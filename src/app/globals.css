@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 body {
-  font-size: 16px;
   overflow-x: hidden;
+  font-size: 16px;
+  line-height: 20px;
   font-family: "Nunito", sans-serif;
 }
 
@@ -26,9 +27,21 @@ body {
 }
 
 input {
-  @apply focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent;
+  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-[48px] text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] font-nunito px-4  border border-[#DFDFDF];
 }
 
 select {
   @apply focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent;
+}
+
+.text-body {
+  @apply text-[1rem] leading-[1rem];
+}
+
+.text-header {
+  @apply text-[1.5rem] leading-[2rem];
+}
+
+.text-hint {
+  @apply text-[0.9rem] leading-[1rem];
 }

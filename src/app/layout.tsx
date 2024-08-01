@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito, Nunito_Sans, Quantico } from "next/font/google";
+import { Nunito, Quantico } from "next/font/google";
 import "./globals.css";
 
 import "@mantine/core/styles.css";
@@ -16,11 +16,7 @@ const nunito = Nunito({
   variable: "--font-nunito",
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
 });
-const nunito_sans = Nunito_Sans({
-  subsets: ["latin"],
-  variable: "--font-nunito_sans",
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-});
+
 const quantico = Quantico({
   subsets: ["latin"],
   variable: "--font-quantico",
@@ -64,9 +60,7 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
-      <body
-        className={`${nunito.className} ${nunito_sans.className} ${quantico.className}`}
-      >
+      <body className={`${nunito.className}`}>
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>

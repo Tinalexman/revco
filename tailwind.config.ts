@@ -15,11 +15,11 @@ const config: Config = {
         neutral: "#EBEBEB",
         "neutral-2": "#797979",
         "neutral-3": "#B0B0B0",
+        error: "#FF0000",
       },
       fontFamily: {
         nunito: ["var(--font-nunito)", "sans-serif"],
-        nunito_sans: ["var(--font-nunito_sans)", "sans-serif"],
-        qunatico: ["var(--font-quantico)", "sans-serif"],
+        quantico: ["var(--font-quantico)", "sans-serif"],
       },
       screens: {
         xs: {
