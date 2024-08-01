@@ -8,9 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      },
       colors: {
         primary: "#00923F",
         "primary-light": "#E6F4EC",
+        secondary: "#FF9500",
         background: "#E5E5EA",
         neutral: "#EBEBEB",
         "neutral-2": "#797979",
@@ -20,6 +24,7 @@ const config: Config = {
       fontFamily: {
         nunito: ["var(--font-nunito)", "sans-serif"],
         quantico: ["var(--font-quantico)", "sans-serif"],
+        bai_jamuree: ["var(--font-bai)", "sans-serif"],
       },
       screens: {
         xs: {

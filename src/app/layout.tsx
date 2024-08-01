@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito, Quantico } from "next/font/google";
+import { Nunito, Quantico, Bai_Jamjuree } from "next/font/google";
 import "./globals.css";
 
 import "@mantine/core/styles.css";
@@ -21,6 +21,12 @@ const quantico = Quantico({
   subsets: ["latin"],
   variable: "--font-quantico",
   weight: ["400", "700"],
+});
+
+const bai_jamjuree = Bai_Jamjuree({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700"],
+  variable: "--font-bai",
 });
 
 export const metadata: Metadata = {
@@ -60,7 +66,9 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
-      <body className={`${nunito.className}`}>
+      <body
+        className={`${quantico.className} ${bai_jamjuree.className} ${nunito.className}`}
+      >
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>

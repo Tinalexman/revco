@@ -6,7 +6,6 @@ body {
   overflow-x: hidden;
   font-size: 16px;
   line-height: 20px;
-  font-family: "Nunito", sans-serif;
 }
 
 .scrollbar-custom {
@@ -42,6 +41,30 @@ select {
   @apply text-[1.5rem] leading-[2rem];
 }
 
+.text-subtitle {
+  @apply text-[1.2rem] leading-[1.5rem];
+}
+
+.text-title {
+  @apply text-[2.5rem] leading-[2.5rem];
+}
+
 .text-hint {
   @apply text-[0.9rem] leading-[1rem];
+}
+
+.text-small {
+  @apply text-[1rem] leading-[0.9rem];
+}
+
+.text-extra {
+  @apply text-[4rem] leading-[6rem];
+}
+
+::selection {
+  @apply bg-primary text-white;
+}
+
+::-moz-selection {
+  @apply bg-primary text-white;
 }

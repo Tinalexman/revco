@@ -10,6 +10,8 @@ import { Loader } from "@mantine/core";
 
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
+import { motion } from "framer-motion";
+
 interface iManualLoginPayload {
   email: string;
   password: string;
@@ -28,7 +30,21 @@ const Login = () => {
           height={100}
         />
         <div className="flex flex-col gap-5 w-full">
-          <h1 className="text-header font-bold text-neutral-2">Log In</h1>
+          <motion.h1
+            initial={{
+              x: "100%",
+            }}
+            animate={{
+              x: "0%",
+              transition: {
+                duration: 1,
+                ease: "easeOut",
+              },
+            }}
+            className="text-header font-bold text-neutral-2"
+          >
+            Log In
+          </motion.h1>
           <Formik
             initialValues={{
               email: "",
@@ -121,12 +137,22 @@ const Login = () => {
                   Forgot Password?
                 </Link>
 
-                <button
+                <motion.button
+                  initial={{
+                    y: "10%",
+                  }}
+                  animate={{
+                    y: "0%",
+                    transition: {
+                      duration: 1,
+                      ease: "easeOut",
+                    },
+                  }}
                   disabled={isSubmitting}
                   className={`bg-primary rounded-full w-full text-body h-[60px] text-white font-bold mt-3`}
                 >
                   {isSubmitting ? <Loader color="white" /> : "Log In"}
-                </button>
+                </motion.button>
               </Form>
             )}
           </Formik>
