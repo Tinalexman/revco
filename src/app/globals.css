@@ -26,7 +26,11 @@ body {
 }
 
 input {
-  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-[48px] text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] font-nunito px-4  border border-[#DFDFDF];
+  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-[48px] text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] font-nunito px-4 border border-[#DFDFDF];
+}
+
+textarea {
+  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-[48px] text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] font-nunito px-4 py-2 border border-[#DFDFDF];
 }
 
 select {
@@ -55,6 +59,10 @@ select {
 
 .text-small {
   @apply text-[1rem] leading-[0.9rem];
+}
+
+.text-smaller {
+  @apply text-[0.8rem] leading-[0.9rem];
 }
 
 .text-extra {

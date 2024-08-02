@@ -25,7 +25,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <div className="flex w-full items-center justify-between">
+    <div className="flex w-full items-center justify-between h-[72px]">
       <Image
         src={Logo}
         alt="logo"

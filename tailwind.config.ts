@@ -13,10 +13,12 @@ const config: Config = {
       },
       colors: {
         primary: "#00923F",
+        "primary-2": "#65B741",
         "primary-light": "#E6F4EC",
         secondary: "#FF9500",
         background: "#E5E5EA",
         neutral: "#EBEBEB",
+        "grey-18": "rgba(98, 98, 98, 0.18)",
         "neutral-2": "#797979",
         "neutral-3": "#B0B0B0",
         error: "#FF0000",
