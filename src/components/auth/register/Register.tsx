@@ -50,7 +50,12 @@ const Register = () => {
             {registerProps.map((rp, i) => (
               <div
                 key={i}
-                onClick={() => setIndex(i)}
+                onClick={() => {
+                  setIndex(i);
+                  if (i === 1) {
+                    setNoNin(false);
+                  }
+                }}
                 className={`w-[48.5%] cursor-pointer transition-colors duration-200 ease-in h-10 rounded-lg justify-center gap-3 items-center text-smaller text-[#3A3A3A] flex ${
                   index === i ? "bg-primary-light " : "bg-neutral"
                 }`}
@@ -96,7 +101,7 @@ const Register = () => {
               onChange={(e) => setNin(e.target.value)}
               className="w-full text-body"
             />
-            {!noNin && (
+            {!noNin && index === 0 && (
               <p className="text-hint font-nunito text-black mt-1">
                 Don&apos;t have a NIN?{" "}
                 <span
