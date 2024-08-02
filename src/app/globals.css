@@ -4,6 +4,7 @@
 
 body {
   overflow-x: hidden;
+  font-family: "Nunito", "Quantico", "Bai Jamjuree", sans-serif;
   font-size: 16px;
   line-height: 20px;
 }
@@ -34,7 +35,7 @@ textarea {
 }
 
 select {
-  @apply focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent;
+  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-[48px] text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] font-nunito px-4 border border-[#DFDFDF];
 }
 
 .text-body {

@@ -67,7 +67,7 @@ export default function RootLayout({
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
       <body
-        className={`${quantico.className} ${bai_jamjuree.className} ${nunito.className}`}
+        className={`${nunito.className} ${quantico.className} ${bai_jamjuree.className} `}
       >
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>

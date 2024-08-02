@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import { PiInfoLight } from "react-icons/pi";
+import { MdOutlineCancel } from "react-icons/md";
 
 import { motion } from "framer-motion";
 import Cooperate from "./Cooperate";
@@ -22,7 +23,7 @@ const Register = () => {
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-background bg-opacity-[0.95] font-nunito">
-      <div className="w-[400px] flex flex-col items-center gap-5 max-h-[90%] overflow-y-scroll scrollbar-custom">
+      <div className="w-[500px] flex flex-col items-center gap-5 max-h-[90%] overflow-y-scroll scrollbar-custom">
         <div className="flex flex-col items-center gap-6 w-full">
           <div className="flex flex-col gap-1 items-center">
             <motion.h1
@@ -67,35 +68,51 @@ const Register = () => {
               </div>
             ))}
           </div>
+          {noNin && (
+            <div className="w-full flex items-center justify-between px-8 font-medium py-[10px] rounded-[8px] text-primary text-hint bg-[#B0DDC3]">
+              <p>Temporary NIN: 01234567890</p>
+              <MdOutlineCancel
+                size={"20px"}
+                className="cursor-pointer"
+                onClick={() => setNoNin(false)}
+              />
+            </div>
+          )}
           <div className="flex flex-col gap-[2px] w-full">
             <div className="flex w-full justify-between items-center">
               <h3 className="text-body text-neutral-2">
-                National Identification Number
+                {noNin
+                  ? "Payer Temporary ID"
+                  : "National Identification Number"}
               </h3>
-              <PiInfoLight size={"20px"} className="text-[#FF9500]" />
+              {!noNin && (
+                <PiInfoLight size={"20px"} className="text-[#FF9500]" />
+              )}
             </div>
             <input
               type="text"
-              placeholder="Enter your NIN"
+              placeholder={`Enter your ${noNin ? "payer temporary ID" : "NIN"}`}
               value={nin}
               onChange={(e) => setNin(e.target.value)}
               className="w-full text-body"
             />
-            <p className="text-hint font-nunito text-black mt-1">
-              Don&apos;t have a NIN?{" "}
-              <span
-                onClick={() => setNoNin(true)}
-                className="text-primary font-bold"
-              >
-                Click Here
-              </span>
-            </p>
+            {!noNin && (
+              <p className="text-hint font-nunito text-black mt-1">
+                Don&apos;t have a NIN?{" "}
+                <span
+                  onClick={() => setNoNin(true)}
+                  className="text-primary font-bold cursor-pointer"
+                >
+                  Click Here
+                </span>
+              </p>
+            )}
           </div>
 
-          {index === 0 && <Individual />}
+          {index === 0 && <Individual hasNin={!noNin} />}
           {index === 1 && <Cooperate />}
         </div>
-        <p className="text-hint text-black">
+        <p className="text-hint text-black mt-10">
           Already have an account?{" "}
           <span className="text-primary font-bold underline">
             <Link href={"/auth/login"}>LOGIN</Link>
