@@ -25,15 +25,15 @@ const Footer = () => {
   const quickLinks: iQuickLink[] = [
     {
       name: "Download Receipt",
-      link: "/download-receipt",
+      link: "/dashboard/download-receipt",
     },
     {
       name: "Contact Us",
-      link: "/contact-us",
+      link: "/dashboard/contact-us",
     },
     {
       name: "Pay Bills",
-      link: "/pay-bills",
+      link: "/dashboard/pay-bills",
     },
   ];
 

@@ -16,6 +16,7 @@ const config: Config = {
         "primary-2": "#65B741",
         "primary-light": "#E6F4EC",
         secondary: "#FF9500",
+        tertiary: "#6500E0",
         background: "#E5E5EA",
         neutral: "#EBEBEB",
         "grey-18": "rgba(98, 98, 98, 0.18)",
@@ -47,7 +48,7 @@ const config: Config = {
       },
       boxShadow: {
         custom: "0 0 10px rgba(0, 0, 0, 0.07)",
-        "custom-1": "0 0 20px rgba(0, 0, 0, 0.15)",
+        "custom-1": "0 0 10px rgba(0, 0, 0, 0.25)",
       },
     },
   },

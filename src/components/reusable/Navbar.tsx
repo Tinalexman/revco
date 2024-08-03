@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import Image from "next/image";
 import Logo from "@/public/image_261.png";
@@ -9,19 +9,19 @@ interface iNav {
   link: string;
 }
 
-const Navbar = () => {
+const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
   const links: iNav[] = [
     {
       name: "Pay Bills",
-      link: "/pay-bills",
+      link: "/dashboard/pay-bills",
     },
     {
       name: "Generate PIN",
-      link: "/generate-pin",
+      link: "/dashboard/generate-pin",
     },
     {
       name: "Validate Receipt",
-      link: "/validate-receipt",
+      link: "/dashboard/validate-receipt",
     },
   ];
   return (
@@ -38,7 +38,9 @@ const Navbar = () => {
           <Link
             href={ln.link}
             key={i}
-            className="text-small font-semibold font-nunito text-white"
+            className={`text-small font-semibold font-nunito ${
+              swap ? "text-black" : "text-white"
+            }`}
           >
             {ln.name}{" "}
           </Link>
@@ -47,7 +49,11 @@ const Navbar = () => {
       <div className="flex items-center gap-5 w-fit">
         <Link
           href={"/auth/register"}
-          className="w-[150px] h-10 flex justify-center items-center rounded-full border-2 border-white hover:border-primary border-opacity-[0.28] hover:border-opacity-100 text-small font-semibold font-nunito text-white transition-all duration-300 ease-out"
+          className={`${
+            swap
+              ? "bg-primary-light text-primary"
+              : "border-2 border-white text-white hover:border-primary border-opacity-[0.28] hover:border-opacity-100"
+          } w-[150px] h-10 flex justify-center items-center rounded-full  text-small font-semibold font-nunito  transition-all duration-300 ease-out`}
         >
           Register
         </Link>

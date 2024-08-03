@@ -28,17 +28,17 @@ const Banner = () => {
     {
       image: BillsImage,
       name: "Pay Bills",
-      link: "/pay-bills",
+      link: "/dashboard/pay-bills",
     },
     {
       image: PinImage,
       name: "Generate PIN",
-      link: "/generate-pin",
+      link: "/dashboard/generate-pin",
     },
     {
       image: Invoice,
       name: "Validate Invoice",
-      link: "/validate-receipt",
+      link: "/dashboard/validate-receipt",
     },
   ];
 
@@ -52,7 +52,7 @@ const Banner = () => {
       <div className="w-full h-full bg-[#005324] bg-opacity-[0.65] px-16 py-5 relative">
         {/* <div className="bg-[url('../../public/image_262.png')] w-full h-full bg-cover bg-no-repeat bg-center absolute" /> */}
         <div className="flex flex-col z-5">
-          <Navbar />
+          <Navbar swap={false} />
           <hr className="mt-5 bg-white bg-opacity-[0.75]" />
           <div className="flex flex-col w-full h-[calc(100vh-132px)] justify-between items-center">
             <div className="pl-5 mt-14 w-full">

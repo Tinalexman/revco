@@ -61,14 +61,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  //${quantico.className} ${bai_jamjuree.className}
   return (
     <html lang="en">
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
-      <body
-        className={`${nunito.className} ${quantico.className} ${bai_jamjuree.className} `}
-      >
+
+      <body className={`${nunito.className} `}>
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>
