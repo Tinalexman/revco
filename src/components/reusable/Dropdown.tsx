@@ -41,19 +41,24 @@ const Dropdown: FC<{ menus: iMenuItem[]; value: string }> = ({
         <p className="line-clamp-1">{value}</p>
       </div>
       {open && (
-        <div className="w-[40rem] absolute z-10 -right-[12.5rem] top-[56px] flex flex-col max-h-[250px] py-3 px-2 overflow-y-scroll text-contrast-100 bg-white rounded-[16px] shadow-custom p-[5px]">
-          {menus.map((menu, i) => (
-            <div
-              key={i}
-              className="w-full cursor-pointer hover:bg-[#F1F2F0] px-3 py-2 rounded-md text-[#626262]"
-              onClick={() => {
-                menu.onClick();
-                setOpen(false);
-              }}
-            >
-              {menu.name}
-            </div>
-          ))}
+        <div className="grid place-content-center bg-white absolute z-10 p-2 -right-[13.5rem] top-[60px] rounded-[16px] shadow-custom">
+          <div
+            className="w-[40rem] flex flex-col max-h-[250px] 
+        overflow-y-scroll text-contrast-100 scrollbar-thin scrollbar-webkit p-2"
+          >
+            {menus.map((menu, i) => (
+              <div
+                key={i}
+                className="w-full cursor-pointer hover:bg-[#F1F2F0] px-3 py-2 rounded-md text-[#626262]"
+                onClick={() => {
+                  menu.onClick();
+                  setOpen(false);
+                }}
+              >
+                {menu.name}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

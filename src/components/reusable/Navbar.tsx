@@ -109,11 +109,12 @@ const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
             <IoMdArrowDropdown size={"16px"} />
           </div>
           {open && (
-            <div className="absolute z-10 top-20 w-[13.5rem] rounded-[8px] bg-white p-2 flex flex-col">
+            <div className="absolute z-10 top-20 w-[13.5rem] rounded-[8px] bg-white p-2 flex flex-col gap-2">
               <div
                 className="w-full cursor-pointer hover:bg-[#F1F2F0] flex items-center gap-2 px-2 py-1 rounded-md text-black"
                 onClick={() => {
                   setOpen(false);
+                  window.location.assign("/dashboard/transaction-history");
                 }}
               >
                 <GoHistory size={"16px"} />

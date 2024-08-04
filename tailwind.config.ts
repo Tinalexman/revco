@@ -52,6 +52,28 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }: any) {
+      const newUtilities = {
+        ".scrollbar-thin": {
+          scrollbarWidth: "thin",
+          scrollbarColor: "rgb(135 135 135) rgb(247 247 247)",
+        },
+        ".scrollbar-webkit": {
+          "&::-webkit-scrollbar": {
+            width: "8px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "rgb(247 247 247)",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "rgb(135 135 135)",
+            borderRadius: "4px",
+          },
+        },
+      };
+      addUtilities(newUtilities, ["responsive", "hover", "focus"]);
+    },
+  ],
 };
 export default config;
