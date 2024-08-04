@@ -32,7 +32,7 @@ const Dashboard = () => {
     {
       image: Invoice,
       name: "Validate Invoice",
-      link: "/dashboard/validate-receipt",
+      link: "/dashboard/validate-invoice",
     },
   ];
 
@@ -51,11 +51,11 @@ const Dashboard = () => {
             <Image
               src={prop.image}
               alt="prop"
-              className="size-20 object-cover"
+              className="size-[8rem] object-cover"
               width={80}
               height={80}
             />
-            <p className="text-smaller font-semibold text-black  font-nunito">
+            <p className="text-small font-semibold text-black  font-nunito">
               {prop.name}
             </p>
           </Link>

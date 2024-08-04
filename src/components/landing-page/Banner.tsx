@@ -38,7 +38,7 @@ const Banner = () => {
     {
       image: Invoice,
       name: "Validate Invoice",
-      link: "/dashboard/validate-receipt",
+      link: "/dashboard/validate-invoice",
     },
   ];
 
