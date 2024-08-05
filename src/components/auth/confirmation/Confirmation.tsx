@@ -8,6 +8,7 @@ import Link from "next/link";
 
 import { MdMarkEmailRead } from "react-icons/md";
 import { motion } from "framer-motion";
+import { useGlobalStore } from "@/src/stores/globalStore";
 
 const Confirmation = () => {
   return (
@@ -23,6 +24,7 @@ const Content = () => {
   const email: string | null = search.get("email");
 
   useEffect(() => {
+    useGlobalStore.setState({ activeIndex: -1 });
     if (email === null) {
       router.back();
     }

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Image from "next/image";
 import Sent from "@/public/sent.png";
+import { useGlobalStore } from "@/src/stores/globalStore";
 
 const Download = () => {
   const [start, setStart] = useState<string>("");
@@ -11,6 +12,10 @@ const Download = () => {
   const [email, setEmail] = useState<string>("");
 
   const [sent, isSent] = useState<boolean>(false);
+
+  useEffect(() => {
+    useGlobalStore.setState({ activeIndex: -1 });
+  }, []);
 
   return (
     <div className="flex flex-col pt-16 items-center gap-5 w-[360px] h-full">

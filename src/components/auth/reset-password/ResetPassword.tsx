@@ -1,11 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackButton from "@/src/components/reusable/BackButton";
 import { motion } from "framer-motion";
+import { useGlobalStore } from "@/src/stores/globalStore";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState<string>("");
+
+  useEffect(() => {
+    useGlobalStore.setState({ activeIndex: -1 });
+  }, []);
 
   return (
     <div className="w-full h-full flex items-center justify-center bg-background bg-opacity-[0.95] font-nunito">

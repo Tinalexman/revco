@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/public/image_261.png";
@@ -21,6 +21,11 @@ interface iManualLoginPayload {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  useEffect(() => {
+    useGlobalStore.setState({ activeIndex: -1 });
+  }, []);
+
   return (
     <div className="w-full h-full flex items-center justify-center font-nunito bg-background bg-opacity-[0.95]">
       <div className="w-[350px] flex flex-col items-center gap-5">

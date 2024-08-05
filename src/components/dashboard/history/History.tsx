@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackButton from "../../reusable/BackButton";
 import { FiSearch } from "react-icons/fi";
 import { IoFilter } from "react-icons/io5";
 import { TbFileDownload } from "react-icons/tb";
+import { useGlobalStore } from "@/src/stores/globalStore";
 
 interface iHistory {
   transactionID: string;
@@ -25,6 +26,10 @@ const History = () => {
     })
   );
   const [search, setSearch] = useState<string>("");
+
+  useEffect(() => {
+    useGlobalStore.setState({ activeIndex: -1 });
+  }, []);
 
   return (
     <div className="flex flex-col pt-16 items-start gap-5 w-[55rem] h-full">
