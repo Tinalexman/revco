@@ -23,6 +23,7 @@ const config: Config = {
         "neutral-2": "#797979",
         "neutral-3": "#B0B0B0",
         error: "#FF0000",
+        "white-50": "rgba(233, 233, 233, 0.5)",
       },
       fontFamily: {
         nunito: ["var(--font-nunito)", "sans-serif"],

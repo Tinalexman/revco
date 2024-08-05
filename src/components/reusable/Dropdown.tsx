@@ -43,7 +43,7 @@ const Dropdown: FC<{ menus: iMenuItem[]; value: string }> = ({
       {open && (
         <div className="grid place-content-center bg-white absolute z-10 p-2 -right-[13.5rem] top-[60px] rounded-[16px] shadow-custom">
           <div
-            className="w-[40rem] flex flex-col max-h-[250px] 
+            className="w-[40rem] flex flex-col max-h-[20rem] 
         overflow-y-scroll text-contrast-100 scrollbar-thin scrollbar-webkit p-2"
           >
             {menus.map((menu, i) => (

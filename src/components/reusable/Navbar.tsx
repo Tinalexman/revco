@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC, useState, useRef, useEffect } from "react";
 
 import Image from "next/image";
@@ -57,13 +59,23 @@ const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
 
   return (
     <div className="flex w-full items-center justify-between h-[72px]">
-      <Image
-        src={Logo}
-        alt="logo"
-        className="size-[72px] object-cover"
-        width={72}
-        height={72}
-      />
+      <Link
+        href={"/"}
+        className={`flex items-center gap-2 ${
+          swap ? "max-w-[18rem]" : "w-fit"
+        } `}
+      >
+        <Image
+          src={Logo}
+          alt="logo"
+          className="size-[72px] object-cover"
+          width={72}
+          height={72}
+        />
+        <h2 className="text-subtitle font-bold text-[#333333]">
+          Taraba State Internal Revenue Service
+        </h2>
+      </Link>
       <div className="w-fit flex items-center gap-5">
         {links.map((ln, i) => (
           <Link
@@ -99,7 +111,11 @@ const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
       )}
       {signedIn && (
         <div ref={dropdownRef} onClick={() => setOpen(!open)}>
-          <div className="flex items-center gap-2 w-fit text-black cursor-pointer">
+          <div
+            className={`${
+              !swap ? "text-white" : "text-black"
+            } flex items-center gap-2 w-fit cursor-pointer`}
+          >
             <div className="bg-[#B0DDC3] grid place-content-center rounded-full size-9 text-body font-semibold">
               {lastName.charAt(0)}
             </div>
@@ -124,6 +140,7 @@ const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
                 className="w-full cursor-pointer hover:bg-[#F1F2F0] flex items-center gap-2 px-2 py-1 rounded-md text-black"
                 onClick={() => {
                   setOpen(false);
+                  window.location.assign("/dashboard/download-receipt");
                 }}
               >
                 <TbFileDownload size={"16px"} />
