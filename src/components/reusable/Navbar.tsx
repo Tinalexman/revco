@@ -253,7 +253,11 @@ const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
                   <Link
                     href={ln.link}
                     key={i}
-                    className="text-body font-medium font-nunito text-black"
+                    className={`text-body ${
+                      active === i
+                        ? "text-primary font-bold underline"
+                        : "font-medium text-black"
+                    } font-nunito`}
                   >
                     {ln.name}
                   </Link>
