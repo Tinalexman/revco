@@ -61,9 +61,9 @@ const Footer = () => {
   ];
 
   return (
-    <div className="w-full bg-white px-20 py-16 gap-8 flex flex-col font-nunito">
-      <div className="w-full flex gap-[200px]">
-        <div className="flex flex-col gap-5 w-[340px]">
+    <div className="w-full bg-white px-20 md:px-5 py-16 md:py-5 gap-8 flex flex-col font-nunito">
+      <div className="w-full flex md:flex-col gap-[200px] md:gap-10">
+        <div className="flex flex-col gap-5 w-[340px] md:w-full">
           <Image
             src={Logo}
             alt="logo"
@@ -76,7 +76,7 @@ const Footer = () => {
             to the Taraba state government revenue services.
           </p>
         </div>
-        <div className="flex w-fit gap-16">
+        <div className="flex md:flex-col w-fit gap-16 md:gap-6">
           <div className="flex flex-col gap-2">
             <h2 className="text-subtitle text-primary-2 font-bold">
               Quick Link

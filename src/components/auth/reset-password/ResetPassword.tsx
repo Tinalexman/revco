@@ -8,7 +8,7 @@ const ResetPassword = () => {
   const [email, setEmail] = useState<string>("");
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-background bg-opacity-[0.95]">
+    <div className="w-full h-full flex items-center justify-center bg-background bg-opacity-[0.95] font-nunito">
       <div className="w-[400px] flex flex-col gap-3 relative">
         <div className="absolute -top-[60%] left-0">
           <BackButton color={"#000000"} classicArrow={true} text="Back" />
@@ -49,6 +49,9 @@ const ResetPassword = () => {
               duration: 1,
               ease: "easeOut",
             },
+          }}
+          onClick={() => {
+            window.location.assign("/auth/confirmation?email=" + email);
           }}
           className={`bg-primary rounded-full w-full text-body h-[60px] text-white font-bold mt-3`}
         >

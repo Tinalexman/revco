@@ -37,7 +37,7 @@ const Dropdown: FC<{
       <div
         onClick={() => setOpen(!open)}
         className={`${open && "ring-2 ring-green-600"} ${
-          fitMenu
+          fitMenu && fitMenu
             ? `rounded-[8px] border border-[#DDE2FF] flex items-center ${
                 value || hint ? "justify-between" : "justify-end"
               }`
@@ -46,12 +46,12 @@ const Dropdown: FC<{
       >
         {value === "" && <p className="text-neutral-3">{hint}</p>}
         <p className="line-clamp-1">{value}</p>
-        <IoIosArrowDown />
+        {fitMenu && fitMenu && <IoIosArrowDown />}
       </div>
       {open && (
         <div
           className={`grid place-content-center bg-white absolute z-10 p-2 ${
-            fitMenu
+            fitMenu && fitMenu
               ? "left-0 w-fit rounded-[8px]"
               : "-right-[13.5rem] rounded-[16px]"
           } top-[60px]  shadow-custom`}

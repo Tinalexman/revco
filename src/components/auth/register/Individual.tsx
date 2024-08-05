@@ -6,6 +6,9 @@ import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 import { states } from "@/src/constants/constants";
 
+import { useGlobalStore } from "@/src/stores/globalStore";
+import { toast } from "react-hot-toast";
+
 interface iIndividual {
   firstName: string;
   lastName: string;
@@ -68,6 +71,11 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
         }}
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(false);
+          useGlobalStore.setState({ loggedIn: true });
+          toast.success("Welcome back");
+          setTimeout(() => {
+            window.location.replace("/dashboard");
+          }, 1500);
         }}
         validateOnMount={true}
       >

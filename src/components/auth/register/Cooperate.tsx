@@ -3,6 +3,10 @@ import { Formik, Form } from "formik";
 import { motion } from "framer-motion";
 import React, { useState, FC } from "react";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
+
+import { useGlobalStore } from "@/src/stores/globalStore";
+import { toast } from "react-hot-toast";
+
 interface iCooperate {
   firstName: string;
   lastName: string;
@@ -61,6 +65,11 @@ const Cooperate = () => {
         }}
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(false);
+          useGlobalStore.setState({ loggedIn: true });
+          toast.success("Welcome back");
+          setTimeout(() => {
+            window.location.replace("/dashboard");
+          }, 1500);
         }}
         validateOnMount={true}
       >

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Nunito, Quantico, Bai_Jamjuree } from "next/font/google";
-import "./globals.css";
 
 import "@mantine/core/styles.css";
+
+import "./globals.css";
 
 import {
   ColorSchemeScript,
@@ -61,14 +62,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  //${quantico.className} ${bai_jamjuree.className}
+  //
   return (
     <html lang="en">
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
 
-      <body className={`${nunito.className} `}>
+      <body
+        className={`${nunito.variable} ${quantico.variable} ${bai_jamjuree.variable}`}
+      >
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>

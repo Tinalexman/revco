@@ -28,7 +28,7 @@ const config: Config = {
       fontFamily: {
         nunito: ["var(--font-nunito)", "sans-serif"],
         quantico: ["var(--font-quantico)", "sans-serif"],
-        bai_jamuree: ["var(--font-bai)", "sans-serif"],
+        bai: ["var(--font-bai)", "sans-serif"],
       },
       screens: {
         xs: {

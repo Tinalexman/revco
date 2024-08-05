@@ -49,7 +49,7 @@ const Content = () => {
   return (
     <div className="flex flex-col pt-16 items-start gap-4 w-[40rem] h-full overflow-y-scroll scrollbar-custom">
       <BackButton classicArrow={true} color={"#000000"} text={"Back"} />
-      <h2 className="text-subtitle font-bold text-[#3A3A3A]">
+      <h2 className="text-subtitle font-bold text-[#3A3A3A] font-nunito">
         TARABA STATE INTERNAL REVENUE SERVICE
       </h2>
       <Formik
@@ -94,7 +94,7 @@ const Content = () => {
         }) => (
           <Form
             onSubmit={handleSubmit}
-            className="w-full flex flex-col gap-5"
+            className="w-full flex flex-col items-center gap-5"
             method="POST"
           >
             <div className="w-full space-y-2 px-1">
@@ -240,22 +240,36 @@ const Content = () => {
               </div>
             </div>
 
-            <motion.button
-              initial={{
-                y: "10%",
-              }}
-              animate={{
-                y: "0%",
-                transition: {
-                  duration: 1,
-                  ease: "easeOut",
-                },
-              }}
-              disabled={isSubmitting}
-              className={`bg-primary rounded-full w-full text-body h-[60px] text-white font-bold mt-3`}
-            >
-              {isSubmitting ? <Loader color="white" /> : "Log In"}
-            </motion.button>
+            <div className="flex gap-2 w-full items-center justify-center">
+              <input
+                type="checkbox"
+                name="agreed"
+                className="size-3 accent-primary bg-white focus:ring-0"
+              />
+              <p className="text-smaller text-black">
+                By clicking Continue, you agree to our{" "}
+                <span className="text-tertiary font-medium cursor-pointer">
+                  Terms and Conditions
+                </span>{" "}
+                and{" "}
+                <span className="text-tertiary font-medium cursor-pointer">
+                  Privacy Policy
+                </span>
+              </p>
+            </div>
+
+            <div className="flex w-full items-center justify-around  mt-3">
+              <button
+                className={`border border-error rounded-full w-[40%] text-small h-12 text-error font-bold`}
+              >
+                CANCEL
+              </button>
+              <button
+                className={`bg-primary rounded-full w-[40%] text-small h-12 text-white font-bold`}
+              >
+                CONTINUE
+              </button>
+            </div>
           </Form>
         )}
       </Formik>

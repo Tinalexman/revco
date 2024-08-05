@@ -7,6 +7,7 @@ import { RiFileList3Fill } from "react-icons/ri";
 import Image from "next/image";
 import Invoice from "@/public/invoice_info.png";
 import { PAYMENT_TARGET } from "@/src/constants/constants";
+import { useGlobalStore } from "@/src/stores/globalStore";
 
 const GenerateInvoice = () => {
   const [pin, setPin] = useState<string>("");
@@ -14,6 +15,10 @@ const GenerateInvoice = () => {
 
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    useGlobalStore.setState({ activeIndex: 2 });
+  }, []);
 
   return (
     <div className="flex flex-col items-center w-[700px] gap-6 pt-16">

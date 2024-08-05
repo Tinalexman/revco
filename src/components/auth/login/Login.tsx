@@ -12,6 +12,8 @@ import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 import { motion } from "framer-motion";
 
+import { useGlobalStore } from "@/src/stores/globalStore";
+import { toast } from "react-hot-toast";
 interface iManualLoginPayload {
   email: string;
   password: string;
@@ -20,7 +22,7 @@ interface iManualLoginPayload {
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   return (
-    <div className="w-full h-full flex items-center justify-center bg-background bg-opacity-[0.95]">
+    <div className="w-full h-full flex items-center justify-center font-nunito bg-background bg-opacity-[0.95]">
       <div className="w-[350px] flex flex-col items-center gap-5">
         <Image
           src={Logo}
@@ -70,6 +72,11 @@ const Login = () => {
             }}
             onSubmit={async (values, { setSubmitting }) => {
               setSubmitting(false);
+              useGlobalStore.setState({ loggedIn: true });
+              toast.success("Welcome back");
+              setTimeout(() => {
+                window.location.replace("/dashboard");
+              }, 1500);
             }}
             validateOnMount={true}
           >

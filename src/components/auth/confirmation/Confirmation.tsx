@@ -29,7 +29,7 @@ const Content = () => {
   }, [router]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-8 bg-background bg-opacity-[0.95]">
+    <div className="w-full h-full flex flex-col items-center justify-center gap-8 bg-background bg-opacity-[0.95] font-nunito">
       <MdMarkEmailRead className="text-primary" size={"60px"} />
       <div className="w-[300px] flex flex-col gap-1 items-center">
         <motion.h1

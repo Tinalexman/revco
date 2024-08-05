@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropdown from "../../reusable/Dropdown";
 import { PAYMENT_TARGET } from "@/src/constants/constants";
+import { useGlobalStore } from "@/src/stores/globalStore";
 
 const Pins = () => {
   const [index, setIndex] = useState<number>(0);
@@ -13,6 +14,10 @@ const Pins = () => {
       "1% PROCESSING FEE ON CAPITAL PROJECT (TARABA STATE REVENUE)"
     )
   );
+
+  useEffect(() => {
+    useGlobalStore.setState({ activeIndex: 1 });
+  }, []);
 
   return (
     <div>
@@ -55,6 +60,7 @@ const Pins = () => {
               }))}
               hint="Select Plan"
               value={pinType}
+              fitMenu={false}
             />
           </div>
           <button
