@@ -72,9 +72,11 @@ const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
           width={72}
           height={72}
         />
-        <h2 className="text-subtitle font-bold text-[#333333]">
-          Taraba State Internal Revenue Service
-        </h2>
+        {!swap && (
+          <h2 className="text-subtitle font-bold text-[#333333]">
+            Taraba State Internal Revenue Service
+          </h2>
+        )}
       </Link>
       <div className="w-fit flex items-center gap-5">
         {links.map((ln, i) => (

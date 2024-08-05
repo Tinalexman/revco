@@ -23,6 +23,7 @@ const PayBills = () => {
             placeholder="Enter PIN"
           />
           <button
+            onClick={() => {}}
             className={`bg-primary rounded-full w-[25%] text-body h-[48px] text-white font-bold`}
           >
             Proceed

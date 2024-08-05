@@ -37,3 +37,5 @@ export const states: string[] = [
   "Zamfara",
   "FCT",
 ];
+
+export const PAYMENT_TARGET = "Revco-Payment-Target";

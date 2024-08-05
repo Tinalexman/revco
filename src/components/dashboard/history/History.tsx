@@ -27,7 +27,7 @@ const History = () => {
   const [search, setSearch] = useState<string>("");
 
   return (
-    <div className="flex flex-col pt-16 items-start gap-5 w-[75%] h-full">
+    <div className="flex flex-col pt-16 items-start gap-5 w-[55rem] h-full">
       <BackButton classicArrow={true} color={"#000000"} text={"History"} />
       <div className="w-full h-full max-h-[20rem] bg-white rounded-xl p-4 flex flex-col gap-6">
         <div className="flex w-full justify-between items-center">

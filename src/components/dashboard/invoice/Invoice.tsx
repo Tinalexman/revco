@@ -6,6 +6,7 @@ import { RiFileList3Fill } from "react-icons/ri";
 
 import Image from "next/image";
 import Invoice from "@/public/invoice_info.png";
+import { PAYMENT_TARGET } from "@/src/constants/constants";
 
 const GenerateInvoice = () => {
   const [pin, setPin] = useState<string>("");
@@ -20,11 +21,11 @@ const GenerateInvoice = () => {
         <h2 className="text-header font-bold text-[#595959]">
           Paysure Invoice Number (PIN){"  "}
           <span
-            onMouseEnter={() => {
-              if (!open) {
-                setOpen(true);
-              }
-            }}
+            // onMouseEnter={() => {
+            //   if (!open) {
+            //     setOpen(true);
+            //   }
+            // }}
             // onMouseLeave={() => {
             //   if (open) {
             //     setOpen(false);
@@ -60,7 +61,7 @@ const GenerateInvoice = () => {
               placeholder="Enter PIN"
             />
             <button
-              onClick={() => setError(true)}
+              onClick={() => {}}
               className={`bg-primary rounded-full w-[25%] text-body h-[48px] text-white font-bold`}
             >
               Proceed

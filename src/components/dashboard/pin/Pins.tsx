@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Dropdown from "../../reusable/Dropdown";
+import { PAYMENT_TARGET } from "@/src/constants/constants";
 
 const Pins = () => {
   const [index, setIndex] = useState<number>(0);
@@ -52,10 +53,16 @@ const Pins = () => {
                   setPinType(op);
                 },
               }))}
+              hint="Select Plan"
               value={pinType}
             />
           </div>
           <button
+            onClick={() => {
+              window.location.assign(
+                "/payments/make-payment?target=" + pinType
+              );
+            }}
             className={`bg-primary rounded-full w-[25%] text-body h-[48px] text-white font-bold`}
           >
             Proceed

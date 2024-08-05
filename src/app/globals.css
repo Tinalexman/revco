@@ -56,6 +56,10 @@ tbody > tr > td {
   @apply text-[1rem] leading-[1rem];
 }
 
+.text-large {
+  @apply text-[1.1rem] leading-[1.2rem];
+}
+
 .text-header {
   @apply text-[1.5rem] leading-[2rem];
 }

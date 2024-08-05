@@ -1,14 +1,17 @@
 import React, { useState, useRef, useEffect, FC } from "react";
+import { IoIosArrowDown } from "react-icons/io";
 
 interface iMenuItem {
   name: string;
   onClick: () => void;
 }
 
-const Dropdown: FC<{ menus: iMenuItem[]; value: string }> = ({
-  menus,
-  value,
-}) => {
+const Dropdown: FC<{
+  menus: iMenuItem[];
+  value: string;
+  hint: string;
+  fitMenu?: boolean;
+}> = ({ menus, value, hint, fitMenu }) => {
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -33,18 +36,31 @@ const Dropdown: FC<{ menus: iMenuItem[]; value: string }> = ({
     <div ref={dropdownRef} className="relative">
       <div
         onClick={() => setOpen(!open)}
-        className={`${
-          open && "ring-2 ring-green-600"
-        } rounded-full w-full h-[48px] grid place-items-start place-content-center px-3 bg-white cursor-pointer text-[#4F4F4F] text-body`}
+        className={`${open && "ring-2 ring-green-600"} ${
+          fitMenu
+            ? `rounded-[8px] border border-[#DDE2FF] flex items-center ${
+                value || hint ? "justify-between" : "justify-end"
+              }`
+            : "rounded-full grid place-items-start place-content-center"
+        } w-full h-[48px] px-3 bg-white cursor-pointer text-[#4F4F4F] text-body`}
       >
-        {value === "" && <p className="text-neutral-3">Select plan</p>}
+        {value === "" && <p className="text-neutral-3">{hint}</p>}
         <p className="line-clamp-1">{value}</p>
+        <IoIosArrowDown />
       </div>
       {open && (
-        <div className="grid place-content-center bg-white absolute z-10 p-2 -right-[13.5rem] top-[60px] rounded-[16px] shadow-custom">
+        <div
+          className={`grid place-content-center bg-white absolute z-10 p-2 ${
+            fitMenu
+              ? "left-0 w-fit rounded-[8px]"
+              : "-right-[13.5rem] rounded-[16px]"
+          } top-[60px]  shadow-custom`}
+        >
           <div
-            className="w-[40rem] flex flex-col max-h-[20rem] 
-        overflow-y-scroll text-contrast-100 scrollbar-thin scrollbar-webkit p-2"
+            className={`${
+              fitMenu ? "w-full" : "w-[40rem]"
+            } flex flex-col max-h-[20rem] 
+        overflow-y-scroll text-contrast-100 scrollbar-thin scrollbar-webkit p-2`}
           >
             {menus.map((menu, i) => (
               <div
