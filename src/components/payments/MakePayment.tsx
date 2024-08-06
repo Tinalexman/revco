@@ -58,7 +58,7 @@ const Content = () => {
 
   return (
     <>
-      <div className="flex flex-col pt-16 items-start gap-4 w-[40rem] h-full overflow-y-scroll scrollbar-custom">
+      <div className="flex flex-col pt-16 items-start gap-4 w-[45rem] h-full overflow-y-scroll scrollbar-custom">
         <BackButton classicArrow={true} color={"#000000"} text={"Back"} />
         <h2 className="text-subtitle font-bold text-[#3A3A3A] font-nunito">
           TARABA STATE INTERNAL REVENUE SERVICE
