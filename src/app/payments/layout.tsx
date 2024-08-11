@@ -16,7 +16,7 @@ const PaymentLayout: FC<iPaymentLayout> = ({ children }) => {
       <Toaster />
       <div className="w-[100vw] h-[100vh] bg-[url('../../public/image_263.png')] bg-cover bg-center bg-no-repeat">
         <div className="w-full h-full px-16 pt-5 pb-2 flex flex-col items-center bg-background bg-opacity-[0.95] font-nunito">
-          <Navbar swap={true} />
+          <Navbar swap={true} active={-1} />
           <div className="mt-5 w-full h-[1px] bg-[#373737] bg-opacity-30 " />
           <div className="flex flex-col w-full h-[calc(100vh-165px)] justify-between items-center">
             {children}

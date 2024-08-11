@@ -13,10 +13,6 @@ const Download = () => {
 
   const [sent, isSent] = useState<boolean>(false);
 
-  useEffect(() => {
-    useGlobalStore.setState({ activeIndex: -1 });
-  }, []);
-
   return (
     <div className="flex flex-col pt-16 items-center gap-5 w-[360px] h-full">
       {!sent && (

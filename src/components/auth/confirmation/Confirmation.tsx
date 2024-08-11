@@ -24,7 +24,6 @@ const Content = () => {
   const email: string | null = search.get("email");
 
   useEffect(() => {
-    useGlobalStore.setState({ activeIndex: -1 });
     if (email === null) {
       router.back();
     }

@@ -8,10 +8,6 @@ import { useGlobalStore } from "@/src/stores/globalStore";
 const ResetPassword = () => {
   const [email, setEmail] = useState<string>("");
 
-  useEffect(() => {
-    useGlobalStore.setState({ activeIndex: -1 });
-  }, []);
-
   return (
     <div className="w-full h-full flex items-center md:items-start justify-center bg-background bg-opacity-[0.95] font-nunito">
       <div className="w-[400px] md:w-full md:px-5 flex flex-col gap-3 relative md:mt-24">

@@ -58,7 +58,7 @@ const Banner = () => {
         <div className="bg-[url('../../public/image_269.png')] w-[60vw] h-auto bg-cover bg-no-repeat bg-center absolute" />
         <div className="flex flex-col z-5 bg-black bg-opacity-[0.4] w-full h-full px-16 md:px-0 py-5">
           <div className="md:px-2">
-            <Navbar swap={false} />
+            <Navbar swap={false} active={-1} />
           </div>
           <hr className="mt-5 bg-white bg-opacity-[0.75]" />
           <div className="flex flex-col w-full h-[calc(100vh-132px)] md:h-[calc(100vh-100px)] justify-between items-center">

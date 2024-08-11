@@ -21,7 +21,6 @@ const ProcessPayments = () => {
   const router = useRouter();
 
   useEffect(() => {
-    useGlobalStore.setState({ activeIndex: -1 });
     let key = window.localStorage.getItem(PAYMENT_KEY);
     if (key === null) {
       toast.error("An error occurred");

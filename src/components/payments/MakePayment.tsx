@@ -45,7 +45,6 @@ const Content = () => {
   const target: string | null = searchParams.get("target");
 
   useEffect(() => {
-    useGlobalStore.setState({ activeIndex: -1 });
     if (!target) {
       router.back();
     }
