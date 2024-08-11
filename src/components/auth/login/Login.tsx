@@ -22,17 +22,13 @@ interface iManualLoginPayload {
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  useEffect(() => {
-    useGlobalStore.setState({ activeIndex: -1 });
-  }, []);
-
   return (
-    <div className="w-full h-full flex items-center justify-center font-nunito bg-background bg-opacity-[0.95]">
-      <div className="w-[350px] flex flex-col items-center gap-5">
+    <div className="w-full h-full flex items-center md:items-start justify-center bg-background bg-opacity-[0.95]">
+      <div className="w-[350px] md:w-full flex flex-col items-center gap-5 md:px-5 md:mt-10">
         <Image
           src={Logo}
           alt="logo"
-          className="size-[100px] object-cover"
+          className="size-[100px] md:size-20 object-cover"
           width={100}
           height={100}
         />
@@ -70,7 +66,7 @@ const Login = () => {
               if (!values.password) {
                 errors.password = "Required";
               } else if (values.password.length < 8) {
-                errors.password = "Password must be more at least 8 characters";
+                errors.password = "Password must have at least 8 characters";
               }
 
               return errors;
@@ -80,7 +76,7 @@ const Login = () => {
               useGlobalStore.setState({ loggedIn: true });
               toast.success("Welcome back");
               setTimeout(() => {
-                window.location.replace("/dashboard");
+                window.location.replace("/dashboard/pay-bills");
               }, 1500);
             }}
             validateOnMount={true}
@@ -161,7 +157,7 @@ const Login = () => {
                     },
                   }}
                   disabled={isSubmitting}
-                  className={`bg-primary rounded-full w-full text-body h-[60px] text-white font-bold mt-3`}
+                  className={`bg-primary rounded-full w-full text-large h-[60px] md:h-12 text-white font-bold mt-3`}
                 >
                   {isSubmitting ? <Loader color="white" /> : "Log In"}
                 </motion.button>

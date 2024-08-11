@@ -27,10 +27,6 @@ const History = () => {
   );
   const [search, setSearch] = useState<string>("");
 
-  useEffect(() => {
-    useGlobalStore.setState({ activeIndex: -1 });
-  }, []);
-
   return (
     <div className="flex flex-col pt-16 items-start gap-5 w-[55rem] h-full">
       <BackButton classicArrow={true} color={"#000000"} text={"History"} />

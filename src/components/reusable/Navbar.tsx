@@ -15,7 +15,7 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { Drawer } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IoCloseOutline } from "react-icons/io5";
-import { RiMenu4Fill } from "react-icons/ri";
+import { HiMenu } from "react-icons/hi";
 
 import useStore from "@/src/stores/useStore";
 import { useGlobalStore } from "@/src/stores/globalStore";
@@ -25,7 +25,7 @@ interface iNav {
   link: string;
 }
 
-const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
+const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
   const links: iNav[] = [
     {
       name: "Pay Bills",
@@ -57,7 +57,7 @@ const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
   };
 
   const logout = () => {
-    useGlobalStore.setState({ loggedIn: false, activeIndex: -1 });
+    useGlobalStore.setState({ loggedIn: false });
     window.location.replace("/");
   };
 
@@ -70,31 +70,28 @@ const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
   }, []);
 
   const signedIn = useStore(useGlobalStore, (state: any) => state.loggedIn);
-  const active = useStore(useGlobalStore, (state: any) => state.activeIndex);
   const firstName = useStore(useGlobalStore, (state: any) => state.firstName);
   const lastName = useStore(useGlobalStore, (state: any) => state.lastName);
 
-  if (signedIn === undefined) return <></>;
-
   return (
     <>
-      <div className="flex w-full items-center justify-between h-[72px] md:h-[48px]">
+      <nav className="flex w-full items-center justify-between h-[72px] md:h-[48px]">
         <Link
           href={"/"}
           className={`flex items-center gap-2 ${
-            swap ? "max-w-[18rem]" : "w-fit"
+            swap ? "max-w-[20rem]" : "w-fit"
           } `}
         >
           <Image
             src={Logo}
             alt="logo"
-            className="size-[72px] md:size-[48px] object-cover"
+            className="size-[72px] md:size-[42px] object-cover"
             width={72}
             height={72}
           />
           {swap && (
             <h2 className="text-subtitle font-bold text-[#333333]">
-              Taraba State Internal Revenue Service
+              Taraba State Board of Internal Revenue Service
             </h2>
           )}
         </Link>
@@ -190,24 +187,30 @@ const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
             )}
           </div>
         )}
-        <RiMenu4Fill
-          className="md:block hidden text-white cursor-pointer text-header"
+        <HiMenu
+          className={`md:block hidden ${
+            swap ? "text-black" : "text-white"
+          } cursor-pointer text-header`}
           onClick={openDrawer}
         />
-      </div>
+      </nav>
       <Drawer.Root
         opened={openedDrawer}
         onClose={closeDrawer}
         padding={0}
         top={0}
-        position="right"
-        size={"70vw"}
-        radius={"16px"}
+        position="top"
+        size={"55vh"}
+        transitionProps={{
+          transition: "rotate-left",
+          duration: 150,
+          timingFunction: "linear",
+        }}
       >
         <Drawer.Overlay />
         <Drawer.Content>
           <Drawer.Body>
-            <div className="w-full h-[100vh] flex flex-col px-3 py-2 gap-5 bg-white">
+            <div className="w-full h-[100vh] md:h-auto flex flex-col px-3 py-2 gap-5 bg-white">
               <div className="w-full flex justify-between items-center">
                 <Image
                   src={Logo}
@@ -265,7 +268,7 @@ const Navbar: FC<{ swap: boolean }> = ({ swap }) => {
               </div>
 
               {!signedIn && (
-                <div className="flex flex-col items-center gap-3 w-full mt-16">
+                <div className="flex flex-col items-center gap-3 w-full mt-6">
                   <Link
                     href={"/auth/register"}
                     className={` bg-primary-light text-primary w-full h-10 flex justify-center items-center rounded-full text-small font-semibold font-nunito `}

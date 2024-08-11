@@ -19,11 +19,15 @@ const Register = () => {
   const [index, setIndex] = useState<number>(-1);
   const [nin, setNin] = useState<string>("");
   const [noNin, setNoNin] = useState<boolean>(false);
-  const registerProps: string[] = ["Individual Account", "Cooperate"];
+  const registerProps: string[] = ["Individual", "Cooperate"];
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-background bg-opacity-[0.95] font-nunito">
-      <div className="w-[500px] flex flex-col items-center gap-5 max-h-[90%] overflow-y-scroll scrollbar-custom">
+    <div
+      className={`w-full h-full ${
+        index === -1 ? "md:h-full" : "md:h-auto"
+      } flex items-center md:items-start justify-center md:justify-start bg-background bg-opacity-[0.95]`}
+    >
+      <div className="w-[500px] md:w-full md:mt-16 flex flex-col items-center gap-5 md:px-2 max-h-[90%] md:h-auto md:max-h-full overflow-y-scroll scrollbar-custom">
         <div className="flex flex-col items-center gap-6 w-full">
           <div className="flex flex-col gap-1 items-center">
             <motion.h1
@@ -41,7 +45,7 @@ const Register = () => {
             >
               Create your account
             </motion.h1>
-            <p className="text-smaller text-black">
+            <p className="text-smaller md:text-center text-black">
               Fill in the form to finish registration, you can select the type
               of account you are registering.
             </p>
@@ -74,8 +78,8 @@ const Register = () => {
             ))}
           </div>
           {noNin && (
-            <div className="w-full flex items-center justify-between px-8 font-medium py-[10px] rounded-[8px] text-primary text-hint bg-[#B0DDC3]">
-              <p>Temporary NIN: 01234567890</p>
+            <div className="w-full flex items-center justify-between px-8 md:px-3 font-medium py-[10px] rounded-[8px] text-primary text-hint bg-[#B0DDC3]">
+              <p>Payer Temporary ID: 01234567890</p>
               <MdOutlineCancel
                 size={"20px"}
                 className="cursor-pointer"
@@ -117,7 +121,7 @@ const Register = () => {
           {index === 0 && <Individual hasNin={!noNin} />}
           {index === 1 && <Cooperate />}
         </div>
-        <p className="text-hint text-black mt-10">
+        <p className="text-hint text-black my-10">
           Already have an account?{" "}
           <span className="text-primary font-bold underline">
             <Link href={"/auth/login"}>LOGIN</Link>

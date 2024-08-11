@@ -61,7 +61,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="w-full bg-white px-20 md:px-5 py-16 md:py-5 gap-8 flex flex-col font-nunito">
+    <footer className="w-full bg-white px-20 md:px-5 py-16 md:py-5 gap-8 flex flex-col font-nunito">
       <div className="w-full flex md:flex-col gap-[200px] md:gap-10">
         <div className="flex flex-col gap-5 w-[340px] md:w-full">
           <Image
@@ -71,7 +71,7 @@ const Footer = () => {
             width={64}
             height={64}
           />
-          <p className="text-smaller text-[#333333] ">
+          <p className="text-small text-[#333333] ">
             Experience the easy and secure way to pay your taxes or bills owed
             to the Taraba state government revenue services.
           </p>
@@ -85,7 +85,7 @@ const Footer = () => {
               <Link
                 key={i}
                 href={ql.link}
-                className="text-body font-medium text-[#333333]"
+                className="text-body font-light md:font-normal text-[#333333]"
               >
                 {ql.name}
               </Link>
@@ -111,7 +111,7 @@ const Footer = () => {
       <div className="w-full border-t-[1px] pt-4 border-grey-18 text-[#333333] text-smaller grid place-items-center">
         © Copyright {new Date().getFullYear()}, All Rights Reserved
       </div>
-    </div>
+    </footer>
   );
 };
 

@@ -16,10 +16,6 @@ const GenerateInvoice = () => {
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    useGlobalStore.setState({ activeIndex: 2 });
-  }, []);
-
   return (
     <div className="flex flex-col items-center w-[700px] gap-6 pt-16">
       <div className="flex flex-col items-start gap-2 w-[500px] h-full relative">

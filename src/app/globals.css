@@ -25,15 +25,15 @@ body {
 }
 
 input {
-  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-[48px] text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] font-nunito px-4 border border-[#DFDFDF];
+  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-12 md:h-10 text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] px-4 md:px-2 border border-[#DFDFDF];
 }
 
 textarea {
-  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-[48px] text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] font-nunito px-4 py-2 border border-[#DFDFDF];
+  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-12 md:h-10 text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] px-4 py-2 border border-[#DFDFDF];
 }
 
 select {
-  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-[48px] text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] font-nunito px-4 border border-[#DFDFDF];
+  @apply w-full placeholder:text-neutral-3 rounded-[8px] h-12 md:h-10 text-black focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent bg-white text-[1rem] placeholder:text-[0.9rem] leading-[1rem] px-4 md:px-2 border border-[#DFDFDF];
 }
 
 tr {
@@ -57,7 +57,7 @@ tbody > tr > td {
 }
 
 .text-large {
-  @apply text-[1.1rem] leading-[1.2rem];
+  @apply text-[1.1rem] md:text-[1rem] leading-[1.2rem] md:leading-[1.1rem];
 }
 
 .text-header {
@@ -77,15 +77,15 @@ tbody > tr > td {
 }
 
 .text-small {
-  @apply text-[1rem] md:text-[0.6rem] leading-[0.9rem] md:leading-[0.8rem];
+  @apply text-[0.9rem] md:text-[0.7rem] leading-[0.92rem] md:leading-[0.75rem];
 }
 
 .text-smaller {
-  @apply text-[0.8rem] leading-[0.9rem];
+  @apply text-[0.8rem] md:text-[0.65em] leading-[0.9rem] md:leading-[0.7rem];
 }
 
 .text-extra {
-  @apply text-[4rem] md:text-[2rem] leading-[6rem] md:leading-[3rem];
+  @apply text-[4rem] md:text-[2rem] leading-[4.2rem] md:leading-[3rem];
 }
 
 ::selection {

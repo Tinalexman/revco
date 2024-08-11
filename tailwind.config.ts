@@ -25,11 +25,6 @@ const config: Config = {
         error: "#FF0000",
         "white-50": "rgba(233, 233, 233, 0.5)",
       },
-      fontFamily: {
-        nunito: ["var(--font-nunito)", "sans-serif"],
-        quantico: ["var(--font-quantico)", "sans-serif"],
-        bai: ["var(--font-bai)", "sans-serif"],
-      },
       screens: {
         xs: {
           max: "120px",

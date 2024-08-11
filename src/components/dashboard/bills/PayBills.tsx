@@ -1,14 +1,9 @@
 "use client";
 
-import { useGlobalStore } from "@/src/stores/globalStore";
 import React, { useState, useEffect } from "react";
 
 const PayBills = () => {
   const [pin, setPin] = useState<string>("");
-
-  useEffect(() => {
-    useGlobalStore.setState({ activeIndex: 0 });
-  }, []);
 
   return (
     <div className="flex flex-col pt-16 items-start gap-2 w-[500px] h-full">

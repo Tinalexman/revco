@@ -13,9 +13,9 @@ const ResetPassword = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-background bg-opacity-[0.95] font-nunito">
-      <div className="w-[400px] flex flex-col gap-3 relative">
-        <div className="absolute -top-[60%] left-0">
+    <div className="w-full h-full flex items-center md:items-start justify-center bg-background bg-opacity-[0.95] font-nunito">
+      <div className="w-[400px] md:w-full md:px-5 flex flex-col gap-3 relative md:mt-24">
+        <div className="absolute -top-[60%] md:-top-14 left-0 md:left-5">
           <BackButton color={"#000000"} classicArrow={true} text="Back" />
         </div>
         <motion.h1
@@ -56,9 +56,9 @@ const ResetPassword = () => {
             },
           }}
           onClick={() => {
-            window.location.assign("/auth/confirmation?email=" + email);
+            window.location.assign(`/auth/confirmation?email=${email}`);
           }}
-          className={`bg-primary rounded-full w-full text-body h-[60px] text-white font-bold mt-3`}
+          className={`bg-primary rounded-full w-full text-large h-[60px] md:h-12 text-white font-bold mt-3`}
         >
           Send Reset Link
         </motion.button>

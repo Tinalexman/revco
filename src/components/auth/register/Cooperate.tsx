@@ -58,7 +58,7 @@ const Cooperate = () => {
           if (!values.password) {
             errors.password = "Required";
           } else if (values.password.length < 8) {
-            errors.password = "Password must be more at least 8 characters";
+            errors.password = "Password must have at least 8 characters";
           }
 
           return errors;
@@ -68,7 +68,7 @@ const Cooperate = () => {
           useGlobalStore.setState({ loggedIn: true });
           toast.success("Welcome back");
           setTimeout(() => {
-            window.location.replace("/dashboard");
+            window.location.replace("/dashboard/pay-bills");
           }, 1500);
         }}
         validateOnMount={true}
@@ -244,16 +244,16 @@ const Cooperate = () => {
                   className="w-full text-body pr-11"
                 />
                 <div
-                  className="absolute text-neutral-2 top-[30px] right-4 flex items-center cursor-pointer"
+                  className="absolute text-neutral-2 top-[30px] md:top-[28px] md:right-2 right-4 flex items-center cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowPassword(!showPassword);
                   }}
                 >
                   {showPassword ? (
-                    <MdVisibilityOff size={"22px"} />
+                    <MdVisibilityOff className="text-[22px] md:text-[18px]" />
                   ) : (
-                    <MdVisibility size={"22px"} />
+                    <MdVisibility className="text-[22px] md:text-[18px]" />
                   )}
                 </div>
                 {errors.password && touched.password && (
@@ -271,16 +271,16 @@ const Cooperate = () => {
                   className="w-full text-body pr-11"
                 />
                 <div
-                  className="absolute text-neutral-2 top-[30px] right-4 flex items-center cursor-pointer"
+                  className="absolute text-neutral-2 top-[30px] md:top-[28px] md:right-2 right-4 flex items-center cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowConfirmPassword(!showConfirmPassword);
                   }}
                 >
                   {showConfirmPassword ? (
-                    <MdVisibilityOff size={"22px"} />
+                    <MdVisibilityOff className="text-[22px] md:text-[18px]" />
                   ) : (
-                    <MdVisibility size={"22px"} />
+                    <MdVisibility className="text-[22px] md:text-[18px]" />
                   )}
                 </div>
                 {errors.confirmPassword && touched.confirmPassword && (
@@ -303,9 +303,9 @@ const Cooperate = () => {
                 },
               }}
               type="submit"
-              className={`bg-primary rounded-full w-[75%] text-body h-[60px] text-white font-bold mt-3`}
+              className={`bg-primary rounded-full w-[85%] text-large h-[60px] md:h-12 text-white font-bold mt-3`}
             >
-              Continue
+              Create Account
             </motion.button>
           </Form>
         )}

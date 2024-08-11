@@ -8,16 +8,12 @@ import { useGlobalStore } from "@/src/stores/globalStore";
 const Pins = () => {
   const [index, setIndex] = useState<number>(0);
   const [pinType, setPinType] = useState<string>("");
-  const registerProps: string[] = ["Individual Account", "Cooperate"];
+  const registerProps: string[] = ["Individual", "Cooperate"];
   const [options, setOptions] = useState<string[]>(
     Array(10).fill(
       "1% PROCESSING FEE ON CAPITAL PROJECT (TARABA STATE REVENUE)"
     )
   );
-
-  useEffect(() => {
-    useGlobalStore.setState({ activeIndex: 1 });
-  }, []);
 
   return (
     <div>

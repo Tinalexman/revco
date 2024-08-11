@@ -10,7 +10,10 @@ export default function NotFoundPage() {
         <h1 className="text-header font-bold text-black mt-5">
           Page Not Found
         </h1>
-        <Link href={"/"} className="text-body text-primary font-bold mt-20">
+        <Link
+          href={"/"}
+          className="text-body text-primary font-bold mt-20 md:mt-16"
+        >
           Back to Home
         </Link>
       </div>

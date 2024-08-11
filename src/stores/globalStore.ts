@@ -6,7 +6,6 @@ export type tGlobalData = {
   firstName: string;
   lastName: string;
   clear: () => void;
-  activeIndex: number;
 };
 
 export const useGlobalStore = create<tGlobalData>()(
@@ -16,7 +15,6 @@ export const useGlobalStore = create<tGlobalData>()(
       firstName: "Micheal",
       lastName: "Adalikwu",
       clear: () => set({ loggedIn: false }),
-      activeIndex: -1,
     }),
     {
       name: "Revco Global Data",

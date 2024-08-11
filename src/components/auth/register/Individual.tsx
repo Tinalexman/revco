@@ -64,7 +64,53 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
           if (!values.password) {
             errors.password = "Required";
           } else if (values.password.length < 8) {
-            errors.password = "Password must be more at least 8 characters";
+            errors.password = "Password must have at least 8 characters";
+          }
+
+          if (!values.confirmPassword) {
+            errors.confirmPassword = "Required";
+          } else if (values.password !== values.confirmPassword) {
+            errors.confirmPassword = "Passwords do not match";
+          }
+
+          if (!values.dob) {
+            errors.dob = "Required";
+          }
+
+          if (!values.firstName) {
+            errors.firstName = "Required";
+          }
+
+          if (!values.lastName) {
+            errors.lastName = "Required";
+          }
+
+          if (!values.username) {
+            errors.username = "Required";
+          }
+
+          if (!values.phoneNumber) {
+            errors.phoneNumber = "Required";
+          }
+
+          if (!values.state) {
+            errors.state = "Required";
+          }
+
+          if (!values.lga) {
+            errors.lga = "Required";
+          }
+
+          if (!values.address) {
+            errors.address = "Required";
+          }
+
+          if (!values.gender) {
+            errors.gender = "Required";
+          }
+
+          if (!values.tin) {
+            errors.tin = "Required";
           }
 
           return errors;
@@ -74,7 +120,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
           useGlobalStore.setState({ loggedIn: true });
           toast.success("Welcome back");
           setTimeout(() => {
-            window.location.replace("/dashboard");
+            window.location.replace("/dashboard/pay-bills");
           }, 1500);
         }}
         validateOnMount={true}
@@ -263,16 +309,16 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                   className="w-full text-body pr-11"
                 />
                 <div
-                  className="absolute text-neutral-2 top-[30px] right-4 flex items-center cursor-pointer"
+                  className="absolute text-neutral-2 top-[30px] md:top-[28px] md:right-2 right-4 flex items-center cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowPassword(!showPassword);
                   }}
                 >
                   {showPassword ? (
-                    <MdVisibilityOff size={"22px"} />
+                    <MdVisibilityOff className="text-[22px] md:text-[18px]" />
                   ) : (
-                    <MdVisibility size={"22px"} />
+                    <MdVisibility className="text-[22px] md:text-[18px]" />
                   )}
                 </div>
                 {errors.password && touched.password && (
@@ -290,16 +336,16 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                   className="w-full text-body pr-11"
                 />
                 <div
-                  className="absolute text-neutral-2 top-[30px] right-4 flex items-center cursor-pointer"
+                  className="absolute text-neutral-2 top-[30px] md:top-[28px] md:right-2 right-4 flex items-center cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowConfirmPassword(!showConfirmPassword);
                   }}
                 >
                   {showConfirmPassword ? (
-                    <MdVisibilityOff size={"22px"} />
+                    <MdVisibilityOff className="text-[22px] md:text-[18px]" />
                   ) : (
-                    <MdVisibility size={"22px"} />
+                    <MdVisibility className="text-[22px] md:text-[18px]" />
                   )}
                 </div>
                 {errors.confirmPassword && touched.confirmPassword && (
@@ -336,9 +382,9 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 },
               }}
               type="submit"
-              className={`bg-primary rounded-full w-[75%] text-body h-[60px] text-white font-bold mt-3`}
+              className={`bg-primary rounded-full w-[75%] text-large h-[60px] md:h-12 text-white font-bold mt-3`}
             >
-              Continue
+              Create Account
             </motion.button>
           </Form>
         )}

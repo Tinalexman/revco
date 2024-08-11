@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito, Quantico, Bai_Jamjuree } from "next/font/google";
+import { Nunito } from "next/font/google";
 
 import "@mantine/core/styles.css";
 
@@ -11,23 +11,12 @@ import {
   MantineProvider,
   createTheme,
 } from "@mantine/core";
+import { Toaster } from "react-hot-toast";
 
 const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-nunito",
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-});
-
-const quantico = Quantico({
-  subsets: ["latin"],
-  variable: "--font-quantico",
-  weight: ["400", "700"],
-});
-
-const bai_jamjuree = Bai_Jamjuree({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700"],
-  variable: "--font-bai",
 });
 
 export const metadata: Metadata = {
@@ -69,9 +58,8 @@ export default function RootLayout({
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
 
-      <body
-        className={`${nunito.variable} ${quantico.variable} ${bai_jamjuree.variable}`}
-      >
+      <body className={nunito.className}>
+        <Toaster />
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>
