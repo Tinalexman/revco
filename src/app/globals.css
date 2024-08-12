@@ -44,12 +44,16 @@ thead > tr {
   @apply bg-[#F6F6F7] rounded-md h-10 text-small;
 }
 
+thead > tr > th {
+  @apply md:px-3;
+}
+
 th {
   @apply text-start;
 }
 
 tbody > tr > td {
-  @apply text-[#3A3A3A] text-hint py-3;
+  @apply text-[#3A3A3A] text-hint py-3 md:px-3;
 }
 
 .text-body {

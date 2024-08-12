@@ -16,7 +16,7 @@ const Pins = () => {
   );
 
   return (
-    <div className="flex flex-col mt-16 md:mt-10 md:px-2 items-start gap-3 w-[500px] md:w-full h-full">
+    <div className="flex flex-col mt-16 md:mt-10 items-start gap-3 w-[500px] md:w-full h-full">
       <div className="w-full justify-between items-center flex">
         {registerProps.map((rp, i) => (
           <div

@@ -6,7 +6,7 @@ const PayBills = () => {
   const [pin, setPin] = useState<string>("");
 
   return (
-    <div className="flex flex-col pt-16 items-start gap-2 w-[500px] md:px-2 md:w-full h-full">
+    <div className="flex flex-col mt-16 md:mt-10 items-start gap-2 w-[500px] md:w-full h-full">
       <h2 className="text-header font-bold text-[#595959]">
         Paysure Invoice Number (PIN){"  "}
         <span className="text-tertiary text-small font-semibold">
@@ -29,7 +29,7 @@ const PayBills = () => {
             Proceed
           </button>
         </div>
-        <div className="text-small text-[#595959] font-semibold text-end">
+        <div className="text-small text-[#595959] font-semibold text-end md:mb-20">
           Don&apos;t have a PIN?{" "}
           <span
             onClick={() => window.location.assign("/dashboard/generate-pin")}

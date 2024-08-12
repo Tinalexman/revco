@@ -75,11 +75,18 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
 
   return (
     <>
-      <nav className="flex w-full items-center justify-between h-[72px] md:h-[48px]">
+      <nav className="flex w-full md:bg-white md:px-5 items-center justify-between h-[72px] md:h-20">
+        <HiMenu
+          size={26}
+          className={`md:block hidden ${
+            swap ? "text-black" : "text-white"
+          } cursor-pointer text-header mr-2`}
+          onClick={openDrawer}
+        />
         <Link
           href={"/"}
           className={`flex items-center gap-2 ${
-            swap ? "max-w-[20rem]" : "w-fit"
+            swap ? "max-w-[20rem]" : "w-fit md:w-2/5"
           } `}
         >
           <Image
@@ -141,12 +148,12 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
             <div
               className={`${
                 !swap ? "text-white" : "text-black"
-              } flex items-center gap-2 w-fit cursor-pointer`}
+              } flex items-center gap-2 md:gap-1 w-fit cursor-pointer`}
             >
               <div className="bg-[#B0DDC3] grid place-content-center rounded-full size-9 text-body font-semibold">
                 {lastName.charAt(0)}
               </div>
-              <p className="text-body">
+              <p className="text-body md:hidden">
                 {firstName} {lastName}
               </p>
               <IoMdArrowDropdown size={"16px"} />
@@ -187,26 +194,26 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
             )}
           </div>
         )}
-        <HiMenu
-          className={`md:block hidden ${
-            swap ? "text-black" : "text-white"
-          } cursor-pointer text-header`}
-          onClick={openDrawer}
-        />
+        {signedIn && (
+          <div
+            className={`${
+              !swap ? "text-white" : "text-black"
+            } flex items-center gap-2 md:gap-1 w-fit cursor-pointer md:block hidden`}
+          >
+            <div className="bg-[#B0DDC3] grid place-content-center rounded-full size-9 text-body font-semibold">
+              {lastName.charAt(0)}
+            </div>
+            <IoMdArrowDropdown size={"16px"} />
+          </div>
+        )}
       </nav>
       <Drawer.Root
         opened={openedDrawer}
         onClose={closeDrawer}
         padding={0}
         top={0}
-        position="right"
-        w={"50vw"}
-        h={"100vh"}
-        // transitionProps={{
-        //   transition: "rotate-left",
-        //   duration: 150,
-        //   timingFunction: "linear",
-        // }}
+        position="top"
+        size={"100%"}
       >
         <Drawer.Overlay />
         <Drawer.Content>

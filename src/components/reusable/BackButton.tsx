@@ -27,9 +27,9 @@ const BackButton: FC<{
       onClick={goBack}
     >
       {classicArrow ? (
-        <GoArrowLeft size={"24px"} fill={color} />
+        <GoArrowLeft size={20} fill={color} />
       ) : (
-        <IoIosArrowBack size={"24px"} fill={color} />
+        <IoIosArrowBack size={20} fill={color} />
       )}
       <p
         style={{

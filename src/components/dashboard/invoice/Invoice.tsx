@@ -17,8 +17,8 @@ const GenerateInvoice = () => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <div className="flex flex-col items-center w-[700px] gap-6 pt-16">
-      <div className="flex flex-col items-start gap-2 w-[500px] h-full relative">
+    <div className="flex flex-col items-center w-[700px] md:w-full gap-6 mt-16 md:mt-10">
+      <div className="flex flex-col items-start gap-2 w-[500px] md:w-full h-full relative">
         <h2 className="text-header font-bold text-[#595959]">
           Paysure Invoice Number (PIN){"  "}
           <span
@@ -53,26 +53,26 @@ const GenerateInvoice = () => {
           </div>
         )}
         <div className="flex flex-col w-full gap-3 items-start">
-          <div className="w-full flex gap-2 items-center">
+          <div className="w-full flex md:flex-col gap-2 items-center">
             <input
               type="text"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
-              className="rounded-full w-[75%]"
+              className="rounded-full w-[75%] md:w-full"
               placeholder="Enter PIN"
             />
             <button
               onClick={() => {}}
-              className={`bg-primary rounded-full w-[25%] text-body h-[48px] text-white font-bold`}
+              className={`bg-primary rounded-full w-[25%] md:w-full text-body h-12 md:h-10 text-white font-bold`}
             >
               Proceed
             </button>
           </div>
-          <div className="text-smaller text-[#595959] font-semibold text-end">
+          <div className="text-small text-[#595959] font-semibold text-end md:mb-20">
             Don&apos;t have a PIN?{" "}
             <span
               onClick={() => window.location.assign("/dashboard/generate-pin")}
-              className="text-tertiary font-bold text-smaller cursor-pointer"
+              className="text-tertiary font-bold cursor-pointer"
             >
               Click here
             </span>
@@ -80,7 +80,7 @@ const GenerateInvoice = () => {
         </div>
       </div>
       {error && (
-        <div className="w-full flex items-center justify-between px-8 font-medium py-[10px] rounded-[8px] text-[#DA251D] text-hint bg-[#F4BBB9]">
+        <div className="w-full flex items-center justify-between px-8 font-medium py-[10px] md:mb-20 rounded-[8px] text-[#DA251D] text-hint bg-[#F4BBB9]">
           <div className="flex w-fit gap-1 items-center">
             <RiFileList3Fill size={"16px"} />
             <p>Invoice not found</p>
