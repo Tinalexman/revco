@@ -90,13 +90,13 @@ const ProcessPayments = () => {
   }
 
   return (
-    <div className="flex flex-col mt-16 px-8 py-10 items-center gap-6 w-[50rem] rounded-lg text-black bg-white overflow-y-scroll scrollbar-custom">
+    <div className="flex flex-col mt-16 md:mt-6 px-8 md:px-2.5 py-10 md:py-5 items-center gap-6 w-[50rem] md:w-full rounded-lg text-black bg-white overflow-y-scroll scrollbar-custom">
       <div className="w-full flex justify-between items-center">
         <h2 className="text-large font-bold">PIN: {paymentDetails.pin}</h2>
         <p className="text-small text-[#007AFF] cursor-pointer">View Receipt</p>
       </div>
-      <div className="w-full flex justify-between">
-        <div className="w-[45%] flex flex-col gap-2">
+      <div className="w-full flex md:flex-col justify-between">
+        <div className="w-[45%] md:w-full flex flex-col gap-2">
           <div className="w-full flex justify-between">
             <p className="text-smaller">Payer&apos;s name:</p>
             <p className="text-smaller font-bold">{paymentDetails.name}</p>
@@ -117,7 +117,7 @@ const ProcessPayments = () => {
             </p>
           </div>
         </div>
-        <div className="w-[45%] flex flex-col gap-2">
+        <div className="w-[45%] md:w-full flex flex-col gap-2">
           <div className="w-full flex justify-between">
             <p className="text-smaller">Payer ID:</p>
             <p className="text-smaller font-bold">{paymentDetails.payerID}</p>
@@ -135,14 +135,14 @@ const ProcessPayments = () => {
         </div>
       </div>
       <hr className="bg-background w-full" />
-      <div className="w-full gap-[10px] grid grid-cols-5">
+      <div className="w-full gap-[10px] grid grid-cols-5 md:grid-cols-1">
         {modes.map((md, i) => {
           const Icon = md.icon;
           return (
             <div
               key={i}
               onClick={() => setMode(i)}
-              className={`transition-colors ease-out duration-300 w-full flex flex-col justify-center items-center gap-[10px] py-4 rounded-lg cursor-pointer ${
+              className={`transition-colors ease-out duration-300 w-full flex flex-col justify-center items-center gap-[10px] py-4 md:py-2 rounded-lg cursor-pointer ${
                 i === mode ? "bg-primary-light" : "bg-[#EBEBEB]"
               }`}
             >

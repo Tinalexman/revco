@@ -42,7 +42,7 @@ const Dropdown: FC<{
                 value || hint ? "justify-between" : "justify-end"
               }`
             : "rounded-full grid place-items-start place-content-center"
-        } w-full h-[48px] px-3 bg-white cursor-pointer text-[#4F4F4F] text-body`}
+        } w-full h-12 md:h-10 px-3 bg-white cursor-pointer text-[#4F4F4F] text-body`}
       >
         {value === "" && <p className="text-neutral-3">{hint}</p>}
         <p className="line-clamp-1">{value}</p>
@@ -53,19 +53,19 @@ const Dropdown: FC<{
           className={`grid place-content-center bg-white absolute z-10 p-2 ${
             fitMenu && fitMenu
               ? "left-0 w-fit rounded-[8px]"
-              : "-right-[13.5rem] rounded-[16px]"
-          } top-[60px]  shadow-custom`}
+              : "-right-[13.5rem] md:right-0 rounded-[16px]"
+          } top-[60px] md:top-12 shadow-custom`}
         >
           <div
             className={`${
-              fitMenu ? "w-full" : "w-[40rem]"
-            } flex flex-col max-h-[20rem] 
+              fitMenu ? "w-full" : "w-[40rem] md:w-full"
+            } flex flex-col max-h-[15rem] md:max-h-[10rem] 
         overflow-y-scroll text-contrast-100 scrollbar-thin scrollbar-webkit p-2`}
           >
             {menus.map((menu, i) => (
               <div
                 key={i}
-                className="w-full cursor-pointer hover:bg-[#F1F2F0] px-3 py-2 rounded-md text-[#626262]"
+                className="w-full cursor-pointer hover:bg-[#F1F2F0] px-3 md:px-2 py-2 rounded-md text-[#626262] text-body"
                 onClick={() => {
                   menu.onClick();
                   setOpen(false);

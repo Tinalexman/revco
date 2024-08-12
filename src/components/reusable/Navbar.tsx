@@ -199,13 +199,14 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
         onClose={closeDrawer}
         padding={0}
         top={0}
-        position="top"
-        size={"55vh"}
-        transitionProps={{
-          transition: "rotate-left",
-          duration: 150,
-          timingFunction: "linear",
-        }}
+        position="right"
+        w={"50vw"}
+        h={"100vh"}
+        // transitionProps={{
+        //   transition: "rotate-left",
+        //   duration: 150,
+        //   timingFunction: "linear",
+        // }}
       >
         <Drawer.Overlay />
         <Drawer.Content>

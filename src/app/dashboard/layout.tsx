@@ -39,7 +39,7 @@ const DashboardLayout: FC<iDashboardLayout> = ({ children }) => {
         <div className="flex flex-col w-full h-[calc(100vh-165px)] md:h-full justify-between items-center">
           {children}
         </div>
-        <div className="w-[180px] h-[40px] bg-white border-2 text-black border-[#E6E6E6] rounded-[6px] flex items-center justify-center gap-1 font-nunito mt-1">
+        <div className="w-[180px] md:w-[140px] h-10 md:h-9 bg-white border-2 text-black border-[#E6E6E6] rounded-[6px] flex items-center justify-center gap-1 font-nunito mt-1">
           <RiLockPasswordLine size={16} />
           <p className="text-smaller">
             Powered by <span className="text-tertiary font-bold">paysure</span>

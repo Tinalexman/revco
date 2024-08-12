@@ -57,11 +57,11 @@ tbody > tr > td {
 }
 
 .text-large {
-  @apply text-[1.1rem] md:text-[1rem] leading-[1.2rem] md:leading-[1.1rem];
+  @apply text-[1.1rem] md:text-[0.8rem] leading-[1.2rem] md:leading-[0.9rem];
 }
 
 .text-header {
-  @apply text-[1.5rem] leading-[2rem];
+  @apply text-[1.5rem] md:text-[1.2rem] leading-[2rem] md:leading-[1.3rem];
 }
 
 .text-subtitle {
@@ -85,7 +85,7 @@ tbody > tr > td {
 }
 
 .text-tiny {
-  @apply text-[0.6rem] md:text-[0.45em] leading-[0.7rem] md:leading-[0.5rem];
+  @apply text-[0.6rem] leading-[0.7rem];
 }
 
 .text-extra {

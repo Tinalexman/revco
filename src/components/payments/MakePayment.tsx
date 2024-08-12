@@ -57,7 +57,7 @@ const Content = () => {
 
   return (
     <>
-      <div className="flex flex-col pt-16 items-start gap-4 w-[45rem] h-full overflow-y-scroll scrollbar-custom">
+      <div className="flex flex-col mt-16 md:mt-6 items-start gap-4 w-[45rem] md:w-full h-full md:h-auto overflow-y-scroll scrollbar-custom">
         <BackButton classicArrow={true} color={"#000000"} text={"Back"} />
         <h2 className="text-subtitle font-bold text-[#3A3A3A] font-nunito">
           TARABA STATE INTERNAL REVENUE SERVICE
@@ -126,17 +126,14 @@ const Content = () => {
                   Who do you want to pay for{" "}
                   <span className="text-error">*</span>
                 </h3>
-                <input
-                  type="text"
-                  readOnly
-                  value={target ?? ""}
-                  className="w-full text-body border border-[#DDE2FF]"
-                />
+                <div className="w-full flex items-center text-body border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 h-12 md:h-auto py-2 text-black">
+                  {target}
+                </div>
               </div>
 
-              <div className="flex items-start justify-between w-full px-2">
-                <div className="flex flex-col gap-1 w-[48%]">
-                  <h3 className="text-large text-[#454545]  font-bold">
+              <div className="flex items-start justify-between w-full px-2 md:px-1">
+                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
+                  <h3 className="text-large  text-[#454545] font-bold">
                     Full Name <span className="text-error">*</span>
                   </h3>
                   <input
@@ -150,8 +147,8 @@ const Content = () => {
                     <p className="text-hint text-error">{errors.fullName}</p>
                   )}
                 </div>
-                <div className="flex flex-col gap-1 w-[48%]">
-                  <h3 className="text-large text-[#454545]  font-bold">
+                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
+                  <h3 className="text-large text-[#454545] font-bold">
                     Email <span className="text-error">*</span>
                   </h3>
                   <input
@@ -166,9 +163,9 @@ const Content = () => {
                   )}
                 </div>
               </div>
-              <div className="flex items-start justify-between w-full px-1">
-                <div className="flex flex-col gap-1 w-[48%]">
-                  <h3 className="text-large text-[#454545]  font-bold">
+              <div className="flex items-start justify-between w-full px-2 md:px-1">
+                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
+                  <h3 className="text-large text-[#454545] font-bold">
                     TIN <span className="text-error">*</span>
                   </h3>
                   <input
@@ -182,8 +179,8 @@ const Content = () => {
                     <p className="text-hint text-error">{errors.tin}</p>
                   )}
                 </div>
-                <div className="flex flex-col gap-1 w-[48%]">
-                  <h3 className="text-large text-[#454545]  font-bold">
+                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
+                  <h3 className="text-large text-[#454545] font-bold">
                     Phone number <span className="text-error">*</span>
                   </h3>
                   <input
@@ -198,8 +195,8 @@ const Content = () => {
                   )}
                 </div>
               </div>
-              <div className="flex items-start justify-between px-1 w-full">
-                <div className="flex flex-col gap-1 w-[48%]">
+              <div className="flex items-start justify-between px-2 md:px-1 w-full">
+                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
                   <h3 className="text-large text-[#454545]  font-bold">
                     State <span className="text-error">*</span>
                   </h3>
@@ -215,10 +212,9 @@ const Content = () => {
                     fitMenu
                   />
                 </div>
-                <div className="flex flex-col gap-1 w-[48%]">
-                  <h3 className="text-large text-[#454545]  font-bold">
-                    Local Government of Origin{" "}
-                    <span className="text-error">*</span>
+                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
+                  <h3 className="text-large text-[#454545] font-bold">
+                    LGA <span className="text-error">*</span>
                   </h3>
                   <Dropdown menus={[]} value={""} hint="Select LGA" fitMenu />
                 </div>
@@ -248,7 +244,7 @@ const Content = () => {
                       type="text"
                       name="amount"
                       value={values.amount}
-                      placeholder="Enter amount to pay"
+                      placeholder="Enter amount"
                       onChange={(e) => {
                         const res = e.target.value.replace(/,/g, "");
                         if (!isNaN(Number(res))) {
@@ -293,7 +289,7 @@ const Content = () => {
 
               <div className="flex w-full items-center justify-around my-3">
                 <button
-                  className={`border border-error rounded-full w-[40%] text-small h-12 text-error font-bold`}
+                  className={`border border-error rounded-full w-[40%] md:w-[45%] text-small h-12 md:h-10 text-error font-bold`}
                 >
                   CANCEL
                 </button>
@@ -322,7 +318,7 @@ const Content = () => {
                       window.location.assign("/payments/process");
                     }
                   }}
-                  className={`bg-primary rounded-full w-[40%] text-small h-12 text-white font-bold`}
+                  className={`bg-primary rounded-full w-[40%] md:w-[45%] text-small h-12 md:h-10 text-white font-bold`}
                 >
                   CONTINUE
                 </button>

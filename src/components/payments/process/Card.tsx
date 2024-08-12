@@ -16,7 +16,7 @@ interface iCardDetails {
 
 const Card = () => {
   return (
-    <div className="w-[60%] mt-2">
+    <div className="w-[60%] md:w-full mt-2">
       <Formik
         initialValues={{
           cardNumber: "",
@@ -70,7 +70,7 @@ const Card = () => {
                 <Image
                   src={CardType}
                   alt="card type"
-                  className="absolute top-1/2 -translate-y-1/2 right-4 object-cover"
+                  className="absolute md:w-[5rem] md:h-auto top-1/2 -translate-y-1/2 right-4 object-cover"
                 />
               </div>
               <div className="w-full flex">
@@ -112,7 +112,7 @@ const Card = () => {
 
             <button
               disabled={isSubmitting}
-              className={`bg-[#408BFC] rounded-[10px] w-[70%] text-large h-12 text-white font-bold mt-2 mb-5`}
+              className={`bg-[#408BFC] rounded-[10px] w-[70%] md:w-[80%] text-large h-12 md:h-10 text-white font-bold mt-2 mb-5`}
             >
               Pay Now
             </button>
