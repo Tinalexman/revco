@@ -17,6 +17,7 @@ import { useGlobalStore } from "@/src/stores/globalStore";
 
 import PaymentModal from "./PaymentModal";
 import { PAYMENT_KEY, tProcessPayment } from "@/src/stores/paymentStore";
+import { formatAmountWithCommas } from "@/src/functions/numberFunctions";
 
 interface iPaymentData {
   fullName: string;
@@ -27,7 +28,6 @@ interface iPaymentData {
   lga: string;
   address: string;
   amount: number;
-  curreny: string;
 }
 
 const MakePayment = () => {
@@ -72,7 +72,6 @@ const Content = () => {
             lga: "",
             address: "",
             amount: "",
-            curreny: "",
           }}
           validate={(values) => {
             const errors: Partial<iPaymentData> = {};
@@ -101,6 +100,7 @@ const Content = () => {
             isSubmitting,
             isInitialValid,
             isValid,
+            setFieldValue,
           }) => (
             <Form
               onSubmit={handleSubmit}
@@ -206,10 +206,12 @@ const Content = () => {
                   <Dropdown
                     menus={states.map((st, i) => ({
                       name: st,
-                      onClick: () => {},
+                      onClick: () => {
+                        setFieldValue("state", st);
+                      },
                     }))}
-                    value={""}
-                    hint=""
+                    value={values.state}
+                    hint="Select State"
                     fitMenu
                   />
                 </div>
@@ -218,7 +220,7 @@ const Content = () => {
                     Local Government of Origin{" "}
                     <span className="text-error">*</span>
                   </h3>
-                  <Dropdown menus={[]} value={""} hint="" fitMenu />
+                  <Dropdown menus={[]} value={""} hint="Select LGA" fitMenu />
                 </div>
               </div>
               <div className="w-full space-y-2 px-1">
@@ -238,27 +240,35 @@ const Content = () => {
                   <h3 className="text-large text-[#454545]  font-bold">
                     Amount to Pay (₦) <span className="text-error">*</span>
                   </h3>
-                  <input
-                    type="number"
-                    name="amount"
-                    value={values.amount}
-                    onChange={handleChange}
-                    className="w-full text-body border border-[#DDE2FF]"
-                  />
+                  <div className="w-full flex">
+                    <div className="bg-background w-[15%] rounded-[8px] rounded-tr-none rounded-br-none h-12 md:h-10 grid place-content-center">
+                      <p className="text-large font-bold text-black">₦</p>
+                    </div>
+                    <input
+                      type="text"
+                      name="amount"
+                      value={values.amount}
+                      placeholder="Enter amount to pay"
+                      onChange={(e) => {
+                        const res = e.target.value.replace(/,/g, "");
+                        if (!isNaN(Number(res))) {
+                          setFieldValue("amount", formatAmountWithCommas(res));
+                        }
+                      }}
+                      className="w-[85%] text-body border border-[#DDE2FF] rounded-tl-none rounded-bl-none"
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-col gap-1 w-[48%]">
                   <h3 className="text-large text-[#454545]  font-bold">
                     Currency
                     <span className="text-error">*</span>
                   </h3>
-                  <Dropdown
-                    menus={currencies.map((cp, i) => ({
-                      name: cp,
-                      onClick: () => {},
-                    }))}
-                    value={""}
-                    hint={currencies[0]}
-                    fitMenu
+                  <input
+                    type="text"
+                    value={"NGN - Nigerian Naira"}
+                    readOnly
+                    className="w-full text-body border border-[#DDE2FF]"
                   />
                 </div>
               </div>
@@ -295,7 +305,9 @@ const Content = () => {
                     } else {
                       let processData: tProcessPayment = {
                         tin: values.tin,
-                        amount: Number.parseInt(values.amount),
+                        amount: Number.parseInt(
+                          values.amount.replace(/,/g, "")
+                        ),
                         target: target ?? "",
                         name: values.fullName,
                         ref: "Ministry of Agriculture",
