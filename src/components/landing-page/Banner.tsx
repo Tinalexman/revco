@@ -116,7 +116,8 @@ const Banner = () => {
 
             <div className="flex flex-col items-center gap-4 w-[80%] md:w-full">
               <hr className="bg-white bg-opacity-[0.75] w-full" />
-              <div className="w-full place-items-center grid grid-cols-4 md:grid-cols-2 text-white">
+              <div className="h-6 md:h-3" />
+              {/* <div className="w-full place-items-center grid grid-cols-4 md:grid-cols-2 text-white">
                 {bottomLinks.map((bl, i) => {
                   const Icon = bl.icon;
                   return (
@@ -126,7 +127,7 @@ const Banner = () => {
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
