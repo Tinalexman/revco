@@ -18,6 +18,7 @@ import { useGlobalStore } from "@/src/stores/globalStore";
 import PaymentModal from "./PaymentModal";
 import { PAYMENT_KEY, tProcessPayment } from "@/src/stores/paymentStore";
 import { formatAmountWithCommas } from "@/src/functions/numberFunctions";
+import CustomPhoneInput from "../reusable/CustomPhoneInput";
 
 interface iPaymentData {
   fullName: string;
@@ -183,12 +184,10 @@ const Content = () => {
                   <h3 className="text-large text-[#454545] font-bold">
                     Phone number <span className="text-error">*</span>
                   </h3>
-                  <input
-                    type="text"
-                    name="phoneNumber"
-                    value={values.phoneNumber}
-                    onChange={handleChange}
-                    className="w-full text-body border border-[#DDE2FF]"
+                  <CustomPhoneInput
+                    handleBlur={handleBlur}
+                    handleChange={handleChange}
+                    phoneNumber={values.phoneNumber}
                   />
                   {errors.phoneNumber && touched.phoneNumber && (
                     <p className="text-hint text-error">{errors.phoneNumber}</p>

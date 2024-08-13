@@ -103,3 +103,8 @@ tbody > tr > td {
 ::-moz-selection {
   @apply bg-primary text-white;
 }
+
+.PhoneInput .PhoneInputCountrySelectArrow {
+  --PhoneInputCountrySelectArrow-color: #000000;
+  --PhoneInputCountrySelectArrow-opacity: 1;
+}

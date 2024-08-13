@@ -1,11 +1,15 @@
 import { Loader } from "@mantine/core";
 import { Formik, Form } from "formik";
 import { motion } from "framer-motion";
-import React, { useState, FC } from "react";
+import React, { useState, forwardRef } from "react";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 import { useGlobalStore } from "@/src/stores/globalStore";
 import { toast } from "react-hot-toast";
+
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import CustomPhoneInput from "../../reusable/CustomPhoneInput";
 
 interface iCooperate {
   firstName: string;
@@ -83,6 +87,7 @@ const Cooperate = () => {
           isSubmitting,
           isInitialValid,
           isValid,
+          setFieldValue,
         }) => (
           <Form
             onSubmit={handleSubmit}
@@ -204,13 +209,10 @@ const Cooperate = () => {
             <div className="flex justify-around w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Phone Number</h3>
-                <input
-                  type="text"
-                  name="phoneNumber"
-                  placeholder="+234"
-                  value={values.phoneNumber}
-                  onChange={handleChange}
-                  className="w-full text-body"
+                <CustomPhoneInput
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  phoneNumber={values.phoneNumber}
                 />
                 {errors.phoneNumber && touched.phoneNumber && (
                   <p className="text-hint text-error">{errors.phoneNumber}</p>

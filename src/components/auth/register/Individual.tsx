@@ -8,6 +8,7 @@ import { states } from "@/src/constants/constants";
 
 import { useGlobalStore } from "@/src/stores/globalStore";
 import { toast } from "react-hot-toast";
+import CustomPhoneInput from "../../reusable/CustomPhoneInput";
 
 interface iIndividual {
   firstName: string;
@@ -188,13 +189,10 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Phone Number</h3>
-                <input
-                  type="text"
-                  name="phoneNumber"
-                  placeholder="+234"
-                  value={values.phoneNumber}
-                  onChange={handleChange}
-                  className="w-full text-body"
+                <CustomPhoneInput
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  phoneNumber={values.phoneNumber}
                 />
                 {errors.phoneNumber && touched.phoneNumber && (
                   <p className="text-hint text-error">{errors.phoneNumber}</p>
