@@ -18,7 +18,7 @@ const PaymentLayout: FC<iPaymentLayout> = ({ children }) => {
           <Navbar swap={true} active={-1} />
         </div>
         <div className="mt-5 w-full h-[1px] bg-[#373737] bg-opacity-30 " />
-        <div className="flex flex-col w-full h-[calc(100vh-165px)] md:h-auto md:px-5 justify-between items-center">
+        <div className="flex flex-col w-full h-[calc(100vh-165px)] md:h-auto md:px-5 pt-16 md:pt-6 justify-between items-center">
           {children}
         </div>
         <div className="w-[180px] md:w-[140px] h-10 md:h-9 bg-white border-2 text-black border-[#E6E6E6] rounded-[6px] flex items-center justify-center gap-1 font-nunito mt-1">

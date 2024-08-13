@@ -58,7 +58,7 @@ const Content = () => {
 
   return (
     <>
-      <div className="flex flex-col mt-16 md:mt-6 items-start gap-4 w-[45rem] md:w-full h-full md:h-auto overflow-y-scroll scrollbar-custom">
+      <div className="flex flex-col items-start gap-4 w-[45rem] px-[2px] md:px-1 md:w-full h-full md:h-auto overflow-y-scroll scrollbar-custom">
         <BackButton classicArrow={true} color={"#000000"} text={"Back"} />
         <h2 className="text-subtitle font-bold text-[#3A3A3A] font-nunito">
           TARABA STATE INTERNAL REVENUE SERVICE
@@ -109,7 +109,7 @@ const Content = () => {
               method="POST"
             >
               {proceed && taxPayerID && (
-                <div className="w-full space-y-2 px-1">
+                <div className="w-full space-y-2">
                   <h3 className="text-large text-[#454545]  font-bold">
                     Tax Payer ID
                   </h3>
@@ -122,7 +122,7 @@ const Content = () => {
                 </div>
               )}
 
-              <div className="w-full space-y-2 px-1">
+              <div className="w-full space-y-2">
                 <h3 className="text-large text-[#454545]  font-bold">
                   Who do you want to pay for{" "}
                   <span className="text-error">*</span>
@@ -132,9 +132,9 @@ const Content = () => {
                 </div>
               </div>
 
-              <div className="flex items-start justify-between w-full px-2 md:px-1">
+              <div className="flex items-start justify-between w-full">
                 <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
-                  <h3 className="text-large  text-[#454545] font-bold">
+                  <h3 className="text-large text-[#454545] font-bold">
                     Full Name <span className="text-error">*</span>
                   </h3>
                   <input
@@ -164,7 +164,7 @@ const Content = () => {
                   )}
                 </div>
               </div>
-              <div className="flex items-start justify-between w-full px-2 md:px-1">
+              <div className="flex items-start justify-between w-full">
                 <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
                   <h3 className="text-large text-[#454545] font-bold">
                     TIN <span className="text-error">*</span>
@@ -194,7 +194,7 @@ const Content = () => {
                   )}
                 </div>
               </div>
-              <div className="flex items-start justify-between px-2 md:px-1 w-full">
+              <div className="flex items-start justify-between w-full">
                 <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
                   <h3 className="text-large text-[#454545]  font-bold">
                     State <span className="text-error">*</span>
@@ -218,7 +218,7 @@ const Content = () => {
                   <Dropdown menus={[]} value={""} hint="Select LGA" fitMenu />
                 </div>
               </div>
-              <div className="w-full space-y-2 px-1">
+              <div className="w-full space-y-2">
                 <h3 className="text-large text-[#454545]  font-bold">
                   Address <span className="text-error">*</span>
                 </h3>
@@ -230,7 +230,7 @@ const Content = () => {
                   className="w-full text-body border border-[#DDE2FF] resize-none h-[100px]"
                 />
               </div>
-              <div className="flex items-start justify-between px-1 w-full">
+              <div className="flex items-start justify-between w-full">
                 <div className="flex flex-col gap-1 w-[48%]">
                   <h3 className="text-large text-[#454545]  font-bold">
                     Amount to Pay (₦) <span className="text-error">*</span>

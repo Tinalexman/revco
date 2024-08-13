@@ -142,7 +142,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             className="w-full flex flex-col items-center gap-3"
             method="POST"
           >
-            <div className="flex justify-around w-full">
+            <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">First Name</h3>
                 <input
@@ -172,7 +172,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 )}
               </div>
             </div>
-            <div className="flex justify-around w-full">
+            <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Username</h3>
                 <input
@@ -199,7 +199,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 )}
               </div>
             </div>
-            <div className="flex justify-around w-full">
+            <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">State of Origin</h3>
                 <select
@@ -233,7 +233,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
               </div>
             </div>
             {!hasNin && (
-              <div className="flex justify-around w-full">
+              <div className="flex justify-between w-full">
                 <div className="flex flex-col gap-[2px] w-[48%]">
                   <h3 className="text-body text-neutral-2">Gender</h3>
                   <select
@@ -265,7 +265,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 </div>
               </div>
             )}
-            <div className="flex justify-around w-full">
+            <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Email Address</h3>
                 <input
@@ -295,7 +295,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 )}
               </div>
             </div>
-            <div className="flex justify-around w-full">
+            <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%] relative">
                 <h3 className="text-body text-neutral-2">Password</h3>
                 <input
@@ -354,7 +354,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
               </div>
             </div>
             <div className="flex flex-col items-center gap-[2px] w-full">
-              <div className="w-full pl-[2%]">
+              <div className="w-full">
                 <h3 className="text-body  text-neutral-2">Address</h3>
               </div>
               <textarea
@@ -362,7 +362,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 placeholder="Enter your address here"
                 value={values.address}
                 onChange={handleChange}
-                className="w-[98%] h-24 text-body resize-none"
+                className="w-full h-24 text-body resize-none"
               />
               {errors.address && touched.address && (
                 <p className="text-hint text-error">{errors.address}</p>

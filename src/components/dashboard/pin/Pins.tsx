@@ -24,7 +24,7 @@ const Pins = () => {
             onClick={() => {
               setIndex(i);
             }}
-            className={`w-[48.5%] cursor-pointer transition-colors duration-200 ease-in h-10 rounded-lg justify-center gap-3 items-center text-smaller text-[#3A3A3A] flex ${
+            className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in h-10 rounded-lg justify-center gap-3 items-center text-smaller text-[#3A3A3A] flex ${
               index === i ? "bg-primary-light " : "bg-neutral"
             }`}
           >

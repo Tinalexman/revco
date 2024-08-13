@@ -94,7 +94,7 @@ const Cooperate = () => {
             className="w-full flex flex-col items-center gap-3"
             method="POST"
           >
-            <div className="flex justify-around w-full">
+            <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Business Name</h3>
                 <input
@@ -124,7 +124,7 @@ const Cooperate = () => {
                 )}
               </div>
             </div>
-            <div className="flex justify-around w-full">
+            <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Email Address</h3>
                 <input
@@ -154,7 +154,7 @@ const Cooperate = () => {
                 )}
               </div>
             </div>
-            <div className="flex flex-col gap-[2px] w-full pl-2">
+            <div className="flex flex-col gap-[2px] w-full">
               <h3 className="text-body text-neutral-2">RC Number</h3>
               <input
                 type="text"
@@ -175,7 +175,7 @@ const Cooperate = () => {
               </h2>
             </div>
 
-            <div className="flex justify-around w-full">
+            <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">First Name</h3>
                 <input
@@ -206,7 +206,7 @@ const Cooperate = () => {
               </div>
             </div>
 
-            <div className="flex justify-around w-full">
+            <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Phone Number</h3>
                 <CustomPhoneInput
@@ -234,7 +234,7 @@ const Cooperate = () => {
               </div>
             </div>
 
-            <div className="flex justify-around w-full">
+            <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%] relative">
                 <h3 className="text-body text-neutral-2">Password</h3>
                 <input

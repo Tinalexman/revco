@@ -27,7 +27,7 @@ const Register = () => {
         index === -1 ? "md:h-full" : "md:h-auto"
       } flex items-center md:items-start justify-center md:justify-start bg-background bg-opacity-[0.95]`}
     >
-      <div className="w-[500px] md:w-full md:mt-16 flex flex-col items-center gap-5 md:px-2 max-h-[90%] md:h-auto md:max-h-full overflow-y-scroll scrollbar-custom">
+      <div className="w-[500px] md:w-full md:mt-16 flex flex-col items-center gap-5 md:px-2 px-[2px] max-h-[90%] md:h-auto md:max-h-full overflow-y-scroll scrollbar-custom">
         <div className="flex flex-col items-center gap-6 w-full">
           <div className="flex flex-col gap-1 items-center">
             <motion.h1
@@ -60,7 +60,7 @@ const Register = () => {
                     setNoNin(false);
                   }
                 }}
-                className={`w-[48.5%] cursor-pointer transition-colors duration-200 ease-in h-10 rounded-lg justify-center gap-3 items-center text-smaller text-[#3A3A3A] flex ${
+                className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in h-10 rounded-lg justify-center gap-3 items-center text-smaller text-[#3A3A3A] flex ${
                   index === i ? "bg-primary-light " : "bg-neutral"
                 }`}
               >
@@ -77,7 +77,7 @@ const Register = () => {
               </div>
             ))}
           </div>
-          {noNin && (
+          {false && noNin && (
             <div className="w-full flex items-center justify-between px-8 md:px-3 font-medium py-[10px] rounded-[8px] text-primary text-hint bg-[#B0DDC3]">
               <p>Payer Temporary ID: 01234567890</p>
               <MdOutlineCancel
@@ -104,12 +104,16 @@ const Register = () => {
               value={nin}
               onChange={(e) => setNin(e.target.value)}
               className="w-full text-body"
+              readOnly
             />
             {!noNin && index === 0 && (
               <p className="text-hint font-nunito text-black mt-1">
                 Don&apos;t have a NIN?{" "}
                 <span
-                  onClick={() => setNoNin(true)}
+                  onClick={() => {
+                    setNoNin(true);
+                    setNin("01234567890");
+                  }}
                   className="text-primary font-bold cursor-pointer"
                 >
                   Click Here
