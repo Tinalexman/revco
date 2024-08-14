@@ -78,34 +78,36 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
       <nav
         className={`flex w-full ${
           swap && "md:bg-white"
-        } md:px-5 items-center justify-between h-[72px] md:h-20`}
+        } md:px-5 items-center justify-between h-[72px] md:h-14`}
       >
-        <HiMenu
-          size={26}
-          className={`md:block hidden ${
-            swap ? "text-black" : "text-white"
-          } cursor-pointer text-header mr-2`}
-          onClick={openDrawer}
-        />
-        <Link
-          href={"/"}
-          className={`flex items-center gap-2 ${
-            swap ? "max-w-[20rem]" : "w-fit md:w-2/5"
-          } `}
-        >
-          <Image
-            src={Logo}
-            alt="logo"
-            className="size-[72px] md:size-[42px] object-cover"
-            width={72}
-            height={72}
+        <div className="flex gap-4 w-fit h-full items-center">
+          <HiMenu
+            size={26}
+            className={`md:block hidden ${
+              swap ? "text-black" : "text-white"
+            } cursor-pointer text-header`}
+            onClick={openDrawer}
           />
-          {swap && (
-            <h2 className="text-subtitle font-bold text-[#333333]">
-              Taraba State Board of Internal Revenue Service
-            </h2>
-          )}
-        </Link>
+          <Link
+            href={"/"}
+            className={`flex items-center gap-2 ${
+              swap ? "max-w-[20rem]" : "w-fit md:w-[50%]"
+            } `}
+          >
+            <Image
+              src={Logo}
+              alt="logo"
+              className="size-[72px] md:size-[42px] object-cover"
+              width={72}
+              height={72}
+            />
+            {swap && (
+              <h2 className="text-subtitle font-bold text-[#333333]">
+                Taraba State Board of Internal Revenue Service
+              </h2>
+            )}
+          </Link>
+        </div>
         <div className="w-fit flex items-center gap-5 md:hidden">
           {links.map((ln, i) => (
             <Link
@@ -202,12 +204,11 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
           <div
             className={`${
               !swap ? "text-white" : "text-black"
-            } flex items-center gap-2 md:gap-1 w-fit cursor-pointer md:block hidden`}
+            } items-center gap-2 md:gap-1 cursor-pointer md:flex hidden`}
           >
             <div className="bg-[#B0DDC3] grid place-content-center rounded-full size-9 text-body font-semibold">
               {lastName.charAt(0)}
             </div>
-            <IoMdArrowDropdown size={"16px"} />
           </div>
         )}
       </nav>
@@ -234,6 +235,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
                 <IoCloseOutline
                   className="text-black text-header"
                   onClick={closeDrawer}
+                  size={26}
                 />
               </div>
 
