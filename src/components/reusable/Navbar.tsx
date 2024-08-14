@@ -75,7 +75,11 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
 
   return (
     <>
-      <nav className="flex w-full md:bg-white md:px-5 items-center justify-between h-[72px] md:h-20">
+      <nav
+        className={`flex w-full ${
+          swap && "md:bg-white"
+        } md:px-5 items-center justify-between h-[72px] md:h-20`}
+      >
         <HiMenu
           size={26}
           className={`md:block hidden ${
