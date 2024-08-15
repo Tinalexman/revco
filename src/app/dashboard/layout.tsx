@@ -16,11 +16,11 @@ const DashboardLayout: FC<iDashboardLayout> = ({ children }) => {
   const determineIndex = () => {
     const current = pathName.split("/")[2];
     switch (current) {
-      case "pay-bills":
+      case "make-payment":
         return 0;
-      case "generate-pin":
+      case "generate-invoice":
         return 1;
-      case "validate-invoice":
+      case "validate-receipt":
         return 2;
     }
 
