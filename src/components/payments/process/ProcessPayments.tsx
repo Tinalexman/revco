@@ -93,7 +93,7 @@ const ProcessPayments = () => {
     <div className="flex flex-col px-8 md:px-2.5 py-10 md:py-5 items-center gap-6 w-[50rem] md:w-full rounded-lg text-black bg-white overflow-y-scroll scrollbar-custom">
       <div className="w-full flex justify-between items-center">
         <h2 className="text-large font-bold">PIN: {paymentDetails.pin}</h2>
-        <p className="text-small text-[#007AFF] cursor-pointer">View Receipt</p>
+        {/* <p className="text-small text-[#007AFF] cursor-pointer">View Receipt</p> */}
       </div>
       <div className="w-full flex md:flex-col justify-between">
         <div className="w-[45%] md:w-full flex flex-col gap-2">

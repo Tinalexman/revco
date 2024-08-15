@@ -84,10 +84,34 @@ const Content = () => {
               errors.email = "Invalid email address";
             }
 
+            if (Number.parseInt(values.amount.replace(/,/g, "")) <= 0) {
+              errors.amount = -1;
+            }
+
             return errors;
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(false);
+            if (!proceed) {
+              shouldProceed(true);
+              open();
+            } else {
+              let processData: tProcessPayment = {
+                tin: values.tin,
+                amount: Number.parseInt(values.amount.replace(/,/g, "")),
+                target: target ?? "",
+                name: values.fullName,
+                ref: "Ministry of Agriculture",
+                payerID: taxPayerID,
+                pin: "383223232323 ",
+              };
+
+              window.localStorage.setItem(
+                PAYMENT_KEY,
+                JSON.stringify(processData)
+              );
+              window.location.assign("/payments/process");
+            }
           }}
           validateOnMount={true}
         >
@@ -254,7 +278,7 @@ const Content = () => {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col gap-1 w-[48%]">
+                {/* <div className="flex flex-col gap-1 w-[48%]">
                   <h3 className="text-large text-[#454545]  font-bold">
                     Currency
                     <span className="text-error">*</span>
@@ -265,7 +289,7 @@ const Content = () => {
                     readOnly
                     className="w-full text-body border border-[#DDE2FF]"
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className="flex gap-2 w-full items-center justify-center">
@@ -293,30 +317,7 @@ const Content = () => {
                   CANCEL
                 </button>
                 <button
-                  onClick={() => {
-                    if (!proceed) {
-                      shouldProceed(true);
-                      open();
-                    } else {
-                      let processData: tProcessPayment = {
-                        tin: values.tin,
-                        amount: Number.parseInt(
-                          values.amount.replace(/,/g, "")
-                        ),
-                        target: target ?? "",
-                        name: values.fullName,
-                        ref: "Ministry of Agriculture",
-                        payerID: taxPayerID,
-                        pin: "383223232323 ",
-                      };
-
-                      window.localStorage.setItem(
-                        PAYMENT_KEY,
-                        JSON.stringify(processData)
-                      );
-                      window.location.assign("/payments/process");
-                    }
-                  }}
+                  type="submit"
                   className={`bg-primary rounded-full w-[40%] md:w-[45%] text-small h-12 md:h-10 text-white font-bold`}
                 >
                   CONTINUE
@@ -330,6 +331,8 @@ const Content = () => {
         <Modal.Root
           opened={opened}
           onClose={close}
+          closeOnClickOutside={false}
+          closeOnEscape={false}
           centered
           padding={0}
           top={0}

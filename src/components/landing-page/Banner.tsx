@@ -30,18 +30,18 @@ const Banner = () => {
   const props: iBannerProps[] = [
     {
       image: BillsImage,
-      name: "Pay Bills",
-      link: "/dashboard/pay-bills",
+      name: "Make Payment",
+      link: "/dashboard/make-payment",
     },
     {
       image: PinImage,
-      name: "Generate PIN",
-      link: "/dashboard/generate-pin",
+      name: "Generate Invoice",
+      link: "/dashboard/generate-invoice",
     },
     {
       image: Invoice,
-      name: "Validate Invoice",
-      link: "/dashboard/validate-invoice",
+      name: "Validate Receipt",
+      link: "/dashboard/validate-receipt",
     },
   ];
 
@@ -71,7 +71,7 @@ const Banner = () => {
             </div>
 
             <div className="w-full justify-center items-center flex flex-col gap-5 md:px-2">
-              <div className="w-full justify-center items-center flex md:flex-col gap-2">
+              {/* <div className="w-full justify-center items-center flex md:flex-col gap-2">
                 <div className="w-[32rem] md:w-full h-14 md:h-10 relative">
                   <input
                     type="text"
@@ -91,7 +91,7 @@ const Banner = () => {
                   Pay a Bill
                   <IoArrowDownCircleOutline size={20} />
                 </Link>
-              </div>
+              </div> */}
               <div className="flex md:grid md:grid-cols-3 justify-center items-center gap-8 md:gap-2 w-full">
                 {props.map((prop, i) => (
                   <Link

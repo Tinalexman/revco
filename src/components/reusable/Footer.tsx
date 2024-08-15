@@ -27,13 +27,13 @@ const Footer = () => {
       name: "Download Receipt",
       link: "/dashboard/download-receipt",
     },
+    // {
+    //   name: "Contact Us",
+    //   link: "/dashboard/contact-us",
+    // },
     {
-      name: "Contact Us",
-      link: "/dashboard/contact-us",
-    },
-    {
-      name: "Pay Bills",
-      link: "/dashboard/pay-bills",
+      name: "Make Payment",
+      link: "/dashboard/make-payment",
     },
   ];
 

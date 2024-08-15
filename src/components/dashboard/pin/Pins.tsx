@@ -53,16 +53,21 @@ const Pins = () => {
                 setPinType(op);
               },
             }))}
-            hint="Select Plan"
+            hint="Select MDA"
             value={pinType}
             fitMenu={false}
           />
         </div>
         <button
           onClick={() => {
+            if (pinType === "") return;
             window.location.assign("/payments/make-payment?target=" + pinType);
           }}
-          className={`bg-primary rounded-full w-[25%] md:w-full text-body h-12 md:h-10 text-white font-bold`}
+          className={`${
+            pinType === ""
+              ? "cursor-not-allowed bg-neutral-2 text-black"
+              : "bg-primary text-white cursor-pointer"
+          }  rounded-full w-[25%] md:w-full text-body h-12 md:h-10 font-bold`}
         >
           Proceed
         </button>

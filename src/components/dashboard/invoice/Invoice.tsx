@@ -41,7 +41,7 @@ const GenerateInvoice = () => {
           <div className="absolute text-white right-0 top-2 rounded-[16px] w-[250px] rounded-tl-none bg-black size-10 p-4 flex flex-col gap-4">
             <div className="flex flex-col gap-1 ">
               <h2 className="font-semibold text-small">
-                Paysure Invoice Number
+                Payment Invoice Number
               </h2>
               <p className="text-Smaller">
                 Lorem ipsum dolor sit amet consectetur. Ultricies nisi interdum

@@ -8,7 +8,7 @@ const PayBills = () => {
   return (
     <div className="flex flex-col mt-16 md:mt-10 items-start gap-2 w-[500px] md:w-full h-full">
       <h2 className="text-header font-bold text-[#595959]">
-        Paysure Invoice Number (PIN){"  "}
+        Payment Invoice Number (PIN){"  "}
         <span className="text-tertiary text-small font-semibold">
           What is this?
         </span>

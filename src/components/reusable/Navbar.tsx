@@ -28,16 +28,16 @@ interface iNav {
 const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
   const links: iNav[] = [
     {
-      name: "Pay Bills",
-      link: "/dashboard/pay-bills",
+      name: "Make Payment",
+      link: "/dashboard/make-payment",
     },
     {
-      name: "Generate PIN",
-      link: "/dashboard/generate-pin",
+      name: "Generate Invoice",
+      link: "/dashboard/generate-invoice",
     },
     {
-      name: "Validate Invoice",
-      link: "/dashboard/validate-invoice",
+      name: "Validate Receipt",
+      link: "/dashboard/validate-receipt",
     },
   ];
 
