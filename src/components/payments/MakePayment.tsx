@@ -43,15 +43,15 @@ const Content = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const mda: string | null = searchParams.get("mda");
   const target: string | null = searchParams.get("target");
 
   useEffect(() => {
-    if (!target) {
+    if (!target || !mda) {
       router.back();
     }
   }, [router]);
 
-  const currencies: string[] = ["NGN - Nigerian Naira"];
   const [proceed, shouldProceed] = useState<boolean>(false);
   const [opened, { open, close }] = useDisclosure(false);
   const [taxPayerID, setTaxPayerID] = useState<string>("");
@@ -151,6 +151,9 @@ const Content = () => {
                   Who do you want to pay for{" "}
                   <span className="text-error">*</span>
                 </h3>
+                <div className="w-full flex items-center text-body border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 h-12 md:h-auto py-2 text-black">
+                  {mda}
+                </div>
                 <div className="w-full flex items-center text-body border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 h-12 md:h-auto py-2 text-black">
                   {target}
                 </div>

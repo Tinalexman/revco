@@ -7,8 +7,10 @@ import { useGlobalStore } from "@/src/stores/globalStore";
 
 const Pins = () => {
   const [index, setIndex] = useState<number>(0);
-  const [pinType, setPinType] = useState<string>("");
+  const [mda, setMDA] = useState<string>("");
+  const [target, setTarget] = useState<string>("");
   const registerProps: string[] = ["Individual", "Cooperate"];
+
   const [options, setOptions] = useState<string[]>(
     Array(10).fill(
       "1% PROCESSING FEE ON CAPITAL PROJECT (TARABA STATE REVENUE)"
@@ -50,27 +52,44 @@ const Pins = () => {
             menus={options.map((op, i) => ({
               name: op,
               onClick: () => {
-                setPinType(op);
+                setMDA(op);
               },
             }))}
             hint="Select MDA"
-            value={pinType}
+            value={mda}
             fitMenu={false}
           />
         </div>
         <button
           onClick={() => {
-            if (pinType === "") return;
-            window.location.assign("/payments/make-payment?target=" + pinType);
+            if (mda === "" || target === "") return;
+            window.location.assign(
+              "/payments/make-payment?mda=" + mda + "&target=" + target
+            );
           }}
           className={`${
-            pinType === ""
+            mda === "" || target === ""
               ? "cursor-not-allowed bg-neutral-2 text-black"
               : "bg-primary text-white cursor-pointer"
           }  rounded-full w-[25%] md:w-full text-body h-12 md:h-10 font-bold`}
         >
           Proceed
         </button>
+      </div>
+      <div className="w-full flex md:flex-col gap-2 items-center">
+        <div className="w-[75%] md:w-full">
+          <Dropdown
+            menus={options.map((op, i) => ({
+              name: op,
+              onClick: () => {
+                setTarget(op);
+              },
+            }))}
+            hint="Select Revenue Head"
+            value={target}
+            fitMenu={false}
+          />
+        </div>
       </div>
     </div>
   );
