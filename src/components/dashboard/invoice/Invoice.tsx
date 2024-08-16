@@ -1,57 +1,57 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
 import { RiFileList3Fill } from "react-icons/ri";
 
 import Image from "next/image";
 import Invoice from "@/public/invoice_info.png";
-import { PAYMENT_TARGET } from "@/src/constants/constants";
-import { useGlobalStore } from "@/src/stores/globalStore";
 
 const GenerateInvoice = () => {
   const [pin, setPin] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
-
   const [open, setOpen] = useState<boolean>(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div className="flex flex-col items-center w-[700px] md:w-full gap-6 mt-16 md:mt-10">
       <div className="flex flex-col items-start gap-2 w-[500px] md:w-full h-full relative">
         <h2 className="text-header font-bold text-[#595959]">
-          Paysure Invoice Number (PIN){"  "}
+          Payment Invoice Number (PIN){"  "}
           <span
-            // onMouseEnter={() => {
-            //   if (!open) {
-            //     setOpen(true);
-            //   }
-            // }}
-            // onMouseLeave={() => {
-            //   if (open) {
-            //     setOpen(false);
-            //   }
-            // }}
+            onMouseEnter={() => {
+              if (!open) {
+                setOpen(true);
+              }
+            }}
+            onMouseLeave={() => {
+              if (open) {
+                setOpen(false);
+              }
+            }}
             className="text-tertiary text-small font-semibold cursor-help"
           >
             What is this?
           </span>
         </h2>
-        {open && (
-          <div className="absolute text-white right-0 top-2 rounded-[16px] w-[250px] rounded-tl-none bg-black size-10 p-4 flex flex-col gap-4">
-            <div className="flex flex-col gap-1 ">
+        <div
+          className={`absolute text-white -right-[200px] md:right-2 top-5 rounded-[16px] w-[300px] h-fit rounded-tl-none md:rounded-tr-none md:rounded-tl-2xl bg-black size-10 p-4 flex flex-col gap-4 transition-opacity duration-300 ease-in-out 
+            ${open ? "opacity-100" : "opacity-0"} `}
+        >
+          <div className="flex flex-col gap-1 items-center">
+            <div className="w-full">
               <h2 className="font-semibold text-small">
                 Payment Invoice Number
               </h2>
-              <p className="text-Smaller">
-                Lorem ipsum dolor sit amet consectetur. Ultricies nisi interdum
-                eget urna orci quis eget. Mauris ac posuere vitae tortor. Arcu
-                maecenas accumsan cursus nunc diam enim. Accumsan orci quam
-                tellus et vel semper.
-              </p>
             </div>
+            <p className="text-smaller">
+              Lorem ipsum dolor sit amet consectetur. Ultricies nisi interdum
+              eget urna orci quis eget. Mauris ac posuere vitae tortor. Arcu
+              maecenas accumsan cursus nunc diam enim. Accumsan orci quam tellus
+              et vel semper.
+            </p>
+            <Image src={Invoice} alt="receipt" />
           </div>
-        )}
+        </div>
         <div className="flex flex-col w-full gap-3 items-start">
           <div className="w-full flex md:flex-col gap-2 items-center">
             <input

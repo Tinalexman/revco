@@ -57,6 +57,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
   };
 
   const logout = () => {
+    closeDrawer();
     useGlobalStore.setState({ loggedIn: false });
     window.location.replace("/");
   };
@@ -97,7 +98,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
             <Image
               src={Logo}
               alt="logo"
-              className="size-[72px] md:size-[42px] object-cover"
+              className="size-[64px] md:size-[42px] object-cover"
               width={72}
               height={72}
             />
@@ -250,51 +251,66 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
                     </p>
                   </div>
 
-                  <Link
+                  <div
                     className="mt-5 w-fit cursor-pointer text-body font-medium font-nunito text-black"
-                    href={"/dashboard/transaction-history"}
+                    onClick={() => {
+                      closeDrawer();
+                      window.location.assign("/dashboard/transaction-history");
+                    }}
                   >
                     Transaction History
-                  </Link>
-                  <Link
+                  </div>
+                  <div
                     className="w-fit cursor-pointer text-body font-medium font-nunito text-black"
-                    href={"/dashboard/download-receipt"}
+                    onClick={() => {
+                      closeDrawer();
+                      window.location.assign("/dashboard/download-receipt");
+                    }}
                   >
                     Download Receipt
-                  </Link>
+                  </div>
                 </div>
               )}
 
               <div className="w-fit flex flex-col gap-3 mt-5">
                 {links.map((ln, i) => (
-                  <Link
-                    href={ln.link}
+                  <div
+                    onClick={() => {
+                      closeDrawer();
+                      window.location.assign(ln.link);
+                    }}
                     key={i}
-                    className={`text-body ${
+                    className={`text-body w-fit ${
                       active === i
                         ? "text-primary font-bold underline"
                         : "font-medium text-black"
                     } font-nunito`}
                   >
                     {ln.name}
-                  </Link>
+                  </div>
                 ))}
               </div>
 
               {!signedIn && (
                 <div className="flex flex-col items-center gap-3 w-full mt-6">
-                  <Link
-                    href={"/auth/register"}
+                  <div
+                    onClick={() => {
+                      closeDrawer();
+                      window.location.assign("/auth/register");
+                    }}
                     className={` bg-primary-light text-primary w-full h-10 flex justify-center items-center rounded-full text-small font-semibold font-nunito `}
                   >
                     Register
-                  </Link>
-                  <Link
-                    href={"/auth/login"}
+                  </div>
+                  <div
+                    onClick={() => {
+                      closeDrawer();
+                      window.location.assign("/auth/login");
+                    }}
                     className="w-full h-10 flex justify-center items-center rounded-full bg-primary text-small font-semibold font-nunito text-white"
                   >
                     Login
-                  </Link>
+                  </div>
                 </div>
               )}
 
