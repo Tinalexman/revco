@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Navbar from "../reusable/Navbar";
 
 import Link from "next/link";
@@ -14,6 +14,8 @@ import Invoice from "@/public/invoice.svg";
 import { MdOutlineGroups2 } from "react-icons/md";
 import { IoSearch, IoArrowDownCircleOutline } from "react-icons/io5";
 import { IconType } from "react-icons";
+
+import { motion, useInView } from "framer-motion";
 
 interface iBannerProps {
   image: StaticImageData;
@@ -51,6 +53,8 @@ const Banner = () => {
   });
 
   const [search, setSearch] = useState<string>("");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: "some" });
 
   return (
     <div className="w-[100vw] h-[100vh] md:h-auto bg-[url('../../public/image_266.png')] bg-cover bg-no-repeat bg-center">
@@ -92,24 +96,37 @@ const Banner = () => {
                   <IoArrowDownCircleOutline size={20} />
                 </Link>
               </div> */}
-              <div className="flex md:grid md:grid-cols-3 justify-center items-center gap-8 md:gap-2 w-full">
+              <div
+                ref={ref}
+                className="flex md:grid md:grid-cols-3 justify-center items-center gap-8 md:gap-2 w-full"
+              >
                 {props.map((prop, i) => (
-                  <Link
+                  <motion.div
                     key={i}
-                    href={prop.link}
-                    className="flex flex-col gap-2 items-center py-5 md:py-3 px-8 md:px-0 bg-white rounded-2xl md:rounded-lg cursor-pointer"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: i * 0.1,
+                      ease: "easeOut",
+                    }}
                   >
-                    <Image
-                      src={prop.image}
-                      alt="prop"
-                      className="size-[80px] md:size-12 object-cover"
-                      width={100}
-                      height={100}
-                    />
-                    <p className="text-body md:text-smaller md:text-center text-[#333333] font-semibold">
-                      {prop.name}
-                    </p>
-                  </Link>
+                    <Link
+                      href={prop.link}
+                      className="flex flex-col gap-2 items-center py-5 md:py-3 px-8 md:px-0 bg-white rounded-2xl md:rounded-lg cursor-pointer"
+                    >
+                      <Image
+                        src={prop.image}
+                        alt="prop"
+                        className="size-[80px] md:size-12 object-cover"
+                        width={100}
+                        height={100}
+                      />
+                      <p className="text-body md:text-smaller md:text-center text-[#333333] font-semibold">
+                        {prop.name}
+                      </p>
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
             </div>

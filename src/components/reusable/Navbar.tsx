@@ -79,7 +79,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
       <nav
         className={`flex w-full ${
           swap && "md:bg-white"
-        } md:px-5 items-center justify-between h-[72px] md:h-14`}
+        } md:px-5 items-center justify-between md:h-14 h-16`}
       >
         <div className="flex gap-4 w-fit h-full items-center">
           <HiMenu
@@ -98,7 +98,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
             <Image
               src={Logo}
               alt="logo"
-              className="size-[64px] md:size-[42px] object-cover"
+              className="size-[60px] md:size-[42px] object-cover"
               width={72}
               height={72}
             />
@@ -165,40 +165,45 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
               </p>
               <IoMdArrowDropdown size={"16px"} />
             </div>
-            {open && (
-              <div className="absolute z-10 top-20 w-[13.5rem] rounded-[8px] bg-white p-2 flex flex-col gap-2">
-                <div
-                  className="w-full cursor-pointer hover:bg-[#F1F2F0] flex items-center gap-2 px-2 py-1 rounded-md text-black"
-                  onClick={() => {
-                    setOpen(false);
-                    window.location.assign("/dashboard/transaction-history");
-                  }}
-                >
-                  <GoHistory size={"16px"} />
-                  Transaction History
-                </div>
-                <div
-                  className="w-full cursor-pointer hover:bg-[#F1F2F0] flex items-center gap-2 px-2 py-1 rounded-md text-black"
-                  onClick={() => {
-                    setOpen(false);
-                    window.location.assign("/dashboard/download-receipt");
-                  }}
-                >
-                  <TbFileDownload size={"16px"} />
-                  Download Receipt
-                </div>
-                <div
-                  className="w-full cursor-pointer hover:bg-[#F1F2F0] flex items-center gap-2 px-2 py-1 rounded-md text-black"
-                  onClick={() => {
-                    setOpen(false);
-                    logout();
-                  }}
-                >
-                  <BiLogOutCircle size={"16px"} />
-                  Sign Out
-                </div>
+            {/* {open && (
+              
+            )} */}
+            <div
+              className={`absolute transition-all duration-300 ease-out z-10 top-16 w-[13.5rem] rounded-[8px] bg-white flex flex-col gap-2 ${
+                open ? "p-2 h-auto" : "h-0 max-h-0 min-h-0 overflow-hidden p-0"
+              }`}
+            >
+              <div
+                className="w-full cursor-pointer hover:bg-[#F1F2F0] flex items-center gap-2 px-2 py-1 rounded-md text-black"
+                onClick={() => {
+                  setOpen(false);
+                  window.location.assign("/dashboard/transaction-history");
+                }}
+              >
+                <GoHistory size={"16px"} />
+                Transaction History
               </div>
-            )}
+              <div
+                className="w-full cursor-pointer hover:bg-[#F1F2F0] flex items-center gap-2 px-2 py-1 rounded-md text-black"
+                onClick={() => {
+                  setOpen(false);
+                  window.location.assign("/dashboard/download-receipt");
+                }}
+              >
+                <TbFileDownload size={"16px"} />
+                Download Receipt
+              </div>
+              <div
+                className="w-full cursor-pointer hover:bg-[#F1F2F0] flex items-center gap-2 px-2 py-1 rounded-md text-black"
+                onClick={() => {
+                  setOpen(false);
+                  logout();
+                }}
+              >
+                <BiLogOutCircle size={"16px"} />
+                Sign Out
+              </div>
+            </div>
           </div>
         )}
         {signedIn && (
