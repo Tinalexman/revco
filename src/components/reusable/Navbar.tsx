@@ -98,15 +98,22 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
             <Image
               src={Logo}
               alt="logo"
-              className="size-[60px] md:size-[42px] object-cover"
+              className="size-[4rem] md:size-[42px] object-cover"
               width={72}
               height={72}
             />
-            {swap && (
-              <h2 className="text-subtitle font-bold text-[#333333]">
-                Taraba State Board of Internal Revenue Service
+            <div>
+              <h2
+                className={`text-nav font-podvoka font-bold ${
+                  !swap ? "text-white" : "text-[#333333]"
+                }`}
+              >
+                TARABA STATE
               </h2>
-            )}
+              <p className="text-[#DA251D] text-smaller">
+                BOARD OF INTERNAL REVENUE SERVICE
+              </p>
+            </div>
           </Link>
         </div>
         <div className="w-fit flex items-center gap-5 md:hidden">
@@ -218,6 +225,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
           </div>
         )}
       </nav>
+
       <Drawer.Root
         opened={openedDrawer}
         onClose={closeDrawer}

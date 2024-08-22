@@ -42,6 +42,10 @@ const config: Config = {
           max: "1440px",
         },
       },
+      fontFamily: {
+        inter: ["var(--font-inter)", "serif"],
+        podvoka: ["var(--font-podkova)", "serif"],
+      },
       boxShadow: {
         custom: "0 0 10px rgba(0, 0, 0, 0.07)",
         "custom-1": "0 0 10px rgba(0, 0, 0, 0.25)",

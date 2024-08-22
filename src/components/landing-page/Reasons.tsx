@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useRef } from "react";
 import Image, { StaticImageData } from "next/image";
 
@@ -9,8 +7,6 @@ import PaymentChannels from "@/public/debit_11898202 1.svg";
 import Sectors from "@/public/easy-installation_5025723 1.svg";
 import PaymentRecords from "@/public/receipt_10935039 1.svg";
 import Learn from "@/public/setting_3019287 1.svg";
-
-import { motion, useInView } from "framer-motion";
 
 interface iReason {
   title: string;
@@ -52,9 +48,6 @@ const Reasons = () => {
     },
   ];
 
-  const ref = useRef(null);
-  const isInView = useInView(ref, { amount: "some" });
-
   return (
     <div className="w-full py-20 md:py-14 flex flex-col items-center gap-14 bg-primary-light">
       <div className="w-fit flex flex-col items-center gap-1">
@@ -65,30 +58,10 @@ const Reasons = () => {
           Your Tax, Your Contribution to a Greater Taraba State.
         </p>
       </div>
-      <div
-        ref={ref}
-        className="w-full grid-cols-3 md:grid-cols-1 gap-6 grid px-16 md:px-2"
-      >
+      <div className="w-full grid-cols-3 md:grid-cols-1 gap-6 grid px-16 md:px-2">
         {reasons.map((rn, i) => (
-          <motion.div
+          <div
             key={i}
-            initial={{
-              x:
-                i === 0 || i === 4 ? "-30%" : i === 1 || i === 5 ? "0%" : "30%",
-            }}
-            animate={{
-              x: isInView
-                ? 0
-                : i === 0 || i === 4
-                ? "-30%"
-                : i === 1 || i === 5
-                ? "0%"
-                : "30%",
-              transition: {
-                ease: "easeOut",
-                duration: 1,
-              },
-            }}
             className="w-full h-72 md:h-60 p-5 bg-white rounded-lg flex flex-col gap-8"
           >
             <div className="bg-primary-light rounded-full p-4 w-fit">
@@ -104,7 +77,7 @@ const Reasons = () => {
               <h2 className="text-large font-bold">{rn.title}</h2>
               <p className="text-small">{rn.text}</p>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>

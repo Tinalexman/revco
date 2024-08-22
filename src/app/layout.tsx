@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Inter, Podkova } from "next/font/google";
 
 import "@mantine/core/styles.css";
 
@@ -13,10 +13,16 @@ import {
 } from "@mantine/core";
 import { Toaster } from "react-hot-toast";
 
-const nunito = Nunito({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-nunito",
+  variable: "--font-inter",
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+const podvoka = Podkova({
+  subsets: ["latin"],
+  variable: "--font-podkova",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -51,14 +57,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  //
   return (
     <html lang="en">
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
 
-      <body className={nunito.className}>
+      <body className={`${podvoka.variable} ${inter.className}`}>
         <Toaster />
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
