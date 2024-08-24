@@ -77,9 +77,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
   return (
     <>
       <nav
-        className={`flex w-full lg:pb-5 xs:pb-2 ${
-          swap && "xs:bg-white lg:bg-transparent"
-        }  items-center justify-between`}
+        className={`flex w-full lg:pb-5 xs:pb-2 items-center justify-between`}
       >
         <Link href={"/"} className={`flex items-center gap-2 w-fit `}>
           <Image

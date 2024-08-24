@@ -13,87 +13,99 @@ const GenerateInvoice = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col items-center w-[700px] md:w-full gap-6 mt-16 md:mt-10">
-      <div className="flex flex-col items-start gap-2 w-[500px] md:w-full h-full relative">
-        <h2 className="text-header font-bold text-[#595959]">
-          Payment Invoice Number (PIN){"  "}
-          <span
-            onMouseEnter={() => {
-              if (!open) {
-                setOpen(true);
-              }
-            }}
-            onMouseLeave={() => {
-              if (open) {
-                setOpen(false);
-              }
-            }}
-            className="text-tertiary text-small font-semibold cursor-help"
-          >
-            What is this?
-          </span>
-        </h2>
-        <div
-          className={`absolute text-white -right-[200px] md:right-2 top-5 rounded-[16px] w-[300px] h-fit rounded-tl-none md:rounded-tr-none md:rounded-tl-2xl bg-black size-10 p-4 flex flex-col gap-4 transition-opacity duration-300 ease-in-out 
-            ${open ? "opacity-100" : "opacity-0"} `}
+    <div className="flex flex-col items-start gap-2 lg:w-[450px] xl:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full lg:h-fit xs:h-[calc(100vh-13rem)]">
+      <h2 className="text-l-1 font-bold text-[#595959]">
+        Payment Invoice Number (PIN){"  "}
+        <span
+          onMouseEnter={() => {
+            if (!open) {
+              setOpen(true);
+            }
+          }}
+          onMouseLeave={() => {
+            if (open) {
+              setOpen(false);
+            }
+          }}
+          className="text-tertiary text-b-1 font-semibold cursor-help relative"
         >
-          <div className="flex flex-col gap-1 items-center">
-            <div className="w-full">
-              <h2 className="font-semibold text-small">
-                Payment Invoice Number
-              </h2>
+          What is this?
+          {
+            <div
+              className={`absolute text-white -right-[305px] top-5 w-[300px] h-fit rounded-tl-none rounded-2xl bg-black size-10 p-4 flex flex-col gap-4 transition-all duration-300 ease-in-out 
+            ${open ? "opacity-100 scale-100" : "opacity-0 scale-0"} `}
+            >
+              <div className="flex flex-col gap-1 items-center">
+                <div className="w-full">
+                  <h2 className="font-semibold text-l-2">
+                    Payment Invoice Number
+                  </h2>
+                </div>
+                <p className="text-s-3 font-normal">
+                  Lorem ipsum dolor sit amet consectetur. Ultricies nisi
+                  interdum eget urna orci quis eget. Mauris ac posuere vitae
+                  tortor. Arcu maecenas accumsan cursus nunc diam enim. Accumsan
+                  orci quam tellus et vel semper.
+                </p>
+                <Image
+                  src={Invoice}
+                  alt="receipt"
+                  className="w-[70%] object-cover h-auto"
+                />
+              </div>
             </div>
-            <p className="text-smaller">
-              Lorem ipsum dolor sit amet consectetur. Ultricies nisi interdum
-              eget urna orci quis eget. Mauris ac posuere vitae tortor. Arcu
-              maecenas accumsan cursus nunc diam enim. Accumsan orci quam tellus
-              et vel semper.
-            </p>
-            <Image src={Invoice} alt="receipt" />
-          </div>
+          }
+        </span>
+      </h2>
+
+      <div className="flex flex-col w-full gap-3 items-start">
+        <div className="w-full flex lg:flex-row xs:flex-col xs:gap-2 lg:gap-3 xl:gap-4 3xl:gap-5 items-center">
+          <input
+            type="text"
+            value={pin}
+            onChange={(e) => setPin(e.target.value)}
+            className="rounded-full"
+            placeholder="Enter PIN"
+          />
+          <button
+            onClick={() => {}}
+            className={`bg-primary rounded-full lg:w-[35%] xs:w-full text-b-1 xs:h-10 lg:h-12 sm:h-10 md:h-12 xl:h-16 2xl:h-[72px] 3xl:h-20 4xl:h-24 text-white font-semibold `}
+          >
+            Proceed
+          </button>
         </div>
-        <div className="flex flex-col w-full gap-3 items-start">
-          <div className="w-full flex md:flex-col gap-2 items-center">
-            <input
-              type="text"
-              value={pin}
-              onChange={(e) => setPin(e.target.value)}
-              className="rounded-full w-[75%] md:w-full"
-              placeholder="Enter PIN"
-            />
-            <button
-              onClick={() => {}}
-              className={`bg-primary rounded-full w-[25%] md:w-full text-body h-12 md:h-10 text-white font-bold`}
-            >
-              Proceed
-            </button>
-          </div>
-          <div className="text-small text-[#595959] font-semibold text-end md:mb-20">
-            Don&apos;t have a PIN?{" "}
-            <span
-              onClick={() => window.location.assign("/dashboard/generate-pin")}
-              className="text-tertiary font-bold cursor-pointer"
-            >
-              Click here
-            </span>
-          </div>
+        <div className="text-s-4 text-[#595959] font-semibold text-end">
+          Don&apos;t have a PIN?{" "}
+          <span
+            onClick={() =>
+              window.location.assign("/dashboard/generate-invoice")
+            }
+            className="text-tertiary font-bold cursor-pointer"
+          >
+            Click here
+          </span>
         </div>
       </div>
-      {error && (
-        <div className="w-full flex items-center justify-between px-8 font-medium py-[10px] md:mb-20 rounded-[8px] text-[#DA251D] text-hint bg-[#F4BBB9]">
-          <div className="flex w-fit gap-1 items-center">
-            <RiFileList3Fill size={"16px"} />
-            <p>Invoice not found</p>
-          </div>
-          <MdOutlineCancel
-            size={"20px"}
-            className="cursor-pointer"
-            onClick={() => setError(false)}
-          />
-        </div>
-      )}
     </div>
   );
 };
+
+{
+  /*
+  error && (
+    <div className="w-full flex items-center justify-between px-8 font-medium py-[10px] md:mb-20 rounded-[8px] text-[#DA251D] text-hint bg-[#F4BBB9]">
+      <div className="flex w-fit gap-1 items-center">
+        <RiFileList3Fill size={"16px"} />
+        <p>Invoice not found</p>
+      </div>
+      <MdOutlineCancel
+        size={"20px"}
+        className="cursor-pointer"
+        onClick={() => setError(false)}
+      />
+    </div>
+  );
+  */
+}
 
 export default GenerateInvoice;

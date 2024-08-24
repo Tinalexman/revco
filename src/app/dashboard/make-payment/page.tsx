@@ -1,10 +1,8 @@
-import PayBills from "@/src/components/dashboard/bills/PayBills";
+import MakePayment from "@/src/components/dashboard/bills/PayBills";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pay Bills",
+  title: "Make Payment",
 };
 
-export default function PayBillsPage() {
-  return <PayBills />;
-}
+export default MakePayment;
