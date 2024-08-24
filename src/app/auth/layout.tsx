@@ -3,8 +3,6 @@
 import React, { ReactNode, FC } from "react";
 
 import { MdOutlineDoneAll } from "react-icons/md";
-import { Toaster } from "react-hot-toast";
-import { motion } from "framer-motion";
 
 interface iAuthLayout {
   children: ReactNode;
@@ -12,64 +10,28 @@ interface iAuthLayout {
 
 const AuthLayout: FC<iAuthLayout> = ({ children }) => {
   return (
-    <div className="w-[100vw] h-[100vh] flex">
-      <div className="w-[50%] md:hidden h-full bg-[url('../../public/image_264.png')] bg-cover bg-no-repeat bg-center font-bai">
+    <div className="w-[100vw] h-[100vh] xl:h-[100vh] xl:w-[100vw] 2xl:w-[100vw] 2xl:h-[100vh] 3xl:w-[100vw] 3xl:h-[100vh] 4xl:w-[100vw] 4xl:h-[100vh] flex">
+      <div className="w-[50vw] xl:h-[100vh] xl:w-[50vw] 2xl:w-[50vw] 2xl:h-[100vh] 3xl:w-[50vw] 3xl:h-[100vh] 4xl:w-[50vw] 4xl:h-[100vh] xs:hidden lg:block h-full bg-[url('../../public/image_264.png')] bg-cover bg-no-repeat bg-center">
         <div className="bg-primary bg-opacity-[0.53] w-full h-full flex flex-col justify-center items-center relative">
           <div className="bg-[url('../../public/image_262.png')] w-full h-full bg-cover bg-no-repeat bg-center absolute" />
-          <div className="flex flex-col w-[280px] gap-3 z-5 ">
-            <motion.h1
-              initial={{
-                y: "-75%",
-              }}
-              animate={{
-                y: "0%",
-                transition: {
-                  duration: 2,
-                  ease: "easeInOut",
-                  type: "spring",
-                  bounce: 0.75,
-                },
-              }}
-              className="text-title font-semibold text-white "
-            >
+          <div className="flex flex-col lg:w-[19rem] xl:w-[20rem] 2xl:w-[24rem] 3xl:w-[28rem] 4xl:w-[32rem] lg:gap-3 xl:gap-4 2xl:gap-5 3xl:gap-6 z-5 ">
+            <h1 className="text-h-2 font-semibold text-white ">
               Access Your Online Billing Account
-            </motion.h1>
-            <h2 className="text-white text-subtitle font-semibold">
-              Required:
-            </h2>
-            <motion.div
-              animate={{
-                x: ["-2%", "0%", "-2%"],
-                transition: {
-                  duration: 5,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                },
-              }}
-              className="flex gap-[10px] items-center text-white"
-            >
-              <MdOutlineDoneAll size={"20px"} />
-              <p className="text-body">NIN</p>
-            </motion.div>
-            <motion.div
-              animate={{
-                x: ["2%", "0%", "2%"],
-                transition: {
-                  duration: 5,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                },
-              }}
-              className="flex gap-[10px] items-center text-white"
-            >
-              <MdOutlineDoneAll size={"20px"} />
-              <p className="text-body">Email address and password</p>
-            </motion.div>
+            </h1>
+            <h2 className="text-white text-l-1 font-semibold">Required:</h2>
+            <div className="flex lg:gap-2.5 xl:gap-3 2xl:gap-4 3xl:gap-5 4xl:gap-6 text-b-1 items-center text-white">
+              <MdOutlineDoneAll />
+              <p>NIN</p>
+            </div>
+            <div className="flex lg:gap-2.5 xl:gap-3 2xl:gap-4 3xl:gap-5 4xl:gap-6 text-b-1 items-center text-white">
+              <MdOutlineDoneAll />
+              <p>Email address and password</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="w-[50%] md:w-full h-full bg-[url('../../public/image_263.png')] bg-cover bg-no-repeat bg-center">
+      <div className="lg:w-[50vw] lg:h-[100vh] xl:h-[100vh] xl:w-[50vw] 2xl:w-[50vw] 2xl:h-[100vh] 3xl:w-[50vw] 3xl:h-[100vh] 4xl:w-[50vw] 4xl:h-[100vh] xs:w-full h-full bg-[url('../../public/image_263.png')] bg-cover bg-no-repeat bg-center">
         {children}
       </div>
     </div>

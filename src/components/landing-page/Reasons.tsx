@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Image, { StaticImageData } from "next/image";
 
 import PayBills from "@/public/tax_1101555 1.svg";
