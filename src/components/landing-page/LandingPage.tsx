@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect } from "react";
+import React from "react";
 import Footer from "../reusable/Footer";
 import Banner from "./Banner";
 import Reasons from "./Reasons";

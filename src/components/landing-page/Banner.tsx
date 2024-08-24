@@ -49,7 +49,7 @@ const Banner = () => {
           </div>
 
           <div className="flex flex-col w-full xl:mt-[6.7rem] xs:mt-[5.75rem] xl:gap-[11.5rem] xs:gap-[3.5rem]">
-            <div className="xl:pl-10 xs:px-5 xl:w-[55%] xs:w-full flex flex-col xl:gap-3">
+            <div className="xl:pl-10 xs:px-2 xl:w-[55%] xs:w-full flex flex-col xl:gap-3">
               <h1 className="text-extra text-white font-bold">
                 Invest in Taraba Future
               </h1>
