@@ -29,7 +29,7 @@ const PaymentModal: FC<{ onContinue: (val: string) => void }> = ({
             alt="receipt"
             className="size-[6rem] object-cover"
           />
-          <p className="text-black text-small text-center">
+          <p className="text-black text-b-2 text-center">
             A tax profile with the Payer Id{" "}
             <span className="text-primary font-bold">WX-513785 </span>
             has been created for you. You can register later to view all your
@@ -37,7 +37,7 @@ const PaymentModal: FC<{ onContinue: (val: string) => void }> = ({
           </p>
           <button
             onClick={() => onContinue("WX-513785")}
-            className={`bg-primary rounded-full w-[60%] text-smaller h-[48px] text-white font-bold mt-2`}
+            className={`bg-primary rounded-full w-[70%] text-smaller text-s-4 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-semibold mt-2`}
           >
             Confirm - Continue To Payment
           </button>

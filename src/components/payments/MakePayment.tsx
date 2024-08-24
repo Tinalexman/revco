@@ -17,7 +17,11 @@ import { useGlobalStore } from "@/src/stores/globalStore";
 
 import PaymentModal from "./PaymentModal";
 import { PAYMENT_KEY, tProcessPayment } from "@/src/stores/paymentStore";
-import { formatAmountWithCommas } from "@/src/functions/numberFunctions";
+import {
+  formatAmountWithCommas,
+  formatNumberWithThreesAndFours,
+  unformatNumberWithThreesAndFours,
+} from "@/src/functions/numberFunctions";
 import CustomPhoneInput from "../reusable/CustomPhoneInput";
 
 interface iPaymentData {
@@ -58,9 +62,9 @@ const Content = () => {
 
   return (
     <>
-      <div className="flex flex-col items-start gap-4 w-[45rem] px-[2px] md:px-1 md:w-full h-full md:h-auto overflow-y-scroll scrollbar-custom">
+      <div className="flex flex-col items-start gap-2 lg:w-[700px] xl:w-[800px] 2xl:w-[900px] 3xl:w-[1100px] 4xl:w-[1300px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-auto">
         <BackButton classicArrow={true} color={"#000000"} text={"Back"} />
-        <h2 className="text-subtitle font-bold text-[#3A3A3A] font-nunito">
+        <h2 className="text-l-1 font-bold text-[#3A3A3A] font-nunito">
           TARABA STATE INTERNAL REVENUE SERVICE
         </h2>
         <Formik
@@ -75,12 +79,12 @@ const Content = () => {
             amount: "",
           }}
           validate={(values) => {
-            const errors: Partial<iPaymentData> = {};
+            const errors: any = {};
 
             if (!values.fullName) {
-              values.fullName = "Required";
+              errors.fullName = "Required";
             } else if (values.fullName.length < 3) {
-              values.fullName = "Full name must be at least 3 characters";
+              errors.fullName = "Full name must be at least 3 characters";
             }
 
             if (!values.email) {
@@ -103,8 +107,11 @@ const Content = () => {
               errors.lga = "Required";
             }
 
-            if (Number.parseInt(values.amount.replace(/,/g, "")) <= 0) {
-              errors.amount = -1;
+            let v = Number.parseInt(values.amount.replace(/,/g, ""));
+            if (v === undefined) {
+              errors.amount = "Invalid amount";
+            } else if (v <= 0) {
+              errors.amount = "Amount must be greater than zero";
             }
 
             return errors;
@@ -142,17 +149,15 @@ const Content = () => {
             handleBlur,
             handleSubmit,
             isSubmitting,
-            isInitialValid,
-            isValid,
             setFieldValue,
           }) => (
             <Form
               onSubmit={handleSubmit}
-              className="w-full flex flex-col items-center gap-5"
+              className="w-full flex flex-col items-center xs:gap-3 lg:gap-5"
               method="POST"
             >
               {proceed && taxPayerID && (
-                <div className="w-full space-y-2">
+                <div className="w-full lg:space-y-2 xs:space-y-1">
                   <h3 className="text-large text-[#454545]  font-bold">
                     Tax Payer ID
                   </h3>
@@ -165,22 +170,22 @@ const Content = () => {
                 </div>
               )}
 
-              <div className="w-full space-y-2">
-                <h3 className="text-large text-[#454545]  font-bold">
+              <div className="w-full lg:space-y-2 xs:space-y-1">
+                <h3 className="text-l-2 text-[#454545] font-bold">
                   Who do you want to pay for{" "}
                   <span className="text-error">*</span>
                 </h3>
-                <div className="w-full flex items-center text-body border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 text-black">
+                <div className="w-full flex items-center text-b-1 border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 text-black">
                   {mda}
                 </div>
-                <div className="w-full flex items-center text-body border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 text-black">
+                <div className="w-full flex items-center text-b-1 border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 text-black">
                   {target}
                 </div>
               </div>
 
               <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
-                  <h3 className="text-large text-[#454545] font-bold">
+                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:-[48%] xs:w-[49%]">
+                  <h3 className="text-l-2 text-[#454545] font-bold">
                     Full Name <span className="text-error">*</span>
                   </h3>
                   <input
@@ -188,14 +193,14 @@ const Content = () => {
                     name="fullName"
                     value={values.fullName}
                     onChange={handleChange}
-                    className="w-full text-body border border-[#DDE2FF]"
+                    className="w-full text-b-1 border border-[#DDE2FF]"
                   />
                   {errors.fullName && touched.fullName && (
-                    <p className="text-hint text-error">{errors.fullName}</p>
+                    <p className="text-s-4 text-error">{errors.fullName}</p>
                   )}
                 </div>
-                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
-                  <h3 className="text-large text-[#454545] font-bold">
+                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:w-[48%] xs:w-[49%]">
+                  <h3 className="text-l-2 text-[#454545] font-bold">
                     Email <span className="text-error">*</span>
                   </h3>
                   <input
@@ -203,44 +208,64 @@ const Content = () => {
                     name="email"
                     value={values.email}
                     onChange={handleChange}
-                    className="w-full text-body border border-[#DDE2FF]"
+                    className="w-full text-b-1 border border-[#DDE2FF]"
                   />
                   {errors.email && touched.email && (
-                    <p className="text-hint text-error">{errors.email}</p>
+                    <p className="text-s-4 text-error">{errors.email}</p>
                   )}
                 </div>
               </div>
               <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
-                  <h3 className="text-large text-[#454545] font-bold">TIN</h3>
+                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:w-[48%] xs:w-[49%]">
+                  <h3 className="text-l-2 text-[#454545] font-bold">TIN</h3>
                   <input
                     type="text"
                     name="tin"
                     value={values.tin}
                     onChange={handleChange}
-                    className="w-full text-body border border-[#DDE2FF]"
+                    className="w-full text-b-1 border border-[#DDE2FF]"
                   />
                   {errors.tin && touched.tin && (
                     <p className="text-hint text-error">{errors.tin}</p>
                   )}
                 </div>
-                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
-                  <h3 className="text-large text-[#454545] font-bold">
+                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:w-[48%] xs:w-[49%]">
+                  <h3 className="text-l-2 text-[#454545] font-bold">
                     Phone number <span className="text-error">*</span>
                   </h3>
-                  <CustomPhoneInput
+                  {/* <CustomPhoneInput
                     handleBlur={handleBlur}
                     handleChange={handleChange}
+                    setField={(val) => {
+                      setFieldValue("phoneNumber", val);
+                    }}
                     phoneNumber={values.phoneNumber}
+                  /> */}
+                  <input
+                    type="tel"
+                    name="phoneNumber"
+                    value={values.phoneNumber}
+                    onChange={(e) => {
+                      const res = unformatNumberWithThreesAndFours(
+                        e.target.value
+                      );
+                      if (!isNaN(Number(res))) {
+                        setFieldValue(
+                          "phoneNumber",
+                          formatNumberWithThreesAndFours(res)
+                        );
+                      }
+                    }}
+                    className="w-full text-b-1 border border-[#DDE2FF]"
                   />
-                  {errors.phoneNumber && touched.phoneNumber && (
-                    <p className="text-hint text-error">{errors.phoneNumber}</p>
+                  {errors.phoneNumber && (
+                    <p className="text-s-4 text-error">{errors.phoneNumber}</p>
                   )}
                 </div>
               </div>
               <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
-                  <h3 className="text-large text-[#454545]  font-bold">
+                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:w-[48%] xs:w-[49%]">
+                  <h3 className="text-l-2 text-[#454545] font-bold">
                     State <span className="text-error">*</span>
                   </h3>
                   <Dropdown
@@ -252,36 +277,50 @@ const Content = () => {
                     }))}
                     value={values.state}
                     hint="Select State"
-                    fitMenu
+                    fitMenu={true}
                   />
+                  {errors.state && (
+                    <p className="text-s-4 text-error">{errors.state}</p>
+                  )}
                 </div>
-                <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
-                  <h3 className="text-large text-[#454545] font-bold">
+                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:w-[48%] xs:w-[49%]">
+                  <h3 className="text-l-2 text-[#454545] font-bold">
                     LGA <span className="text-error">*</span>
                   </h3>
-                  <Dropdown menus={[]} value={""} hint="Select LGA" fitMenu />
+                  <Dropdown
+                    menus={states.map((st, i) => ({
+                      name: st,
+                      onClick: () => {
+                        setFieldValue("lga", st);
+                      },
+                    }))}
+                    value={values.lga}
+                    hint="Select LGA"
+                    fitMenu={true}
+                  />
+                  {errors.lga && (
+                    <p className="text-s-4 text-error">{errors.lga}</p>
+                  )}
                 </div>
               </div>
               <div className="w-full space-y-2">
-                <h3 className="text-large text-[#454545]  font-bold">
-                  Address
-                </h3>
+                <h3 className="text-l-2 text-[#454545]  font-bold">Address</h3>
                 <textarea
                   name="address"
                   value={values.address}
                   onChange={handleChange}
                   placeholder="Enter your address here"
-                  className="w-full text-body border border-[#DDE2FF] resize-none h-[100px]"
+                  className="w-full text-b-1 border border-[#DDE2FF] resize-none h-[100px]"
                 />
               </div>
               <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col gap-1 w-[48%]">
-                  <h3 className="text-large text-[#454545]  font-bold">
+                <div className="flex flex-col gap-1 lg:w-[48%] xs:w-full">
+                  <h3 className="text-l-2 text-[#454545] font-bold">
                     Amount to Pay (₦) <span className="text-error">*</span>
                   </h3>
                   <div className="w-full flex">
-                    <div className="bg-background w-[15%] rounded-[8px] rounded-tr-none rounded-br-none h-12 md:h-10 grid place-content-center">
-                      <p className="text-large font-bold text-black">₦</p>
+                    <div className="bg-neutral-3 w-[15%] rounded-[8px] rounded-tr-none rounded-br-none lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 grid place-content-center">
+                      <p className="text-b-1 font-bold text-black">₦</p>
                     </div>
                     <input
                       type="text"
@@ -294,9 +333,12 @@ const Content = () => {
                           setFieldValue("amount", formatAmountWithCommas(res));
                         }
                       }}
-                      className="w-[85%] text-body border border-[#DDE2FF] rounded-tl-none rounded-bl-none"
+                      className="w-[85%] text-b-1 border border-[#DDE2FF] rounded-tl-none rounded-bl-none"
                     />
                   </div>
+                  {errors.amount && (
+                    <p className="text-s-4 text-error">{errors.amount}</p>
+                  )}
                 </div>
               </div>
 
@@ -306,7 +348,7 @@ const Content = () => {
                   name="agreed"
                   className="size-3 accent-primary bg-white focus:ring-0"
                 />
-                <p className="text-smaller text-black">
+                <p className="text-s-3 text-black">
                   By clicking Continue, you agree to our{" "}
                   <span className="text-tertiary font-medium cursor-pointer">
                     Terms and Conditions
@@ -320,13 +362,13 @@ const Content = () => {
 
               <div className="flex w-full items-center justify-around my-3">
                 <button
-                  className={`border border-error rounded-full w-[40%] md:w-[45%] text-small h-12 md:h-10 text-error font-bold`}
+                  className={`border border-error rounded-full lg:w-[40%] xs:w-[45%] text-b-1 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-error font-bold`}
                 >
                   CANCEL
                 </button>
                 <button
                   type="submit"
-                  className={`bg-primary rounded-full w-[40%] md:w-[45%] text-small h-12 md:h-10 text-white font-bold`}
+                  className={`bg-primary rounded-full lg:w-[40%] xs:w-[45%] text-b-1 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-bold`}
                 >
                   CONTINUE
                 </button>

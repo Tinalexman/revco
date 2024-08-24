@@ -42,7 +42,7 @@ const Dropdown: FC<{
                 value || hint ? "justify-between" : "justify-end"
               }`
             : "rounded-full grid place-items-start place-content-center"
-        } w-full lg:h-12 xs:h-10 sm:h-10 md:h-12 xl:h-16 2xl:h-[72px] 3xl:h-20 4xl:h-24 xs:px-2 lg:px-4 xl:px-6 2xl:px-7 3xl:px-8 4xl:px-10 bg-white cursor-pointer text-[#4F4F4F] text-body`}
+        } w-full lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 xs:px-2 lg:px-4 xl:px-6 2xl:px-7 3xl:px-8 4xl:px-10 bg-white cursor-pointer text-[#4F4F4F] text-b-1`}
       >
         {value === "" && <p className="text-neutral-3">{hint}</p>}
         <p className="line-clamp-1">{value}</p>

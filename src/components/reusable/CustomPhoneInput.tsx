@@ -7,7 +7,8 @@ const CustomPhoneInput: FC<{
   phoneNumber: string;
   handleChange: React.ChangeEventHandler<HTMLInputElement>;
   handleBlur: React.FocusEventHandler<HTMLInputElement>;
-}> = ({ phoneNumber, handleBlur, handleChange }) => {
+  setField: (val: string) => void;
+}> = ({ phoneNumber, handleBlur, handleChange, setField }) => {
   const [focused, setFocused] = useState<boolean>(false);
   const [fontSize, setFontSize] = useState("0.9rem");
 
@@ -33,7 +34,9 @@ const CustomPhoneInput: FC<{
     <PhoneInput
       defaultCountry="NG"
       international={true}
-      onChange={(e) => {}}
+      onChange={(e) => {
+        e?.toString() && setField(e?.toString());
+      }}
       inputComponent={forwardRef<HTMLInputElement>((props, ref) => (
         <input
           ref={ref}
