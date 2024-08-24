@@ -30,16 +30,18 @@ const DashboardLayout: FC<iDashboardLayout> = ({ children }) => {
   const active = determineIndex();
 
   return (
-    <div className="w-[100vw] h-[100vh] bg-[url('../../public/image_263.png')] bg-cover bg-center bg-no-repeat">
-      <div className="w-full h-full px-16 md:px-0 pb-2 flex flex-col items-center bg-background bg-opacity-[0.95]">
-        <Navbar swap={true} active={active} />
-        <div className="mt-5 w-full h-[1px] bg-[#373737] bg-opacity-30 md:hidden" />
-        <div className="flex flex-col w-full h-[calc(100vh-165px)] md:h-auto md:px-5 justify-between items-center">
-          {children}
+    <div className="w-[100vw] lg:h-[100vh] xs:h-auto bg-[url('../../public/image_263.png')] bg-cover bg-center bg-no-repeat">
+      <div className="w-full h-full lg:px-10 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-32 flex flex-col items-center bg-background bg-opacity-[0.95]">
+        <div className="xs:px-5 lg:px-0 xl:px-0 2xl:px-0 3xl:px-0 4xl:px-0 lg:py-6 2xl:py-10 3xl:py-12 xs:py-5 w-[100%]">
+          <Navbar swap={true} active={active} />
         </div>
-        <div className="w-[180px] md:w-[140px] h-10 md:h-9 bg-white border-2 text-black border-[#E6E6E6] rounded-[6px] flex items-center justify-center gap-1 font-nunito mt-1">
-          <RiLockPasswordLine size={16} />
-          <p className="text-smaller">
+
+        {/* <div className="flex flex-col w-full h-[calc(100vh-165px)] md:h-auto md:px-5 justify-between items-center">
+          {children}
+        </div> */}
+        <div className="text-s-4 xs:py-2 xs:px-3 2xl:py-4 2xl:px-5 bg-white border-2 text-black border-[#E6E6E6] rounded-[6px] flex items-center justify-center gap-1 font-nunito mt-1">
+          <RiLockPasswordLine className="text-l-1" />
+          <p>
             Powered by <span className="text-tertiary font-bold">paysure</span>
           </p>
         </div>
