@@ -16,7 +16,7 @@ interface iCardDetails {
 
 const Card = () => {
   return (
-    <div className="w-[60%] md:w-full mt-2">
+    <div className="lg:w-[60%] xs:w-full mt-2">
       <Formik
         initialValues={{
           cardNumber: "",

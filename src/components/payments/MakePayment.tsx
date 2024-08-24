@@ -170,7 +170,7 @@ const Content = () => {
                 </div>
               )}
 
-              <div className="w-full lg:space-y-2 xs:space-y-1">
+              <div className="w-full space-y-2">
                 <h3 className="text-l-2 text-[#454545] font-bold">
                   Who do you want to pay for{" "}
                   <span className="text-error">*</span>
@@ -184,7 +184,7 @@ const Content = () => {
               </div>
 
               <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:-[48%] xs:w-[49%]">
+                <div className="flex flex-col lg:gap-1 xs:gap-0.5 lg:-[48%] xs:w-[49%]">
                   <h3 className="text-l-2 text-[#454545] font-bold">
                     Full Name <span className="text-error">*</span>
                   </h3>
@@ -199,7 +199,7 @@ const Content = () => {
                     <p className="text-s-4 text-error">{errors.fullName}</p>
                   )}
                 </div>
-                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:w-[48%] xs:w-[49%]">
+                <div className="flex flex-col lg:gap-1 xs:gap-0.5 lg:w-[48%] xs:w-[49%]">
                   <h3 className="text-l-2 text-[#454545] font-bold">
                     Email <span className="text-error">*</span>
                   </h3>
@@ -216,7 +216,7 @@ const Content = () => {
                 </div>
               </div>
               <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:w-[48%] xs:w-[49%]">
+                <div className="flex flex-col lg:gap-1 xs:gap-0.5 lg:w-[48%] xs:w-[49%]">
                   <h3 className="text-l-2 text-[#454545] font-bold">TIN</h3>
                   <input
                     type="text"
@@ -229,32 +229,31 @@ const Content = () => {
                     <p className="text-hint text-error">{errors.tin}</p>
                   )}
                 </div>
-                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:w-[48%] xs:w-[49%]">
+                <div className="flex flex-col lg:gap-1 xs:gap-0.5 lg:w-[48%] xs:w-[49%]">
                   <h3 className="text-l-2 text-[#454545] font-bold">
                     Phone number <span className="text-error">*</span>
                   </h3>
-                  {/* <CustomPhoneInput
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    setField={(val) => {
-                      setFieldValue("phoneNumber", val);
-                    }}
-                    phoneNumber={values.phoneNumber}
-                  /> */}
+
                   <input
                     type="tel"
                     name="phoneNumber"
                     value={values.phoneNumber}
                     onChange={(e) => {
+                      if (e.target.value.length === 0) {
+                        setFieldValue("phoneNumber", "");
+                        return;
+                      }
+
                       const res = unformatNumberWithThreesAndFours(
                         e.target.value
                       );
-                      if (!isNaN(Number(res))) {
-                        setFieldValue(
-                          "phoneNumber",
-                          formatNumberWithThreesAndFours(res)
-                        );
-                      }
+
+                      if (isNaN(Number(res))) return;
+
+                      setFieldValue(
+                        "phoneNumber",
+                        formatNumberWithThreesAndFours(res)
+                      );
                     }}
                     className="w-full text-b-1 border border-[#DDE2FF]"
                   />
@@ -264,7 +263,7 @@ const Content = () => {
                 </div>
               </div>
               <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:w-[48%] xs:w-[49%]">
+                <div className="flex flex-col lg:gap-1 xs:gap-0.5 lg:w-[48%] xs:w-[49%]">
                   <h3 className="text-l-2 text-[#454545] font-bold">
                     State <span className="text-error">*</span>
                   </h3>
@@ -283,7 +282,7 @@ const Content = () => {
                     <p className="text-s-4 text-error">{errors.state}</p>
                   )}
                 </div>
-                <div className="flex flex-col lg:gap-1 xs:gap-0 lg:w-[48%] xs:w-[49%]">
+                <div className="flex flex-col lg:gap-1 xs:gap-0.5 lg:w-[48%] xs:w-[49%]">
                   <h3 className="text-l-2 text-[#454545] font-bold">
                     LGA <span className="text-error">*</span>
                   </h3>
@@ -303,8 +302,8 @@ const Content = () => {
                   )}
                 </div>
               </div>
-              <div className="w-full space-y-2">
-                <h3 className="text-l-2 text-[#454545]  font-bold">Address</h3>
+              <div className="w-full lg:space-y-2 xs:space-y-1">
+                <h3 className="text-l-2 text-[#454545] font-bold">Address</h3>
                 <textarea
                   name="address"
                   value={values.address}
@@ -314,12 +313,12 @@ const Content = () => {
                 />
               </div>
               <div className="flex items-start justify-between w-full">
-                <div className="flex flex-col gap-1 lg:w-[48%] xs:w-full">
+                <div className="flex flex-col gap-1 lg:w-[48%] xs:w-[49%]">
                   <h3 className="text-l-2 text-[#454545] font-bold">
                     Amount to Pay (₦) <span className="text-error">*</span>
                   </h3>
                   <div className="w-full flex">
-                    <div className="bg-neutral-3 w-[15%] rounded-[8px] rounded-tr-none rounded-br-none lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 grid place-content-center">
+                    <div className="bg-neutral-3 w-[20%] rounded-[8px] rounded-tr-none rounded-br-none lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 grid place-content-center">
                       <p className="text-b-1 font-bold text-black">₦</p>
                     </div>
                     <input
@@ -333,7 +332,7 @@ const Content = () => {
                           setFieldValue("amount", formatAmountWithCommas(res));
                         }
                       }}
-                      className="w-[85%] text-b-1 border border-[#DDE2FF] rounded-tl-none rounded-bl-none"
+                      className="w-[80%] text-b-1 border border-[#DDE2FF] rounded-tl-none rounded-bl-none"
                     />
                   </div>
                   {errors.amount && (
@@ -370,7 +369,7 @@ const Content = () => {
                   type="submit"
                   className={`bg-primary rounded-full lg:w-[40%] xs:w-[45%] text-b-1 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-bold`}
                 >
-                  CONTINUE
+                  {proceed ? "PROCEED" : "CONTINUE"}
                 </button>
               </div>
             </Form>

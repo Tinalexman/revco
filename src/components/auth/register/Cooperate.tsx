@@ -10,6 +10,10 @@ import { toast } from "react-hot-toast";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import CustomPhoneInput from "../../reusable/CustomPhoneInput";
+import {
+  unformatNumberWithThreesAndFours,
+  formatNumberWithThreesAndFours,
+} from "@/src/functions/numberFunctions";
 
 interface iCooperate {
   firstName: string;
@@ -209,10 +213,28 @@ const Cooperate = () => {
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Phone Number</h3>
-                <CustomPhoneInput
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  phoneNumber={values.phoneNumber}
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  value={values.phoneNumber}
+                  onChange={(e) => {
+                    if (e.target.value.length === 0) {
+                      setFieldValue("phoneNumber", "");
+                      return;
+                    }
+
+                    const res = unformatNumberWithThreesAndFours(
+                      e.target.value
+                    );
+
+                    if (isNaN(Number(res))) return;
+
+                    setFieldValue(
+                      "phoneNumber",
+                      formatNumberWithThreesAndFours(res)
+                    );
+                  }}
+                  className="w-full text-b-1 border border-[#DDE2FF]"
                 />
                 {errors.phoneNumber && touched.phoneNumber && (
                   <p className="text-hint text-error">{errors.phoneNumber}</p>

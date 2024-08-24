@@ -9,6 +9,10 @@ import { states } from "@/src/constants/constants";
 import { useGlobalStore } from "@/src/stores/globalStore";
 import { toast } from "react-hot-toast";
 import CustomPhoneInput from "../../reusable/CustomPhoneInput";
+import {
+  unformatNumberWithThreesAndFours,
+  formatNumberWithThreesAndFours,
+} from "@/src/functions/numberFunctions";
 
 interface iIndividual {
   firstName: string;
@@ -136,6 +140,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
           isSubmitting,
           isInitialValid,
           isValid,
+          setFieldValue,
         }) => (
           <Form
             onSubmit={handleSubmit}
@@ -189,10 +194,28 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Phone Number</h3>
-                <CustomPhoneInput
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  phoneNumber={values.phoneNumber}
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  value={values.phoneNumber}
+                  onChange={(e) => {
+                    if (e.target.value.length === 0) {
+                      setFieldValue("phoneNumber", "");
+                      return;
+                    }
+
+                    const res = unformatNumberWithThreesAndFours(
+                      e.target.value
+                    );
+
+                    if (isNaN(Number(res))) return;
+
+                    setFieldValue(
+                      "phoneNumber",
+                      formatNumberWithThreesAndFours(res)
+                    );
+                  }}
+                  className="w-full text-b-1 border border-[#DDE2FF]"
                 />
                 {errors.phoneNumber && touched.phoneNumber && (
                   <p className="text-hint text-error">{errors.phoneNumber}</p>
