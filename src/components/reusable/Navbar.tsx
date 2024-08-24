@@ -85,7 +85,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
           <Image
             src={Logo}
             alt="logo"
-            className="xl:size-[3.25rem] lg:size-[3.15rem] xs:size-[3rem] object-cover"
+            className="xl:size-[3.25rem] 2xl:size-[4rem] 3xl:size-[4.5rem] 4xl:size-[5.5rem] lg:size-[3.15rem] xs:size-[3rem] object-cover"
             width={72}
             height={72}
           />
@@ -128,13 +128,13 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
                 swap
                   ? "bg-primary-light text-primary"
                   : "border-2 border-white text-white hover:border-primary border-opacity-[0.28] hover:border-opacity-100"
-              } lg:w-[150px] lg:h-10 flex justify-center items-center rounded-full text-s-3 font-semibold font-nunito transition-all duration-300 ease-out`}
+              } lg:w-[150px] 2xl:w-[220px] lg:h-10 2xl:h-12 flex justify-center items-center rounded-full text-s-3 font-semibold font-nunito transition-all duration-300 ease-out`}
             >
               Register
             </Link>
             <Link
               href={"/auth/login"}
-              className="lg:w-[150px] lg:h-10 flex justify-center items-center rounded-full bg-primary text-s-3 font-semibold font-nunito text-white"
+              className="lg:w-[150px] 2xl:w-[220px] lg:h-10 2xl:h-12 flex justify-center items-center rounded-full bg-primary text-s-3 font-semibold font-nunito text-white"
             >
               Login
             </Link>

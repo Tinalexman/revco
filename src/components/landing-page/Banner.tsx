@@ -38,15 +38,15 @@ const Banner = () => {
     <div className="w-[100vw] xl:h-[100vh] xs:h-[100vh] bg-[url('../../public/image_266.png')] bg-cover bg-no-repeat bg-center">
       <div className="w-full h-full bg-[#005324] bg-opacity-[0.65] relative">
         <div className="bg-[url('../../public/image_269.png')] w-[60vw] h-auto bg-cover bg-no-repeat bg-center absolute" />
-        <div className="flex flex-col z-5 bg-black bg-opacity-[0.4] w-full h-full lg:px-10 xl:px-16">
-          <div className="lg:py-6 xs:py-5">
-            <div className="xs:px-5">
+        <div className="flex flex-col z-5 bg-black bg-opacity-[0.4] w-full h-full lg:px-10 xl:px-16 2xl:px-20 3xl:px-24 4xl:px-32">
+          <div className="lg:py-6 2xl:py-10 3xl:py-12 xs:py-5">
+            <div className="xs:px-5 lg:px-0">
               <Navbar swap={false} active={-1} />
             </div>
             <hr className="bg-white bg-opacity-[0.75]" />
           </div>
 
-          <div className="flex flex-col w-full lg:mt-[4rem] xl:mt-[6.7rem] xs:mt-[5.75rem] xl:gap-[11.5rem] lg:gap-[6rem] xs:gap-[3.5rem]">
+          <div className="flex flex-col w-full lg:mt-[4rem] xl:mt-[6.7rem] xs:mt-[5.75rem] xl:gap-[11.5rem] 2xl:gap-[14rem] 3xl:gap-[22rem] 4xl:gap-[30rem] lg:gap-[6rem] xs:gap-[3.5rem]">
             <div className="lg:pl-10 xs:px-2 lg:w-[45%] xl:w-[55%] xs:w-full flex flex-col xl:gap-3">
               <h1 className="text-extra text-white font-bold">
                 Invest in Taraba Future
@@ -62,17 +62,17 @@ const Banner = () => {
             </div>
 
             <div className="w-full grid place-content-center xs:px-2">
-              <div className="grid grid-cols-3 lg:gap-8 xs:gap-2 xl:w-[40rem] lg:w-[39rem] xs:w-full">
+              <div className="grid grid-cols-3 lg:gap-8 xs:gap-2 xl:w-[40rem] 2xl:w-[52rem] 3xl:w-[60rem] 4xl:w-[65rem] lg:w-[39rem] xs:w-full">
                 {props.map((prop, i) => (
                   <Link
                     key={i}
                     href={prop.link}
-                    className="flex flex-col xl:gap-2 xs:gap-2 items-center xl:py-4 xs:py-3 xl:px-6 xs:px-4 bg-white rounded-2xl xs:rounded-lg cursor-pointer"
+                    className="flex flex-col xl:gap-2 2xl:gap-3 3xl:gap-5 xs:gap-2 items-center xl:py-4 2xl:py-10 xs:py-3 xl:px-6 xs:px-4 bg-white rounded-2xl xs:rounded-lg cursor-pointer"
                   >
                     <Image
                       src={prop.image}
                       alt="prop"
-                      className="xl:size-[6.25rem] lg:size-[5rem] xs:size-[4.5rem] object-cover"
+                      className="2xl:size-[6.75rem] 3xl:size-[7rem] 4xl:size-[7.5rem] xl:size-[6.25rem] lg:size-[5rem] xs:size-[4.5rem] object-cover"
                       width={100}
                       height={100}
                     />

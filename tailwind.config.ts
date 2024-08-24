@@ -31,9 +31,9 @@ const config: Config = {
         md: "768px", // Tablets and larger screens
         lg: "976px", // Laptops and larger screens
         xl: "1440px", // Desktops
-        // "2xl": "1920px", // Large desktops
-        // "3xl": "2560px", // Ultra-wide screens
-        // "4xl": "3200px", // Extra-large screens
+        "2xl": "1920px", // Large desktops
+        "3xl": "2560px", // Ultra-wide screens
+        "4xl": "3200px", // Extra-large screens
       },
       fontFamily: {
         inter: ["var(--font-inter)", "serif"],
