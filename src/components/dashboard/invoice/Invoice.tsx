@@ -6,11 +6,14 @@ import { RiFileList3Fill } from "react-icons/ri";
 
 import Image from "next/image";
 import Invoice from "@/public/invoice_info.png";
+import { useValidatePaidInvoice } from "@/src/hooks/invoiceHooks";
+import { Loader } from "@mantine/core";
 
 const GenerateInvoice = () => {
   const [pin, setPin] = useState<string>("");
-  const [error, setError] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
+
+  const { loading, validate } = useValidatePaidInvoice();
 
   return (
     <div className="flex flex-col items-start gap-2 lg:w-[450px] xl:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full lg:h-fit xs:h-[calc(100vh-13rem)]">
@@ -68,10 +71,12 @@ const GenerateInvoice = () => {
             placeholder="Enter PIN"
           />
           <button
-            onClick={() => {}}
+            onClick={() => {
+              validate(pin);
+            }}
             className={`bg-primary rounded-full lg:w-[35%] xs:w-full text-b-1 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-semibold `}
           >
-            Proceed
+            {loading ? <Loader color="white.9" /> : "Proceed"}
           </button>
         </div>
         <div className="text-s-4 text-[#595959] font-semibold text-end">
