@@ -6,14 +6,8 @@ import Link from "next/link";
 import { PiInfoLight } from "react-icons/pi";
 import { MdOutlineCancel } from "react-icons/md";
 
-import { motion } from "framer-motion";
 import Cooperate from "./Cooperate";
 import Individual from "./Individual";
-
-interface iRegister {
-  name: string;
-  link: string;
-}
 
 const Register = () => {
   const [index, setIndex] = useState<number>(-1);
@@ -22,30 +16,14 @@ const Register = () => {
   const registerProps: string[] = ["Individual", "Cooperate"];
 
   return (
-    <div
-      className={`w-full h-full ${
-        index === -1 ? "md:h-full" : "md:h-auto"
-      } flex items-center md:items-start justify-center md:justify-start bg-background bg-opacity-[0.95]`}
-    >
-      <div className="w-[500px] md:w-full md:mt-16 flex flex-col items-center gap-5 md:px-2 px-[2px] max-h-[90%] md:h-auto md:max-h-full overflow-y-scroll scrollbar-custom">
-        <div className="flex flex-col items-center gap-6 w-full">
+    <div className="w-full h-full flex flex-col items-center justify-center bg-background bg-opacity-[0.95]">
+      <div className="h-fit lg:w-[450px] xl:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full xs:px-5 flex flex-col items-center justify-center gap-5">
+        <div className="flex flex-col items-center xs:gap-6 xl:gap-8 2xl:gap-10 3xl:gap-12 4xl:gap-14 w-full">
           <div className="flex flex-col gap-1 items-center">
-            <motion.h1
-              initial={{
-                x: "100%",
-              }}
-              animate={{
-                x: "0%",
-                transition: {
-                  duration: 1,
-                  ease: "easeOut",
-                },
-              }}
-              className="text-header font-bold text-black"
-            >
+            <h1 className="text-h-3 font-bold text-black">
               Create your account
-            </motion.h1>
-            <p className="text-smaller md:text-center text-black">
+            </h1>
+            <p className="text-b-1 text-center text-black">
               Fill in the form to finish registration, you can select the type
               of account you are registering.
             </p>
@@ -60,7 +38,7 @@ const Register = () => {
                     setNoNin(false);
                   }
                 }}
-                className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in h-10 rounded-lg justify-center gap-3 items-center text-smaller text-[#3A3A3A] flex ${
+                className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in xs:h-10 xl:h-12 2xl:h-14 3xl:h-16 4xl:h-20 rounded-lg justify-center gap-3 items-center text-s-2 text-[#3A3A3A] flex ${
                   index === i ? "bg-primary-light " : "bg-neutral"
                 }`}
               >
