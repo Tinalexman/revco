@@ -37,49 +37,53 @@ const Banner = () => {
   ];
 
   return (
-    <div className="w-[100vw] h-[100vh] md:h-auto bg-[url('../../public/image_266.png')] bg-cover bg-no-repeat bg-center">
+    <div className="w-[100vw] xl:h-[100vh] xs:h-[100vh] bg-[url('../../public/image_266.png')] bg-cover bg-no-repeat bg-center">
       <div className="w-full h-full bg-[#005324] bg-opacity-[0.65] relative">
         <div className="bg-[url('../../public/image_269.png')] w-[60vw] h-auto bg-cover bg-no-repeat bg-center absolute" />
-        <div className="flex flex-col z-5 bg-black bg-opacity-[0.4] w-full h-full px-20 md:px-0 py-5">
-          <div className="md:px-2">
-            <Navbar swap={false} active={-1} />
+        <div className="flex flex-col z-5 bg-black bg-opacity-[0.4] w-full h-full xl:px-16">
+          <div className="xl:py-6 xs:py-5">
+            <div className="xs:px-5">
+              <Navbar swap={false} active={-1} />
+            </div>
+            <hr className="bg-white bg-opacity-[0.75]" />
           </div>
-          <hr className="mt-2 bg-white bg-opacity-[0.75]" />
-          <div className="flex flex-col w-full h-[calc(100vh-132px)] md:h-[calc(100vh-100px)] justify-between items-center">
-            <div className="pl-5 mt-10 md:mt-6 w-full">
-              <h1 className="text-extra text-white font-bold">TARABA STATE</h1>
-              <h2 className="text-[2rem] md:text-[1rem] leading-[2.2rem] md:leading-[1.4rem] text-secondary font-bold">
-                BOARD OF INTERNAL REVENUE <br />
-                SERVICE
+
+          <div className="flex flex-col w-full xl:mt-[6.7rem] xs:mt-[5.75rem] xl:gap-[11.5rem] xs:gap-[3.5rem]">
+            <div className="xl:pl-10 xs:px-5 xl:w-[55%] xs:w-full flex flex-col xl:gap-3">
+              <h1 className="text-extra text-white font-bold">
+                Invest in Taraba Future
+              </h1>
+              <h2 className="text-subextra text-white xl:block xs:hidden">
+                Your tax contributions are the foundation of progress. <br />
+                Your Tax, Your Contribution to a Greater Taraba State.
+              </h2>
+              <h2 className="text-subextra text-white xs:block xl:hidden">
+                Your tax contributions are the foundation of progress. Your Tax,
+                Your Contribution to a Greater Taraba State.
               </h2>
             </div>
 
-            <div className="w-full justify-center items-center flex flex-col gap-5 md:px-2">
-              <div className="flex md:grid md:grid-cols-3 justify-center items-center gap-8 md:gap-2 w-full">
+            <div className="w-full grid place-content-center xs:px-2">
+              <div className="grid grid-cols-3 xl:gap-8 xs:gap-2 xl:w-[40rem] xs:w-full">
                 {props.map((prop, i) => (
                   <Link
                     key={i}
                     href={prop.link}
-                    className="flex flex-col gap-2 items-center py-5 md:py-3 px-8 md:px-0 bg-white rounded-2xl md:rounded-lg cursor-pointer"
+                    className="flex flex-col xl:gap-2 xs:gap-2 items-center xl:py-4 xs:py-3 xl:px-6 xs:px-4 bg-white rounded-2xl xs:rounded-lg cursor-pointer"
                   >
                     <Image
                       src={prop.image}
                       alt="prop"
-                      className="size-[80px] md:size-12 object-cover"
+                      className="xl:size-[6.25rem] xs:size-[4.5rem] object-cover"
                       width={100}
                       height={100}
                     />
-                    <p className="text-body md:text-smaller md:text-center text-[#333333] font-semibold">
+                    <p className="text-b-1 text-center text-[#333333] font-semibold">
                       {prop.name}
                     </p>
                   </Link>
                 ))}
               </div>
-            </div>
-
-            <div className="flex flex-col items-center gap-4 w-[80%] md:w-full">
-              <hr className="bg-white bg-opacity-[0.75] w-full" />
-              <div className="h-6 md:h-3" />
             </div>
           </div>
         </div>

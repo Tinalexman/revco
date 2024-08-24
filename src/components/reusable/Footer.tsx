@@ -27,10 +27,10 @@ const Footer = () => {
       name: "Download Receipt",
       link: "/dashboard/download-receipt",
     },
-    // {
-    //   name: "Contact Us",
-    //   link: "/dashboard/contact-us",
-    // },
+    {
+      name: "Contact Us",
+      link: "/",
+    },
     {
       name: "Make Payment",
       link: "/dashboard/make-payment",
@@ -61,41 +61,52 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="w-full bg-white px-20 md:px-5 py-16 md:py-5 gap-8 flex flex-col font-nunito">
-      <div className="w-full flex md:flex-col gap-[200px] md:gap-10">
-        <div className="flex flex-col gap-5 w-[340px] md:w-full">
-          <Image
-            src={Logo}
-            alt="logo"
-            className="size-16 object-cover"
-            width={64}
-            height={64}
-          />
-          <p className="text-small text-[#333333] ">
+    <footer className="w-full bg-white xl:p-16 xs:px-2 xs:py-8 gap-8 flex flex-col">
+      <div className="w-full flex xl:flex-row xs:flex-col xl:gap-[14rem] xs:gap-8">
+        <div className="flex flex-col gap-5 xl:w-[21rem] xs:w-full">
+          <Link href={"/"} className={`flex items-center gap-2 w-fit `}>
+            <Image
+              src={Logo}
+              alt="logo"
+              className="xl:size-[3.25rem] object-cover"
+              width={72}
+              height={72}
+            />
+            <div className="xs:hidden lg:block">
+              <h2 className={`text-nav font-podkova font-bold text-[#333333]`}>
+                TARABA STATE
+              </h2>
+              <p className="text-[#DA251D] text-s-1">
+                BOARD OF INTERNAL REVENUE SERVICE
+              </p>
+            </div>
+          </Link>
+          <p className="text-s-4 text-[#333333] ">
             Experience the easy and secure way to pay your taxes or bills owed
             to the Taraba state government revenue services.
           </p>
         </div>
-        <div className="flex md:flex-col w-fit gap-16 md:gap-6">
+
+        <div className="flex xl:flex-row xs:flex-col w-fit xl:gap-16 xs:gap-8">
           <div className="flex flex-col gap-2">
-            <h2 className="text-subtitle text-primary-2 font-bold">
+            <h2 className="text-l-3 text-primary-2 xl:gap-2 font-bold">
               Quick Link
             </h2>
             {quickLinks.map((ql, i) => (
               <Link
                 key={i}
                 href={ql.link}
-                className="text-body font-light md:font-normal text-[#333333]"
+                className="text-body font-light text-[#333333]"
               >
                 {ql.name}
               </Link>
             ))}
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="text-subtitle text-primary-2 font-bold">
+            <h2 className="text-l-3 text-primary-2 font-bold">
               Connect With Us
             </h2>
-            <div className="gap-6 flex items-center text-[#003316]">
+            <div className="xl:gap-6 xs:gap-4 flex items-center text-[#003316]">
               {socialLinks.map((sl, i) => {
                 const Icon = sl.icon;
                 return (
@@ -108,7 +119,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="w-full border-t-[1px] pt-4 border-grey-18 text-[#333333] text-smaller grid place-items-center">
+      <div className="w-full border-t-[1px] pt-4 border-grey-18 text-[#333333] text-s-4 grid place-items-center">
         © Copyright {new Date().getFullYear()}, All Rights Reserved
       </div>
     </footer>

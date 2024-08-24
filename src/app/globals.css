@@ -37,11 +37,11 @@ select {
 }
 
 tr {
-  @apply text-black text-body font-semibold border-b border-[#EBF2FA];
+  @apply text-black font-semibold border-b border-[#EBF2FA];
 }
 
 thead > tr {
-  @apply bg-[#F6F6F7] rounded-md h-10 text-small;
+  @apply bg-[#F6F6F7] rounded-md h-10;
 }
 
 thead > tr > th {
@@ -53,19 +53,27 @@ th {
 }
 
 tbody > tr > td {
-  @apply text-[#3A3A3A] text-hint py-3 md:px-3;
+  @apply text-[#3A3A3A] py-3 md:px-3;
 }
 
-.text-body {
-  @apply text-[1rem] md:text-[0.8rem] leading-[1rem] md:leading-[0.9rem];
+.text-b-1 {
+  @apply xl:text-[1rem] xl:leading-[1.5rem] xs:text-[0.6rem] xs:leading-[0.8rem];
 }
 
-.text-large {
-  @apply text-[1.1rem] md:text-[0.8rem] leading-[1.2rem] md:leading-[0.9rem];
+.text-l-1 {
+  @apply text-[1.25rem] leading-[1.875rem];
 }
 
-.text-header {
-  @apply text-[1.5rem] md:text-[1.2rem] leading-[2rem] md:leading-[1.3rem];
+.text-l-2 {
+  @apply xl:text-[1.125rem] xl:leading-[2rem];
+}
+
+.text-l-3 {
+  @apply xl:text-[1.25rem] xl:leading-[1.5rem];
+}
+
+.text-h-1 {
+  @apply text-[2rem] leading-[2.25rem];
 }
 
 .text-subtitle {
@@ -77,19 +85,27 @@ tbody > tr > td {
 }
 
 .text-nav {
-  @apply text-[2rem] md:text-[1.5rem] leading-[2.4rem] md:leading-[1.8rem];
+  @apply xl:text-[2.25rem] xl:leading-[2.5rem];
 }
 
 .text-hint {
   @apply text-[0.9rem] leading-[1rem];
 }
 
-.text-small {
-  @apply text-[0.9rem] md:text-[0.7rem] leading-[0.92rem] md:leading-[0.75rem];
+.text-s-4 {
+  @apply text-[0.875rem] leading-[1.25rem];
 }
 
-.text-smaller {
-  @apply text-[0.7rem] md:text-[0.6em] leading-[0.7rem] md:leading-[0.6rem];
+.text-s-3 {
+  @apply xl:text-[0.875rem] xl:leading-[1.08rem];
+}
+
+.text-s-2 {
+  @apply xl:text-[1rem] xl:leading-[1.125rem];
+}
+
+.text-s-1 {
+  @apply xl:text-[0.78rem] xl:leading-[1.19rem];
 }
 
 .text-tiny {
@@ -97,7 +113,11 @@ tbody > tr > td {
 }
 
 .text-extra {
-  @apply text-[4rem] md:text-[2rem] leading-[4.2rem] md:leading-[3rem];
+  @apply xl:text-[4.14rem] xl:leading-[4.315rem] xs:text-[3.2rem] xs:leading-[3.35rem];
+}
+
+.text-subextra {
+  @apply xl:text-[1.5rem] xl:leading-[2.05rem] xs:text-[1.16rem] xs:leading-[1.6rem];
 }
 
 ::selection {

@@ -77,51 +77,37 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
   return (
     <>
       <nav
-        className={`flex w-full ${
+        className={`flex w-full xl:pb-5 xs:pb-2 ${
           swap && "md:bg-white"
-        } md:px-5 items-center justify-between md:h-14 h-16`}
+        }  items-center justify-between`}
       >
-        <div className="flex gap-4 w-fit h-full items-center">
-          <HiMenu
-            size={26}
-            className={`md:block hidden ${
-              swap ? "text-black" : "text-white"
-            } cursor-pointer text-header`}
-            onClick={openDrawer}
+        <Link href={"/"} className={`flex items-center gap-2 w-fit `}>
+          <Image
+            src={Logo}
+            alt="logo"
+            className="xl:size-[3.25rem] xs:size-[3rem] object-cover"
+            width={72}
+            height={72}
           />
-          <Link
-            href={"/"}
-            className={`flex items-center gap-2 ${
-              swap ? "max-w-[20rem]" : "w-fit md:w-[50%]"
-            } `}
-          >
-            <Image
-              src={Logo}
-              alt="logo"
-              className="size-[4rem] md:size-[42px] object-cover"
-              width={72}
-              height={72}
-            />
-            <div>
-              <h2
-                className={`text-nav font-podvoka font-bold ${
-                  !swap ? "text-white" : "text-[#333333]"
-                }`}
-              >
-                TARABA STATE
-              </h2>
-              <p className="text-[#DA251D] text-smaller">
-                BOARD OF INTERNAL REVENUE SERVICE
-              </p>
-            </div>
-          </Link>
-        </div>
-        <div className="w-fit flex items-center gap-5 md:hidden">
+          <div className="xs:hidden lg:block">
+            <h2
+              className={`text-nav font-podkova font-bold ${
+                !swap ? "text-white" : "text-[#333333]"
+              }`}
+            >
+              TARABA STATE
+            </h2>
+            <p className="text-[#DA251D] text-s-1">
+              BOARD OF INTERNAL REVENUE SERVICE
+            </p>
+          </div>
+        </Link>
+        <div className="w-fit hidden items-center xl:gap-5 xl:flex">
           {links.map((ln, i) => (
             <Link
               href={ln.link}
               key={i}
-              className={`text-small font-nunito ${
+              className={`text-s-2 p-2.5 font-nunito ${
                 active === i
                   ? "text-primary font-bold underline"
                   : swap
@@ -133,21 +119,22 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
             </Link>
           ))}
         </div>
+
         {!signedIn && (
-          <div className="flex items-center gap-5 w-fit md:hidden">
+          <div className="lg:flex items-center gap-5 w-fit hidden">
             <Link
               href={"/auth/register"}
               className={`${
                 swap
                   ? "bg-primary-light text-primary"
                   : "border-2 border-white text-white hover:border-primary border-opacity-[0.28] hover:border-opacity-100"
-              } w-[150px] h-10 flex justify-center items-center rounded-full  text-small font-semibold font-nunito  transition-all duration-300 ease-out`}
+              } xl:w-[150px] xl:h-10 flex justify-center items-center rounded-full text-s-3 font-semibold font-nunito transition-all duration-300 ease-out`}
             >
               Register
             </Link>
             <Link
               href={"/auth/login"}
-              className="w-[150px] h-10 flex justify-center items-center rounded-full bg-primary text-small font-semibold font-nunito text-white"
+              className="xl:w-[150px] xl:h-10 flex justify-center items-center rounded-full bg-primary text-s-3 font-semibold font-nunito text-white"
             >
               Login
             </Link>
@@ -157,7 +144,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
           <div
             ref={dropdownRef}
             onClick={() => setOpen(!open)}
-            className="md:hidden"
+            className="hidden lg:block"
           >
             <div
               className={`${
@@ -213,17 +200,14 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
             </div>
           </div>
         )}
-        {signedIn && (
-          <div
-            className={`${
-              !swap ? "text-white" : "text-black"
-            } items-center gap-2 md:gap-1 cursor-pointer md:flex hidden`}
-          >
-            <div className="bg-[#B0DDC3] grid place-content-center rounded-full size-9 text-body font-semibold">
-              {lastName.charAt(0)}
-            </div>
-          </div>
-        )}
+
+        <HiMenu
+          size={26}
+          className={`lg:hidden xs:block ${
+            swap ? "text-black" : "text-white"
+          } cursor-pointer text-header`}
+          onClick={openDrawer}
+        />
       </nav>
 
       <Drawer.Root

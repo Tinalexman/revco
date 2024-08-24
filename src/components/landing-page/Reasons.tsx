@@ -49,33 +49,33 @@ const Reasons = () => {
   ];
 
   return (
-    <div className="w-full py-20 md:py-14 flex flex-col items-center gap-14 bg-primary-light">
-      <div className="w-fit flex flex-col items-center gap-1">
-        <h2 className="text-header font-semibold text-black">
+    <div className="w-full xl:py-20 xs:py-8 flex flex-col items-center gap-14 bg-primary-light">
+      <div className="w-fit flex flex-col xs:px-8 items-center xl:gap-2.5 text-black">
+        <h2 className="text-h-1 font-semibold text-center">
           Pay Taxes with Ease
         </h2>
-        <p className="text-large text-center text-black">
+        <p className="text-l-1 text-center ">
           Your Tax, Your Contribution to a Greater Taraba State.
         </p>
       </div>
-      <div className="w-full grid-cols-3 md:grid-cols-1 gap-6 grid px-16 md:px-2">
+      <div className="w-full xl:grid-cols-3 grid xs:grid-cols-1 gap-6 xl:px-16 xs:px-2">
         {reasons.map((rn, i) => (
           <div
             key={i}
-            className="w-full h-72 md:h-60 p-5 bg-white rounded-lg flex flex-col gap-8"
+            className="w-full xl:h-[17.5rem] p-5 bg-white rounded-lg flex flex-col gap-8"
           >
             <div className="bg-primary-light rounded-full p-4 w-fit">
               <Image
                 src={rn.image}
                 alt="reason"
-                className="size-8"
+                className="xl:size-8"
                 width={32}
                 height={32}
               />
             </div>
             <div className="flex flex-col gap-2 text-[#626262]">
-              <h2 className="text-large font-bold">{rn.title}</h2>
-              <p className="text-small">{rn.text}</p>
+              <h2 className="text-l-2 font-bold">{rn.title}</h2>
+              <p className="text-s-4">{rn.text}</p>
             </div>
           </div>
         ))}
