@@ -57,7 +57,7 @@ tbody > tr > td {
 }
 
 .text-b-1 {
-  @apply xl:text-[1rem] xl:leading-[1.5rem] xs:text-[0.6rem] xs:leading-[0.8rem];
+  @apply lg:text-[1rem]  lg:leading-[1.3rem] xl:leading-[1.5rem] xs:text-[0.6rem] xs:leading-[0.8rem];
 }
 
 .text-l-1 {
@@ -85,7 +85,7 @@ tbody > tr > td {
 }
 
 .text-nav {
-  @apply xl:text-[2.25rem] xl:leading-[2.5rem];
+  @apply lg:text-[2rem] lg:leading-[2.3rem] xl:text-[2.25rem] xl:leading-[2.5rem];
 }
 
 .text-hint {
@@ -101,11 +101,11 @@ tbody > tr > td {
 }
 
 .text-s-2 {
-  @apply xl:text-[1rem] xl:leading-[1.125rem];
+  @apply lg:text-[1rem] lg:leading-[1.125rem];
 }
 
 .text-s-1 {
-  @apply xl:text-[0.78rem] xl:leading-[1.19rem];
+  @apply lg:text-[0.7rem] lg:leading-[1.05rem]   xl:text-[0.78rem] xl:leading-[1.19rem];
 }
 
 .text-tiny {
@@ -113,11 +113,11 @@ tbody > tr > td {
 }
 
 .text-extra {
-  @apply xl:text-[4.14rem] xl:leading-[4.315rem] xs:text-[3.2rem] xs:leading-[3.35rem];
+  @apply lg:text-[4rem] xl:text-[4.14rem] lg:leading-[4.2rem] xl:leading-[4.315rem] xs:text-[3.2rem] xs:leading-[3.35rem];
 }
 
 .text-subextra {
-  @apply xl:text-[1.5rem] xl:leading-[2.05rem] xs:text-[1.16rem] xs:leading-[1.6rem];
+  @apply lg:text-[1.3rem] xl:text-[1.5rem] lg:leading-[2rem] xl:leading-[2.05rem] xs:text-[1.16rem] xs:leading-[1.6rem];
 }
 
 ::selection {

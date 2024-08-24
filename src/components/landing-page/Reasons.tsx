@@ -49,7 +49,7 @@ const Reasons = () => {
   ];
 
   return (
-    <div className="w-full xl:py-20 xs:py-8 flex flex-col items-center gap-14 bg-primary-light">
+    <div className="w-full xl:py-20 lg:py-16 xs:py-8 flex flex-col items-center gap-14 bg-primary-light">
       <div className="w-fit flex flex-col xs:px-8 items-center xl:gap-2.5 text-black">
         <h2 className="text-h-1 font-semibold text-center">
           Pay Taxes with Ease
@@ -58,11 +58,11 @@ const Reasons = () => {
           Your Tax, Your Contribution to a Greater Taraba State.
         </p>
       </div>
-      <div className="w-full xl:grid-cols-3 grid xs:grid-cols-1 gap-6 xl:px-16 xs:px-2">
+      <div className="w-full lg:grid-cols-3 xl:grid-cols-3 grid xs:grid-cols-1 gap-6 xl:px-16 lg:px-10 xs:px-2">
         {reasons.map((rn, i) => (
           <div
             key={i}
-            className="w-full xl:h-[17.5rem] p-5 bg-white rounded-lg flex flex-col gap-8"
+            className="w-full lg:h-[17rem] xl:h-[17.5rem] p-5 bg-white rounded-lg flex flex-col gap-8"
           >
             <div className="bg-primary-light rounded-full p-4 w-fit">
               <Image

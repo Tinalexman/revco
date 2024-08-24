@@ -77,7 +77,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
   return (
     <>
       <nav
-        className={`flex w-full xl:pb-5 xs:pb-2 ${
+        className={`flex w-full lg:pb-5 xs:pb-2 ${
           swap && "md:bg-white"
         }  items-center justify-between`}
       >
@@ -85,7 +85,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
           <Image
             src={Logo}
             alt="logo"
-            className="xl:size-[3.25rem] xs:size-[3rem] object-cover"
+            className="xl:size-[3.25rem] lg:size-[3.15rem] xs:size-[3rem] object-cover"
             width={72}
             height={72}
           />
@@ -102,7 +102,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
             </p>
           </div>
         </Link>
-        <div className="w-fit hidden items-center xl:gap-5 xl:flex">
+        <div className="w-fit hidden items-center lg:gap-5 lg:flex">
           {links.map((ln, i) => (
             <Link
               href={ln.link}
@@ -128,13 +128,13 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
                 swap
                   ? "bg-primary-light text-primary"
                   : "border-2 border-white text-white hover:border-primary border-opacity-[0.28] hover:border-opacity-100"
-              } xl:w-[150px] xl:h-10 flex justify-center items-center rounded-full text-s-3 font-semibold font-nunito transition-all duration-300 ease-out`}
+              } lg:w-[150px] lg:h-10 flex justify-center items-center rounded-full text-s-3 font-semibold font-nunito transition-all duration-300 ease-out`}
             >
               Register
             </Link>
             <Link
               href={"/auth/login"}
-              className="xl:w-[150px] xl:h-10 flex justify-center items-center rounded-full bg-primary text-s-3 font-semibold font-nunito text-white"
+              className="lg:w-[150px] lg:h-10 flex justify-center items-center rounded-full bg-primary text-s-3 font-semibold font-nunito text-white"
             >
               Login
             </Link>

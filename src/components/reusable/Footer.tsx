@@ -61,14 +61,14 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="w-full bg-white xl:p-16 xs:px-2 xs:py-8 gap-8 flex flex-col">
-      <div className="w-full flex xl:flex-row xs:flex-col xl:gap-[14rem] xs:gap-8">
-        <div className="flex flex-col gap-5 xl:w-[21rem] xs:w-full">
+    <footer className="w-full bg-white xl:p-16 lg:p-10 xs:px-2 xs:py-8 gap-8 flex flex-col">
+      <div className="w-full flex xl:flex-row lg:flex-row xs:flex-col xl:gap-[14rem] lg:gap-[12rem] xs:gap-8">
+        <div className="flex flex-col gap-5 xl:w-[21rem] lg:w-[20rem] xs:w-full">
           <Link href={"/"} className={`flex items-center gap-2 w-fit `}>
             <Image
               src={Logo}
               alt="logo"
-              className="xl:size-[3.25rem] object-cover"
+              className="xl:size-[3.25rem] lg:size-[3.15rem] xs:size-[3rem] object-cover"
               width={72}
               height={72}
             />
@@ -87,7 +87,7 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="flex xl:flex-row xs:flex-col w-fit xl:gap-16 xs:gap-8">
+        <div className="flex xl:flex-row lg:flex-row xs:flex-col w-fit xl:gap-16 lg:gap-10 xs:gap-8">
           <div className="flex flex-col gap-2">
             <h2 className="text-l-3 text-primary-2 xl:gap-2 font-bold">
               Quick Link
