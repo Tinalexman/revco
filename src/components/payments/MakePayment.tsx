@@ -76,12 +76,31 @@ const Content = () => {
           }}
           validate={(values) => {
             const errors: Partial<iPaymentData> = {};
+
+            if (!values.fullName) {
+              values.fullName = "Required";
+            } else if (values.fullName.length < 3) {
+              values.fullName = "Full name must be at least 3 characters";
+            }
+
             if (!values.email) {
               errors.email = "Required";
             } else if (
               !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
             ) {
               errors.email = "Invalid email address";
+            }
+
+            if (!values.phoneNumber) {
+              errors.phoneNumber = "Required";
+            }
+
+            if (!values.state) {
+              errors.state = "Required";
+            }
+
+            if (!values.lga) {
+              errors.lga = "Required";
             }
 
             if (Number.parseInt(values.amount.replace(/,/g, "")) <= 0) {
@@ -99,9 +118,9 @@ const Content = () => {
               let processData: tProcessPayment = {
                 tin: values.tin,
                 amount: Number.parseInt(values.amount.replace(/,/g, "")),
-                target: target ?? "",
+                target: mda ?? "",
                 name: values.fullName,
-                ref: "Ministry of Agriculture",
+                ref: target ?? "",
                 payerID: taxPayerID,
                 pin: "383223232323 ",
               };
@@ -110,7 +129,7 @@ const Content = () => {
                 PAYMENT_KEY,
                 JSON.stringify(processData)
               );
-              window.location.assign("/payments/process");
+              window.location.assign("/dashboard/process-payment");
             }
           }}
           validateOnMount={true}
@@ -151,10 +170,10 @@ const Content = () => {
                   Who do you want to pay for{" "}
                   <span className="text-error">*</span>
                 </h3>
-                <div className="w-full flex items-center text-body border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 h-12 md:h-auto py-2 text-black">
+                <div className="w-full flex items-center text-body border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 text-black">
                   {mda}
                 </div>
-                <div className="w-full flex items-center text-body border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 h-12 md:h-auto py-2 text-black">
+                <div className="w-full flex items-center text-body border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 text-black">
                   {target}
                 </div>
               </div>
@@ -193,9 +212,7 @@ const Content = () => {
               </div>
               <div className="flex items-start justify-between w-full">
                 <div className="flex flex-col gap-1 w-[48%] md:w-[49%]">
-                  <h3 className="text-large text-[#454545] font-bold">
-                    TIN <span className="text-error">*</span>
-                  </h3>
+                  <h3 className="text-large text-[#454545] font-bold">TIN</h3>
                   <input
                     type="text"
                     name="tin"
@@ -247,7 +264,7 @@ const Content = () => {
               </div>
               <div className="w-full space-y-2">
                 <h3 className="text-large text-[#454545]  font-bold">
-                  Address <span className="text-error">*</span>
+                  Address
                 </h3>
                 <textarea
                   name="address"
@@ -281,18 +298,6 @@ const Content = () => {
                     />
                   </div>
                 </div>
-                {/* <div className="flex flex-col gap-1 w-[48%]">
-                  <h3 className="text-large text-[#454545]  font-bold">
-                    Currency
-                    <span className="text-error">*</span>
-                  </h3>
-                  <input
-                    type="text"
-                    value={"NGN - Nigerian Naira"}
-                    readOnly
-                    className="w-full text-body border border-[#DDE2FF]"
-                  />
-                </div> */}
               </div>
 
               <div className="flex gap-2 w-full items-center justify-center">

@@ -33,7 +33,7 @@ const Dropdown: FC<{
   }, []);
 
   return (
-    <div ref={dropdownRef} className="relative">
+    <div ref={dropdownRef} className="relative text-b-1">
       <div
         onClick={() => setOpen(!open)}
         className={`${open && "ring-2 ring-green-600"} ${
@@ -42,7 +42,7 @@ const Dropdown: FC<{
                 value || hint ? "justify-between" : "justify-end"
               }`
             : "rounded-full grid place-items-start place-content-center"
-        } w-full h-12 md:h-10 px-3 bg-white cursor-pointer text-[#4F4F4F] text-body`}
+        } w-full lg:h-12 xs:h-10 sm:h-10 md:h-12 xl:h-16 2xl:h-[72px] 3xl:h-20 4xl:h-24 xs:px-2 lg:px-4 xl:px-6 2xl:px-7 3xl:px-8 4xl:px-10 bg-white cursor-pointer text-[#4F4F4F] text-body`}
       >
         {value === "" && <p className="text-neutral-3">{hint}</p>}
         <p className="line-clamp-1">{value}</p>
@@ -50,22 +50,16 @@ const Dropdown: FC<{
       </div>
       {open && (
         <div
-          className={`grid place-content-center bg-white absolute z-10 p-2 ${
-            fitMenu && fitMenu
-              ? "left-0 w-fit rounded-[8px]"
-              : "-right-[13.5rem] md:right-0 rounded-[16px]"
-          } top-[60px] md:top-12 shadow-custom`}
+          className={`grid place-content-center bg-white absolute z-10 xs:p-4 xl:p-3 3xl:p-4 w-fit left-0 right-0 rounded-2xl xs:top-12 lg:top-14 xl:top-16 2xl:top-20 3xl:top-24 4xl:top-30 shadow-custom`}
         >
           <div
-            className={`${
-              fitMenu ? "w-full" : "w-[40rem] md:w-full"
-            } flex flex-col max-h-[15rem] md:max-h-[10rem] 
-        overflow-y-scroll text-contrast-100 scrollbar-thin scrollbar-webkit p-2`}
+            className={`w-full flex flex-col lg:max-h-[15rem] xl:max-h-[18rem] 2xl:max-h-[21rem] 3xl:max-h-[24rem] 4xl:max-h-[30rem] xs:max-h-[10rem] 
+        overflow-y-scroll text-contrast-100 scrollbar-thin scrollbar-webkit `}
           >
             {menus.map((menu, i) => (
               <div
                 key={i}
-                className="w-full cursor-pointer hover:bg-[#F1F2F0] px-3 md:px-2 py-2 rounded-md text-[#626262] text-body"
+                className="w-full cursor-pointer hover:bg-[#F1F2F0] 2xl:px-4 3xl:px-5 lg:px-3 xs:px-2 xs:py-2 xl:py-3 3xl:py-4 rounded-md text-[#626262] text-b-2"
                 onClick={() => {
                   menu.onClick();
                   setOpen(false);

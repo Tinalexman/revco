@@ -27,15 +27,15 @@ const BackButton: FC<{
       onClick={goBack}
     >
       {classicArrow ? (
-        <GoArrowLeft size={20} fill={color} />
+        <GoArrowLeft fill={color} className="text-b-1" />
       ) : (
-        <IoIosArrowBack size={20} fill={color} />
+        <IoIosArrowBack fill={color} className="text-b-1" />
       )}
       <p
         style={{
           color: color,
         }}
-        className={`text-body font-bold`}
+        className={`text-b-1 font-semibold`}
       >
         {text}
       </p>
