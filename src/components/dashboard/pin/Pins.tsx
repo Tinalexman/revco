@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Dropdown from "../../reusable/Dropdown";
 import { PAYMENT_TARGET } from "@/src/constants/constants";
 import { useGlobalStore } from "@/src/stores/globalStore";
+import { useGetMDAs, useGetMDAServices } from "@/src/hooks/mdaHooks";
 
 const Pins = () => {
   const [index, setIndex] = useState<number>(0);
@@ -16,6 +17,13 @@ const Pins = () => {
       "1% PROCESSING FEE ON CAPITAL PROJECT (TARABA STATE REVENUE)"
     )
   );
+
+  const { loading: loadingMDAs, data: mdas } = useGetMDAs();
+  const {
+    loading: loadingServices,
+    data: services,
+    get: getServices,
+  } = useGetMDAServices();
 
   return (
     <div className="flex flex-col items-start gap-2 lg:w-[700px] xl:w-[800px] 2xl:w-[900px] 3xl:w-[1100px] 4xl:w-[1300px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-[calc(100vh-13rem)]">
