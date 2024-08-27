@@ -12,7 +12,7 @@ import Dropdown from "../reusable/Dropdown";
 import { useDisclosure } from "@mantine/hooks";
 
 import PaymentModal from "./PaymentModal";
-import { PAYMENT_KEY, tProcessPayment } from "@/src/stores/paymentStore";
+import { tProcessPayment } from "@/src/stores/paymentStore";
 import {
   formatAmountWithCommas,
   formatNumberWithThreesAndFours,
@@ -20,8 +20,6 @@ import {
 } from "@/src/functions/numberFunctions";
 import { useGetLGAs, useGetStates } from "@/src/hooks/locationHooks";
 
-import Cryptr from "cryptr";
-import { HASH_KEY } from "@/src/services/base";
 import toast from "react-hot-toast";
 
 interface iPaymentData {
@@ -52,7 +50,6 @@ const Content = () => {
   const [mda, setMDA] = useState<string>("");
 
   useEffect(() => {
-    const cryptr = new Cryptr(HASH_KEY);
     const target: string | null = searchParams.get("target");
 
     if (!target) {
@@ -81,7 +78,7 @@ const Content = () => {
 
   return (
     <>
-      <div className="lg:mb-[5rem]  flex flex-col items-start gap-2 lg:w-[700px] xl:w-[800px] 2xl:w-[900px] 3xl:w-[1100px] 4xl:w-[1300px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-auto">
+      <div className="lg:mb-[5rem] flex flex-col items-start gap-2 lg:w-[700px] xl:w-[800px] 2xl:w-[900px] 3xl:w-[1100px] 4xl:w-[1300px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-auto">
         <BackButton classicArrow={true} color={"#000000"} text={"Back"} />
         <h2 className="text-l-1 font-bold text-[#3A3A3A] font-nunito">
           TARABA STATE INTERNAL REVENUE SERVICE
@@ -157,11 +154,11 @@ const Content = () => {
                 pin: "383223232323 ",
               };
 
-              window.localStorage.setItem(
-                PAYMENT_KEY,
-                JSON.stringify(processData)
+              window.location.assign(
+                `/dashboard/process-payment?target=${Buffer.from(
+                  JSON.stringify(processData)
+                ).toString("base64")}`
               );
-              window.location.assign("/dashboard/process-payment");
             }
           }}
         >

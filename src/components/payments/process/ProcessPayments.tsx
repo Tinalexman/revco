@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
-import { useGlobalStore } from "@/src/stores/globalStore";
 import { tProcessPayment, PAYMENT_KEY } from "@/src/stores/paymentStore";
 import toast from "react-hot-toast";
 import { formatAmountWithCommas } from "@/src/functions/numberFunctions";
@@ -29,6 +28,14 @@ interface iPaymentMode {
 }
 
 const ProcessPayments = () => {
+  return (
+    <Suspense fallback={<Loader color="myColor.9" />}>
+      <Content />
+    </Suspense>
+  );
+};
+
+const Content = () => {
   const [paymentDetails, setPaymentDetails] = useState<tProcessPayment>({
     tin: "",
     amount: 0,
@@ -69,16 +76,19 @@ const ProcessPayments = () => {
   const [mode, setMode] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    let key = window.localStorage.getItem(PAYMENT_KEY);
-    if (key === null) {
-      toast.error("An error occurred. Please try again.");
+    const target: string | null = searchParams.get("target");
+    if (!target) {
       router.back();
-    } else {
-      setPaymentDetails(JSON.parse(key));
-      setLoading(false);
     }
+
+    const payload: string = Buffer.from(target!, "base64").toString("utf-8");
+    let paymentTarget: tProcessPayment = JSON.parse(payload);
+
+    setPaymentDetails(paymentTarget);
+    setLoading(false);
   }, [router]);
 
   if (loading) {
@@ -90,8 +100,8 @@ const ProcessPayments = () => {
   }
 
   return (
-    <div className="w-full xs:px-2.5">
-      <div className="flex flex-col lg:px-8 xs:px-2.5 lg:py-10 xs:py-5 items-center gap-6 lg:w-[50rem] xs:w-full rounded-lg text-black bg-white overflow-y-scroll scrollbar-custom">
+    <div className="w-full lg:mb-[5rem] grid place-content-center xs:px-2.5">
+      <div className="flex flex-col lg:px-8 xs:px-2.5 lg:py-10 xs:py-5 items-center gap-6 lg:w-[50rem] xl:w-[55rem] 2xl:w-[60rem] xs:w-full rounded-lg text-black bg-white overflow-y-scroll scrollbar-custom">
         <div className="w-full flex justify-between items-center">
           <h2 className="text-l-1 font-bold">PIN: {paymentDetails.pin}</h2>
           {/* <p className="text-small text-[#007AFF] cursor-pointer">View Receipt</p> */}
