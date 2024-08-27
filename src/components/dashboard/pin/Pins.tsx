@@ -2,21 +2,16 @@
 
 import React, { useState } from "react";
 import Dropdown from "../../reusable/Dropdown";
-import { PAYMENT_TARGET } from "@/src/constants/constants";
-import { useGlobalStore } from "@/src/stores/globalStore";
 import { useGetMDAs, useGetMDAServices } from "@/src/hooks/mdaHooks";
 
+import Cryptr from "cryptr";
+import { HASH_KEY } from "@/src/services/base";
+
 const Pins = () => {
-  const [index, setIndex] = useState<number>(0);
   const [mda, setMDA] = useState<string>("");
   const [target, setTarget] = useState<string>("");
   const registerProps: string[] = ["Individual", "Cooperate"];
-
-  const [options, setOptions] = useState<string[]>(
-    Array(10).fill(
-      "1% PROCESSING FEE ON CAPITAL PROJECT (TARABA STATE REVENUE)"
-    )
-  );
+  const [index, setIndex] = useState<string>(registerProps[0]);
 
   const { loading: loadingMDAs, data: mdas } = useGetMDAs();
   const {
@@ -26,25 +21,25 @@ const Pins = () => {
   } = useGetMDAServices();
 
   return (
-    <div className="flex flex-col items-start gap-2 lg:w-[700px] xl:w-[800px] 2xl:w-[900px] 3xl:w-[1100px] 4xl:w-[1300px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-[calc(100vh-13rem)]">
+    <div className="flex flex-col items-start gap-2 lg:w-[700px] xl:w-[800px] 2xl:w-[900px] 3xl:w-[1000px] 4xl:w-[1200px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-[calc(100vh-13rem)]">
       <div className="w-full xs:w-full justify-between items-center flex">
         {registerProps.map((rp, i) => (
           <div
             key={i}
             onClick={() => {
-              setIndex(i);
+              setIndex(rp);
             }}
             className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in xs:h-10 xl:h-12 2xl:h-14 3xl:h-16 4xl:h-20 rounded-lg justify-center gap-3 items-center text-smaller text-[#3A3A3A] flex ${
-              index === i ? "bg-primary-light " : "bg-neutral"
+              index === rp ? "bg-primary-light " : "bg-neutral"
             }`}
           >
             <p className="text-l-2">{rp}</p>
             <div
               className={`size-4 grid place-content-center rounded-full border-2 ${
-                index === i ? " border-primary" : "border-neutral-2"
+                index === rp ? " border-primary" : "border-neutral-2"
               }`}
             >
-              {index === i && (
+              {index === rp && (
                 <div className={`size-[6px] rounded-full bg-primary`} />
               )}
             </div>
@@ -56,32 +51,39 @@ const Pins = () => {
           What do you want to pay for?
         </h2>
         <Dropdown
-          menus={options.map((op, i) => ({
-            name: op,
+          menus={mdas.map((op, i) => ({
+            name: op.name,
             onClick: () => {
-              setMDA(op);
+              setMDA(op.name);
+              getServices(op.id);
             },
           }))}
+          showIcon
           hint="Select MDA"
           value={mda}
           fitMenu={false}
+          loading={loadingMDAs}
         />
         <Dropdown
-          menus={options.map((op, i) => ({
-            name: op,
+          menus={services.map((op, i) => ({
+            name: op.name,
             onClick: () => {
-              setTarget(op);
+              setTarget(op.name);
             },
           }))}
+          showIcon
           hint="Select Revenue Head"
           value={target}
           fitMenu={false}
+          loading={loadingServices}
         />
         <button
           onClick={() => {
             if (mda === "" || target === "") return;
+            const cryptr = new Cryptr(HASH_KEY);
+            const payload = `${index}#${mda}#${target}`;
             window.location.assign(
-              "/dashboard/payment?mda=" + mda + "&target=" + target
+              "/dashboard/payment?target=" + cryptr.encrypt(payload)
             );
           }}
           className={`${

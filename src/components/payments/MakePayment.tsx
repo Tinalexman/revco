@@ -5,15 +5,11 @@ import { useSearchParams, useRouter } from "next/navigation";
 
 import { Form, Formik } from "formik";
 
-import { motion } from "framer-motion";
 import { Loader, Modal } from "@mantine/core";
 import BackButton from "../reusable/BackButton";
 import Dropdown from "../reusable/Dropdown";
 
 import { useDisclosure } from "@mantine/hooks";
-
-import { states } from "@/src/constants/constants";
-import { useGlobalStore } from "@/src/stores/globalStore";
 
 import PaymentModal from "./PaymentModal";
 import { PAYMENT_KEY, tProcessPayment } from "@/src/stores/paymentStore";
@@ -22,7 +18,10 @@ import {
   formatNumberWithThreesAndFours,
   unformatNumberWithThreesAndFours,
 } from "@/src/functions/numberFunctions";
-import CustomPhoneInput from "../reusable/CustomPhoneInput";
+import { useGetLGAs, useGetStates } from "@/src/hooks/locationHooks";
+
+import Cryptr from "cryptr";
+import { HASH_KEY } from "@/src/services/base";
 
 interface iPaymentData {
   fullName: string;
@@ -47,18 +46,35 @@ const Content = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const mda: string | null = searchParams.get("mda");
-  const target: string | null = searchParams.get("target");
+  const [role, setRole] = useState<string>("");
+  const [target, setTarget] = useState<string>("");
+  const [mda, setMDA] = useState<string>("");
 
   useEffect(() => {
-    if (!target || !mda) {
+    const cryptr = new Cryptr(HASH_KEY);
+    const target: string | null = searchParams.get("target");
+
+    if (!target) {
       router.back();
     }
+
+    const payload: string = cryptr.decrypt(target!);
+    const parts: string[] = payload.split("#");
+    if (parts.length !== 3) {
+      router.back();
+    }
+
+    setRole(parts[0]);
+    setMDA(parts[1]);
+    setTarget(parts[2]);
   }, [router]);
 
   const [proceed, shouldProceed] = useState<boolean>(false);
   const [opened, { open, close }] = useDisclosure(false);
   const [taxPayerID, setTaxPayerID] = useState<string>("");
+
+  const { data: states, loading: loadingStates } = useGetStates();
+  const { data: lgas, loading: loadingLGAs, get: getLGA } = useGetLGAs();
 
   return (
     <>
@@ -175,11 +191,19 @@ const Content = () => {
                   Who do you want to pay for{" "}
                   <span className="text-error">*</span>
                 </h3>
-                <div className="w-full flex items-center text-b-1 border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 text-black">
-                  {mda}
+                <div
+                  className={`w-full flex items-center text-b-1 border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 ${
+                    mda.length === 0 ? "text-neutral-2" : "text-black"
+                  }`}
+                >
+                  {mda.length === 0 ? "MDA" : mda}
                 </div>
-                <div className="w-full flex items-center text-b-1 border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 text-black">
-                  {target}
+                <div
+                  className={`w-full flex items-center text-b-1 border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 ${
+                    target.length === 0 ? "text-neutral-2" : "text-black"
+                  }`}
+                >
+                  {target.length === 0 ? "Revenue Head" : target}
                 </div>
               </div>
 
@@ -269,14 +293,18 @@ const Content = () => {
                   </h3>
                   <Dropdown
                     menus={states.map((st, i) => ({
-                      name: st,
+                      name: st.name,
                       onClick: () => {
-                        setFieldValue("state", st);
+                        setFieldValue("state", st.name);
+                        getLGA(st.id);
                       },
                     }))}
                     value={values.state}
                     hint="Select State"
+                    loading={loadingStates}
                     fitMenu={true}
+                    alignToStart
+                    showIcon
                   />
                   {errors.state && (
                     <p className="text-s-4 text-error">{errors.state}</p>
@@ -287,15 +315,18 @@ const Content = () => {
                     LGA <span className="text-error">*</span>
                   </h3>
                   <Dropdown
-                    menus={states.map((st, i) => ({
-                      name: st,
+                    menus={lgas.map((st, i) => ({
+                      name: st.name,
                       onClick: () => {
-                        setFieldValue("lga", st);
+                        setFieldValue("lga", st.name);
                       },
                     }))}
+                    loading={loadingLGAs}
                     value={values.lga}
                     hint="Select LGA"
                     fitMenu={true}
+                    alignToStart
+                    showIcon
                   />
                   {errors.lga && (
                     <p className="text-s-4 text-error">{errors.lga}</p>
