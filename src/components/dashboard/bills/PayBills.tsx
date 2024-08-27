@@ -66,7 +66,7 @@ const PayBills = () => {
           />
           <button
             onClick={() => {}}
-            className={`bg-primary rounded-full lg:w-[35%] xs:w-full text-b-1 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-semibold `}
+            className={`bg-primary rounded-full lg:w-[35%] xs:w-full grid place-content-center text-b-1 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-semibold `}
           >
             Proceed
           </button>

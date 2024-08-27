@@ -80,10 +80,10 @@ const Pins = () => {
         <button
           onClick={() => {
             if (mda === "" || target === "") return;
-            const cryptr = new Cryptr(HASH_KEY);
             const payload = `${index}#${mda}#${target}`;
             window.location.assign(
-              "/dashboard/payment?target=" + cryptr.encrypt(payload)
+              "/dashboard/payment?target=" +
+                Buffer.from(payload).toString("base64")
             );
           }}
           className={`${

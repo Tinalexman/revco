@@ -22,6 +22,7 @@ import { useGetLGAs, useGetStates } from "@/src/hooks/locationHooks";
 
 import Cryptr from "cryptr";
 import { HASH_KEY } from "@/src/services/base";
+import toast from "react-hot-toast";
 
 interface iPaymentData {
   fullName: string;
@@ -58,7 +59,7 @@ const Content = () => {
       router.back();
     }
 
-    const payload: string = cryptr.decrypt(target!);
+    const payload: string = Buffer.from(target!, "base64").toString("utf-8");
     const parts: string[] = payload.split("#");
     if (parts.length !== 3) {
       router.back();
@@ -72,6 +73,8 @@ const Content = () => {
   const [proceed, shouldProceed] = useState<boolean>(false);
   const [opened, { open, close }] = useDisclosure(false);
   const [taxPayerID, setTaxPayerID] = useState<string>("");
+
+  const [agreed, setAgreed] = useState<boolean>(false);
 
   const { data: states, loading: loadingStates } = useGetStates();
   const { data: lgas, loading: loadingLGAs, get: getLGA } = useGetLGAs();
@@ -124,7 +127,8 @@ const Content = () => {
             }
 
             let v = Number.parseInt(values.amount.replace(/,/g, ""));
-            if (v === undefined) {
+            console.log(v);
+            if (isNaN(Number(v))) {
               errors.amount = "Invalid amount";
             } else if (v <= 0) {
               errors.amount = "Amount must be greater than zero";
@@ -134,6 +138,11 @@ const Content = () => {
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(false);
+            if (!agreed) {
+              toast.error("Please accept terms and conditions to proceed");
+              return;
+            }
+
             if (!proceed) {
               shouldProceed(true);
               open();
@@ -155,7 +164,6 @@ const Content = () => {
               window.location.assign("/dashboard/process-payment");
             }
           }}
-          validateOnMount={true}
         >
           {({
             values,
@@ -364,6 +372,7 @@ const Content = () => {
                           setFieldValue("amount", formatAmountWithCommas(res));
                         }
                       }}
+                      // onChange={handleChange}
                       className="w-[calc(100%-2.5rem)] text-b-1 border border-[#DDE2FF] rounded-tl-none rounded-bl-none"
                     />
                   </div>
@@ -377,10 +386,12 @@ const Content = () => {
                 <input
                   type="checkbox"
                   name="agreed"
+                  onChange={(val) => setAgreed(!agreed)}
+                  checked={agreed}
                   className="size-3 accent-primary bg-white focus:ring-0"
                 />
                 <p className="text-s-3 text-black">
-                  By clicking Continue, you agree to our{" "}
+                  By clicking CONTINUE, you agree to our{" "}
                   <span className="text-tertiary font-medium cursor-pointer">
                     Terms and Conditions
                   </span>{" "}
