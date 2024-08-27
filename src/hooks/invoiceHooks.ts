@@ -9,6 +9,7 @@ import {
   validatePendingInvoice,
 } from "../services/invoiceServices";
 import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
 export const useGenerateIndividualInvoice = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -87,7 +88,11 @@ export const useValidatePaidInvoice = () => {
   const [data, setData] = useState<any>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
-  let validate = async (invoiceNo: string, callback?: () => void) => {
+  let validate = async (
+    invoiceNo: string,
+    onSuccess?: () => void,
+    onError?: () => void
+  ) => {
     if (loading) return;
     setLoading(true);
 
@@ -96,10 +101,15 @@ export const useValidatePaidInvoice = () => {
       setData(data);
       setLoading(false);
       setSuccess(true);
-      if (callback) callback();
-    } catch (e) {
+      if (onSuccess) onSuccess();
+    } catch (e: any) {
       setSuccess(false);
       setLoading(false);
+
+      let msg = e.response?.data?.data;
+      if (msg) toast.error(msg);
+
+      if (onError) onError();
     }
   };
 

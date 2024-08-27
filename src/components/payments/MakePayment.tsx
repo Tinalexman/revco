@@ -78,7 +78,7 @@ const Content = () => {
 
   return (
     <>
-      <div className="flex flex-col items-start gap-2 lg:w-[700px] xl:w-[800px] 2xl:w-[900px] 3xl:w-[1100px] 4xl:w-[1300px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-auto">
+      <div className="lg:mb-[5rem]  flex flex-col items-start gap-2 lg:w-[700px] xl:w-[800px] 2xl:w-[900px] 3xl:w-[1100px] 4xl:w-[1300px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-auto">
         <BackButton classicArrow={true} color={"#000000"} text={"Back"} />
         <h2 className="text-l-1 font-bold text-[#3A3A3A] font-nunito">
           TARABA STATE INTERNAL REVENUE SERVICE
@@ -296,6 +296,7 @@ const Content = () => {
                       name: st.name,
                       onClick: () => {
                         setFieldValue("state", st.name);
+                        setFieldValue("lga", "");
                         getLGA(st.id);
                       },
                     }))}
@@ -349,7 +350,7 @@ const Content = () => {
                     Amount to Pay (₦) <span className="text-error">*</span>
                   </h3>
                   <div className="w-full flex">
-                    <div className="bg-neutral-3 w-[20%] rounded-[8px] rounded-tr-none rounded-br-none lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 grid place-content-center">
+                    <div className="bg-neutral-3 w-[2.5rem] rounded-[8px] rounded-tr-none rounded-br-none lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 grid place-content-center">
                       <p className="text-b-1 font-bold text-black">₦</p>
                     </div>
                     <input
@@ -363,7 +364,7 @@ const Content = () => {
                           setFieldValue("amount", formatAmountWithCommas(res));
                         }
                       }}
-                      className="w-[80%] text-b-1 border border-[#DDE2FF] rounded-tl-none rounded-bl-none"
+                      className="w-[calc(100%-2.5rem)] text-b-1 border border-[#DDE2FF] rounded-tl-none rounded-bl-none"
                     />
                   </div>
                   {errors.amount && (

@@ -16,7 +16,7 @@ const GenerateInvoice = () => {
   const { loading, validate } = useValidatePaidInvoice();
 
   return (
-    <div className="flex flex-col items-start gap-2 lg:w-[450px] xl:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full lg:h-fit xs:h-[calc(100vh-13rem)]">
+    <div className="lg:mb-[20rem] xl:mb-[35rem] 2xl:mb-[52rem] 3xl:mb-[67rem] flex flex-col items-start gap-2 lg:w-[450px] xl:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full lg:h-fit xs:h-[calc(100vh-13rem)]">
       <h2 className="text-l-1 font-bold text-[#595959]">
         Payment Invoice Number (PIN){"  "}
         <span

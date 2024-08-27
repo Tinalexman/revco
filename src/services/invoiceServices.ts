@@ -81,6 +81,33 @@ export interface iGenerateNonIndividualInvoice {
   projectId: 0;
 }
 
+export interface iValidatePaidInvoiceResponse {
+  assesedService: string;
+  business: string | null;
+  businessId: number;
+  customerId: number;
+  invoiceAmount: number;
+  invoiceNo: number;
+  mda: string;
+  month: number;
+  paid: boolean;
+  payer: string;
+  payerEmail: string;
+  payerFirstName: string | null;
+  payerLastName: string | null;
+  payerPhone: string;
+  payerTin: string | null;
+  payerType: string | null;
+  payment: {
+    transactionId: string;
+    transactionReference: string;
+  }[];
+  paymentChannel: string | null;
+  serviceId: number;
+  tinType: string | null;
+  year: string;
+}
+
 export const validatePendingInvoice = async (invoiceNo: string) => {
   const result = await axios.get(
     `${baseUrl}/self-service/invoice/pending?invoiceNo=${invoiceNo}`
@@ -94,7 +121,7 @@ export const validatePaidInvoice = async (invoiceNo: string) => {
     `${baseUrl}/self-service/invoice/paid?invoiceNo=${invoiceNo}`
   );
 
-  return result.data;
+  return result.data.data as iValidatePaidInvoiceResponse;
 };
 
 export const generateIndividualInvoice = async (

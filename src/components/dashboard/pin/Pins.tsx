@@ -21,7 +21,7 @@ const Pins = () => {
   } = useGetMDAServices();
 
   return (
-    <div className="flex flex-col items-start gap-2 lg:w-[700px] xl:w-[800px] 2xl:w-[900px] 3xl:w-[1000px] 4xl:w-[1200px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-[calc(100vh-13rem)]">
+    <div className="lg:mb-[8rem] xl:mb-[24rem] 2xl:mb-[40rem] 3xl:mb-[57rem] flex flex-col items-start gap-2 lg:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-[calc(100vh-13rem)]">
       <div className="w-full xs:w-full justify-between items-center flex">
         {registerProps.map((rp, i) => (
           <div
@@ -46,7 +46,7 @@ const Pins = () => {
           </div>
         ))}
       </div>
-      <div className=" lg:px-[20%] 2xl:px-[16%] xs:px-0 w-full flex flex-col lg:gap-4 xs:gap-3">
+      <div className=" lg:px-[10%] xs:px-0 w-full flex flex-col lg:gap-4 xs:gap-3">
         <h2 className="text-l-1 font-bold text-[#595959] mt-5">
           What do you want to pay for?
         </h2>
