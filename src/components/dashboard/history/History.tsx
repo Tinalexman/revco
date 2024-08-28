@@ -28,11 +28,11 @@ const History = () => {
   const [search, setSearch] = useState<string>("");
 
   return (
-    <div className="flex flex-col mt-16 md:mt-10 items-start gap-5 w-[55rem] md:w-full h-full md:h-auto">
+    <div className="mb-[5rem] flex flex-col items-start gap-5 lg:w-[80%] xs:w-full h-full xs:h-auto">
       <BackButton classicArrow={true} color={"#000000"} text={"History"} />
-      <div className="w-full h-full md:h-auto max-h-[20rem] md:max-h-[65vh] md:overflow-y-scroll bg-white rounded-xl p-4 md:px-2 md:py-4 flex flex-col gap-6">
-        <div className="flex md:flex-col md:gap-2 w-full justify-between items-center">
-          <div className="relative text-[#595959] w-[280px] md:w-full">
+      <div className="w-full h-full xs:h-auto lg:max-h-[65vh] bg-white rounded-xl lg:p-4  xs:px-2 xs:py-4 flex flex-col gap-6">
+        <div className="flex xs:flex-col lg:flex-row xs:gap-2 w-full justify-between items-center">
+          <div className="relative text-[#595959] lg:w-[45%] xs:w-full">
             <input
               type="text"
               value={search}
@@ -42,18 +42,18 @@ const History = () => {
             />
             <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-3" />
           </div>
-          <div className="flex text-hint w-fit md:w-full items-center gap-2">
-            <div className="md:w-1/2 md:justify-center flex bg-[#FEFEFE] text-black cursor-pointer rounded-lg py-2 items-center gap-1 px-3 border border-[#DFDFDF]">
+          <div className="flex text-hint lg:w-fit xs:w-full items-center gap-2">
+            <div className="lg:justify-start xs:justify-center xs:w-1/2 lg:w-fit text-b-1 flex bg-[#FEFEFE] text-black cursor-pointer rounded-lg py-2 items-center gap-1 px-3 border border-[#DFDFDF]">
               <IoFilter />
               <p className="font-semibold">Sort By</p>
             </div>
-            <div className="md:w-1/2 md:justify-center flex bg-[#FEFEFE] text-black cursor-pointer rounded-lg py-2 items-center gap-1 px-3 border border-[#DFDFDF]">
+            <div className="lg:justify-start xs:justify-center xs:w-1/2 lg:w-fit text-b-1 flex bg-[#FEFEFE] text-black cursor-pointer rounded-lg py-2 items-center gap-1 px-3 border border-[#DFDFDF]">
               <IoFilter />
               <p className="font-semibold">Filter</p>
             </div>
           </div>
         </div>
-        <div className="md:overflow-x-scroll w-full">
+        <div className="overflow-scroll scrollbar-thin w-full">
           <table className="w-full">
             <thead>
               <tr>

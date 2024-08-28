@@ -14,7 +14,7 @@ const Download = () => {
   const [sent, isSent] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col mt-16 md:mt-10 items-center gap-5 w-[360px] md:w-full h-full md:h-auto">
+    <div className="flex flex-col xs:mb-20 items-center gap-5 lg:w-[500px] 2xl:w-[700px] 3xl:w-[800px] xs:w-full h-full xs:h-auto">
       {!sent && (
         <>
           <h2 className="text-header text-start w-full font-bold text-[#595959]">
@@ -74,7 +74,7 @@ const Download = () => {
             isSent(true);
           }
         }}
-        className={`bg-primary rounded-full w-[60%] md:w-full text-body h-12 md:h-10 md:mb-20 text-white font-bold mt-5`}
+        className={`bg-primary rounded-full lg:w-[60%] xs:w-full text-body h-12 md:h-10 md:mb-20 text-white font-bold mt-5`}
       >
         {sent ? "Back to Home" : "Send Receipt"}
       </button>
