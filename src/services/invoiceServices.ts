@@ -108,12 +108,36 @@ export interface iValidatePaidInvoiceResponse {
   year: string;
 }
 
+export interface iValidatePendingInvoiceResponse {
+  invoiceNo: string;
+  invoiceAmount: number;
+  assesedService: string;
+  paymentChannel: any | null;
+  businessId: number;
+  business: any | null;
+  serviceId: number;
+  mda: string;
+  month: number;
+  year: string;
+  customerId: number;
+  payerFirstName: string | null;
+  payerLastName: string | null;
+  tinType: string | null;
+  payment: string | null;
+  paid: boolean;
+  payer: string;
+  payerEmail: string;
+  payerPhone: string;
+  payerTin: string | null;
+  payerType: string | null;
+}
+
 export const validatePendingInvoice = async (invoiceNo: string) => {
   const result = await axios.get(
     `${baseUrl}/self-service/invoice/pending?invoiceNo=${invoiceNo}`
   );
 
-  return result.data;
+  return result.data.data as iValidatePendingInvoiceResponse;
 };
 
 export const validatePaidInvoice = async (invoiceNo: string) => {

@@ -3,7 +3,7 @@
 import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-import { Form, Formik } from "formik";
+import { Form, Formik, useFormik } from "formik";
 
 import { Loader, Modal } from "@mantine/core";
 import BackButton from "../reusable/BackButton";
@@ -41,6 +41,17 @@ const MakePayment = () => {
   );
 };
 
+interface iPaymentForm {
+  fullName: string;
+  email: string;
+  tin: string;
+  phoneNumber: string;
+  state: string;
+  lga: string;
+  address: string;
+  amount: string;
+}
+
 const Content = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -49,6 +60,18 @@ const Content = () => {
   const [target, setTarget] = useState<string>("");
   const [mda, setMDA] = useState<string>("");
 
+  const [initialPaymentDetails, setInitialPaymentDetails] =
+    useState<iPaymentForm>({
+      fullName: "",
+      email: "",
+      tin: "",
+      phoneNumber: "",
+      state: "",
+      lga: "",
+      address: "",
+      amount: "",
+    });
+
   useEffect(() => {
     const target: string | null = searchParams.get("target");
 
@@ -56,15 +79,13 @@ const Content = () => {
       router.back();
     }
 
-    const payload: string = Buffer.from(target!, "base64").toString("utf-8");
-    const parts: string[] = payload.split("#");
-    if (parts.length !== 3) {
-      router.back();
-    }
+    const payload = JSON.parse(
+      Buffer.from(target!, "base64").toString("utf-8")
+    );
 
-    setRole(parts[0]);
-    setMDA(parts[1]);
-    setTarget(parts[2]);
+    setRole(payload.accountType ?? "");
+    setMDA(payload.mda ?? "");
+    setTarget(payload.revenueHead ?? "");
   }, [router]);
 
   const [proceed, shouldProceed] = useState<boolean>(false);
@@ -84,16 +105,8 @@ const Content = () => {
           TARABA STATE INTERNAL REVENUE SERVICE
         </h2>
         <Formik
-          initialValues={{
-            fullName: "",
-            email: "",
-            tin: "",
-            phoneNumber: "",
-            state: "",
-            lga: "",
-            address: "",
-            amount: "",
-          }}
+          initialValues={initialPaymentDetails}
+          enableReinitialize={true}
           validate={(values) => {
             const errors: any = {};
 

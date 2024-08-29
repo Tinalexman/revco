@@ -85,6 +85,7 @@ const Content = () => {
     }
 
     const payload: string = Buffer.from(target!, "base64").toString("utf-8");
+    console.log(payload);
     let paymentTarget: tProcessPayment = JSON.parse(payload);
 
     setPaymentDetails(paymentTarget);

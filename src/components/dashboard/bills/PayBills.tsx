@@ -5,9 +5,14 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Invoice from "@/public/invoice_info.png";
 
+import { useValidatePendingInvoice } from "@/src/hooks/invoiceHooks";
+import { Loader } from "@mantine/core";
+
 const PayBills = () => {
   const [pin, setPin] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
+
+  const { loading, validate } = useValidatePendingInvoice();
 
   return (
     <div className="lg:mb-[20rem] xl:mb-[35rem] 2xl:mb-[52rem] 3xl:mb-[67rem] flex flex-col items-start gap-2 lg:w-[450px] xl:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full lg:h-fit xs:h-[calc(100vh-13rem)]">
@@ -65,10 +70,27 @@ const PayBills = () => {
             placeholder="Enter PIN"
           />
           <button
-            onClick={() => {}}
-            className={`bg-primary rounded-full lg:w-[35%] xs:w-full grid place-content-center text-b-1 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-semibold `}
+            onClick={() => {
+              validate(pin, (data: any) => {
+                const payload = {
+                  tin: data?.payerTin,
+                  amount: data?.invoiceAmount,
+                  target: data?.mda,
+                  name: data?.payer,
+                  ref: data?.assesedService,
+                  payerID: "",
+                  pin: data?.invoiceNo,
+                };
+
+                window.location.assign(
+                  "/dashboard/process-payment?target=" +
+                    Buffer.from(JSON.stringify(payload)).toString("base64")
+                );
+              });
+            }}
+            className={`bg-primary rounded-full lg:w-[35%] grid place-content-center xs:w-full text-b-1 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-semibold `}
           >
-            Proceed
+            {loading ? <Loader color="white.9" /> : "Proceed"}
           </button>
         </div>
         <div className="text-s-4 text-[#595959] font-semibold text-end">

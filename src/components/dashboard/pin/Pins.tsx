@@ -80,10 +80,15 @@ const Pins = () => {
         <button
           onClick={() => {
             if (mda === "" || target === "") return;
-            const payload = `${index}#${mda}#${target}`;
+            const payload = {
+              accountType: index,
+              mda,
+              revenueHead: target,
+            };
+
             window.location.assign(
               "/dashboard/payment?target=" +
-                Buffer.from(payload).toString("base64")
+                Buffer.from(JSON.stringify(payload)).toString("base64")
             );
           }}
           className={`${
