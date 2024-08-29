@@ -18,32 +18,32 @@ const Reasons = () => {
   const reasons: iReason[] = [
     {
       image: PayBills,
-      title: "PAY BILLS",
+      title: "Pay Bills",
       text: "Sign in or register to conveniently manage and pay your bills or taxes, whether you are an individual or a corporate User.",
     },
     {
       image: SelfAssessment,
-      title: "SELF ASSESSMENT",
+      title: "Self Assessment",
       text: "You can conduct self-assessment, generate invoices, and complete payments.",
     },
     {
       image: PaymentChannels,
-      title: "MULTIPLE PAYMENT CHANNELS",
+      title: "Multiple Payment Channels",
       text: "Experience a faster, easier way to pay taxes or invoices. You can make payments against an invoice at any bank branch or through POS, online payments using debit cards (Verve, Visa, or MasterCard) and other payment channels",
     },
     {
       image: Sectors,
-      title: "FORMAL AND INFORMAL SECTORS",
+      title: "Formal and Informal Sectors",
       text: "Access, validate and pay your bills online and offline, at your convenience. You now have your tax office in the comfort of your desk or your mobile device",
     },
     {
       image: PaymentRecords,
-      title: "PAYMENT TRANSACTION RECORDS",
+      title: "Payment Transaction Records",
       text: "View your tax information and payment history at real time.",
     },
     {
       image: Learn,
-      title: "LEARN MORE",
+      title: "Learn More",
       text: "We are here to assist and guide you on how to pay your bills generate invoices and make payment with ease. Click here for help",
     },
   ];

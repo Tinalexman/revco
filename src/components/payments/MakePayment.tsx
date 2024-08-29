@@ -101,8 +101,8 @@ const Content = () => {
     <>
       <div className="lg:mb-[5rem] flex flex-col items-start gap-2 lg:w-[700px] xl:w-[800px] 2xl:w-[900px] 3xl:w-[1100px] 4xl:w-[1300px] xs:w-[100vw] xs:px-5 lg:px-0 lg:h-fit xs:h-auto">
         <BackButton classicArrow={true} color={"#000000"} text={"Back"} />
-        <h2 className="text-l-1 font-bold text-[#3A3A3A] font-nunito">
-          TARABA STATE INTERNAL REVENUE SERVICE
+        <h2 className="text-l-1 font-bold text-[#3A3A3A]">
+          TARABA STATE BOARD OF INTERNAL REVENUE SERVICE
         </h2>
         <Formik
           initialValues={initialPaymentDetails}
@@ -401,14 +401,11 @@ const Content = () => {
                   className="size-3 accent-primary bg-white focus:ring-0"
                 />
                 <p className="text-s-3 text-black">
-                  By clicking CONTINUE, you agree to our{" "}
-                  <span className="text-tertiary font-medium cursor-pointer">
-                    Terms and Conditions
+                  By clicking CONTINUE, you agree to{" "}
+                  <span className="font-semibold">
+                    TARABA STATE BOARD OF INTERNAL REVENUE SERVICE
                   </span>{" "}
-                  and{" "}
-                  <span className="text-tertiary font-medium cursor-pointer">
-                    Privacy Policy
-                  </span>
+                  Terms and Conditions and Privacy Policy
                 </p>
               </div>
 
