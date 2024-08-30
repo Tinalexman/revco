@@ -95,7 +95,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
             >
               TARABA STATE
             </h2>
-            <p className="text-[#DA251D] text-s-1">
+            <p className="text-[#DA251D] text-s-1 font-bold">
               BOARD OF INTERNAL REVENUE SERVICE
             </p>
           </div>

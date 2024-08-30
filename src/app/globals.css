@@ -143,14 +143,14 @@ tbody > tr > td {
 }
 
 .text-nav {
-  @apply xs:text-[1rem] xs:leading-[1.05rem];
-  @apply sm:text-[1.2rem] sm:leading-[1.21rem];
-  @apply md:text-[1.5rem] md:leading-[1.51rem];
-  @apply lg:text-[2rem] lg:leading-[2.01rem];
-  @apply xl:text-[2.25rem] xl:leading-[2.26rem];
-  @apply 2xl:text-[2.5rem] 2xl:leading-[2.51rem];
-  @apply 3xl:text-[3rem] 3xl:leading-[3.02rem];
-  @apply 4xl:text-[3.4rem] 4xl:leading-[3.43rem];
+  @apply xs:text-[1rem] xs:leading-[1rem];
+  @apply sm:text-[1.2rem] sm:leading-[1.2rem];
+  @apply md:text-[1.5rem] md:leading-[1.5rem];
+  @apply lg:text-[2rem] lg:leading-[2rem];
+  @apply xl:text-[2.25rem] xl:leading-[2.25rem];
+  @apply 2xl:text-[2.5rem] 2xl:leading-[2.5rem];
+  @apply 3xl:text-[3rem] 3xl:leading-[3.rem];
+  @apply 4xl:text-[3.4rem] 4xl:leading-[3.4rem];
 }
 
 .text-s-4 {
@@ -189,10 +189,10 @@ tbody > tr > td {
 .text-s-1 {
   @apply xs:text-[0.55rem] xs:leading-[0.6rem];
   @apply sm:text-[0.65rem] sm:leading-[0.7rem];
-  @apply md:text-[0.75rem] md:leading-[0.8rem];
-  @apply lg:text-[0.7rem] lg:leading-[0.75rem];
-  @apply xl:text-[0.78rem] xl:leading-[0.85rem];
-  @apply 2xl:text-[0.85rem] 2xl:leading-[1.9rem];
+  @apply md:text-[0.75rem] md:leading-[0.78rem];
+  @apply lg:text-[0.7rem] lg:leading-[0.72rem];
+  @apply xl:text-[0.78rem] xl:leading-[0.82rem];
+  @apply 2xl:text-[0.85rem] 2xl:leading-[0.9rem];
   @apply 3xl:text-[1.05rem] 3xl:leading-[1.1rem];
   @apply 4xl:text-[1.2rem] 4xl:leading-[1.3rem];
 }
