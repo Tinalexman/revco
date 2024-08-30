@@ -78,7 +78,11 @@ export default function RootLayout({
       </head>
 
       <body className={`${podvoka.variable} ${inter.className}`}>
-        <Toaster />
+        <Toaster
+          toastOptions={{
+            className: "lg:mt-20",
+          }}
+        />
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>
