@@ -78,7 +78,7 @@ const PayBills = () => {
                   target: data?.mda,
                   name: data?.payer,
                   ref: data?.assesedService,
-                  payerID: "",
+                  payerID: data?.payerId,
                   pin: data?.invoiceNo,
                 };
 

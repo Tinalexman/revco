@@ -126,6 +126,7 @@ export interface iValidatePendingInvoiceResponse {
   payment: string | null;
   paid: boolean;
   payer: string;
+  payerId: string | null;
   payerEmail: string;
   payerPhone: string;
   payerTin: string | null;

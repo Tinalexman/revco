@@ -59,6 +59,7 @@ const Content = () => {
   const [role, setRole] = useState<string>("");
   const [target, setTarget] = useState<string>("");
   const [mda, setMDA] = useState<string>("");
+  const [amountReadOnly, setAmountReadOnly] = useState<boolean>(false);
 
   const [initialPaymentDetails, setInitialPaymentDetails] =
     useState<iPaymentForm>({
@@ -83,9 +84,15 @@ const Content = () => {
       Buffer.from(target!, "base64").toString("utf-8")
     );
 
+    setAmountReadOnly(payload.amount > 0);
     setRole(payload.accountType ?? "");
     setMDA(payload.mda ?? "");
     setTarget(payload.revenueHead ?? "");
+
+    setInitialPaymentDetails({
+      ...initialPaymentDetails,
+      amount: payload.amount > 0 ? payload.amount : "",
+    });
   }, [router]);
 
   const [proceed, shouldProceed] = useState<boolean>(false);
@@ -375,6 +382,7 @@ const Content = () => {
                       type="text"
                       name="amount"
                       value={values.amount}
+                      readOnly={amountReadOnly}
                       placeholder="Enter amount"
                       onChange={(e) => {
                         const res = e.target.value.replace(/,/g, "");
@@ -382,7 +390,6 @@ const Content = () => {
                           setFieldValue("amount", formatAmountWithCommas(res));
                         }
                       }}
-                      // onChange={handleChange}
                       className="w-[calc(100%-2.5rem)] text-b-1 border border-[#DDE2FF] rounded-tl-none rounded-bl-none"
                     />
                   </div>

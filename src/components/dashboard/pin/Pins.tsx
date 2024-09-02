@@ -4,12 +4,10 @@ import React, { useState } from "react";
 import Dropdown from "../../reusable/Dropdown";
 import { useGetMDAs, useGetMDAServices } from "@/src/hooks/mdaHooks";
 
-import Cryptr from "cryptr";
-import { HASH_KEY } from "@/src/services/base";
-
 const Pins = () => {
   const [mda, setMDA] = useState<string>("");
   const [target, setTarget] = useState<string>("");
+  const [amount, setAmount] = useState<number>(-1);
   const registerProps: string[] = ["Individual", "Cooperate"];
   const [index, setIndex] = useState<string>(registerProps[0]);
 
@@ -69,6 +67,7 @@ const Pins = () => {
             name: op.name,
             onClick: () => {
               setTarget(op.name);
+              setAmount(op.amount);
             },
           }))}
           showIcon
@@ -84,6 +83,7 @@ const Pins = () => {
               accountType: index,
               mda,
               revenueHead: target,
+              amount,
             };
 
             window.location.assign(

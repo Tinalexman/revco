@@ -94,7 +94,7 @@ const Content = () => {
 
   if (loading) {
     return (
-      <div className="w-[50rem] h-[20rem] mt-16 bg-white rounded-lg grid place-items-center">
+      <div className="w-[50rem] h-[20rem] my-16 bg-white rounded-lg grid place-items-center">
         <Loader color="primary.9" />
       </div>
     );
