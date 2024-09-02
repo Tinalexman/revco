@@ -82,7 +82,7 @@ const Content = () => {
 
     setInitialPaymentDetails({
       ...initialPaymentDetails,
-      amount: payload.amount > 0 ? payload.amount : "",
+      amount: payload.amount > 0 ? formatAmountWithCommas(payload.amount) : "",
     });
   }, [router]);
 
@@ -97,8 +97,8 @@ const Content = () => {
     email: "",
     tin: "",
     phoneNumber: "",
-    state: "",
-    lga: "",
+    state: -1,
+    lga: -1,
     address: "",
     amount: 0,
   });
@@ -146,7 +146,6 @@ const Content = () => {
             }
 
             let v = Number.parseInt(values.amount.replace(/,/g, ""));
-            console.log(v);
             if (isNaN(Number(v))) {
               errors.amount = "Invalid amount";
             } else if (v <= 0) {
@@ -166,21 +165,25 @@ const Content = () => {
               shouldProceed(true);
               setData({
                 address: values.address,
-                amount: Number.parseInt(values.amount.replace(/,/g, "")),
+                amount: Number.parseInt(
+                  values.amount.toString().replace(/,/g, "")
+                ),
                 email: values.email,
                 fullName: values.fullName,
-                lga: values.lga,
+                lga: lgas.find((l) => l.name === values.lga)?.id ?? -1,
                 phoneNumber: unformatNumberWithThreesAndFours(
                   values.phoneNumber
                 ),
-                state: values.state,
+                state: states.find((s) => s.name === values.state)?.id ?? -1,
                 tin: values.tin,
               });
               open();
             } else {
               let processData: tProcessPayment = {
                 tin: values.tin,
-                amount: Number.parseInt(values.amount.replace(/,/g, "")),
+                amount: Number.parseInt(
+                  values.amount.toString().replace(/,/g, "")
+                ),
                 target: mda ?? "",
                 name: values.fullName,
                 ref: target ?? "",
@@ -422,11 +425,11 @@ const Content = () => {
                   className="size-3 accent-primary bg-white focus:ring-0"
                 />
                 <p className="text-s-3 text-black">
-                  By clicking CONTINUE, you agree to{" "}
+                  By clicking continue, you agree to{" "}
                   <span className="font-semibold">
                     TARABA STATE BOARD OF INTERNAL REVENUE SERVICE
                   </span>{" "}
-                  Terms and Conditions and Privacy Policy
+                  Terms & Conditions and Privacy Policy
                 </p>
               </div>
 

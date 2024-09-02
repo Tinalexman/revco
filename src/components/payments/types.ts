@@ -3,8 +3,8 @@ export interface iPaymentData {
   email: string;
   tin: string;
   phoneNumber: string;
-  state: string;
-  lga: string;
+  state: number;
+  lga: number;
   address: string;
   amount: number;
 }
