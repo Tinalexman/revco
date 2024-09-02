@@ -22,16 +22,7 @@ import { useGetLGAs, useGetStates } from "@/src/hooks/locationHooks";
 
 import toast from "react-hot-toast";
 
-interface iPaymentData {
-  fullName: string;
-  email: string;
-  tin: string;
-  phoneNumber: string;
-  state: string;
-  lga: string;
-  address: string;
-  amount: number;
-}
+import { iPaymentData } from "./types";
 
 const MakePayment = () => {
   return (
@@ -101,6 +92,17 @@ const Content = () => {
 
   const [agreed, setAgreed] = useState<boolean>(false);
 
+  const [data, setData] = useState<iPaymentData>({
+    fullName: "",
+    email: "",
+    tin: "",
+    phoneNumber: "",
+    state: "",
+    lga: "",
+    address: "",
+    amount: 0,
+  });
+
   const { data: states, loading: loadingStates } = useGetStates();
   const { data: lgas, loading: loadingLGAs, get: getLGA } = useGetLGAs();
 
@@ -162,6 +164,18 @@ const Content = () => {
 
             if (!proceed) {
               shouldProceed(true);
+              setData({
+                address: values.address,
+                amount: Number.parseInt(values.amount.replace(/,/g, "")),
+                email: values.email,
+                fullName: values.fullName,
+                lga: values.lga,
+                phoneNumber: unformatNumberWithThreesAndFours(
+                  values.phoneNumber
+                ),
+                state: values.state,
+                tin: values.tin,
+              });
               open();
             } else {
               let processData: tProcessPayment = {
@@ -447,6 +461,8 @@ const Content = () => {
           <Modal.Content>
             <Modal.Body>
               <PaymentModal
+                data={data}
+                role={role}
                 onContinue={(val: string) => {
                   close();
                   setTaxPayerID(val);

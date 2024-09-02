@@ -3,26 +3,113 @@ import Receipt from "@/public/noto_receipt.png";
 import Image from "next/image";
 import { Loader } from "@mantine/core";
 
-const PaymentModal: FC<{ onContinue: (val: string) => void }> = ({
-  onContinue,
-}) => {
-  const [loading, setLoading] = useState<boolean>(true);
+import {
+  useGenerateIndividualInvoice,
+  useGenerateNonIndividualInvoice,
+} from "@/src/hooks/invoiceHooks";
+
+import { iPaymentData } from "./types";
+
+const PaymentModal: FC<{
+  role: string;
+  data: iPaymentData;
+  onContinue: (val: string) => void;
+}> = ({ onContinue, data, role }) => {
+  const { loading: loadingIndividual, generate: generateIndividual } =
+    useGenerateIndividualInvoice();
+  const { loading: loadingNonIndividual, generate: generateNonIndividual } =
+    useGenerateNonIndividualInvoice();
 
   useEffect(() => {
-    generateID();
+    if (role === "Individual") {
+      generateIndividual({
+        enumerate: {
+          title: "",
+          dateOfBirth: "",
+          maritalStatus: "",
+          nationality: "",
+          residenceLga: 0,
+          residenceState: 0,
+          residentialAddress: "",
+          occupation: "",
+          officeAddress: "",
+          employerName: "",
+          temporaryTin: "",
+          jtbTin: "",
+          nin: "",
+          customer: {
+            firstName: "",
+            lastName: "",
+            phone: "",
+            email: "",
+            role: "",
+          },
+        },
+        invoice: {
+          invoiceAmount: data.amount,
+          isAssessment: true,
+          assessmentId: 0,
+          serviceId: 0,
+          businessId: 0,
+          mdaId: 0,
+          Month: 0,
+          year: "",
+          userId: 0,
+          month: 0,
+          assessment: true,
+        },
+        projectId: 0,
+      });
+    } else if (role === "Cooperate") {
+      generateNonIndividual({
+        enumerate: {
+          cacRegNo: "",
+          companyName: "",
+          companyAddress: "",
+          city: "",
+          lgaId: 0,
+          phoneNumber1: "",
+          phoneNumber2: "",
+          email: "",
+          nin: "",
+          website: "",
+          temporaryTin: "",
+          jtbTin: "",
+          companyRegistrationDate: "",
+          companyCommencementDate: "",
+          businessType: "",
+          customer: {
+            firstName: "",
+            lastName: "",
+            phone: "",
+            email: "",
+            role: "",
+          },
+        },
+        invoice: {
+          invoiceAmount: data.amount,
+          isAssessment: true,
+          assessmentId: 0,
+          serviceId: 0,
+          businessId: 0,
+          mdaId: 0,
+          Month: 0,
+          year: "",
+          userId: 0,
+          month: 0,
+          assessment: true,
+        },
+        projectId: 0,
+      });
+    }
   }, []);
-
-  const generateID = async () => {
-    setTimeout(async () => {
-      await Promise.resolve();
-      setLoading(false);
-    }, 2000);
-  };
 
   return (
     <div className="w-full h-[24rem] flex items-center justify-center bg-white font-nunito">
-      {loading && <Loader color="primary.9" />}
-      {!loading && (
+      {(loadingIndividual || loadingNonIndividual) && (
+        <Loader color="primary.9" />
+      )}
+      {!(loadingIndividual || loadingNonIndividual) && (
         <div className="flex flex-col items-center justify-center gap-6 px-6 w-full h-full">
           <Image
             src={Receipt}
