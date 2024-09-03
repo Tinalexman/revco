@@ -73,12 +73,27 @@ const Cooperate = () => {
           return errors;
         }}
         onSubmit={async (values, { setSubmitting }) => {
-          setSubmitting(false);
-          useGlobalStore.setState({ loggedIn: true });
-          toast.success("Welcome back");
-          setTimeout(() => {
-            window.location.replace("/dashboard/pay-bills");
-          }, 1500);
+          fn(
+            {
+              firstName: values.firstName,
+              lastName: values.lastName,
+              password: values.password,
+              email: values.email,
+              passwordConfirmation: values.confirmPassword,
+              phone: unformatNumberWithThreesAndFours(values.phoneNumber),
+              project: {
+                projectId: 2,
+              },
+              role: "Non-Individual",
+            },
+            () => {
+              setSubmitting(false);
+              useGlobalStore.setState({ loggedIn: true });
+              setTimeout(() => {
+                window.location.replace("/dashboard/make-payment");
+              }, 500);
+            }
+          );
         }}
         validateOnMount={true}
       >

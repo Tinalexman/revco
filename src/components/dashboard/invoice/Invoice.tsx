@@ -67,7 +67,7 @@ const GenerateInvoice = () => {
             type="text"
             value={pin}
             onChange={(e) => setPin(e.target.value)}
-            className="rounded-full"
+            className="rounded-full text-b-1"
             placeholder="Enter PIN"
           />
           <button

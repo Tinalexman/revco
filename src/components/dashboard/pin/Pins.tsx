@@ -27,11 +27,11 @@ const Pins = () => {
             onClick={() => {
               setIndex(rp);
             }}
-            className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in xs:h-10 xl:h-12 2xl:h-14 3xl:h-16 4xl:h-20 rounded-lg justify-center gap-3 items-center text-smaller text-[#3A3A3A] flex ${
+            className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in xs:h-8 lg:h-12 rounded-lg justify-center gap-3 items-center text-smaller text-[#3A3A3A] flex ${
               index === rp ? "bg-primary-light " : "bg-neutral"
             }`}
           >
-            <p className="text-l-2">{rp}</p>
+            <p className="text-s-2">{rp}</p>
             <div
               className={`size-4 grid place-content-center rounded-full border-2 ${
                 index === rp ? " border-primary" : "border-neutral-2"
@@ -97,7 +97,7 @@ const Pins = () => {
             mda === "" || target === ""
               ? "cursor-not-allowed bg-neutral-3 text-neutral-2"
               : "bg-primary text-white cursor-pointer"
-          } xs:mt-3 3xl:mt-5  rounded-full w-full text-body xs:h-10 lg:h-12 text-b-1 md:h-12 xl:h-16 2xl:h-[72px] 3xl:h-20 4xl:h-24 font-bold`}
+          } xs:mt-3 3xl:mt-5  rounded-full w-full text-body xs:h-10 lg:h-12 text-b-1 font-semibold`}
         >
           Proceed
         </button>

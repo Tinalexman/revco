@@ -71,7 +71,7 @@ const PayBills = () => {
                 setPin(res);
               }
             }}
-            className="rounded-full"
+            className="rounded-full text-b-1"
             placeholder="Enter PIN"
           />
           <button

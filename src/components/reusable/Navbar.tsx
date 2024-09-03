@@ -238,16 +238,16 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
               {signedIn && (
                 <div className="w-full flex flex-col gap-3 mt-5">
                   <div className="flex w-fit items-center gap-3 text-black">
-                    <div className="bg-[#B0DDC3] grid place-content-center rounded-full size-9 text-body font-semibold">
+                    <div className="bg-[#B0DDC3] grid place-content-center rounded-full size-9 text-l-2 font-semibold">
                       {lastName.charAt(0)}
                     </div>
-                    <p className="text-body font-medium">
+                    <p className="text-l-3 font-medium">
                       {firstName} {lastName}
                     </p>
                   </div>
 
                   <div
-                    className="mt-5 w-fit cursor-pointer text-body font-medium font-nunito text-black"
+                    className="mt-5 w-fit cursor-pointer text-l-2 font-medium font-nunito text-black"
                     onClick={() => {
                       closeDrawer();
                       window.location.assign("/dashboard/transaction-history");
@@ -256,7 +256,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
                     Transaction History
                   </div>
                   <div
-                    className="w-fit cursor-pointer text-body font-medium font-nunito text-black"
+                    className="w-fit cursor-pointer text-l-2 font-medium font-nunito text-black"
                     onClick={() => {
                       closeDrawer();
                       window.location.assign("/dashboard/download-receipt");
@@ -275,7 +275,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
                       window.location.assign(ln.link);
                     }}
                     key={i}
-                    className={`text-body w-fit ${
+                    className={`text-l-2 w-fit ${
                       active === i
                         ? "text-primary font-bold underline"
                         : "font-medium text-black"
@@ -311,7 +311,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
 
               {signedIn && (
                 <div
-                  className="w-fit cursor-pointer text-body font-semibold font-nunito text-error mt-20"
+                  className="w-fit cursor-pointer text-l-2 font-semibold font-nunito text-error mt-20"
                   onClick={() => {
                     logout();
                   }}

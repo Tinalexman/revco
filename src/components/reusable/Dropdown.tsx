@@ -51,7 +51,7 @@ const Dropdown: FC<{
         } w-full lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 lg:px-4 xs:px-2 2xl:px-6 3xl:px-8 4xl:px-10 bg-white cursor-pointer text-[#4F4F4F] text-b-1`}
       >
         {loading && loading ? (
-          <p>Loading...</p>
+          <p className="text-neutral-3">Loading...</p>
         ) : (
           <div
             className={`${
