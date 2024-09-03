@@ -28,8 +28,8 @@ const Login = () => {
   const { loading, fn } = useLogin();
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-background bg-opacity-[0.95]">
-      <div className="h-fit lg:w-[450px] xl:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full xs:px-5 flex flex-col items-center justify-center gap-5">
+    <div className="w-full h-full flex flex-col items-center lg:justify-center xs:justify-start bg-white bg-opacity-[0.94]">
+      <div className="h-fit lg:w-[450px] xl:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full xs:px-5 xs:mt-10 lg:mt-0 flex flex-col items-center justify-center gap-10">
         <Image
           src={Logo}
           alt="logo"
@@ -38,7 +38,9 @@ const Login = () => {
           height={72}
         />
         <div className="flex flex-col gap-5 w-full">
-          <h1 className="text-h-3 font-bold text-neutral-2">Log In</h1>
+          <h1 className="text-l-1 font-bold text-neutral-2 lg:text-start xs:text-center">
+            Log In
+          </h1>
           <Formik
             initialValues={{
               username: "",
@@ -94,7 +96,7 @@ const Login = () => {
                 method="POST"
               >
                 <div className="flex flex-col gap-[2px] w-full">
-                  <h3 className="text-b-1 text-neutral-2">Email</h3>
+                  <h3 className="text-b-2 text-neutral-2">Email</h3>
                   <input
                     type="email"
                     name="username"
@@ -108,7 +110,7 @@ const Login = () => {
                   )}
                 </div>
                 <div className="flex flex-col gap-[2px] w-full">
-                  <h3 className="text-b-1 text-neutral-2">Password</h3>
+                  <h3 className="text-b-2 text-neutral-2">Password</h3>
                   <div className="w-full relative">
                     <input
                       type={showPassword ? "text" : "password"}
@@ -138,7 +140,7 @@ const Login = () => {
                 </div>
 
                 <Link
-                  href={"/auth/reset-password"}
+                  href={"/auth/forgot-password"}
                   className="text-b-1 text-neutral-2 font-semibold text-end"
                 >
                   Forgot Password?
@@ -150,7 +152,7 @@ const Login = () => {
                   onClick={() => {
                     setSubmitting(true);
                   }}
-                  className={`bg-primary rounded-full w-full text-large lg:h-[4rem] grid place-content-center xs:h-12 text-white font-bold mt-3`}
+                  className={`bg-primary rounded-full w-full text-l-1 lg:h-[4rem] grid place-content-center xs:h-10 text-white font-semibold mt-3`}
                 >
                   {loading ? <Loader color="white" /> : "Log in"}
                 </button>

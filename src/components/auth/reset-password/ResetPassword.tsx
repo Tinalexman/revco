@@ -52,8 +52,8 @@ const Content = () => {
   }, [router]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-background bg-opacity-[0.95]">
-      <div className="h-fit lg:w-[450px] xl:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full xs:px-5 flex flex-col items-center justify-center gap-10">
+    <div className="w-full h-full flex flex-col items-center lg:justify-center xs:justify-start bg-white bg-opacity-[0.94]">
+      <div className="h-fit lg:w-[450px] xl:w-[500px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full xs:px-5 xs:mt-10 lg:mt-0 flex flex-col items-center justify-center gap-10">
         <Image
           src={Logo}
           alt="logo"
@@ -61,8 +61,10 @@ const Content = () => {
           width={72}
           height={72}
         />
-        <div className="flex flex-col gap-5 w-full">
-          <h1 className="text-l-1 font-bold text-neutral-2">Reset Password</h1>
+        <div className="flex flex-col gap-2 w-full">
+          <h1 className="text-l-1 font-bold text-neutral-2 lg:text-start xs:text-center">
+            Reset Password
+          </h1>
           <Formik
             initialValues={initialValues}
             enableReinitialize={true}
@@ -160,7 +162,7 @@ const Content = () => {
                   onClick={() => {
                     setSubmitting(true);
                   }}
-                  className={`bg-primary rounded-full w-full text-large lg:h-[4rem] grid place-content-center xs:h-12 text-white font-bold mt-3`}
+                  className={`bg-primary rounded-full w-full text-l-1 lg:h-[4rem] grid place-content-center xs:h-10 text-white font-semibold mt-3`}
                 >
                   {loading ? <Loader color="white" /> : "Reset"}
                 </button>

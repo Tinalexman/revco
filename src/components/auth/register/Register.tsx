@@ -24,13 +24,13 @@ const Register = () => {
   return (
     <>
       <div
-        className={`w-full h-full flex flex-col items-center justify-center bg-background bg-opacity-[0.95] overflow-y-scroll ${
+        className={`w-full h-full flex flex-col items-center xs:justify-start lg:justify-center bg-white bg-opacity-[0.94] overflow-y-scroll ${
           index === -1
             ? "lg:pt-0"
             : "lg:pt-[38rem] xl:pt-[25rem] 2xl:pt-[12rem] 3xl:pt-0 "
         }`}
       >
-        <div className="h-fit lg:w-[500px] xl:w-[550px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full xs:px-5 flex flex-col items-center justify-center gap-5">
+        <div className="h-fit lg:w-[500px] xl:w-[550px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full xs:px-5 xs:mt-10 lg:mt-0 flex flex-col items-center justify-center gap-5">
           <div className="flex flex-col items-center xs:gap-6 xl:gap-8 2xl:gap-10 3xl:gap-12 4xl:gap-14 w-full">
             <div className="flex flex-col gap-1 items-center">
               <h1 className="text-h-3 font-bold text-black">
@@ -51,18 +51,20 @@ const Register = () => {
                       setNoNin(false);
                     }
                   }}
-                  className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in xs:h-10 xl:h-12 2xl:h-14 3xl:h-16 4xl:h-20 rounded-lg justify-center gap-3 items-center text-s-2 text-[#3A3A3A] flex ${
+                  className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in xs:h-8 lg:h-12 rounded-md justify-center gap-3 items-center text-s-2 text-[#3A3A3A] flex ${
                     index === i ? "bg-primary-light " : "bg-neutral"
                   }`}
                 >
                   <p>{rp}</p>
                   <div
-                    className={`size-4 grid place-content-center rounded-full border-2 ${
+                    className={`lg:size-4 xs:size-3 grid place-content-center rounded-full border-2 ${
                       index === i ? " border-primary" : "border-neutral-2"
                     }`}
                   >
                     {index === i && (
-                      <div className={`size-[6px] rounded-full bg-primary`} />
+                      <div
+                        className={`lg:size-[6px] xs:size-1 rounded-full bg-primary`}
+                      />
                     )}
                   </div>
                 </div>
@@ -71,7 +73,7 @@ const Register = () => {
 
             <div className="flex flex-col gap-[2px] w-full">
               <div className="flex w-full justify-between items-center">
-                <h3 className="text-body text-neutral-2">
+                <h3 className="text-b-2 text-neutral-2">
                   {noNin
                     ? "Temporary Payer ID"
                     : "National Identification Number"}
@@ -92,11 +94,11 @@ const Register = () => {
                     setNin(e.target.value);
                   }
                 }}
-                className="w-full text-body"
+                className="w-full text-b-2"
                 readOnly={noNin}
               />
               {!noNin && index === 0 && (
-                <p className="text-hint font-nunito text-black mt-1">
+                <p className="text-s-3 font-nunito text-black mt-1">
                   Don&apos;t have a NIN?{" "}
                   <span
                     onClick={() => {
@@ -120,7 +122,7 @@ const Register = () => {
             {index === 0 && <Individual hasNin={!noNin} />}
             {index === 1 && <Cooperate />}
           </div>
-          <p className="text-hint text-black my-10">
+          <p className="text-b-1 text-black my-10">
             Already have an account?{" "}
             <span className="text-primary font-bold underline">
               <Link href={"/auth/login"}>LOGIN</Link>

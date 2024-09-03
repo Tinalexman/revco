@@ -174,51 +174,51 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
           >
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">First Name</h3>
+                <h3 className="text-b-2 text-neutral-2">First Name</h3>
                 <input
                   type="text"
                   name="firstName"
                   placeholder="Enter your first name"
                   value={values.firstName}
                   onChange={handleChange}
-                  className="w-full text-body"
+                  className="w-full text-b-1"
                 />
                 {errors.firstName && touched.firstName && (
-                  <p className="text-hint text-error">{errors.firstName}</p>
+                  <p className="text-s-1 text-error">{errors.firstName}</p>
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Last Name</h3>
+                <h3 className="text-b-2 text-neutral-2">Last Name</h3>
                 <input
                   type="text"
                   name="lastName"
                   placeholder="Enter your last name"
                   value={values.lastName}
                   onChange={handleChange}
-                  className="w-full text-body"
+                  className="w-full text-b-1"
                 />
                 {errors.lastName && touched.lastName && (
-                  <p className="text-hint text-error">{errors.lastName}</p>
+                  <p className="text-s-1 text-error">{errors.lastName}</p>
                 )}
               </div>
             </div>
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Username</h3>
+                <h3 className="text-b-2 text-neutral-2">Username</h3>
                 <input
                   type="text"
                   name="username"
                   placeholder="Enter username"
                   value={values.username}
                   onChange={handleChange}
-                  className="w-full text-body"
+                  className="w-full text-b-1"
                 />
                 {errors.username && touched.username && (
-                  <p className="text-hint text-error">{errors.username}</p>
+                  <p className="text-s-1 text-error">{errors.username}</p>
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Phone Number</h3>
+                <h3 className="text-b-2 text-neutral-2">Phone Number</h3>
                 <input
                   type="tel"
                   name="phoneNumber"
@@ -240,16 +240,16 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                       formatNumberWithThreesAndFours(res)
                     );
                   }}
-                  className="w-full text-b-1 border border-[#DDE2FF]"
+                  className="w-full text-b-1"
                 />
                 {errors.phoneNumber && touched.phoneNumber && (
-                  <p className="text-hint text-error">{errors.phoneNumber}</p>
+                  <p className="text-s-1 text-error">{errors.phoneNumber}</p>
                 )}
               </div>
             </div>
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">State of Origin</h3>
+                <h3 className="text-b-2 text-neutral-2">State of Origin</h3>
                 <Dropdown
                   menus={states.map((st, i) => ({
                     name: st.name,
@@ -267,11 +267,11 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                   showIcon
                 />
                 {errors.state && touched.state && (
-                  <p className="text-hint text-error">{errors.state}</p>
+                  <p className="text-s-1 text-error">{errors.state}</p>
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">
+                <h3 className="text-b-2 text-neutral-2">
                   Local Government Area
                 </h3>
                 <Dropdown
@@ -289,14 +289,14 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                   showIcon
                 />
                 {errors.lga && touched.lga && (
-                  <p className="text-hint text-error">{errors.lga}</p>
+                  <p className="text-s-1 text-error">{errors.lga}</p>
                 )}
               </div>
             </div>
             {!hasNin && (
               <div className="flex justify-between w-full">
                 <div className="flex flex-col gap-[2px] w-[48%]">
-                  <h3 className="text-body text-neutral-2">Gender</h3>
+                  <h3 className="text-b-2 text-neutral-2">Gender</h3>
 
                   <Dropdown
                     menus={["Male", "Female"].map((st, i) => ({
@@ -313,57 +313,57 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                   />
 
                   {errors.gender && (
-                    <p className="text-hint text-error">{errors.gender}</p>
+                    <p className="text-s-1 text-error">{errors.gender}</p>
                   )}
                 </div>
                 <div className="flex flex-col gap-[2px] w-[48%]">
-                  <h3 className="text-body text-neutral-2">Date of Birth</h3>
+                  <h3 className="text-b-2 text-neutral-2">Date of Birth</h3>
                   <input
                     type="date"
                     name="dob"
                     value={values.dob}
                     onChange={handleChange}
-                    className="w-full text-body"
+                    className="w-full text-b-1"
                   />
                   {errors.dob && touched.dob && (
-                    <p className="text-hint text-error">{errors.dob}</p>
+                    <p className="text-s-1 text-error">{errors.dob}</p>
                   )}
                 </div>
               </div>
             )}
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Email Address</h3>
+                <h3 className="text-b-2 text-neutral-2">Email Address</h3>
                 <input
                   type="email"
                   name="email"
                   placeholder="Enter email address"
                   value={values.email}
                   onChange={handleChange}
-                  className="w-full text-body"
+                  className="w-full text-b-1"
                 />
                 {errors.email && touched.email && (
-                  <p className="text-hint text-error">{errors.email}</p>
+                  <p className="text-s-1 text-error">{errors.email}</p>
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">TIN</h3>
+                <h3 className="text-b-2 text-neutral-2">TIN</h3>
                 <input
                   type="text"
                   name="tin"
                   placeholder="Enter your TIN"
                   value={values.tin}
                   onChange={handleChange}
-                  className="w-full text-body"
+                  className="w-full text-b-1"
                 />
                 {errors.tin && touched.tin && (
-                  <p className="text-hint text-error">{errors.tin}</p>
+                  <p className="text-s-1 text-error">{errors.tin}</p>
                 )}
               </div>
             </div>
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Password</h3>
+                <h3 className="text-b-2 text-neutral-2">Password</h3>
                 <div className="w-full relative">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -371,7 +371,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                     placeholder="Enter password"
                     value={values.password}
                     onChange={handleChange}
-                    className="w-full text-body pr-11"
+                    className="w-full text-b-1 pr-11"
                   />
                   <div
                     className="absolute text-neutral-2 top-1/2 -translate-y-1/2 right-4 flex items-center cursor-pointer"
@@ -389,11 +389,11 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 </div>
 
                 {errors.password && touched.password && (
-                  <p className="text-hint text-error">{errors.password}</p>
+                  <p className="text-s-1 text-error">{errors.password}</p>
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Confirm Password</h3>
+                <h3 className="text-b-2 text-neutral-2">Confirm Password</h3>
                 <div className="w-full relative">
                   <input
                     type={showConfirmPassword ? "text" : "password"}
@@ -401,7 +401,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                     placeholder="Confirm password"
                     value={values.confirmPassword}
                     onChange={handleChange}
-                    className="w-full text-body pr-11"
+                    className="w-full text-b-1 pr-11"
                   />
                   <div
                     className="absolute text-neutral-2 top-1/2 -translate-y-1/2 right-4 flex items-center cursor-pointer"
@@ -411,14 +411,14 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                     }}
                   >
                     {showConfirmPassword ? (
-                      <MdVisibilityOff className="text-[22px] md:text-[18px]" />
+                      <MdVisibilityOff className="text-subextra" />
                     ) : (
-                      <MdVisibility className="text-[22px] md:text-[18px]" />
+                      <MdVisibility className="text-subextra" />
                     )}
                   </div>
                 </div>
                 {errors.confirmPassword && touched.confirmPassword && (
-                  <p className="text-hint text-error">
+                  <p className="text-s-1 text-error">
                     {errors.confirmPassword}
                   </p>
                 )}
@@ -426,17 +426,17 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             </div>
             <div className="flex flex-col items-center gap-[2px] w-full">
               <div className="w-full">
-                <h3 className="text-body  text-neutral-2">Address</h3>
+                <h3 className="text-b-2  text-neutral-2">Address</h3>
               </div>
               <textarea
                 name="address"
                 placeholder="Enter your address here"
                 value={values.address}
                 onChange={handleChange}
-                className="w-full h-24 text-body resize-none"
+                className="w-full h-24 text-b-2 resize-none"
               />
               {errors.address && touched.address && (
-                <p className="text-hint text-error">{errors.address}</p>
+                <p className="text-s-1 text-error">{errors.address}</p>
               )}
             </div>
             <button
@@ -445,7 +445,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 setSubmitting(true);
               }}
               disabled={loading}
-              className={`bg-primary rounded-full w-[75%] text-large lg:h-[4rem] grid place-content-center xs:h-12 text-white font-bold mt-3`}
+              className={`bg-primary rounded-full xs:w-full  lg:w-[75%] text-l-1 lg:h-[4rem] grid place-content-center xs:h-10 text-white font-semibold mt-3`}
             >
               {loading ? <Loader color="white.9" /> : "Create Account"}
             </button>

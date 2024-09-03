@@ -32,7 +32,7 @@ const AuthLayout: FC<iAuthLayout> = ({ children }) => {
         </div>
       </div>
 
-      <div className="lg:w-[50vw] lg:h-[100vh] xl:h-[100vh] xl:w-[50vw] 2xl:w-[50vw] 2xl:h-[100vh] 3xl:w-[50vw] 3xl:h-[100vh] 4xl:w-[50vw] 4xl:h-[100vh] xs:w-full h-full bg-[url('../../public/image_263.png')] bg-cover bg-no-repeat bg-center">
+      <div className="lg:w-[50vw] lg:h-[100vh] xs:w-full xs:h-full bg-[url('../../public/image_263.png')] bg-cover bg-no-repeat bg-center">
         {children}
       </div>
     </div>

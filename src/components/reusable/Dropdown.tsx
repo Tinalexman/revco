@@ -44,11 +44,11 @@ const Dropdown: FC<{
         }}
         className={`${open && "ring-2 ring-green-600"} ${
           fitMenu && fitMenu
-            ? `rounded-[8px] border border-[#DDE2FF] flex items-center ${
+            ? `rounded-[8px] border border-[#DFDFDF] flex items-center ${
                 value || hint ? "justify-between" : "justify-end"
               }`
             : "rounded-full flex items-center justify-center"
-        } w-full lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 xs:px-2 lg:px-4 xl:px-6 2xl:px-7 3xl:px-8 4xl:px-10 bg-white cursor-pointer text-[#4F4F4F] text-b-1`}
+        } w-full lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 lg:px-4 xs:px-2 2xl:px-6 3xl:px-8 4xl:px-10 bg-white cursor-pointer text-[#4F4F4F] text-b-1`}
       >
         {loading && loading ? (
           <p>Loading...</p>
@@ -66,7 +66,7 @@ const Dropdown: FC<{
             {value === "" && <p className="text-neutral-3">{hint}</p>}
             <p className="line-clamp-1">{value}</p>
             {showIcon && (
-              <IoMdArrowDropdown className="text-black text-l-1 absolute top-1/2 -translate-y-1/2 right-2" />
+              <IoMdArrowDropdown className="text-black text-l-1 absolute top-1/2 -translate-y-1/2 right-0" />
             )}
           </div>
         )}
