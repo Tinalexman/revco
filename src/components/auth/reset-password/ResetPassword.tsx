@@ -120,7 +120,7 @@ const Content = () => {
                 method="POST"
               >
                 <div className="flex flex-col gap-[2px] w-full mt-5">
-                  <h3 className="text-b-1 text-neutral-2">Reset Code</h3>
+                  <h3 className="text-b-2 text-neutral-2">Reset Code</h3>
                   <input
                     type="text"
                     name="resetCode"
@@ -132,7 +132,7 @@ const Content = () => {
                         setFieldValue("resetCode", val);
                       }
                     }}
-                    className="w-full"
+                    className="w-full text-b-1"
                   />
                   {errors.resetCode && touched.resetCode && (
                     <p className="text-hint text-error">{errors.resetCode}</p>
@@ -148,7 +148,7 @@ const Content = () => {
                       placeholder="Enter password"
                       value={values.password}
                       onChange={handleChange}
-                      className="w-full text-body pr-11"
+                      className="w-full text-b-1"
                     />
                   </div>
                   {errors.password && touched.password && (

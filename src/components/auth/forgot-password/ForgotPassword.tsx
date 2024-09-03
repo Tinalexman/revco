@@ -81,14 +81,14 @@ const ForgotPassword = () => {
                 method="POST"
               >
                 <div className="flex flex-col gap-[2px] w-full mt-5">
-                  <h3 className="text-b-1 text-neutral-2">Email</h3>
+                  <h3 className="text-b-2 text-neutral-2">Email</h3>
                   <input
                     type="email"
                     name="email"
                     placeholder="Enter your email address"
                     value={values.email}
                     onChange={handleChange}
-                    className="w-full"
+                    className="w-full text-b-1"
                   />
                   {errors.email && touched.email && (
                     <p className="text-hint text-error">{errors.email}</p>

@@ -94,7 +94,7 @@ const Register = () => {
                     setNin(e.target.value);
                   }
                 }}
-                className="w-full text-b-2"
+                className="w-full text-b-1"
                 readOnly={noNin}
               />
               {!noNin && index === 0 && (

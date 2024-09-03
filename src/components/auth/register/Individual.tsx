@@ -445,7 +445,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 setSubmitting(true);
               }}
               disabled={loading}
-              className={`bg-primary rounded-full xs:w-full  lg:w-[75%] text-l-1 lg:h-[4rem] grid place-content-center xs:h-10 text-white font-semibold mt-3`}
+              className={`bg-primary rounded-full xs:w-full lg:w-[75%] text-l-1 lg:h-[4rem] grid place-content-center xs:h-10 text-white font-semibold mt-3`}
             >
               {loading ? <Loader color="white.9" /> : "Create Account"}
             </button>

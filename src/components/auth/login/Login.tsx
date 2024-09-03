@@ -103,7 +103,7 @@ const Login = () => {
                     placeholder="Enter your email address"
                     value={values.username}
                     onChange={handleChange}
-                    className="w-full"
+                    className="w-full text-b-1"
                   />
                   {errors.username && touched.username && (
                     <p className="text-s-4 text-error">{errors.username}</p>
@@ -118,7 +118,7 @@ const Login = () => {
                       placeholder="Enter password"
                       value={values.password}
                       onChange={handleChange}
-                      className="w-full text-body pr-11"
+                      className="w-full text-b-1 pr-11"
                     />
                     <div
                       className="absolute text-neutral-2 top-1/2 -translate-y-1/2 right-4 flex items-center cursor-pointer"
