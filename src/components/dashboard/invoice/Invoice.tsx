@@ -95,22 +95,4 @@ const GenerateInvoice = () => {
   );
 };
 
-{
-  /*
-  error && (
-    <div className="w-full flex items-center justify-between px-8 font-medium py-[10px] md:mb-20 rounded-[8px] text-[#DA251D] text-hint bg-[#F4BBB9]">
-      <div className="flex w-fit gap-1 items-center">
-        <RiFileList3Fill size={"16px"} />
-        <p>Invoice not found</p>
-      </div>
-      <MdOutlineCancel
-        size={"20px"}
-        className="cursor-pointer"
-        onClick={() => setError(false)}
-      />
-    </div>
-  );
-  */
-}
-
 export default GenerateInvoice;

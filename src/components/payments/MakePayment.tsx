@@ -207,6 +207,7 @@ const Content = () => {
               );
             }
           }}
+          validateOnChange={false}
         >
           {({
             values,
@@ -232,7 +233,7 @@ const Content = () => {
                     type="text"
                     readOnly
                     value={taxPayerID ?? ""}
-                    className="w-full text-body border border-[#DDE2FF]"
+                    className="w-full text-body border border-[#DFDFDF]"
                   />
                 </div>
               )}
@@ -243,14 +244,14 @@ const Content = () => {
                   <span className="text-error">*</span>
                 </h3>
                 <div
-                  className={`w-full flex items-center text-b-1 border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 ${
+                  className={`w-full flex items-center text-b-1 border border-[#DFDFDF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 ${
                     mda.length === 0 ? "text-neutral-2" : "text-black"
                   }`}
                 >
                   {mda.length === 0 ? "MDA" : mda}
                 </div>
                 <div
-                  className={`w-full flex items-center text-b-1 border border-[#DDE2FF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 ${
+                  className={`w-full flex items-center text-b-1 border border-[#DFDFDF] bg-white rounded-[8px] px-4 md:px-2 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 py-2 ${
                     target.length === 0 ? "text-neutral-2" : "text-black"
                   }`}
                 >
@@ -266,9 +267,10 @@ const Content = () => {
                   <input
                     type="text"
                     name="fullName"
+                    placeholder="Enter your full name"
                     value={values.fullName}
                     onChange={handleChange}
-                    className="w-full text-b-1 border border-[#DDE2FF]"
+                    className="w-full text-b-1"
                   />
                   {errors.fullName && touched.fullName && (
                     <p className="text-s-4 text-error">{errors.fullName}</p>
@@ -281,9 +283,10 @@ const Content = () => {
                   <input
                     type="email"
                     name="email"
+                    placeholder="Enter your email address"
                     value={values.email}
                     onChange={handleChange}
-                    className="w-full text-b-1 border border-[#DDE2FF]"
+                    className="w-full text-b-1"
                   />
                   {errors.email && touched.email && (
                     <p className="text-s-4 text-error">{errors.email}</p>
@@ -296,9 +299,10 @@ const Content = () => {
                   <input
                     type="text"
                     name="tin"
+                    placeholder="Enter your TIN"
                     value={values.tin}
                     onChange={handleChange}
-                    className="w-full text-b-1 border border-[#DDE2FF]"
+                    className="w-full text-b-1 "
                   />
                   {errors.tin && touched.tin && (
                     <p className="text-hint text-error">{errors.tin}</p>
@@ -312,6 +316,7 @@ const Content = () => {
                   <input
                     type="tel"
                     name="phoneNumber"
+                    placeholder="Enter 080 *********"
                     value={values.phoneNumber}
                     onChange={(e) => {
                       if (e.target.value.length === 0) {
@@ -330,7 +335,7 @@ const Content = () => {
                         formatNumberWithThreesAndFours(res)
                       );
                     }}
-                    className="w-full text-b-1 border border-[#DDE2FF]"
+                    className="w-full text-b-1"
                   />
                   {errors.phoneNumber && (
                     <p className="text-s-4 text-error">{errors.phoneNumber}</p>
@@ -392,7 +397,7 @@ const Content = () => {
                   value={values.address}
                   onChange={handleChange}
                   placeholder="Enter your address here"
-                  className="w-full text-b-1 border border-[#DDE2FF] resize-none h-[100px]"
+                  className="w-full text-b-1 resize-none h-[100px]"
                 />
               </div>
               <div className="flex items-start justify-between w-full">
@@ -416,7 +421,7 @@ const Content = () => {
                           setFieldValue("amount", formatAmountWithCommas(res));
                         }
                       }}
-                      className="w-[calc(100%-2.5rem)] text-b-1 border border-[#DDE2FF] rounded-tl-none rounded-bl-none"
+                      className="w-[calc(100%-2.5rem)] text-b-1 rounded-tl-none rounded-bl-none"
                     />
                   </div>
                   {errors.amount && (
@@ -475,6 +480,10 @@ const Content = () => {
               <PaymentModal
                 data={data}
                 role={role}
+                onCancel={() => {
+                  shouldProceed(false);
+                  close();
+                }}
                 onContinue={(val: string) => {
                   close();
                   setTaxPayerID(val);

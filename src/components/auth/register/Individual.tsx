@@ -222,7 +222,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 <input
                   type="tel"
                   name="phoneNumber"
-                  placeholder="080 *********"
+                  placeholder="Enter 080 *********"
                   value={values.phoneNumber}
                   onChange={(e) => {
                     if (e.target.value.length === 0) {

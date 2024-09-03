@@ -14,7 +14,8 @@ const PaymentModal: FC<{
   role: string;
   data: iPaymentData;
   onContinue: (val: string) => void;
-}> = ({ onContinue, data, role }) => {
+  onCancel: () => void;
+}> = ({ onContinue, onCancel, data, role }) => {
   const {
     loading: loadingIndividual,
     generate: generateIndividual,
@@ -150,12 +151,21 @@ const PaymentModal: FC<{
             <h2 className="text-b-1 font-medium text-black text-center">
               An error occurred while generating your invoice
             </h2>
-            <button
-              onClick={fn}
-              className="bg-primary rounded-full w-[70%] h-12 text-b-1 text-white font-semibold"
-            >
-              Retry
-            </button>
+            <div className="w-full flex xs:flex-col xs:gap-3 lg:gap-0 lg:flex-row justify-between items-center">
+              <button
+                onClick={onCancel}
+                className="border border-error rounded-full w-[45%] h-12 text-b-1 text-error font-semibold"
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={fn}
+                className="bg-primary rounded-full w-[45%] h-12 text-b-1 text-white font-semibold"
+              >
+                Retry
+              </button>
+            </div>
           </div>
         )}
     </div>
