@@ -1,19 +1,18 @@
 import { Loader } from "@mantine/core";
 import { Formik, Form } from "formik";
 import { motion } from "framer-motion";
-import React, { useState, forwardRef } from "react";
+import React, { useState } from "react";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 import { useGlobalStore } from "@/src/stores/globalStore";
 import { toast } from "react-hot-toast";
 
-import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
-import CustomPhoneInput from "../../reusable/CustomPhoneInput";
 import {
   unformatNumberWithThreesAndFours,
   formatNumberWithThreesAndFours,
 } from "@/src/functions/numberFunctions";
+
+import { useRegister } from "@/src/hooks/authHooks";
 
 interface iCooperate {
   firstName: string;
@@ -33,6 +32,8 @@ const Cooperate = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
+
+  const { loading, fn } = useRegister();
 
   return (
     <div className="flex flex-col gap-3 border-t-grey-18 border-x-0 border-b-0 border w-full">
@@ -92,6 +93,7 @@ const Cooperate = () => {
           isInitialValid,
           isValid,
           setFieldValue,
+          setSubmitting,
         }) => (
           <Form
             onSubmit={handleSubmit}
@@ -100,29 +102,32 @@ const Cooperate = () => {
           >
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Business Name</h3>
+                <h3 className="text-b-2 text-neutral-2">Business Name</h3>
                 <input
                   type="text"
                   name="businessName"
                   placeholder="Enter business name"
                   value={values.businessName}
                   onChange={handleChange}
-                  className="w-full text-body"
+                  className="w-full text-b-1"
                 />
                 {errors.businessName && touched.businessName && (
-                  <p className="text-hint text-error">{errors.businessName}</p>
+                  <p className="text-s-1 text-error">{errors.businessName}</p>
                 )}
               </div>
+
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Business Category</h3>
-                <select
+                <h3 className="text-b-2 text-neutral-2">Business Category</h3>
+                <input
+                  type="text"
                   name="businessCategory"
+                  placeholder="Enter business category"
                   value={values.businessCategory}
                   onChange={handleChange}
-                  className="w-full text-body"
-                ></select>
+                  className="w-full text-b-1"
+                />
                 {errors.businessCategory && touched.businessCategory && (
-                  <p className="text-hint text-error">
+                  <p className="text-s-1 text-error">
                     {errors.businessCategory}
                   </p>
                 )}
@@ -130,47 +135,52 @@ const Cooperate = () => {
             </div>
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Email Address</h3>
+                <h3 className="text-b-2 text-neutral-2">Email Address</h3>
                 <input
                   type="email"
                   name="email"
                   placeholder="Enter email address"
                   value={values.email}
                   onChange={handleChange}
-                  className="w-full text-body"
+                  className="w-full text-b-1"
                 />
                 {errors.email && touched.email && (
-                  <p className="text-hint text-error">{errors.email}</p>
+                  <p className="text-s-1 text-error">{errors.email}</p>
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">
+                <h3 className="text-b-2 text-neutral-2">
                   Country of Operation
                 </h3>
-                <select
+                <input
+                  type="text"
                   name="country"
+                  placeholder="Enter country"
                   value={values.country}
                   onChange={handleChange}
-                  className="w-full text-body"
-                ></select>
+                  className="w-full text-b-1"
+                />
                 {errors.country && touched.country && (
-                  <p className="text-hint text-error">{errors.country}</p>
+                  <p className="text-s-1 text-error">{errors.country}</p>
                 )}
               </div>
             </div>
-            <div className="flex flex-col gap-[2px] w-full">
-              <h3 className="text-body text-neutral-2">RC Number</h3>
-              <input
-                type="text"
-                name="rc"
-                placeholder="Enter RC number"
-                value={values.rc}
-                onChange={handleChange}
-                className="w-[48%] text-body"
-              />
-              {errors.rc && touched.rc && (
-                <p className="text-hint text-error">{errors.rc}</p>
-              )}
+
+            <div className="w-full">
+              <div className="flex flex-col gap-[2px] w-[48%]">
+                <h3 className="text-b-2 text-neutral-2">RC Number</h3>
+                <input
+                  type="text"
+                  name="rc"
+                  placeholder="Enter RC number"
+                  value={values.rc}
+                  onChange={handleChange}
+                  className="w-full text-b-1"
+                />
+                {errors.rc && touched.rc && (
+                  <p className="text-s-1 text-error">{errors.rc}</p>
+                )}
+              </div>
             </div>
 
             <div className="border-t-grey-18 border-x-0 border-b-0 border w-full">
@@ -181,41 +191,42 @@ const Cooperate = () => {
 
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">First Name</h3>
+                <h3 className="text-b-2 text-neutral-2">First Name</h3>
                 <input
                   type="text"
                   name="firstName"
                   placeholder="Enter your first name"
                   value={values.firstName}
                   onChange={handleChange}
-                  className="w-full text-body"
+                  className="w-full text-b-1"
                 />
                 {errors.firstName && touched.firstName && (
-                  <p className="text-hint text-error">{errors.firstName}</p>
+                  <p className="text-s-1 text-error">{errors.firstName}</p>
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Last Name</h3>
+                <h3 className="text-b-2 text-neutral-2">Last Name</h3>
                 <input
                   type="text"
                   name="lastName"
                   placeholder="Enter your last name"
                   value={values.lastName}
                   onChange={handleChange}
-                  className="w-full text-body"
+                  className="w-full text-b-1"
                 />
                 {errors.lastName && touched.lastName && (
-                  <p className="text-hint text-error">{errors.lastName}</p>
+                  <p className="text-s-1 text-error">{errors.lastName}</p>
                 )}
               </div>
             </div>
 
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">Phone Number</h3>
+                <h3 className="text-b-2 text-neutral-2">Phone Number</h3>
                 <input
                   type="tel"
                   name="phoneNumber"
+                  placeholder="080 *********"
                   value={values.phoneNumber}
                   onChange={(e) => {
                     if (e.target.value.length === 0) {
@@ -234,103 +245,102 @@ const Cooperate = () => {
                       formatNumberWithThreesAndFours(res)
                     );
                   }}
-                  className="w-full text-b-1 border border-[#DDE2FF]"
+                  className="w-full text-b-1"
                 />
                 {errors.phoneNumber && touched.phoneNumber && (
-                  <p className="text-hint text-error">{errors.phoneNumber}</p>
+                  <p className="text-s-1 text-error">{errors.phoneNumber}</p>
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-body text-neutral-2">TIN</h3>
+                <h3 className="text-b-2 text-neutral-2">TIN</h3>
                 <input
                   type="text"
                   name="tin"
                   placeholder="Enter your TIN"
                   value={values.tin}
                   onChange={handleChange}
-                  className="w-full text-body"
+                  className="w-full text-b-1"
                 />
                 {errors.tin && touched.tin && (
-                  <p className="text-hint text-error">{errors.tin}</p>
+                  <p className="text-s-1 text-error">{errors.tin}</p>
                 )}
               </div>
             </div>
 
             <div className="flex justify-between w-full">
-              <div className="flex flex-col gap-[2px] w-[48%] relative">
-                <h3 className="text-body text-neutral-2">Password</h3>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="Enter password"
-                  value={values.password}
-                  onChange={handleChange}
-                  className="w-full text-body pr-11"
-                />
-                <div
-                  className="absolute text-neutral-2 top-[30px] md:top-[28px] md:right-2 right-4 flex items-center cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowPassword(!showPassword);
-                  }}
-                >
-                  {showPassword ? (
-                    <MdVisibilityOff className="text-[22px] md:text-[18px]" />
-                  ) : (
-                    <MdVisibility className="text-[22px] md:text-[18px]" />
-                  )}
+              <div className="flex flex-col gap-[2px] w-[48%]">
+                <h3 className="text-b-2 text-neutral-2">Password</h3>
+                <div className="w-full relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Enter password"
+                    value={values.password}
+                    onChange={handleChange}
+                    className="w-full text-b-1 pr-11"
+                  />
+                  <div
+                    className="absolute text-neutral-2 top-1/2 -translate-y-1/2 right-4 flex items-center cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowPassword(!showPassword);
+                    }}
+                  >
+                    {showPassword ? (
+                      <MdVisibilityOff className="text-subextra" />
+                    ) : (
+                      <MdVisibility className="text-subextra" />
+                    )}
+                  </div>
                 </div>
+
                 {errors.password && touched.password && (
-                  <p className="text-hint text-error">{errors.password}</p>
+                  <p className="text-s-1 text-error">{errors.password}</p>
                 )}
               </div>
-              <div className="flex flex-col gap-[2px] w-[48%] relative">
-                <h3 className="text-body text-neutral-2">Confirm Password</h3>
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  name="confirmPassword"
-                  placeholder="Confirm password"
-                  value={values.confirmPassword}
-                  onChange={handleChange}
-                  className="w-full text-body pr-11"
-                />
-                <div
-                  className="absolute text-neutral-2 top-[30px] md:top-[28px] md:right-2 right-4 flex items-center cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowConfirmPassword(!showConfirmPassword);
-                  }}
-                >
-                  {showConfirmPassword ? (
-                    <MdVisibilityOff className="text-[22px] md:text-[18px]" />
-                  ) : (
-                    <MdVisibility className="text-[22px] md:text-[18px]" />
-                  )}
+              <div className="flex flex-col gap-[2px] w-[48%]">
+                <h3 className="text-b-2 text-neutral-2">Confirm Password</h3>
+                <div className="w-full relative">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                    value={values.confirmPassword}
+                    onChange={handleChange}
+                    className="w-full text-b-1 pr-11"
+                  />
+                  <div
+                    className="absolute text-neutral-2 top-1/2 -translate-y-1/2 right-4 flex items-center cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowConfirmPassword(!showConfirmPassword);
+                    }}
+                  >
+                    {showConfirmPassword ? (
+                      <MdVisibilityOff className="text-subextra" />
+                    ) : (
+                      <MdVisibility className="text-subextra" />
+                    )}
+                  </div>
                 </div>
                 {errors.confirmPassword && touched.confirmPassword && (
-                  <p className="text-hint text-error">
+                  <p className="text-s-1 text-error">
                     {errors.confirmPassword}
                   </p>
                 )}
               </div>
             </div>
 
-            <motion.button
-              initial={{
-                y: "10%",
-              }}
-              animate={{
-                y: "0%",
-                transition: {
-                  duration: 1,
-                  ease: "easeOut",
-                },
-              }}
+            <button
               type="submit"
-              className={`bg-primary rounded-full w-[85%] text-large h-[60px] md:h-12 text-white font-bold mt-3`}
+              onClick={() => {
+                setSubmitting(true);
+              }}
+              disabled={loading}
+              className={`bg-primary rounded-full xs:w-full lg:w-[75%] text-l-1 lg:h-[4rem] grid place-content-center xs:h-10 text-white font-semibold mt-5`}
             >
-              Create Account
-            </motion.button>
+              {loading ? <Loader color="white.9" /> : "Create Account"}
+            </button>
           </Form>
         )}
       </Formik>
