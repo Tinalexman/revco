@@ -12,13 +12,20 @@ import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 import { useGlobalStore } from "@/src/stores/globalStore";
 import { toast } from "react-hot-toast";
+
+import { useLogin } from "@/src/hooks/authHooks";
+
 interface iManualLoginPayload {
-  email: string;
+  username: string;
   password: string;
 }
 
+//test2@mail.com taxTax12#
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const { loading, fn } = useLogin();
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center bg-background bg-opacity-[0.95]">
@@ -34,17 +41,19 @@ const Login = () => {
           <h1 className="text-h-3 font-bold text-neutral-2">Log In</h1>
           <Formik
             initialValues={{
-              email: "",
+              username: "",
               password: "",
             }}
             validate={(values) => {
               const errors: Partial<iManualLoginPayload> = {};
-              if (!values.email) {
-                errors.email = "Required";
+              if (!values.username) {
+                errors.username = "Required";
               } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                  values.username
+                )
               ) {
-                errors.email = "Invalid email address";
+                errors.username = "Invalid email address";
               }
 
               if (!values.password) {
@@ -56,14 +65,16 @@ const Login = () => {
               return errors;
             }}
             onSubmit={async (values, { setSubmitting }) => {
-              setSubmitting(false);
-              useGlobalStore.setState({ loggedIn: true });
-              toast.success("Welcome back");
-              setTimeout(() => {
-                window.location.replace("/dashboard/pay-bills");
-              }, 1500);
+              fn(values, (val: any) => {
+                setSubmitting(false);
+                if (val) {
+                  useGlobalStore.setState({ loggedIn: true });
+                  setTimeout(() => {
+                    window.location.replace("/dashboard/make-payment");
+                  }, 500);
+                }
+              });
             }}
-            validateOnMount={true}
           >
             {({
               values,
@@ -75,6 +86,7 @@ const Login = () => {
               isSubmitting,
               isInitialValid,
               isValid,
+              setSubmitting,
             }) => (
               <Form
                 onSubmit={handleSubmit}
@@ -85,14 +97,14 @@ const Login = () => {
                   <h3 className="text-b-1 text-neutral-2">Email</h3>
                   <input
                     type="email"
-                    name="email"
+                    name="username"
                     placeholder="Enter your email address"
-                    value={values.email}
+                    value={values.username}
                     onChange={handleChange}
                     className="w-full"
                   />
-                  {errors.email && touched.email && (
-                    <p className="text-s-4 text-error">{errors.email}</p>
+                  {errors.username && touched.username && (
+                    <p className="text-s-4 text-error">{errors.username}</p>
                   )}
                 </div>
                 <div className="flex flex-col gap-[2px] w-full">
@@ -101,16 +113,22 @@ const Login = () => {
                     <input
                       type={showPassword ? "text" : "password"}
                       name="password"
-                      placeholder="Enter your password"
+                      placeholder="Enter password"
                       value={values.password}
                       onChange={handleChange}
-                      className="w-full pr-11 lg:pr-14 xs:pr-8"
+                      className="w-full text-body pr-11"
                     />
-                    <div className="absolute inset-y-0 top-1/2 -translate-y-1/2 xs:right-2 sm:right-3 md:right-4 lg:right-5 xl:right-6 flex items-center cursor-pointer">
+                    <div
+                      className="absolute text-neutral-2 top-1/2 -translate-y-1/2 right-4 flex items-center cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowPassword(!showPassword);
+                      }}
+                    >
                       {showPassword ? (
-                        <MdVisibilityOff className="text-h-3" />
+                        <MdVisibilityOff className="text-subextra" />
                       ) : (
-                        <MdVisibility className="text-h-3" />
+                        <MdVisibility className="text-subextra" />
                       )}
                     </div>
                   </div>
@@ -127,10 +145,14 @@ const Login = () => {
                 </Link>
 
                 <button
-                  disabled={isSubmitting}
-                  className={`bg-primary rounded-full w-full text-l-1 xs:h-10 sm:h-12 md:h-14 lg:h-16 xl:h-18 2xl:h-20 3xl:h-22 4xl:h-24 text-white font-bold xs:mt-2 sm:mt-3 md:mt-4 lg:mt-5 xl:mt-6 2xl:mt-7 3xl:mt-8 4xl:mt-10`}
+                  disabled={loading}
+                  type="submit"
+                  onClick={() => {
+                    setSubmitting(true);
+                  }}
+                  className={`bg-primary rounded-full w-full text-large lg:h-[4rem] grid place-content-center xs:h-12 text-white font-bold mt-3`}
                 >
-                  {isSubmitting ? <Loader color="white" /> : "Log In"}
+                  {loading ? <Loader color="white" /> : "Log in"}
                 </button>
               </Form>
             )}

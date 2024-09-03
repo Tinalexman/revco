@@ -18,11 +18,8 @@ const Register = () => {
   const [noNin, setNoNin] = useState<boolean>(false);
   const registerProps: string[] = ["Individual", "Cooperate"];
 
-  const {
-    data: tempPayerID,
-    loading: loadingPayerID,
-    generate: generatePayerID,
-  } = useGenerateTemporaryTIN();
+  const { loading: loadingPayerID, generate: generatePayerID } =
+    useGenerateTemporaryTIN();
 
   return (
     <>
@@ -30,7 +27,7 @@ const Register = () => {
         className={`w-full h-full flex flex-col items-center justify-center bg-background bg-opacity-[0.95] overflow-y-scroll ${
           index === -1
             ? "lg:pt-0"
-            : "lg:pt-[35rem] xl:pt-[40rem] 2xl:pt-[45rem] 3xl:pt-[50rem] "
+            : "lg:pt-[38rem] xl:pt-[25rem] 2xl:pt-[12rem] 3xl:pt-0 "
         }`}
       >
         <div className="h-fit lg:w-[500px] xl:w-[550px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full xs:px-5 flex flex-col items-center justify-center gap-5">
@@ -104,8 +101,12 @@ const Register = () => {
                   <span
                     onClick={() => {
                       setNoNin(true);
-                      generatePayerID((val: string) => {
-                        setNin(val);
+                      generatePayerID((val?: string) => {
+                        if (val) {
+                          setNin(val);
+                        } else {
+                          setNoNin(false);
+                        }
                       });
                     }}
                     className="text-primary font-bold cursor-pointer"
@@ -132,11 +133,17 @@ const Register = () => {
         onClose={() => {}}
         closeOnClickOutside={false}
         closeOnEscape={false}
+        size={"30vw"}
+        padding={0}
+        top={0}
+        centered
       >
         <Modal.Overlay />
         <Modal.Content>
           <Modal.Body>
-            <Loader color="myColor.6" />
+            <div className="w-full h-[30vw] grid place-content-center bg-white ">
+              <Loader color="primary.9" />
+            </div>
           </Modal.Body>
         </Modal.Content>
       </Modal.Root>

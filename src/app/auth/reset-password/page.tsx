@@ -5,6 +5,4 @@ export const metadata: Metadata = {
   title: "Reset Password",
 };
 
-export default function ResetPasswordPage() {
-  return <ResetPassword />;
-}
+export default ResetPassword;

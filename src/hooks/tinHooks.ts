@@ -8,7 +8,7 @@ export const useGenerateTemporaryTIN = () => {
   const [data, setData] = useState<any>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
-  let generate = async (callback?: (id: string) => void) => {
+  let generate = async (callback?: (id?: string) => void) => {
     if (loading) return;
     setLoading(true);
 
@@ -24,6 +24,7 @@ export const useGenerateTemporaryTIN = () => {
       toast.error(
         "Something went wrong while generating your temporary Payer ID. Please try again"
       );
+      if (callback) callback();
     }
   };
 

@@ -10,9 +10,9 @@ export interface iRegisterPayload {
   firstName: string;
   lastName: string;
   phone: string;
+  email: string;
   password: string;
   passwordConfirmation: string;
-  createdBy: number;
   role: string;
   project: {
     projectId: number;
@@ -20,7 +20,8 @@ export interface iRegisterPayload {
 }
 
 export interface iResetPayload {
-  code: string;
+  resetCode: string;
+  email: string;
   password: string;
 }
 
@@ -34,9 +35,12 @@ export async function register(payload: iRegisterPayload) {
   return result.data;
 }
 
-export async function resetPassword(code: string, password: string) {
-  const result = await axios.post(
-    `${baseUrl}/auth/resetpassword?resetCode=${code}&password=${password}`
-  );
+export async function resetPassword(payload: iResetPayload) {
+  const result = await axios.post(`${baseUrl}/auth/resetpassword`, payload);
+  return result.data;
+}
+
+export async function forgotPassword(email: string) {
+  const result = await axios.post(`${baseUrl}/auth/forgotpassword`, { email });
   return result.data;
 }

@@ -17,7 +17,6 @@ import { useGetStates, useGetLGAs } from "@/src/hooks/locationHooks";
 import Dropdown from "../../reusable/Dropdown";
 
 import { useRegister } from "@/src/hooks/authHooks";
-import { useGenerateTemporaryTIN } from "@/src/hooks/tinHooks";
 
 interface iIndividual {
   firstName: string;
@@ -131,28 +130,25 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
           return errors;
         }}
         onSubmit={async (values, { setSubmitting }) => {
-          setSubmitting(true);
-
           fn(
             {
               firstName: values.firstName,
-              createdBy: 0,
               lastName: values.lastName,
               password: values.password,
+              email: values.email,
               passwordConfirmation: values.confirmPassword,
               phone: unformatNumberWithThreesAndFours(values.phoneNumber),
               project: {
-                projectId: 0,
+                projectId: 2,
               },
-              role: "individual",
+              role: "Individual",
             },
             () => {
               setSubmitting(false);
               useGlobalStore.setState({ loggedIn: true });
-              toast.success("Account created");
-              // setTimeout(() => {
-              //   window.location.replace("/dashboard/make-payment");
-              // }, 500);
+              setTimeout(() => {
+                window.location.replace("/dashboard/make-payment");
+              }, 500);
             }
           );
         }}
@@ -169,6 +165,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
           isInitialValid,
           isValid,
           setFieldValue,
+          setSubmitting,
         }) => (
           <Form
             onSubmit={handleSubmit}
@@ -384,9 +381,9 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                     }}
                   >
                     {showPassword ? (
-                      <MdVisibilityOff className="text-[22px] md:text-[18px]" />
+                      <MdVisibilityOff className="text-subextra" />
                     ) : (
-                      <MdVisibility className="text-[22px] md:text-[18px]" />
+                      <MdVisibility className="text-subextra" />
                     )}
                   </div>
                 </div>
@@ -444,10 +441,13 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             </div>
             <button
               type="submit"
-              disabled={isSubmitting}
-              className={`bg-primary rounded-full w-[75%] text-large h-[60px] md:h-12 text-white font-bold mt-3`}
+              onClick={() => {
+                setSubmitting(true);
+              }}
+              disabled={loading}
+              className={`bg-primary rounded-full w-[75%] text-large lg:h-[4rem] grid place-content-center xs:h-12 text-white font-bold mt-3`}
             >
-              {isSubmitting ? <Loader color="white.9" /> : "Create Account"}
+              {loading ? <Loader color="white.9" /> : "Create Account"}
             </button>
           </Form>
         )}
