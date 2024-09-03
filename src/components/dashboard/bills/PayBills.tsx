@@ -65,7 +65,12 @@ const PayBills = () => {
           <input
             type="text"
             value={pin}
-            onChange={(e) => setPin(e.target.value)}
+            onChange={(e) => {
+              const res = e.target.value;
+              if (!isNaN(Number(res))) {
+                setPin(res);
+              }
+            }}
             className="rounded-full"
             placeholder="Enter PIN"
           />

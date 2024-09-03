@@ -149,10 +149,10 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
                 !swap ? "text-white" : "text-black"
               } flex items-center gap-2 md:gap-1 w-fit cursor-pointer`}
             >
-              <div className="bg-[#B0DDC3] grid place-content-center rounded-full size-9 text-body font-semibold">
+              <div className="bg-[#B0DDC3] grid place-content-center rounded-full size-9 text-l-2 font-semibold">
                 {lastName.charAt(0)}
               </div>
-              <p className="text-body md:hidden">
+              <p className="text-b-2 xs:hidden lg:block">
                 {firstName} {lastName}
               </p>
               <IoMdArrowDropdown size={"16px"} />
@@ -161,7 +161,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
               
             )} */}
             <div
-              className={`absolute transition-all duration-300 ease-out z-10 top-16 w-[13.5rem] rounded-[8px] bg-white flex flex-col gap-2 ${
+              className={`absolute transition-all duration-300 ease-out z-10 top-24 w-[13.5rem] rounded-[8px] bg-white flex flex-col gap-2 ${
                 open ? "p-2 h-auto" : "h-0 max-h-0 min-h-0 overflow-hidden p-0"
               }`}
             >

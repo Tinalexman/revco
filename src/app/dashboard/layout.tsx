@@ -32,8 +32,8 @@ const DashboardLayout: FC<iDashboardLayout> = ({ children }) => {
 
   return (
     <div className="w-[100vw] lg:h-[100vh] bg-[url('../../public/image_263.png')] bg-cover bg-center bg-no-repeat">
-      <div className="w-full h-full overflow-y-scroll flex flex-col items-center bg-background bg-opacity-[0.95]">
-        <div className="left-0 right-0 top-0 w-full xs:bg-background lg:bg-transparent border-b border-neutral-3">
+      <div className="w-full h-full overflow-y-scroll flex flex-col items-center bg-white bg-opacity-[0.94]">
+        <div className="left-0 right-0 top-0 w-full xs:bg-white lg:bg-transparent border-b border-gray-300">
           <div className="xs:px-5 lg:px-0">
             <Navbar swap={true} active={active} />
           </div>
