@@ -50,6 +50,9 @@ const Content = () => {
   const [role, setRole] = useState<string>("");
   const [target, setTarget] = useState<string>("");
   const [mda, setMDA] = useState<string>("");
+
+  const [mdaId, setMDAID] = useState<number>(-1);
+  const [targetId, setTargetID] = useState<number>(-1);
   const [amountReadOnly, setAmountReadOnly] = useState<boolean>(false);
 
   const [initialPaymentDetails, setInitialPaymentDetails] =
@@ -78,6 +81,8 @@ const Content = () => {
     setAmountReadOnly(payload.amount > 0);
     setRole(payload.accountType ?? "");
     setMDA(payload.mda ?? "");
+    setMDAID(payload.mdaId ?? -1);
+    setTargetID(payload.revenueHeadId ?? -1);
     setTarget(payload.revenueHead ?? "");
 
     setInitialPaymentDetails({
@@ -101,6 +106,8 @@ const Content = () => {
     lga: -1,
     address: "",
     amount: 0,
+    mda: -1,
+    serviceId: -1,
   });
 
   const { data: states, loading: loadingStates } = useGetStates();
@@ -176,6 +183,8 @@ const Content = () => {
                 ),
                 state: states.find((s) => s.name === values.state)?.id ?? -1,
                 tin: values.tin,
+                mda: mdaId,
+                serviceId: targetId,
               });
               open();
             } else {

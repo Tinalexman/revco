@@ -82,7 +82,9 @@ const Pins = () => {
             const payload = {
               accountType: index,
               mda,
+              mdaId: mdas.find((op) => op.name === mda)?.id,
               revenueHead: target,
+              revenueHeadId: services.find((op) => op.name === target)?.id,
               amount,
             };
 

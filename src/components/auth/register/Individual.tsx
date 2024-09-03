@@ -13,6 +13,11 @@ import {
   unformatNumberWithThreesAndFours,
   formatNumberWithThreesAndFours,
 } from "@/src/functions/numberFunctions";
+import { useGetStates, useGetLGAs } from "@/src/hooks/locationHooks";
+import Dropdown from "../../reusable/Dropdown";
+
+import { useRegister } from "@/src/hooks/authHooks";
+import { useGenerateTemporaryTIN } from "@/src/hooks/tinHooks";
 
 interface iIndividual {
   firstName: string;
@@ -35,8 +40,13 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
 
+  const { data: states, loading: loadingStates } = useGetStates();
+  const { data: lgas, loading: loadingLGAs, get: getLGA } = useGetLGAs();
+
+  const { loading, fn } = useRegister();
+
   return (
-    <div className="flex flex-col gap-3 border-t-grey-18 border-x-0 border-b-0 border w-full">
+    <div className="flex flex-col w-full gap-2">
       <h2 className="text-subtitle font-bold text-black font-nunito mt-3">
         Personal Information
       </h2>
@@ -121,14 +131,32 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
           return errors;
         }}
         onSubmit={async (values, { setSubmitting }) => {
-          setSubmitting(false);
-          useGlobalStore.setState({ loggedIn: true });
-          toast.success("Welcome back");
-          setTimeout(() => {
-            window.location.replace("/dashboard/pay-bills");
-          }, 1500);
+          setSubmitting(true);
+
+          fn(
+            {
+              firstName: values.firstName,
+              createdBy: 0,
+              lastName: values.lastName,
+              password: values.password,
+              passwordConfirmation: values.confirmPassword,
+              phone: unformatNumberWithThreesAndFours(values.phoneNumber),
+              project: {
+                projectId: 0,
+              },
+              role: "individual",
+            },
+            () => {
+              setSubmitting(false);
+              useGlobalStore.setState({ loggedIn: true });
+              toast.success("Account created");
+              // setTimeout(() => {
+              //   window.location.replace("/dashboard/make-payment");
+              // }, 500);
+            }
+          );
         }}
-        validateOnMount={true}
+        validateOnMount={false}
       >
         {({
           values,
@@ -225,16 +253,22 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">State of Origin</h3>
-                <select
-                  name="state"
+                <Dropdown
+                  menus={states.map((st, i) => ({
+                    name: st.name,
+                    onClick: () => {
+                      setFieldValue("state", st.name);
+                      setFieldValue("lga", "");
+                      getLGA(st.id);
+                    },
+                  }))}
                   value={values.state}
-                  onChange={handleChange}
-                  className="w-full text-body"
-                >
-                  {states.map((st, i) => (
-                    <option key={i}>{st}</option>
-                  ))}
-                </select>
+                  hint="Select State"
+                  loading={loadingStates}
+                  fitMenu={true}
+                  alignToStart
+                  showIcon
+                />
                 {errors.state && touched.state && (
                   <p className="text-hint text-error">{errors.state}</p>
                 )}
@@ -243,12 +277,19 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 <h3 className="text-body text-neutral-2">
                   Local Government Area
                 </h3>
-                <input
-                  type="text"
-                  name="lga"
+                <Dropdown
+                  menus={lgas.map((st, i) => ({
+                    name: st.name,
+                    onClick: () => {
+                      setFieldValue("lga", st.name);
+                    },
+                  }))}
+                  loading={loadingLGAs}
                   value={values.lga}
-                  onChange={handleChange}
-                  className="w-full text-body"
+                  hint="Select LGA"
+                  fitMenu={true}
+                  alignToStart
+                  showIcon
                 />
                 {errors.lga && touched.lga && (
                   <p className="text-hint text-error">{errors.lga}</p>
@@ -259,17 +300,22 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
               <div className="flex justify-between w-full">
                 <div className="flex flex-col gap-[2px] w-[48%]">
                   <h3 className="text-body text-neutral-2">Gender</h3>
-                  <select
-                    name="gender"
+
+                  <Dropdown
+                    menus={["Male", "Female"].map((st, i) => ({
+                      name: st,
+                      onClick: () => {
+                        setFieldValue("gender", st);
+                      },
+                    }))}
                     value={values.gender}
-                    onChange={handleChange}
-                    className="w-full text-body"
-                  >
-                    {["Male", "Female"].map((g, i) => (
-                      <option key={i}>{g}</option>
-                    ))}
-                  </select>
-                  {errors.gender && touched.gender && (
+                    hint="Select Gender"
+                    fitMenu={true}
+                    alignToStart
+                    showIcon
+                  />
+
+                  {errors.gender && (
                     <p className="text-hint text-error">{errors.gender}</p>
                   )}
                 </div>
@@ -319,55 +365,60 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
               </div>
             </div>
             <div className="flex justify-between w-full">
-              <div className="flex flex-col gap-[2px] w-[48%] relative">
+              <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Password</h3>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="Enter password"
-                  value={values.password}
-                  onChange={handleChange}
-                  className="w-full text-body pr-11"
-                />
-                <div
-                  className="absolute text-neutral-2 top-[30px] md:top-[28px] md:right-2 right-4 flex items-center cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowPassword(!showPassword);
-                  }}
-                >
-                  {showPassword ? (
-                    <MdVisibilityOff className="text-[22px] md:text-[18px]" />
-                  ) : (
-                    <MdVisibility className="text-[22px] md:text-[18px]" />
-                  )}
+                <div className="w-full relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Enter password"
+                    value={values.password}
+                    onChange={handleChange}
+                    className="w-full text-body pr-11"
+                  />
+                  <div
+                    className="absolute text-neutral-2 top-1/2 -translate-y-1/2 right-4 flex items-center cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowPassword(!showPassword);
+                    }}
+                  >
+                    {showPassword ? (
+                      <MdVisibilityOff className="text-[22px] md:text-[18px]" />
+                    ) : (
+                      <MdVisibility className="text-[22px] md:text-[18px]" />
+                    )}
+                  </div>
                 </div>
+
                 {errors.password && touched.password && (
                   <p className="text-hint text-error">{errors.password}</p>
                 )}
               </div>
-              <div className="flex flex-col gap-[2px] w-[48%] relative">
+              <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-body text-neutral-2">Confirm Password</h3>
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  name="confirmPassword"
-                  placeholder="Confirm password"
-                  value={values.confirmPassword}
-                  onChange={handleChange}
-                  className="w-full text-body pr-11"
-                />
-                <div
-                  className="absolute text-neutral-2 top-[30px] md:top-[28px] md:right-2 right-4 flex items-center cursor-pointer"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowConfirmPassword(!showConfirmPassword);
-                  }}
-                >
-                  {showConfirmPassword ? (
-                    <MdVisibilityOff className="text-[22px] md:text-[18px]" />
-                  ) : (
-                    <MdVisibility className="text-[22px] md:text-[18px]" />
-                  )}
+                <div className="w-full relative">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                    value={values.confirmPassword}
+                    onChange={handleChange}
+                    className="w-full text-body pr-11"
+                  />
+                  <div
+                    className="absolute text-neutral-2 top-1/2 -translate-y-1/2 right-4 flex items-center cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowConfirmPassword(!showConfirmPassword);
+                    }}
+                  >
+                    {showConfirmPassword ? (
+                      <MdVisibilityOff className="text-[22px] md:text-[18px]" />
+                    ) : (
+                      <MdVisibility className="text-[22px] md:text-[18px]" />
+                    )}
+                  </div>
                 </div>
                 {errors.confirmPassword && touched.confirmPassword && (
                   <p className="text-hint text-error">
@@ -391,22 +442,13 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 <p className="text-hint text-error">{errors.address}</p>
               )}
             </div>
-            <motion.button
-              initial={{
-                y: "10%",
-              }}
-              animate={{
-                y: "0%",
-                transition: {
-                  duration: 1,
-                  ease: "easeOut",
-                },
-              }}
+            <button
               type="submit"
+              disabled={isSubmitting}
               className={`bg-primary rounded-full w-[75%] text-large h-[60px] md:h-12 text-white font-bold mt-3`}
             >
-              Create Account
-            </motion.button>
+              {isSubmitting ? <Loader color="white.9" /> : "Create Account"}
+            </button>
           </Form>
         )}
       </Formik>

@@ -8,22 +8,21 @@ export const useGenerateTemporaryTIN = () => {
   const [data, setData] = useState<any>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
-  let generate = async (callback?: () => void) => {
+  let generate = async (callback?: (id: string) => void) => {
     if (loading) return;
     setLoading(true);
 
     try {
       const data = await generateTemporaryTIN();
-      setData(data);
+      setData(data.data);
       setLoading(false);
       setSuccess(true);
-      toast.success("Temporary TIN generated successfully");
-      if (callback) callback();
+      if (callback) callback(data.data);
     } catch (e) {
       setSuccess(false);
       setLoading(false);
       toast.error(
-        "Something went wrong while generating your temporary TIN. Please try again"
+        "Something went wrong while generating your temporary Payer ID. Please try again"
       );
     }
   };

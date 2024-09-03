@@ -7,4 +7,6 @@ export interface iPaymentData {
   lga: number;
   address: string;
   amount: number;
+  mda: number;
+  serviceId: number;
 }
