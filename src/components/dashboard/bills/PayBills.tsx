@@ -44,10 +44,10 @@ const PayBills = () => {
                   </h2>
                 </div>
                 <p className="text-s-3 font-normal">
-                  Lorem ipsum dolor sit amet consectetur. Ultricies nisi
-                  interdum eget urna orci quis eget. Mauris ac posuere vitae
-                  tortor. Arcu maecenas accumsan cursus nunc diam enim. Accumsan
-                  orci quam tellus et vel semper.
+                  The Payment Invoice Number (PIN) is a unique identifier
+                  automatically assigned to every invoice payment generated on
+                  the Revco platform. <br /> This number validates each payment
+                  and generates the corresponding receipt.
                 </p>
                 <Image
                   src={Invoice}
