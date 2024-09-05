@@ -133,6 +133,30 @@ export interface iValidatePendingInvoiceResponse {
   payerType: string | null;
 }
 
+export interface iGenerateInvoiceResponse {
+  invoiceNo: "7175310758982";
+  invoiceAmount: 10.0;
+  assesedService: "WITHHOLDING TAX-0002";
+  paymentChannel: null;
+  businessId: 0;
+  business: null;
+  serviceId: 873;
+  mda: "Ministry of Finance ";
+  month: 0;
+  year: "";
+  customerId: 2590;
+  payerFirstName: null;
+  payerLastName: null;
+  tinType: null;
+  payerId: null;
+  payerTin: null;
+  payer: "Oluwatobiloba Taiwo";
+  payerEmail: "taiwoluwatobilobafestus@gmail.com";
+  payerPhone: "09070754180";
+  payerType: null;
+  paid: false;
+}
+
 export const validatePendingInvoice = async (invoiceNo: string) => {
   const result = await axios.get(
     `${baseUrl}/self-service/invoice/pending?invoiceNo=${invoiceNo}`
@@ -157,7 +181,7 @@ export const generateIndividualInvoice = async (
     payload
   );
 
-  return result.data;
+  return result.data.data as iGenerateInvoiceResponse;
 };
 
 export const generateNonIndividualInvoice = async (
@@ -168,5 +192,5 @@ export const generateNonIndividualInvoice = async (
     payload
   );
 
-  return result.data;
+  return result.data.data as iGenerateInvoiceResponse;
 };

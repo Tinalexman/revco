@@ -69,7 +69,7 @@ const PaymentModal: FC<{
           year: "",
           userId: 0,
           month: 0,
-          assessment: true,
+          assessment: false,
         },
         projectId: 0,
       });
@@ -110,7 +110,7 @@ const PaymentModal: FC<{
           year: "",
           userId: 0,
           month: 0,
-          assessment: true,
+          assessment: false,
         },
         projectId: 0,
       });
@@ -154,14 +154,14 @@ const PaymentModal: FC<{
             <div className="w-full flex xs:flex-col xs:gap-3 lg:gap-0 lg:flex-row justify-between items-center">
               <button
                 onClick={onCancel}
-                className="border border-error rounded-full w-[45%] h-12 text-b-1 text-error font-semibold"
+                className="border border-error rounded-full w-[45%] xs:w-full h-12 text-b-1 text-error font-semibold"
               >
                 Cancel
               </button>
 
               <button
                 onClick={fn}
-                className="bg-primary rounded-full w-[45%] h-12 text-b-1 text-white font-semibold"
+                className="bg-primary rounded-full w-[45%] xs:w-full h-12 text-b-1 text-white font-semibold"
               >
                 Retry
               </button>

@@ -8,6 +8,7 @@ import {
   validatePaidInvoice,
   validatePendingInvoice,
   iValidatePendingInvoiceResponse,
+  iGenerateInvoiceResponse,
 } from "../services/invoiceServices";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
@@ -19,7 +20,7 @@ export const useGenerateIndividualInvoice = () => {
 
   let generate = async (
     payload: iGenerateIndividualInvoice,
-    callback?: () => void
+    callback?: (response: iGenerateInvoiceResponse | null) => void
   ) => {
     if (loading) return;
     setLoading(true);
@@ -30,10 +31,11 @@ export const useGenerateIndividualInvoice = () => {
       setLoading(false);
       setSuccess(true);
       toast.success("Invoice generated successfully");
-      if (callback) callback();
+      if (callback) callback(data);
     } catch (e) {
       setSuccess(false);
       setLoading(false);
+      callback?.(null);
       toast.error(
         "Something went wrong while generating your invoice. Please try again"
       );
