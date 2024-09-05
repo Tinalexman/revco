@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Podkova } from "next/font/google";
+import { Inter, Podkova, Poppins } from "next/font/google";
 
 import "@mantine/core/styles.css";
 
@@ -23,6 +23,12 @@ const podvoka = Podkova({
   subsets: ["latin"],
   variable: "--font-podkova",
   weight: ["400", "500", "600", "700", "800"],
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -77,7 +83,9 @@ export default function RootLayout({
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
 
-      <body className={`${podvoka.variable} ${inter.className}`}>
+      <body
+        className={`${podvoka.variable} ${inter.className} ${poppins.variable}`}
+      >
         <Toaster
           toastOptions={{
             className: "lg:mt-20 text-b-1",

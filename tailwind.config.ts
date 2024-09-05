@@ -38,6 +38,7 @@ const config: Config = {
       fontFamily: {
         inter: ["var(--font-inter)", "serif"],
         podkova: ["var(--font-podkova)", "serif"],
+        poppins: ["var(--font-poppins)", "sans-serif"],
       },
       boxShadow: {
         custom: "0 0 10px rgba(0, 0, 0, 0.07)",

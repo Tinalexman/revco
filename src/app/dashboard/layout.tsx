@@ -23,6 +23,8 @@ const DashboardLayout: FC<iDashboardLayout> = ({ children }) => {
         return 1;
       case "validate-receipt":
         return 2;
+      case "view-receipt":
+        return -10;
     }
 
     return -1;
@@ -41,7 +43,7 @@ const DashboardLayout: FC<iDashboardLayout> = ({ children }) => {
 
         <div className="w-full flex flex-col items-center xs:px-5 lg:px-0 xs:mt-20 2xl:mt-28 xs:h-[calc(100vh-5rem)] lg:h-fit">
           {children}
-          <Powered />
+          {active !== -10 && <Powered />}
         </div>
       </div>
     </div>

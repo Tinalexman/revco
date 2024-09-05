@@ -72,7 +72,15 @@ const GenerateInvoice = () => {
           />
           <button
             onClick={() => {
-              validate(pin);
+              validate(pin, (data) => {
+                if (data !== null) {
+                  window.location.assign(
+                    `/dashboard/view-receipt?target=${Buffer.from(
+                      JSON.stringify(data)
+                    ).toString("base64")}`
+                  );
+                }
+              });
             }}
             className={`bg-primary rounded-full lg:w-[35%] grid place-content-center xs:w-full text-b-1 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-semibold `}
           >
