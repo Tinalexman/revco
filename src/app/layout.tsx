@@ -82,7 +82,6 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
-
       <body
         className={`${podvoka.variable} ${inter.className} ${poppins.variable}`}
       >

@@ -14,6 +14,9 @@ import Coat from "@/public/Coat of Arms.svg";
 
 import { iValidatePaidInvoiceResponse } from "@/src/services/invoiceServices";
 
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
 const ViewReceipt = () => (
   <Suspense fallback={<Loader />}>
     <Content />
@@ -64,9 +67,46 @@ const Content = () => {
     }
   }, [router]);
 
+  const handleDownloadPDF = async () => {
+    const domElement = document.getElementById("receipt");
+    if (!domElement) {
+      console.error("HTML element not found");
+      return;
+    }
+
+    const canvas = await html2canvas(domElement, {
+      scale: 1,
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "pt", "a4");
+
+    const imgWidth = 595.28;
+    const pageHeight = 841.89;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    let heightLeft = imgHeight;
+
+    let position = 0;
+
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    pdf.save("Revco Receipt.pdf");
+  };
+
   return (
-    <div className="w-full grid place-content-center font-poppins pb-20">
-      <div className="w-[804px] shadow-sm border border-gray-200 flex flex-col bg-white ">
+    <div className="w-full flex flex-col items-center gap-10 font-poppins pb-20">
+      <div
+        id="receipt"
+        className="w-[804px] shadow-sm border border-gray-200 flex flex-col bg-white "
+      >
         <div className="w-full h-full bg-[url('../../public/Background.png')] bg-center bg-cover bg-no-repeat relative">
           <p className="text-[8px] font-medium left-5 top-3 absolute text-black">
             E-receipt
@@ -84,7 +124,7 @@ const Content = () => {
                 width={72}
                 height={72}
               />
-              <div>
+              <div className="flex flex-col">
                 <h2
                   className={`text-[32px] leading-[32px] font-podkova font-bold text-[#333333]`}
                 >
@@ -185,6 +225,12 @@ const Content = () => {
           </div>
         </div>
       </div>
+      <button
+        onClick={handleDownloadPDF}
+        className="bg-primary h-12 rounded-full w-[250px] text-white font-semibold"
+      >
+        Download Receipt
+      </button>
     </div>
   );
 };
