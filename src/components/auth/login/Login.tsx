@@ -10,9 +10,6 @@ import { Loader } from "@mantine/core";
 
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
-import { useGlobalStore } from "@/src/stores/globalStore";
-import { toast } from "react-hot-toast";
-
 import { useLogin } from "@/src/hooks/authHooks";
 
 interface iManualLoginPayload {
@@ -70,7 +67,6 @@ const Login = () => {
               fn(values, (val: any) => {
                 setSubmitting(false);
                 if (val) {
-                  useGlobalStore.setState({ loggedIn: true });
                   setTimeout(() => {
                     window.location.replace("/dashboard/make-payment");
                   }, 500);

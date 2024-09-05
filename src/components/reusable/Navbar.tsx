@@ -18,7 +18,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { HiMenu } from "react-icons/hi";
 
 import useStore from "@/src/stores/useStore";
-import { useGlobalStore } from "@/src/stores/globalStore";
+import { useUserData } from "@/src/stores/globalStore";
 
 interface iNav {
   name: string;
@@ -58,7 +58,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
 
   const logout = () => {
     closeDrawer();
-    useGlobalStore.setState({ loggedIn: false });
+    useUserData.setState({ loggedIn: false });
     window.location.replace("/");
   };
 
@@ -70,9 +70,9 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
     };
   }, []);
 
-  const signedIn = useStore(useGlobalStore, (state: any) => state.loggedIn);
-  const firstName = useStore(useGlobalStore, (state: any) => state.firstName);
-  const lastName = useStore(useGlobalStore, (state: any) => state.lastName);
+  const signedIn = useStore(useUserData, (state: any) => state.loggedIn);
+  const firstName = useStore(useUserData, (state: any) => state.firstName);
+  const lastName = useStore(useUserData, (state: any) => state.lastName);
 
   return (
     <>

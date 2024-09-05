@@ -9,11 +9,11 @@ import {
   forgotPassword,
 } from "../services/authServices";
 import { useState, useEffect } from "react";
+import { tUser, useUserData } from "../stores/globalStore";
 
 export const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
-  const [data, setData] = useState<any>({});
 
   let fn = async (payload: iLoginPayload, callback?: (value: any) => void) => {
     if (loading) return;
@@ -22,14 +22,20 @@ export const useLogin = () => {
 
     try {
       const response = await login(payload);
-      setData(response);
+
+      let loginResponse = response.data as tUser;
+      loginResponse.loggedIn = true;
+      useUserData.setState({ ...loginResponse });
+
+      toast.success(`Welcome back, ${loginResponse.lastName}`);
+
       setLoading(false);
       setSuccess(true);
-      callback?.(response);
+      callback?.(true);
     } catch (e: any) {
       setSuccess(false);
       setLoading(false);
-      callback?.(null);
+      callback?.(false);
       toast.error(`${e.response.data.data}`);
     }
   };
@@ -37,7 +43,6 @@ export const useLogin = () => {
   return {
     loading,
     success,
-    data,
     fn,
   };
 };
@@ -57,6 +62,7 @@ export const useRegister = () => {
       setData(response);
       setLoading(false);
       setSuccess(true);
+      toast.success(`Account created successfully`);
       callback?.();
     } catch (e: any) {
       setSuccess(false);
@@ -89,40 +95,6 @@ export const useForgotPassword = () => {
       setData(response);
       setLoading(false);
       setSuccess(true);
-      toast.success("Password reset code has been sent to your email");
-      callback?.(response);
-    } catch (e: any) {
-      setSuccess(false);
-      setLoading(false);
-      callback?.(null);
-      toast.error(`${e.response.data.data}`);
-    }
-  };
-
-  return {
-    loading,
-    success,
-    data,
-    fn,
-  };
-};
-
-export const useResetPassword = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
-  const [data, setData] = useState<any>({});
-
-  let fn = async (payload: iResetPayload, callback?: (value: any) => void) => {
-    if (loading) return;
-
-    setLoading(true);
-
-    try {
-      const response = await resetPassword(payload);
-      setData(response);
-      setLoading(false);
-      setSuccess(true);
-      toast.success("Your password has been reset");
       callback?.(response);
     } catch (e: any) {
       setSuccess(false);

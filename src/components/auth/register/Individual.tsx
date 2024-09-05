@@ -1,14 +1,8 @@
 import { Loader } from "@mantine/core";
 import { Formik, Form } from "formik";
-import { motion } from "framer-motion";
 import React, { useState, FC } from "react";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
-import { states } from "@/src/constants/constants";
-
-import { useGlobalStore } from "@/src/stores/globalStore";
-import { toast } from "react-hot-toast";
-import CustomPhoneInput from "../../reusable/CustomPhoneInput";
 import {
   unformatNumberWithThreesAndFours,
   formatNumberWithThreesAndFours,
@@ -87,10 +81,6 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             errors.confirmPassword = "Passwords do not match";
           }
 
-          if (!values.dob) {
-            errors.dob = "Required";
-          }
-
           if (!values.firstName) {
             errors.firstName = "Required";
           }
@@ -99,32 +89,8 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             errors.lastName = "Required";
           }
 
-          if (!values.username) {
-            errors.username = "Required";
-          }
-
           if (!values.phoneNumber) {
             errors.phoneNumber = "Required";
-          }
-
-          if (!values.state) {
-            errors.state = "Required";
-          }
-
-          if (!values.lga) {
-            errors.lga = "Required";
-          }
-
-          if (!values.address) {
-            errors.address = "Required";
-          }
-
-          if (!values.gender) {
-            errors.gender = "Required";
-          }
-
-          if (!values.tin) {
-            errors.tin = "Required";
           }
 
           return errors;
@@ -145,9 +111,10 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             },
             () => {
               setSubmitting(false);
-              useGlobalStore.setState({ loggedIn: true });
               setTimeout(() => {
-                window.location.replace("/dashboard/make-payment");
+                window.location.replace(
+                  `/auth/confirmation?email=${values.email}&new=true`
+                );
               }, 500);
             }
           );
@@ -174,7 +141,9 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
           >
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">First Name</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  First Name <span className="text-error">*</span>
+                </h3>
                 <input
                   type="text"
                   name="firstName"
@@ -188,7 +157,9 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">Last Name</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  Last Name <span className="text-error">*</span>
+                </h3>
                 <input
                   type="text"
                   name="lastName"
@@ -218,7 +189,9 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">Phone Number</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  Phone Number <span className="text-error">*</span>
+                </h3>
                 <input
                   type="tel"
                   name="phoneNumber"
@@ -334,7 +307,9 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             )}
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">Email Address</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  Email Address <span className="text-error">*</span>
+                </h3>
                 <input
                   type="email"
                   name="email"
@@ -364,7 +339,9 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             </div>
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">Password</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  Password <span className="text-error">*</span>
+                </h3>
                 <div className="w-full relative">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -394,7 +371,9 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">Confirm Password</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  Confirm Password <span className="text-error">*</span>
+                </h3>
                 <div className="w-full relative">
                   <input
                     type={showConfirmPassword ? "text" : "password"}

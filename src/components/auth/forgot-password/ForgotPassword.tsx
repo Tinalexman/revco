@@ -8,12 +8,7 @@ import Logo from "@/public/image_261.png";
 import { Form, Formik } from "formik";
 import { Loader } from "@mantine/core";
 
-import { MdVisibilityOff, MdVisibility } from "react-icons/md";
-
-import { useGlobalStore } from "@/src/stores/globalStore";
-import { toast } from "react-hot-toast";
-
-import { useForgotPassword, useLogin } from "@/src/hooks/authHooks";
+import { useForgotPassword } from "@/src/hooks/authHooks";
 
 const ForgotPassword = () => {
   const { loading, fn } = useForgotPassword();
@@ -55,7 +50,7 @@ const ForgotPassword = () => {
                   setTimeout(
                     () =>
                       window.location.assign(
-                        `/auth/reset-password?email=${values.email}`
+                        `/auth/confirmation?email=${values.email}&new=false`
                       ),
                     500
                   );

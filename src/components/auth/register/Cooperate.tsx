@@ -1,11 +1,7 @@
 import { Loader } from "@mantine/core";
 import { Formik, Form } from "formik";
-import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
-
-import { useGlobalStore } from "@/src/stores/globalStore";
-import { toast } from "react-hot-toast";
 
 import {
   unformatNumberWithThreesAndFours,
@@ -88,9 +84,10 @@ const Cooperate = () => {
             },
             () => {
               setSubmitting(false);
-              useGlobalStore.setState({ loggedIn: true });
               setTimeout(() => {
-                window.location.replace("/dashboard/make-payment");
+                window.location.replace(
+                  `/auth/confirmation?email=${values.email}&new=true`
+                );
               }, 500);
             }
           );

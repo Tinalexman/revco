@@ -60,7 +60,7 @@ const PaymentModal: FC<{
         },
         invoice: {
           invoiceAmount: data.amount,
-          isAssessment: true,
+          isAssessment: false,
           assessmentId: 0,
           serviceId: data.serviceId,
           businessId: 0,
@@ -96,12 +96,12 @@ const PaymentModal: FC<{
             lastName: "",
             phone: "",
             email: "",
-            role: "",
+            role: "non-individual",
           },
         },
         invoice: {
           invoiceAmount: data.amount,
-          isAssessment: true,
+          isAssessment: false,
           assessmentId: 0,
           serviceId: 0,
           businessId: 0,
