@@ -23,6 +23,8 @@ import { useGetLGAs, useGetStates } from "@/src/hooks/locationHooks";
 import toast from "react-hot-toast";
 
 import { iPaymentData } from "./types";
+import { useUserData } from "@/src/stores/globalStore";
+import useStore from "@/src/stores/useStore";
 
 const MakePayment = () => {
   return (
@@ -50,11 +52,10 @@ const Content = () => {
   const [role, setRole] = useState<string>("");
   const [target, setTarget] = useState<string>("");
   const [mda, setMDA] = useState<string>("");
-
   const [mdaId, setMDAID] = useState<number>(-1);
   const [targetId, setTargetID] = useState<number>(-1);
+  const [amount, setAmount] = useState<number>(0);
   const [amountReadOnly, setAmountReadOnly] = useState<boolean>(false);
-
   const [initialPaymentDetails, setInitialPaymentDetails] =
     useState<iPaymentForm>({
       fullName: "",
@@ -67,36 +68,10 @@ const Content = () => {
       amount: "",
     });
 
-  useEffect(() => {
-    const target: string | null = searchParams.get("target");
-
-    if (!target) {
-      router.back();
-    }
-
-    const payload = JSON.parse(
-      Buffer.from(target!, "base64").toString("utf-8")
-    );
-
-    setAmountReadOnly(payload.amount > 0);
-    setRole(payload.accountType ?? "");
-    setMDA(payload.mda ?? "");
-    setMDAID(payload.mdaId ?? -1);
-    setTargetID(payload.revenueHeadId ?? -1);
-    setTarget(payload.revenueHead ?? "");
-
-    setInitialPaymentDetails({
-      ...initialPaymentDetails,
-      amount: payload.amount > 0 ? formatAmountWithCommas(payload.amount) : "",
-    });
-  }, [router]);
-
   const [proceed, shouldProceed] = useState<boolean>(false);
   const [opened, { open, close }] = useDisclosure(false);
   const [taxPayerID, setTaxPayerID] = useState<string>("");
-
   const [agreed, setAgreed] = useState<boolean>(false);
-
   const [data, setData] = useState<iPaymentData>({
     fullName: "",
     email: "",
@@ -112,6 +87,49 @@ const Content = () => {
 
   const { data: states, loading: loadingStates } = useGetStates();
   const { data: lgas, loading: loadingLGAs, get: getLGA } = useGetLGAs();
+  const signedIn = useStore(useUserData, (state: any) => state.loggedIn);
+
+  useEffect(() => {
+    const target: string | null = searchParams.get("target");
+
+    if (!target) {
+      router.back();
+    }
+
+    const payload = JSON.parse(
+      Buffer.from(target!, "base64").toString("utf-8")
+    );
+
+    setAmount(payload.amount);
+    setAmountReadOnly(payload.amount > 0);
+    setRole(payload.accountType ?? "");
+    setMDA(payload.mda ?? "");
+    setMDAID(payload.mdaId ?? -1);
+    setTargetID(payload.revenueHeadId ?? -1);
+    setTarget(payload.revenueHead ?? "");
+
+    setInitialPaymentDetails({
+      ...initialPaymentDetails,
+      amount: payload.amount > 0 ? formatAmountWithCommas(payload.amount) : "",
+    });
+  }, [router]);
+
+  useEffect(() => {
+    if (useUserData.getState().loggedIn) {
+      setInitialPaymentDetails({
+        ...initialPaymentDetails,
+        fullName:
+          useUserData.getState().firstName +
+          " " +
+          useUserData.getState().lastName,
+        email: useUserData.getState().email,
+        phoneNumber: formatNumberWithThreesAndFours(
+          useUserData.getState().phone
+        ),
+        amount: formatAmountWithCommas(amount),
+      });
+    }
+  }, [useUserData, amount]);
 
   return (
     <>
@@ -271,6 +289,7 @@ const Content = () => {
                     value={values.fullName}
                     onChange={handleChange}
                     className="w-full text-b-1"
+                    readOnly={signedIn}
                   />
                   {errors.fullName && touched.fullName && (
                     <p className="text-s-4 text-error">{errors.fullName}</p>
@@ -287,6 +306,7 @@ const Content = () => {
                     value={values.email}
                     onChange={handleChange}
                     className="w-full text-b-1"
+                    readOnly={signedIn}
                   />
                   {errors.email && touched.email && (
                     <p className="text-s-4 text-error">{errors.email}</p>
@@ -318,6 +338,7 @@ const Content = () => {
                     name="phoneNumber"
                     placeholder="Enter 080 *********"
                     value={values.phoneNumber}
+                    readOnly={signedIn}
                     onChange={(e) => {
                       if (e.target.value.length === 0) {
                         setFieldValue("phoneNumber", "");
