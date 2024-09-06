@@ -17,7 +17,7 @@ const Download = () => {
       {!sent && (
         <>
           <h2 className="text-header text-start w-full font-bold text-[#595959]">
-            Generate Statement
+            Generate Receipts
           </h2>
           <div className="flex flex-col gap-2 md:gap-1 w-full">
             <h3 className="text-b-2 text-neutral-2">Date</h3>
