@@ -5,7 +5,6 @@ import BackButton from "../../reusable/BackButton";
 import { FiSearch } from "react-icons/fi";
 import { IoFilter } from "react-icons/io5";
 import { TbFileDownload } from "react-icons/tb";
-import { useGlobalStore } from "@/src/stores/globalStore";
 
 interface iHistory {
   transactionID: string;
