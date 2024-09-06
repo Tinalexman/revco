@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 
 import Image from "next/image";
 import Sent from "@/public/sent.png";
-import { useGlobalStore } from "@/src/stores/globalStore";
 
 const Download = () => {
   const [start, setStart] = useState<string>("");
