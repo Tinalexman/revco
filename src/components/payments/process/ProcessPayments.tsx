@@ -114,15 +114,6 @@ const Content = () => {
               <p className="text-s-3 font-bold">{paymentDetails.name}</p>
             </div>
             <div className="w-full flex justify-between">
-              <p className="text-s-3 w-[40%]">
-                Invoice Amount Due{" "}
-                <span className="text-s-1">(after discount)</span>
-              </p>
-              <p className="text-smaller font-bold">
-                ₦{formatAmountWithCommas(paymentDetails.amount.toFixed(2))}
-              </p>
-            </div>
-            <div className="w-full flex justify-between">
               <p className="text-s-3">Revenue Head:</p>
               <p className="text-s-3 font-bold w-fit max-w-[60%] text-end">
                 {paymentDetails.target}
