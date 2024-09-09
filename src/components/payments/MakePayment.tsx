@@ -245,7 +245,7 @@ const Content = () => {
               {proceed && taxPayerID && (
                 <div className="w-full lg:space-y-2 xs:space-y-1">
                   <h3 className="text-large text-[#454545]  font-bold">
-                    Tax Payer ID
+                    Payer TIN
                   </h3>
                   <input
                     type="text"

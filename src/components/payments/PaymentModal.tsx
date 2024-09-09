@@ -76,7 +76,7 @@ const PaymentModal: FC<{
           projectId: 0,
         },
         (val) => {
-          if (val && val.payerId) setTaxPayerID(val.payerId);
+          if (val && val.payerTin) setTaxPayerID(val.payerTin);
         }
       );
     } else if (role === "Cooperate") {
@@ -122,7 +122,7 @@ const PaymentModal: FC<{
           projectId: 0,
         },
         (val) => {
-          if (val && val.payerId) setTaxPayerID(val.payerId);
+          if (val && val.payerTin) setTaxPayerID(val.payerTin);
         }
       );
     }
@@ -142,7 +142,7 @@ const PaymentModal: FC<{
               className="size-[6rem] object-cover"
             />
             <p className="text-black text-b-2 text-center">
-              A tax profile with the Payer Id{" "}
+              A tax profile with the Payer TIN{" "}
               <span className="text-primary font-bold">{payerID}</span>
               has been created for you. You can register later to view all your
               invoices, payments and receipts.
