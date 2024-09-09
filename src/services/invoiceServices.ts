@@ -174,8 +174,8 @@ export interface iGenerateInvoiceResponse {
   payerFirstName: any;
   payerLastName: any;
   tinType: any;
-  payerId: any;
-  payerTin: any;
+  payerId: string | null;
+  payerTin: string | null;
   payer: string;
   payerEmail: string;
   payerPhone: string;

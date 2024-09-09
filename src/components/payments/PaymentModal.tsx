@@ -31,89 +31,100 @@ const PaymentModal: FC<{
     fn();
   }, []);
 
+  const [payerID, setTaxPayerID] = useState<string>("");
+
   const fn = () => {
     const names: string[] = data.fullName.split(" ");
-
     if (role === "Individual") {
-      generateIndividual({
-        enumerate: {
-          title: "",
-          dateOfBirth: "",
-          maritalStatus: "",
-          nationality: "",
-          residenceLga: data.lga,
-          residenceState: data.state,
-          residentialAddress: data.address,
-          occupation: "",
-          officeAddress: "",
-          employerName: "",
-          temporaryTin: "",
-          jtbTin: data.tin,
-          nin: "",
-          customer: {
-            firstName: names[0],
-            lastName: names[1],
-            phone: data.phoneNumber,
-            email: data.email,
-            role: "individual",
+      generateIndividual(
+        {
+          enumerate: {
+            title: "",
+            dateOfBirth: "",
+            maritalStatus: "",
+            nationality: "",
+            residenceLga: data.lga,
+            residenceState: data.state,
+            residentialAddress: data.address,
+            occupation: "",
+            officeAddress: "",
+            employerName: "",
+            temporaryTin: "",
+            jtbTin: data.tin,
+            nin: "",
+            customer: {
+              firstName: names[0],
+              lastName: names[1],
+              phone: data.phoneNumber,
+              email: data.email,
+              role: "individual",
+            },
           },
+          invoice: {
+            invoiceAmount: data.amount,
+            isAssessment: false,
+            assessmentId: 0,
+            serviceId: data.serviceId,
+            businessId: 0,
+            mdaId: data.mda,
+            Month: 0,
+            year: "",
+            userId: 0,
+            month: 0,
+            assessment: false,
+          },
+          projectId: 0,
         },
-        invoice: {
-          invoiceAmount: data.amount,
-          isAssessment: false,
-          assessmentId: 0,
-          serviceId: data.serviceId,
-          businessId: 0,
-          mdaId: data.mda,
-          Month: 0,
-          year: "",
-          userId: 0,
-          month: 0,
-          assessment: false,
-        },
-        projectId: 0,
-      });
+        (val) => {
+          if (val && val.payerId) setTaxPayerID(val.payerId);
+        }
+      );
     } else if (role === "Cooperate") {
-      generateNonIndividual({
-        enumerate: {
-          cacRegNo: "",
-          companyName: "",
-          companyAddress: "",
-          city: "",
-          lgaId: 0,
-          phoneNumber1: "",
-          phoneNumber2: "",
-          email: "",
-          nin: "",
-          website: "",
-          temporaryTin: "",
-          jtbTin: "",
-          companyRegistrationDate: "",
-          companyCommencementDate: "",
-          businessType: "",
-          customer: {
-            firstName: "",
-            lastName: "",
-            phone: "",
+      generateNonIndividual(
+        {
+          enumerate: {
+            cacRegNo: "",
+            companyName: "",
+            companyAddress: "",
+            city: "",
+            lgaId: 0,
+            phoneNumber1: "",
+            phoneNumber2: "",
             email: "",
-            role: "non-individual",
+            nin: "",
+            website: "",
+            temporaryTin: "",
+            jtbTin: "",
+            companyRegistrationDate: "",
+            companyCommencementDate: "",
+            businessType: "",
+            customer: {
+              firstName: "",
+              lastName: "",
+              phone: "",
+              email: "",
+              role: "non-individual",
+            },
           },
+          invoice: {
+            invoiceAmount: data.amount,
+            isAssessment: false,
+            assessmentId: 0,
+            serviceId: 0,
+            businessId: 0,
+            mdaId: 0,
+            Month: 0,
+            year: "",
+            userId: 0,
+            month: 0,
+            assessment: false,
+          },
+          projectId: 0,
         },
-        invoice: {
-          invoiceAmount: data.amount,
-          isAssessment: false,
-          assessmentId: 0,
-          serviceId: 0,
-          businessId: 0,
-          mdaId: 0,
-          Month: 0,
-          year: "",
-          userId: 0,
-          month: 0,
-          assessment: false,
-        },
-        projectId: 0,
-      });
+        (val) => {
+          if (val && val.payerId) setTaxPayerID(val.payerId);
+        }
+      );
     }
   };
 
@@ -132,12 +143,16 @@ const PaymentModal: FC<{
             />
             <p className="text-black text-b-2 text-center">
               A tax profile with the Payer Id{" "}
-              <span className="text-primary font-bold">WX-513785 </span>
+              <span className="text-primary font-bold">{payerID}</span>
               has been created for you. You can register later to view all your
               invoices, payments and receipts.
             </p>
             <button
-              onClick={() => onContinue("WX-513785")}
+              onClick={() => {
+                if (payerID) {
+                  onContinue(payerID);
+                }
+              }}
               className={`bg-primary rounded-full w-[70%] text-smaller text-s-4 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-semibold mt-2`}
             >
               Confirm - Continue To Payment

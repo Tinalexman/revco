@@ -57,7 +57,7 @@ export const useGenerateNonIndividualInvoice = () => {
 
   let generate = async (
     payload: iGenerateNonIndividualInvoice,
-    callback?: () => void
+    callback?: (response: iGenerateInvoiceResponse | null) => void
   ) => {
     if (loading) return;
     setLoading(true);
@@ -68,10 +68,11 @@ export const useGenerateNonIndividualInvoice = () => {
       setLoading(false);
       setSuccess(true);
       toast.success("Invoice generated successfully");
-      if (callback) callback();
+      callback?.(data);
     } catch (e) {
       setSuccess(false);
       setLoading(false);
+      callback?.(null);
       toast.error(
         "Something went wrong while generating your invoice. Please try again"
       );

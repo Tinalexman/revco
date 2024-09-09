@@ -66,6 +66,7 @@ const Content = () => {
       const payload = JSON.parse(
         Buffer.from(target!, "base64").toString("utf-8")
       );
+      console.log(payload);
       setReceipt(payload);
     }
   }, [router]);
@@ -125,12 +126,12 @@ const Content = () => {
               <p className="font-medium">{receipt.payer}</p>
             </div>
             <div className="w-full py-[2.7px] border-b flex border-[#F9DEDD] items-center justify-between">
-              <p className=" font-light">Revenue Head:</p>
-              <p className="font-medium">{receipt.assesedService}</p>
+              <p className=" font-light">MDA:</p>
+              <p className="font-medium">{receipt.mda}</p>
             </div>
             <div className="w-full py-[2.7px] border-b flex border-[#F9DEDD] items-center justify-between">
-              <p className=" font-light">PIN:</p>
-              <p className="font-medium">{receipt.invoiceNo}</p>
+              <p className=" font-light">Revenue Head:</p>
+              <p className="font-medium">{receipt.assesedService}</p>
             </div>
             {receipt.payerId && (
               <div className="w-full py-[2.7px] border-b flex border-[#F9DEDD] items-center justify-between">
@@ -160,12 +161,12 @@ const Content = () => {
           <div className="mt-[123.52px] ml-[77.02px] w-[351.33px] h-[79px]">
             <div className="h-[32px] w-full bg-[#AE1E17] flex items-center pl-[16.22px] ">
               <p className="text-[16.75px] leading-[20.93px] text-[#FBE9E8] font-medium font-poppins">
-                TRN
+                PIN
               </p>
             </div>
             <div className="pl-[16.22px] flex items-center h-[47px] w-full bg-[#E5645F59]">
               <p className="text-[19.45px] leading-[24.31px] text-[#1A0100] font-semibold font-poppins">
-                {receipt.payment[0] && receipt.payment[0].transactionReference}
+                {receipt.invoiceNo}
               </p>
             </div>
           </div>
@@ -178,14 +179,15 @@ const Content = () => {
             height={160}
           />
 
-          <Image
-            src={Paid}
-            alt="paid stamp"
-            className="w-[256px] h-[150px] absolute bottom-[170px] right-[34.79px]"
-            width={256}
-            height={150}
-          />
-
+          {receipt.paid && (
+            <Image
+              src={Paid}
+              alt="paid stamp"
+              className="w-[256px] h-[150px] absolute bottom-[170px] right-[34.79px]"
+              width={256}
+              height={150}
+            />
+          )}
           <div className="mt-[78.37px] w-full grid place-content-center bg-[#FBE9E86E] h-[56.75px]">
             <p className="text-[12.16px] leading-[15.2px] text-black">
               Powered by:{" "}
