@@ -119,7 +119,7 @@ const Content = () => {
 
   return (
     <div className="w-full lg:mb-[5rem] grid place-content-center xs:px-2.5">
-      <div className="flex flex-col lg:px-8 xs:px-2.5 lg:py-10 xs:py-5 items-center gap-6 lg:w-[50rem] xl:w-[55rem] 2xl:w-[60rem] xs:w-full rounded-lg text-black bg-white overflow-y-scroll scrollbar-custom">
+      <div className="flex flex-col lg:px-8 xs:px-2.5 lg:py-10 xs:py-5 items-center gap-6 lg:w-[52rem] xl:w-[56rem] 2xl:w-[60rem] xs:w-full rounded-lg text-black bg-white overflow-y-scroll scrollbar-custom">
         <div className="w-full flex justify-between items-center">
           <h2 className="text-l-1 font-bold">
             PIN: {paymentDetails.invoiceNo}
@@ -127,7 +127,7 @@ const Content = () => {
           {/* <p className="text-small text-[#007AFF] cursor-pointer">View Receipt</p> */}
         </div>
         <div className="w-full flex lg:flex-row xs:flex-col justify-between xs:gap-3">
-          <div className="lg:w-[45%] xs:w-full flex flex-col gap-2">
+          <div className="lg:w-[47.5%] xs:w-full flex flex-col gap-2">
             <div className="w-full flex justify-between">
               <p className="text-s-3">Payer&apos;s name:</p>
               <p className="text-s-3 font-bold">{paymentDetails.payer}</p>
@@ -145,21 +145,22 @@ const Content = () => {
               </p>
             </div>
           </div>
-          <div className="lg:w-[45%] xs:w-full flex flex-col gap-2">
+          <div className="lg:w-[47.5%] xs:w-full flex flex-col gap-2">
             <div className="w-full flex justify-between">
               <p className="text-s-3">Payer ID:</p>
               <p className="text-s-3 font-bold">{paymentDetails.payerTin}</p>
             </div>
-            <div className="w-full flex justify-between">
-              <p className="text-s-3">External Ref.Number</p>
-              <p className="text-s-3 font-bold w-fit max-w-[60%] text-end ">
-                {paymentDetails.paymentChannel}
-              </p>
-            </div>
+
             <div className="w-full flex justify-between">
               <p className="text-s-3">TIN:</p>
               <p className="text-s-3 font-bold w-fit max-w-[60%] text-end">
                 {paymentDetails.payerTin}
+              </p>
+            </div>
+            <div className="w-full flex justify-between">
+              <p className="text-s-3">Amount</p>
+              <p className="text-s-3 font-bold w-fit max-w-[60%] text-end ">
+                ₦{paymentDetails.invoiceAmount.toLocaleString("en-US")}
               </p>
             </div>
           </div>
