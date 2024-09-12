@@ -20,6 +20,7 @@ import Branch from "./Branch";
 import Online from "./Online";
 import POS from "./POS";
 import Transfer from "./Transfer";
+import { iGenerateInvoiceResponse } from "@/src/services/invoiceServices";
 
 interface iPaymentMode {
   name: string;
@@ -36,15 +37,31 @@ const ProcessPayments = () => {
 };
 
 const Content = () => {
-  const [paymentDetails, setPaymentDetails] = useState<tProcessPayment>({
-    tin: "",
-    amount: 0,
-    target: "",
-    name: "",
-    ref: "",
-    payerID: "",
-    pin: "",
-  });
+  const [paymentDetails, setPaymentDetails] =
+    useState<iGenerateInvoiceResponse>({
+      invoiceNo: "",
+      invoiceAmount: 0,
+      assesedService: "",
+      paymentChannel: null,
+      businessId: 0,
+      business: null,
+      serviceId: 0,
+      mda: "",
+      month: 0,
+      year: "",
+      customerId: 0,
+      payerFirstName: null,
+      payerLastName: null,
+      tinType: null,
+      payerId: null,
+      payerTin: null,
+      payer: "",
+      payerEmail: "",
+      payerPhone: "",
+      payerType: null,
+      paid: false,
+    });
+
   const modes: iPaymentMode[] = [
     {
       name: "Bank Card",
@@ -86,7 +103,7 @@ const Content = () => {
 
     const payload: string = Buffer.from(target!, "base64").toString("utf-8");
     console.log(payload);
-    let paymentTarget: tProcessPayment = JSON.parse(payload);
+    let paymentTarget: iGenerateInvoiceResponse = JSON.parse(payload);
 
     setPaymentDetails(paymentTarget);
     setLoading(false);
@@ -104,37 +121,45 @@ const Content = () => {
     <div className="w-full lg:mb-[5rem] grid place-content-center xs:px-2.5">
       <div className="flex flex-col lg:px-8 xs:px-2.5 lg:py-10 xs:py-5 items-center gap-6 lg:w-[50rem] xl:w-[55rem] 2xl:w-[60rem] xs:w-full rounded-lg text-black bg-white overflow-y-scroll scrollbar-custom">
         <div className="w-full flex justify-between items-center">
-          <h2 className="text-l-1 font-bold">PIN: {paymentDetails.pin}</h2>
+          <h2 className="text-l-1 font-bold">
+            PIN: {paymentDetails.invoiceNo}
+          </h2>
           {/* <p className="text-small text-[#007AFF] cursor-pointer">View Receipt</p> */}
         </div>
         <div className="w-full flex lg:flex-row xs:flex-col justify-between xs:gap-3">
           <div className="lg:w-[45%] xs:w-full flex flex-col gap-2">
             <div className="w-full flex justify-between">
               <p className="text-s-3">Payer&apos;s name:</p>
-              <p className="text-s-3 font-bold">{paymentDetails.name}</p>
+              <p className="text-s-3 font-bold">{paymentDetails.payer}</p>
+            </div>
+            <div className="w-full flex justify-between">
+              <p className="text-s-3">MDA:</p>
+              <p className="text-s-3 font-bold w-fit max-w-[60%] text-end">
+                {paymentDetails.mda}
+              </p>
             </div>
             <div className="w-full flex justify-between">
               <p className="text-s-3">Revenue Head:</p>
               <p className="text-s-3 font-bold w-fit max-w-[60%] text-end">
-                {paymentDetails.target}
+                {paymentDetails.assesedService}
               </p>
             </div>
           </div>
           <div className="lg:w-[45%] xs:w-full flex flex-col gap-2">
             <div className="w-full flex justify-between">
               <p className="text-s-3">Payer ID:</p>
-              <p className="text-s-3 font-bold">{paymentDetails.payerID}</p>
+              <p className="text-s-3 font-bold">{paymentDetails.payerTin}</p>
             </div>
             <div className="w-full flex justify-between">
               <p className="text-s-3">External Ref.Number</p>
               <p className="text-s-3 font-bold w-fit max-w-[60%] text-end ">
-                {paymentDetails.ref}
+                {paymentDetails.paymentChannel}
               </p>
             </div>
             <div className="w-full flex justify-between">
               <p className="text-s-3">TIN:</p>
               <p className="text-s-3 font-bold w-fit max-w-[60%] text-end">
-                {paymentDetails.tin}
+                {paymentDetails.payerTin}
               </p>
             </div>
           </div>

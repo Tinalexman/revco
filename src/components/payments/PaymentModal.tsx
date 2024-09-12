@@ -9,11 +9,12 @@ import {
 } from "@/src/hooks/invoiceHooks";
 
 import { iPaymentData } from "./types";
+import { iGenerateInvoiceResponse } from "@/src/services/invoiceServices";
 
 const PaymentModal: FC<{
   role: string;
   data: iPaymentData;
-  onContinue: (val: string) => void;
+  onContinue: (val: iGenerateInvoiceResponse) => void;
   onCancel: () => void;
 }> = ({ onContinue, onCancel, data, role }) => {
   const {
@@ -31,7 +32,8 @@ const PaymentModal: FC<{
     fn();
   }, []);
 
-  const [payerID, setTaxPayerID] = useState<string>("");
+  const [invoiceResponse, setInvoiceResponse] =
+    useState<iGenerateInvoiceResponse | null>(null);
 
   const fn = () => {
     const names: string[] = data.fullName.split(" ");
@@ -76,7 +78,7 @@ const PaymentModal: FC<{
           projectId: 0,
         },
         (val) => {
-          if (val && val.payerTin) setTaxPayerID(val.payerTin);
+          if (val && val.payerTin) setInvoiceResponse(val);
         }
       );
     } else if (role === "Cooperate") {
@@ -122,7 +124,7 @@ const PaymentModal: FC<{
           projectId: 0,
         },
         (val) => {
-          if (val && val.payerTin) setTaxPayerID(val.payerTin);
+          if (val && val.payerTin) setInvoiceResponse(val);
         }
       );
     }
@@ -143,14 +145,16 @@ const PaymentModal: FC<{
             />
             <p className="text-black text-b-2 text-center">
               A tax profile with the Payer TIN{" "}
-              <span className="text-primary font-bold">{payerID}</span>
+              <span className="text-primary font-bold">
+                {invoiceResponse?.payerTin}
+              </span>{" "}
               has been created for you. You can register later to view all your
               invoices, payments and receipts.
             </p>
             <button
               onClick={() => {
-                if (payerID) {
-                  onContinue(payerID);
+                if (invoiceResponse) {
+                  onContinue(invoiceResponse!);
                 }
               }}
               className={`bg-primary rounded-full w-[70%] text-smaller text-s-4 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-semibold mt-2`}

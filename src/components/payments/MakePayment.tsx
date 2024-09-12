@@ -3,7 +3,7 @@
 import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-import { Form, Formik, useFormik } from "formik";
+import { Form, Formik } from "formik";
 
 import { Loader, Modal } from "@mantine/core";
 import BackButton from "../reusable/BackButton";
@@ -12,7 +12,6 @@ import Dropdown from "../reusable/Dropdown";
 import { useDisclosure } from "@mantine/hooks";
 
 import PaymentModal from "./PaymentModal";
-import { tProcessPayment } from "@/src/stores/paymentStore";
 import {
   formatAmountWithCommas,
   formatNumberWithThreesAndFours,
@@ -25,6 +24,7 @@ import toast from "react-hot-toast";
 import { iPaymentData } from "./types";
 import { useUserData } from "@/src/stores/globalStore";
 import useStore from "@/src/stores/useStore";
+import { iGenerateInvoiceResponse } from "@/src/services/invoiceServices";
 
 const MakePayment = () => {
   return (
@@ -70,7 +70,6 @@ const Content = () => {
 
   const [proceed, shouldProceed] = useState<boolean>(false);
   const [opened, { open, close }] = useDisclosure(false);
-  const [taxPayerID, setTaxPayerID] = useState<string>("");
   const [agreed, setAgreed] = useState<boolean>(false);
   const [data, setData] = useState<iPaymentData>({
     fullName: "",
@@ -84,6 +83,9 @@ const Content = () => {
     mda: -1,
     serviceId: -1,
   });
+
+  const [invoiceResponse, setInvoiceResponse] =
+    useState<iGenerateInvoiceResponse | null>(null);
 
   const { data: states, loading: loadingStates } = useGetStates();
   const { data: lgas, loading: loadingLGAs, get: getLGA } = useGetLGAs();
@@ -206,21 +208,9 @@ const Content = () => {
               });
               open();
             } else {
-              let processData: tProcessPayment = {
-                tin: values.tin,
-                amount: Number.parseInt(
-                  values.amount.toString().replace(/,/g, "")
-                ),
-                target: mda ?? "",
-                name: values.fullName,
-                ref: target ?? "",
-                payerID: taxPayerID,
-                pin: "383223232323 ",
-              };
-
               window.location.assign(
                 `/dashboard/process-payment?target=${Buffer.from(
-                  JSON.stringify(processData)
+                  JSON.stringify(invoiceResponse!)
                 ).toString("base64")}`
               );
             }
@@ -242,7 +232,7 @@ const Content = () => {
               className="w-full flex flex-col items-center xs:gap-3 lg:gap-5"
               method="POST"
             >
-              {proceed && taxPayerID && (
+              {proceed && invoiceResponse && (
                 <div className="w-full lg:space-y-2 xs:space-y-1">
                   <h3 className="text-large text-[#454545]  font-bold">
                     Payer TIN
@@ -250,7 +240,7 @@ const Content = () => {
                   <input
                     type="text"
                     readOnly
-                    value={taxPayerID ?? ""}
+                    value={invoiceResponse?.payerTin ?? ""}
                     className="w-full text-body border border-[#DFDFDF]"
                   />
                 </div>
@@ -505,9 +495,9 @@ const Content = () => {
                   shouldProceed(false);
                   close();
                 }}
-                onContinue={(val: string) => {
+                onContinue={(val: iGenerateInvoiceResponse) => {
                   close();
-                  setTaxPayerID(val);
+                  setInvoiceResponse(val);
                 }}
               />
             </Modal.Body>
