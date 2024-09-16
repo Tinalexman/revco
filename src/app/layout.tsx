@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Podkova, Poppins } from "next/font/google";
 
-import "@mantine/core/styles.css";
-
 import "./globals.css";
 
 import {
@@ -11,6 +9,8 @@ import {
   MantineProvider,
   createTheme,
 } from "@mantine/core";
+import "@mantine/core/styles.css";
+
 import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
