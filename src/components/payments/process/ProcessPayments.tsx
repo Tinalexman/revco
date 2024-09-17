@@ -24,7 +24,6 @@ import { iGenerateInvoiceResponse } from "@/src/services/invoiceServices";
 
 interface iPaymentMode {
   name: string;
-  component: React.ReactNode;
   icon: IconType;
 }
 
@@ -65,30 +64,42 @@ const Content = () => {
   const modes: iPaymentMode[] = [
     {
       name: "Bank Card",
-      component: <Card />,
       icon: TbCreditCardFilled,
     },
     {
       name: "Bank Branch",
-      component: <Branch />,
       icon: BiSolidBank,
     },
     {
       name: "Bank Transfer",
-      component: <Transfer />,
       icon: FaMoneyBillTransfer,
     },
     {
       name: "Online Payment",
-      component: <Online />,
       icon: PiMonitorArrowUpFill,
     },
     {
       name: "POS",
-      component: <POS />,
       icon: TbDeviceLandlinePhone,
     },
   ];
+
+  const getComponent = (index: number) => {
+    switch (index) {
+      case 0:
+        return <Card details={paymentDetails} />;
+      case 1:
+        return <Branch />;
+      case 2:
+        return <Card details={paymentDetails} />;
+      case 3:
+        return <Card details={paymentDetails} />;
+      case 4:
+        return <POS />;
+      default:
+        return <></>;
+    }
+  };
 
   const [mode, setMode] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
@@ -104,7 +115,7 @@ const Content = () => {
     const payload: string = Buffer.from(target!, "base64").toString("utf-8");
     console.log(payload);
     let paymentTarget: iGenerateInvoiceResponse = JSON.parse(payload);
-
+    console.log(paymentTarget);
     setPaymentDetails(paymentTarget);
     setLoading(false);
   }, [router]);
@@ -124,7 +135,11 @@ const Content = () => {
           <h2 className="text-l-1 font-bold">
             PIN: {paymentDetails.invoiceNo}
           </h2>
-          {/* <p className="text-small text-[#007AFF] cursor-pointer">View Receipt</p> */}
+          {mode !== 1 && mode !== 4 && (
+            <p className="text-small text-[#007AFF] cursor-pointer">
+              Print Invoice
+            </p>
+          )}
         </div>
         <div className="w-full flex lg:flex-row xs:flex-col justify-between xs:gap-3">
           <div className="lg:w-[47.5%] xs:w-full flex flex-col gap-2">
@@ -203,7 +218,7 @@ const Content = () => {
             );
           })}
         </div>
-        {modes[mode].component}
+        {getComponent(mode)}
       </div>
     </div>
   );

@@ -17,3 +17,12 @@ export async function authenticate() {
 
   return response.data.token;
 }
+
+export function getCheckoutPage(
+  email: string,
+  name: string,
+  phone: string,
+  amount: number
+) {
+  return `https://payments.paysure.ng/checkout/gateway?k=${publicKey}&a=${amount}&e=${email}&n=${name}&p=${phone}&cburl=https://paysure.ng&hasAccessTo=bank_card,ussd,bank_transfer`;
+}

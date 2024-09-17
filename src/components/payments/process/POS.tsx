@@ -12,7 +12,7 @@ const POS = () => {
       <button
         className={`bg-[#408BFC] rounded-[10px] lg:w-[70%] xs:w-[80%] text-b-1 lg:h-12 xs:h-10 text-white font-bold mb-5`}
       >
-        Pay Now
+        Print Invoice
       </button>
     </div>
   );
