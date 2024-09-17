@@ -161,7 +161,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
               
             )} */}
             <div
-              className={`absolute transition-all duration-300 ease-out z-10 top-24 w-[13.5rem] rounded-[8px] bg-white flex flex-col gap-2 ${
+              className={`absolute transition-all duration-300 ease-out z-10 top-20 w-[13.5rem] rounded-[8px] bg-white flex flex-col gap-2 ${
                 open ? "p-2 h-auto" : "h-0 max-h-0 min-h-0 overflow-hidden p-0"
               }`}
             >
@@ -175,7 +175,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
                 <GoHistory size={"16px"} />
                 Transaction History
               </div>
-              <div
+              {/* <div
                 className="w-full cursor-pointer hover:bg-[#F1F2F0] flex items-center gap-2 px-2 py-1 rounded-md text-black"
                 onClick={() => {
                   setOpen(false);
@@ -184,7 +184,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
               >
                 <TbFileDownload size={"16px"} />
                 Download Receipt
-              </div>
+              </div> */}
               <div
                 className="w-full cursor-pointer hover:bg-[#F1F2F0] flex items-center gap-2 px-2 py-1 rounded-md text-black"
                 onClick={() => {
@@ -255,7 +255,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
                   >
                     Transaction History
                   </div>
-                  <div
+                  {/* <div
                     className="w-fit cursor-pointer text-l-2 font-medium font-nunito text-black"
                     onClick={() => {
                       closeDrawer();
@@ -263,7 +263,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
                     }}
                   >
                     Download Receipt
-                  </div>
+                  </div> */}
                 </div>
               )}
 

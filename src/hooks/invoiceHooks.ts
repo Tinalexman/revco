@@ -108,8 +108,7 @@ export const useValidatePaidInvoice = () => {
       setLoading(false);
 
       let msg = e.response?.data?.data;
-      if (msg) toast.error(msg);
-
+      toast.error(msg ?? "Something went wrong. Please try again");
       callback?.(null);
     }
   };

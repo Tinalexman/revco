@@ -308,7 +308,9 @@ const MobileReceipt: FC<{
             className="w-full py-[2.7px] border-b flex  items-center justify-between"
           >
             <p className=" font-light">External Ref. Number:</p>
-            <p className="font-medium">{receipt.mda}</p>
+            <p className="font-medium">
+              {receipt.payment[0] && receipt.payment[0].transactionReference}
+            </p>
           </div>
           {receipt.payerTin && (
             <div
@@ -523,7 +525,9 @@ const DesktopReceipt: FC<{
           className="w-full py-[2.7px] border-b flex  items-center justify-between"
         >
           <p className=" font-light">External Ref. Number:</p>
-          <p className="font-medium">{receipt.mda}</p>
+          <p className="font-medium">
+            {receipt.payment[0] && receipt.payment[0].transactionReference}
+          </p>
         </div>
         {receipt.payerTin && (
           <div
