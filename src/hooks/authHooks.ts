@@ -22,9 +22,7 @@ export const useLogin = () => {
 
     try {
       const response = await login(payload);
-
       let loginResponse = response.data as tUser;
-      loginResponse.loggedIn = true;
       useUserData.setState({ ...loginResponse });
 
       toast.success(`Welcome back, ${loginResponse.lastName}`);
