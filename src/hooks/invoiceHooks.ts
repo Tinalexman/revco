@@ -129,7 +129,7 @@ export const useValidatePendingInvoice = () => {
 
   let validate = async (
     invoiceNo: string,
-    onSuccess?: (data: any) => void,
+    onSuccess?: (data: iValidatePendingInvoiceResponse) => void,
     onError?: () => void
   ) => {
     if (loading) return;

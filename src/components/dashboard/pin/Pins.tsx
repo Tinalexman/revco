@@ -97,7 +97,7 @@ const Pins = () => {
             mda === "" || target === ""
               ? "cursor-not-allowed bg-neutral-3 text-neutral-2"
               : "bg-primary text-white cursor-pointer"
-          } xs:mt-3 3xl:mt-5  rounded-full w-full text-body xs:h-10 lg:h-12 text-b-1 font-semibold`}
+          } xs:mt-3 3xl:mt-5  rounded-full w-full text-body xs:h-10 lg:h-12 xl:h-14 text-b-1 font-semibold`}
         >
           Proceed
         </button>

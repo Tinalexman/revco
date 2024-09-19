@@ -85,23 +85,6 @@ const Content = () => {
     },
   ];
 
-  const getComponent = (index: number) => {
-    switch (index) {
-      case 0:
-        return <Card details={paymentDetails} />;
-      case 1:
-        return <Branch />;
-      case 2:
-        return <Card details={paymentDetails} />;
-      case 3:
-        return <Card details={paymentDetails} />;
-      case 4:
-        return <POS />;
-      default:
-        return <></>;
-    }
-  };
-
   const [mode, setMode] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
@@ -129,6 +112,12 @@ const Content = () => {
   }
 
   const downloadReceipt = () => {
+    const receiptContainer = document.getElementById(
+      "receipt-container"
+    ) as HTMLElement;
+    receiptContainer.style.overflow = "visible";
+    receiptContainer.style.height = "auto";
+
     const receiptElement = document.getElementById(
       "revco-desktop-receipt"
     ) as HTMLElement;
@@ -215,6 +204,9 @@ const Content = () => {
         );
         pdf.save("Revco Receipt.pdf");
 
+        receiptContainer.style.overflow = "hidden";
+        receiptContainer.style.height = "0";
+
         stateColumn.style.justifyContent = "center";
         stateColumn.style.gap = "0";
         paymentDetailsContainer.style.paddingBottom = "0";
@@ -235,6 +227,23 @@ const Content = () => {
           externalRefSection.style.paddingBottom = "0";
         }
       });
+    }
+  };
+
+  const getComponent = (index: number) => {
+    switch (index) {
+      case 0:
+        return <Card details={paymentDetails} />;
+      case 1:
+        return <Branch print={downloadReceipt} />;
+      case 2:
+        return <Card details={paymentDetails} />;
+      case 3:
+        return <Card details={paymentDetails} />;
+      case 4:
+        return <POS print={downloadReceipt} />;
+      default:
+        return <></>;
     }
   };
 
@@ -335,7 +344,7 @@ const Content = () => {
           {getComponent(mode)}
         </div>
       </div>
-      <div className="h-0">
+      <div id="receipt-container" className="xs:h-0 overflow-hidden">
         <DesktopRevcoReceipt receipt={paymentDetails} colors={stateColors} />
       </div>
     </>

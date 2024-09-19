@@ -55,8 +55,8 @@ const PaymentModal: FC<{
             jtbTin: data.tin,
             nin: "",
             customer: {
-              firstName: names[0],
-              lastName: names[1],
+              firstName: names[0] ?? "",
+              lastName: names[1] ?? "",
               phone: data.phoneNumber,
               email: data.email,
               role: "individual",
@@ -101,10 +101,10 @@ const PaymentModal: FC<{
             companyCommencementDate: "",
             businessType: "",
             customer: {
-              firstName: "",
-              lastName: "",
-              phone: "",
-              email: "",
+              firstName: names[0] ?? "",
+              lastName: names[1] ?? "",
+              phone: data.phoneNumber,
+              email: data.email,
               role: "non-individual",
             },
           },
@@ -112,9 +112,9 @@ const PaymentModal: FC<{
             invoiceAmount: data.amount,
             isAssessment: false,
             assessmentId: 0,
-            serviceId: 0,
+            serviceId: data.serviceId,
             businessId: 0,
-            mdaId: 0,
+            mdaId: data.mda,
             Month: 0,
             year: "",
             userId: 0,
@@ -159,7 +159,7 @@ const PaymentModal: FC<{
               }}
               className={`bg-primary rounded-full w-[70%] text-smaller text-s-4 lg:h-12 xs:h-10 2xl:h-14 3xl:h-16 4xl:h-20 text-white font-semibold mt-2`}
             >
-              Confirm - Continue To Payment
+              Continue To Payment
             </button>
           </div>
         )}
@@ -173,14 +173,14 @@ const PaymentModal: FC<{
             <div className="w-full flex xs:flex-col xs:gap-3 lg:gap-0 lg:flex-row justify-between items-center">
               <button
                 onClick={onCancel}
-                className="border border-error rounded-full w-[45%] xs:w-full h-12 text-b-1 text-error font-semibold"
+                className="border border-error rounded-full lg:w-[45%] xs:w-full h-12 text-b-1 text-error font-semibold"
               >
                 Cancel
               </button>
 
               <button
                 onClick={fn}
-                className="bg-primary rounded-full w-[45%] xs:w-full h-12 text-b-1 text-white font-semibold"
+                className="bg-primary rounded-full lg:w-[45%] xs:w-full h-12 text-b-1 text-white font-semibold"
               >
                 Retry
               </button>

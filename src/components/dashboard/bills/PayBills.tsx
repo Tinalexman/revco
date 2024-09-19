@@ -8,6 +8,11 @@ import Invoice from "@/public/invoice_info.png";
 import { useValidatePendingInvoice } from "@/src/hooks/invoiceHooks";
 import { Loader } from "@mantine/core";
 
+import {
+  iValidatePendingInvoiceResponse,
+  iGenerateInvoiceResponse,
+} from "@/src/services/invoiceServices";
+
 const PayBills = () => {
   const [pin, setPin] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
@@ -76,15 +81,29 @@ const PayBills = () => {
           />
           <button
             onClick={() => {
-              validate(pin, (data: any) => {
-                const payload = {
-                  tin: data?.payerTin,
-                  amount: data?.invoiceAmount,
-                  target: data?.mda,
-                  name: data?.payer,
-                  ref: data?.assesedService,
-                  payerID: data?.payerId,
-                  pin: data?.invoiceNo,
+              validate(pin, (data: iValidatePendingInvoiceResponse) => {
+                const payload: iGenerateInvoiceResponse = {
+                  payerTin: data?.payerTin ?? "",
+                  invoiceAmount: data?.invoiceAmount ?? 0,
+                  mda: data?.mda ?? "",
+                  payer: data?.payer ?? "",
+                  assesedService: data?.assesedService ?? "",
+                  payerId: data?.payerId ?? "",
+                  invoiceNo: data?.invoiceNo ?? "",
+                  paid: false,
+                  business: "",
+                  businessId: 0,
+                  customerId: 0,
+                  month: 0,
+                  year: "2024",
+                  serviceId: 0,
+                  payerType: null,
+                  paymentChannel: null,
+                  payerFirstName: null,
+                  payerLastName: null,
+                  payerEmail: "",
+                  payerPhone: "",
+                  tinType: null,
                 };
 
                 window.location.assign(
