@@ -1,6 +1,6 @@
 import { Loader } from "@mantine/core";
 import { Formik, Form } from "formik";
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 import {
@@ -36,7 +36,17 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
   const { data: states, loading: loadingStates } = useGetStates();
   const { data: lgas, loading: loadingLGAs, get: getLGA } = useGetLGAs();
 
-  const { loading, fn } = useRegister();
+  const { loading, fn, success, data } = useRegister();
+
+  useEffect(() => {
+    if (!loading && success && data) {
+      setTimeout(() => {
+        window.location.replace(
+          `/auth/confirmation?email=${data}&new=true`
+        );
+      }, 500);
+    }
+  }, [loading, success, data]);
 
   return (
     <div className="flex flex-col w-full gap-2">
@@ -96,28 +106,19 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
           return errors;
         }}
         onSubmit={async (values, { setSubmitting }) => {
-          fn(
-            {
-              firstName: values.firstName,
-              lastName: values.lastName,
-              password: values.password,
-              email: values.email,
-              passwordConfirmation: values.confirmPassword,
-              phone: unformatNumberWithThreesAndFours(values.phoneNumber),
-              project: {
-                projectId: 2,
-              },
-              role: "Individual",
+          setSubmitting(false);
+          fn({
+            firstName: values.firstName,
+            lastName: values.lastName,
+            password: values.password,
+            email: values.email,
+            passwordConfirmation: values.confirmPassword,
+            phone: unformatNumberWithThreesAndFours(values.phoneNumber),
+            project: {
+              projectId: 2,
             },
-            () => {
-              setSubmitting(false);
-              setTimeout(() => {
-                window.location.replace(
-                  `/auth/confirmation?email=${values.email}&new=true`
-                );
-              }, 500);
-            }
-          );
+            role: "Individual",
+          });
         }}
         validateOnMount={false}
       >
@@ -421,9 +422,6 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             </div>
             <button
               type="submit"
-              onClick={() => {
-                setSubmitting(true);
-              }}
               disabled={loading}
               className={`bg-primary rounded-full xs:w-full lg:w-[75%] text-l-1 lg:h-[4rem] grid place-content-center xs:h-10 text-white font-semibold mt-5`}
             >

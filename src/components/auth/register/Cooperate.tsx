@@ -1,6 +1,6 @@
 import { Loader } from "@mantine/core";
 import { Formik, Form } from "formik";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 import {
@@ -29,7 +29,15 @@ const Cooperate = () => {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
 
-  const { loading, fn } = useRegister();
+  const { loading, fn, success, data } = useRegister();
+
+  useEffect(() => {
+    if (!loading && success && data) {
+      setTimeout(() => {
+        window.location.replace(`/auth/confirmation?email=${data}&new=true`);
+      }, 500);
+    }
+  }, [loading, success, data]);
 
   return (
     <div className="flex flex-col gap-3 border-t-grey-18 border-x-0 border-b-0 border w-full">
@@ -66,31 +74,39 @@ const Cooperate = () => {
             errors.password = "Password must have at least 8 characters";
           }
 
+          if (!values.confirmPassword) {
+            errors.confirmPassword = "Required";
+          } else if (values.password !== values.confirmPassword) {
+            errors.confirmPassword = "Passwords do not match";
+          }
+
+          if (!values.firstName) {
+            errors.firstName = "Required";
+          }
+
+          if (!values.lastName) {
+            errors.lastName = "Required";
+          }
+
+          if (!values.phoneNumber) {
+            errors.phoneNumber = "Required";
+          }
+
           return errors;
         }}
         onSubmit={async (values, { setSubmitting }) => {
-          fn(
-            {
-              firstName: values.firstName,
-              lastName: values.lastName,
-              password: values.password,
-              email: values.email,
-              passwordConfirmation: values.confirmPassword,
-              phone: unformatNumberWithThreesAndFours(values.phoneNumber),
-              project: {
-                projectId: 2,
-              },
-              role: "Non-Individual",
+          fn({
+            firstName: values.firstName,
+            lastName: values.lastName,
+            password: values.password,
+            email: values.email,
+            passwordConfirmation: values.confirmPassword,
+            phone: unformatNumberWithThreesAndFours(values.phoneNumber),
+            project: {
+              projectId: 2,
             },
-            () => {
-              setSubmitting(false);
-              setTimeout(() => {
-                window.location.replace(
-                  `/auth/confirmation?email=${values.email}&new=true`
-                );
-              }, 500);
-            }
-          );
+            role: "Non-Individual",
+          });
         }}
         validateOnMount={true}
       >
@@ -147,7 +163,9 @@ const Cooperate = () => {
             </div>
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">Email Address</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  Email Address <span className="text-error">*</span>
+                </h3>
                 <input
                   type="email"
                   name="email"
@@ -203,7 +221,9 @@ const Cooperate = () => {
 
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">First Name</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  First Name <span className="text-error">*</span>
+                </h3>
                 <input
                   type="text"
                   name="firstName"
@@ -217,7 +237,9 @@ const Cooperate = () => {
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">Last Name</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  Last Name <span className="text-error">*</span>
+                </h3>
                 <input
                   type="text"
                   name="lastName"
@@ -234,7 +256,9 @@ const Cooperate = () => {
 
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">Phone Number</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  Phone Number <span className="text-error">*</span>
+                </h3>
                 <input
                   type="tel"
                   name="phoneNumber"
@@ -281,7 +305,9 @@ const Cooperate = () => {
 
             <div className="flex justify-between w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">Password</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  Password <span className="text-error">*</span>
+                </h3>
                 <div className="w-full relative">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -311,7 +337,9 @@ const Cooperate = () => {
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">Confirm Password</h3>
+                <h3 className="text-b-2 text-neutral-2">
+                  Confirm Password <span className="text-error">*</span>
+                </h3>
                 <div className="w-full relative">
                   <input
                     type={showConfirmPassword ? "text" : "password"}
@@ -345,9 +373,9 @@ const Cooperate = () => {
 
             <button
               type="submit"
-              onClick={() => {
-                setSubmitting(true);
-              }}
+              // onClick={() => {
+              //   setSubmitting(true);
+              // }}
               disabled={loading}
               className={`bg-primary rounded-full xs:w-full lg:w-[75%] text-l-1 lg:h-[4rem] grid place-content-center xs:h-10 text-white font-semibold mt-5`}
             >

@@ -48,24 +48,22 @@ export const useLogin = () => {
 export const useRegister = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
-  const [data, setData] = useState<any>({});
+  const [data, setData] = useState<string>("");
 
-  let fn = async (payload: iRegisterPayload, callback?: () => void) => {
+  let fn = async (payload: iRegisterPayload) => {
     if (loading) return;
 
     setLoading(true);
 
     try {
       const response = await register(payload);
-      setData(response);
+      setData(payload.email);
       setLoading(false);
       setSuccess(true);
       toast.success(`Account created successfully`);
-      callback?.();
     } catch (e: any) {
       setSuccess(false);
       setLoading(false);
-      callback?.();
       toast.error(`${e.response.data.data}`);
     }
   };
