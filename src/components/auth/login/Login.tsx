@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/public/image_261.png";
@@ -21,8 +21,15 @@ interface iManualLoginPayload {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { loading, fn, success } = useLogin();
 
-  const { loading, fn } = useLogin();
+  useEffect(() => {
+    if (!loading && success) {
+      setTimeout(() => {
+        window.location.replace("/dashboard/make-payment");
+      }, 500);
+    }
+  }, [loading, success]);
 
   return (
     <div className="w-full h-full flex flex-col items-center lg:justify-center xs:justify-start bg-white bg-opacity-[0.94]">
@@ -64,14 +71,8 @@ const Login = () => {
               return errors;
             }}
             onSubmit={async (values, { setSubmitting }) => {
-              fn(values, (val: any) => {
-                setSubmitting(false);
-                if (val) {
-                  setTimeout(() => {
-                    window.location.replace("/dashboard/make-payment");
-                  }, 500);
-                }
-              });
+              setSubmitting(false);
+              fn(values);
             }}
           >
             {({

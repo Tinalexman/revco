@@ -15,7 +15,7 @@ export const useLogin = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
 
-  let fn = async (payload: iLoginPayload, callback?: (value: any) => void) => {
+  let fn = async (payload: iLoginPayload) => {
     if (loading) return;
 
     setLoading(true);
@@ -29,11 +29,9 @@ export const useLogin = () => {
 
       setLoading(false);
       setSuccess(true);
-      callback?.(true);
     } catch (e: any) {
       setSuccess(false);
       setLoading(false);
-      callback?.(false);
       toast.error(`${e.response.data.data}`);
     }
   };
