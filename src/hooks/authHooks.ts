@@ -23,6 +23,7 @@ export const useLogin = () => {
     try {
       const response = await login(payload);
       let loginResponse = response.data as tUser;
+      loginResponse.loggedIn = true;
       useUserData.setState({ ...loginResponse });
 
       toast.success(`Welcome back, ${loginResponse.lastName}`);
@@ -32,7 +33,9 @@ export const useLogin = () => {
     } catch (e: any) {
       setSuccess(false);
       setLoading(false);
-      toast.error(`${e.response.data.data}`);
+      let errorMessage =
+        e.response?.data?.data ?? "An error occurred. Please try again";
+      toast.error(errorMessage);
     }
   };
 

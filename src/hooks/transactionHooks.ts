@@ -15,6 +15,7 @@ export const useGetTransactionHistory = () => {
 
     try {
       const token = useUserData.getState().token;
+      console.log("Token", token);
       const response = await getTransactionHistory(
         token,
         payload.start,
