@@ -25,6 +25,7 @@ import { iPaymentData } from "./types";
 import { useUserData } from "@/src/stores/globalStore";
 import useStore from "@/src/stores/useStore";
 import { iGenerateInvoiceResponse } from "@/src/services/invoiceServices";
+import { iReceiptData } from "./RevcoReceipt";
 
 const MakePayment = () => {
   return (
@@ -208,9 +209,23 @@ const Content = () => {
               });
               open();
             } else {
+              const receiptData: iReceiptData = {
+                assesedService: invoiceResponse!.assesedService,
+                invoiceAmount: invoiceResponse!.invoiceAmount,
+                invoiceNo: invoiceResponse!.invoiceNo,
+                mda: invoiceResponse!.mda,
+                paid: invoiceResponse!.paid,
+                payer: invoiceResponse!.payer,
+                payerEmail: invoiceResponse!.payerEmail,
+                payerId: invoiceResponse?.payerId ?? "",
+                payerPhone: invoiceResponse!.payerPhone,
+                payerTin: invoiceResponse!.payerTin,
+                transactionReference: "",
+              };
+
               window.location.assign(
                 `/dashboard/process-payment?target=${Buffer.from(
-                  JSON.stringify(invoiceResponse!)
+                  JSON.stringify(receiptData)
                 ).toString("base64")}`
               );
             }
@@ -222,9 +237,7 @@ const Content = () => {
             errors,
             touched,
             handleChange,
-            handleBlur,
             handleSubmit,
-            isSubmitting,
             setFieldValue,
           }) => (
             <Form

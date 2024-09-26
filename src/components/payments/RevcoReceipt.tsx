@@ -8,26 +8,28 @@ import Qr from "@/public/paysure qr.png";
 import Paid from "@/public/Paid Stamp.svg";
 import Coat from "@/public/Coat of Arms.svg";
 
-import {
-  iValidatePaidInvoiceResponse,
-  iGenerateInvoiceResponse,
-} from "@/src/services/invoiceServices";
-
 import { iStateColors } from "@/src/constants/constants";
 
+export interface iReceiptData {
+  invoiceNo: string;
+  invoiceAmount: number;
+  assesedService: string;
+  mda: string;
+  transactionReference: string;
+  payerId: string;
+  payerTin: any;
+  payer: string;
+  payerEmail: string;
+  payerPhone: string;
+  paid: boolean;
+}
+
 export const DesktopRevcoReceipt: FC<{
-  receipt: iValidatePaidInvoiceResponse | iGenerateInvoiceResponse;
+  receipt: iReceiptData;
   colors: iStateColors;
 }> = ({ receipt, colors }) => {
   const isPaid = receipt.paid;
-  const castTest = receipt as iValidatePaidInvoiceResponse;
-  let refNo = "";
-  if (castTest) {
-    refNo =
-      castTest.payment &&
-      castTest.payment[0] &&
-      castTest.payment[0].transactionReference;
-  }
+  let refNo = receipt.transactionReference;
 
   return (
     <div
@@ -144,7 +146,7 @@ export const DesktopRevcoReceipt: FC<{
               <p className="font-medium">{receipt.payerId}</p>
             </div>
           )}
-          {isPaid && (
+          {isPaid && refNo && (
             <div
               id="external-ref-section"
               style={{
@@ -251,9 +253,12 @@ export const DesktopRevcoReceipt: FC<{
 };
 
 export const MobileRevcoReceipt: FC<{
-  receipt: iValidatePaidInvoiceResponse | iGenerateInvoiceResponse;
+  receipt: iReceiptData;
   colors: iStateColors;
 }> = ({ receipt, colors }) => {
+  const isPaid = receipt.paid;
+  let refNo = receipt.transactionReference;
+
   return (
     <div className="w-full shadow-sm border border-gray-200 flex flex-col bg-white ">
       <div className="w-full h-full bg-[url('../../public/Background.png')] bg-center bg-cover bg-no-repeat relative">
@@ -358,19 +363,17 @@ export const MobileRevcoReceipt: FC<{
               <p className="font-medium">{receipt.payerId}</p>
             </div>
           )}
-          <div
-            style={{
-              borderColor: colors.border,
-            }}
-            className="w-full py-[2.7px] border-b flex  items-center justify-between"
-          >
-            <p className=" font-light">External Ref. Number:</p>
-            <p className="font-medium">
-              {(receipt as iValidatePaidInvoiceResponse).payment[0] &&
-                (receipt as iValidatePaidInvoiceResponse).payment[0]
-                  .transactionReference}
-            </p>
-          </div>
+          {refNo && (
+            <div
+              style={{
+                borderColor: colors.border,
+              }}
+              className="w-full py-[2.7px] border-b flex  items-center justify-between"
+            >
+              <p className=" font-light">External Ref. Number:</p>
+              <p className="font-medium">{refNo}</p>
+            </div>
+          )}
           {receipt.payerTin && (
             <div
               style={{

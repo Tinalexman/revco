@@ -8,6 +8,7 @@ import Image from "next/image";
 import Invoice from "@/public/invoice_info.png";
 import { useValidatePaidInvoice } from "@/src/hooks/invoiceHooks";
 import { Loader } from "@mantine/core";
+import { iReceiptData } from "../../payments/RevcoReceipt";
 
 const GenerateInvoice = () => {
   const [pin, setPin] = useState<string>("");
@@ -74,9 +75,23 @@ const GenerateInvoice = () => {
             onClick={() => {
               validate(pin, (data) => {
                 if (data !== null) {
+                  const receiptData: iReceiptData = {
+                    assesedService: data.assesedService,
+                    invoiceAmount: data.invoiceAmount,
+                    invoiceNo: data.invoiceNo,
+                    mda: data.mda,
+                    paid: data.paid,
+                    payer: data.payer,
+                    payerEmail: data.payerEmail,
+                    payerId: data.payerId ?? "",
+                    payerPhone: data.payerPhone,
+                    payerTin: data.payerTin,
+                    transactionReference: data.payment[0].transactionReference,
+                  };
+
                   window.location.assign(
                     `/dashboard/view-receipt?target=${Buffer.from(
-                      JSON.stringify(data)
+                      JSON.stringify(receiptData)
                     ).toString("base64")}`
                   );
                 }

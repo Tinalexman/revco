@@ -6,14 +6,21 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { Loader } from "@mantine/core";
 
-import { iValidatePaidInvoiceResponse } from "@/src/services/invoiceServices";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 //850596632258
 
 import { iStateColors, stateColorsData } from "@/src/constants/constants";
-import { DesktopRevcoReceipt, MobileRevcoReceipt } from "./RevcoReceipt";
+import {
+  iReceiptData,
+  DesktopRevcoReceipt,
+  MobileRevcoReceipt,
+} from "./RevcoReceipt";
+import {
+  useValidatePaidInvoice,
+  useValidatePendingInvoice,
+} from "@/src/hooks/invoiceHooks";
 
 const ViewReceipt = () => (
   <Suspense fallback={<Loader />}>
@@ -22,44 +29,104 @@ const ViewReceipt = () => (
 );
 
 const Content = () => {
-  const [receipt, setReceipt] = useState<iValidatePaidInvoiceResponse>({
+  const [receipt, setReceipt] = useState<iReceiptData>({
     invoiceNo: "",
     invoiceAmount: 0,
     assesedService: "",
-    paymentChannel: null,
-    businessId: 0,
-    business: null,
-    serviceId: 0,
     mda: "",
-    month: 0,
-    year: "",
-    customerId: 0,
-    payerFirstName: null,
-    payerLastName: null,
-    tinType: null,
+    transactionReference: "",
     payerId: "",
-    payment: [],
     payerTin: null,
     payer: "",
     payerEmail: "",
     payerPhone: "",
-    payerType: null,
     paid: false,
   });
 
   const searchParams = useSearchParams();
   const router = useRouter();
   const target: string | null = searchParams.get("target");
+  const pendingInvoiceNo: string | null = searchParams.get("pendingInvoice");
+  const paidInvoiceNo: string | null = searchParams.get("paidInvoice");
+
+  const { loading: loadingPendingInvoice, validate: validatePendiingInvoice } =
+    useValidatePendingInvoice();
+  const { loading: loadingPaidInvoice, validate: validatePaidInvoice } =
+    useValidatePaidInvoice();
+
+  const checkParams = () => {
+    if (
+      target === null &&
+      pendingInvoiceNo === null &&
+      paidInvoiceNo === null
+    ) {
+      router.back();
+      return;
+    }
+
+    if (target !== null) {
+      try {
+        const payload = JSON.parse(
+          Buffer.from(target!, "base64").toString("utf-8")
+        );
+        setReceipt(payload);
+      } catch (e) {
+        router.back();
+        return;
+      }
+    }
+
+    if (pendingInvoiceNo !== null) {
+      validatePendiingInvoice(
+        pendingInvoiceNo,
+        (data) => {
+          setReceipt({
+            assesedService: data.assesedService,
+            invoiceAmount: data.invoiceAmount,
+            invoiceNo: data.invoiceNo,
+            mda: data.mda,
+            paid: data.paid,
+            payer: data.payer,
+            payerEmail: data.payerEmail,
+            payerId: data.payerId,
+            payerPhone: data.payerPhone,
+            payerTin: data.payerTin,
+            transactionReference: "",
+          });
+        },
+        () => {
+          router.back();
+          return;
+        }
+      );
+    }
+
+    if (paidInvoiceNo !== null) {
+      validatePaidInvoice(paidInvoiceNo, (data) => {
+        if (data === null) {
+          router.back();
+          return;
+        } else {
+          setReceipt({
+            assesedService: data.assesedService,
+            invoiceAmount: data.invoiceAmount,
+            invoiceNo: data.invoiceNo,
+            mda: data.mda,
+            paid: data.paid,
+            payer: data.payer,
+            payerEmail: data.payerEmail,
+            payerId: data.payerId,
+            payerPhone: data.payerPhone,
+            payerTin: data.payerTin,
+            transactionReference: data.payment[0].transactionReference,
+          });
+        }
+      });
+    }
+  };
 
   useEffect(() => {
-    if (target === null) {
-      router.back();
-    } else {
-      const payload = JSON.parse(
-        Buffer.from(target!, "base64").toString("utf-8")
-      );
-      setReceipt(payload);
-    }
+    checkParams();
   }, [router]);
 
   const stateColors: iStateColors = stateColorsData["Taraba"];
@@ -167,6 +234,14 @@ const Content = () => {
       });
     }
   };
+
+  if (loadingPendingInvoice || loadingPaidInvoice) {
+    return (
+      <div className="w-full h-80 grid place-content-center">
+        <Loader color="primary.9" />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full flex flex-col items-center gap-10 font-poppins pb-20">
