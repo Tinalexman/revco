@@ -41,9 +41,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
   useEffect(() => {
     if (!loading && success && data) {
       setTimeout(() => {
-        window.location.replace(
-          `/auth/confirmation?email=${data}&new=true`
-        );
+        window.location.replace(`/auth/confirmation?email=${data}&new=true`);
       }, 500);
     }
   }, [loading, success, data]);
@@ -115,7 +113,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             passwordConfirmation: values.confirmPassword,
             phone: unformatNumberWithThreesAndFours(values.phoneNumber),
             project: {
-              projectId: 2,
+              projectId: 1,
             },
             role: "Individual",
           });

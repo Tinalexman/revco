@@ -75,7 +75,7 @@ const PaymentModal: FC<{
             month: 0,
             assessment: false,
           },
-          projectId: 0,
+          projectId: 1,
         },
         (val) => {
           if (val && val.payerTin) setInvoiceResponse(val);
@@ -121,7 +121,7 @@ const PaymentModal: FC<{
             month: 0,
             assessment: false,
           },
-          projectId: 0,
+          projectId: 1,
         },
         (val) => {
           if (val && val.payerTin) setInvoiceResponse(val);
