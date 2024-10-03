@@ -148,6 +148,11 @@ const History = () => {
               <Loader color="primary.9" />{" "}
             </div>
           )}
+          {!loading && history.length === 0 && (
+            <div className="w-full h-60 place-content-center grid text-l-2 text-[#454545]">
+              You have not made any transactions yet.
+            </div>
+          )}
         </div>
       </div>
     </div>
