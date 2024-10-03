@@ -27,7 +27,7 @@ interface iPaymentMode {
 
 const ProcessPayments = () => {
   return (
-    <Suspense fallback={<Loader color="myColor.9" />}>
+    <Suspense fallback={<Loader color="primary.9" />}>
       <Content />
     </Suspense>
   );

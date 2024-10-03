@@ -29,7 +29,7 @@ import { iReceiptData } from "./RevcoReceipt";
 
 const MakePayment = () => {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader color="primary.9" />}>
       <Content />
     </Suspense>
   );
