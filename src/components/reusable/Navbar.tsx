@@ -58,6 +58,7 @@ const Navbar: FC<{ swap: boolean; active: number }> = ({ swap, active }) => {
 
   const logout = () => {
     closeDrawer();
+    useUserData.getState().clear();
     window.localStorage.removeItem("revco-user");
     window.location.replace("/");
   };
