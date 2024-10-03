@@ -78,7 +78,9 @@ const PaymentModal: FC<{
           projectId: 1,
         },
         (val) => {
-          if (val && val.invoiceNo) setInvoiceResponse(val);
+          if (val !== null) {
+            setInvoiceResponse(val);
+          }
         }
       );
     } else if (role === "Cooperate") {
@@ -124,7 +126,9 @@ const PaymentModal: FC<{
           projectId: 1,
         },
         (val) => {
-          if (val && val.invoiceNo) setInvoiceResponse(val);
+          if (val !== null) {
+            setInvoiceResponse(val);
+          }
         }
       );
     }
@@ -136,7 +140,8 @@ const PaymentModal: FC<{
         <Loader color="primary.9" />
       )}
       {!(loadingIndividual || loadingNonIndividual) &&
-        (individualSuccess || nonIndividualSuccess) && (
+        (individualSuccess || nonIndividualSuccess) &&
+        invoiceResponse !== null && (
           <div className="flex flex-col items-center justify-center gap-6 px-6 w-full h-full">
             <Image
               src={Receipt}
@@ -163,7 +168,8 @@ const PaymentModal: FC<{
           </div>
         )}
       {!(loadingIndividual || loadingNonIndividual) &&
-        !(individualSuccess || nonIndividualSuccess) && (
+        (!(individualSuccess || nonIndividualSuccess) ||
+          invoiceResponse === null) && (
           <div className="flex flex-col items-center gap-10 px-16">
             <h2 className="text-h-1 font-bold text-black">Oops!</h2>
             <h2 className="text-b-1 font-medium text-black text-center">
