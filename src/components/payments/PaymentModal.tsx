@@ -78,7 +78,7 @@ const PaymentModal: FC<{
           projectId: 1,
         },
         (val) => {
-          if (val && val.payerTin) setInvoiceResponse(val);
+          if (val && val.invoiceNo) setInvoiceResponse(val);
         }
       );
     } else if (role === "Cooperate") {
@@ -124,7 +124,7 @@ const PaymentModal: FC<{
           projectId: 1,
         },
         (val) => {
-          if (val && val.payerTin) setInvoiceResponse(val);
+          if (val && val.invoiceNo) setInvoiceResponse(val);
         }
       );
     }
