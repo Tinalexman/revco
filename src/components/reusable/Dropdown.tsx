@@ -64,7 +64,7 @@ const Dropdown: FC<{
             } w-full`}
           >
             {value === "" && <p className="text-neutral-3">{hint}</p>}
-            <p className="line-clamp-1">{value}</p>
+            <p className={`line-clamp-1 ${showIcon && "pr-4"}`}>{value}</p>
             {showIcon && (
               <IoMdArrowDropdown className="text-black text-l-1 absolute top-1/2 -translate-y-1/2 right-0" />
             )}
