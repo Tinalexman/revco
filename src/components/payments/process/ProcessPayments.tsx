@@ -133,8 +133,8 @@ const Content = () => {
 
   return (
     <>
-      <div className="w-full lg:mb-[5rem] grid place-content-center xs:px-2.5">
-        <div className="flex flex-col lg:px-8 xs:px-2.5 lg:py-10 xs:py-5 items-center gap-6 lg:w-[52rem] xl:w-[56rem] 2xl:w-[60rem] xs:w-full rounded-lg text-black bg-white overflow-y-scroll scrollbar-custom">
+      <div className="xs:w-full lg:mb-[5rem] grid place-content-center xs:px-2.5">
+        <div className="flex flex-col lg:px-8 xs:px-2.5 lg:py-10 xs:py-5 items-center gap-6 lg:w-[52rem] xl:w-[56rem] 2xl:w-[60rem] xs:w-[calc(100vw-2.5rem)] rounded-lg text-black bg-white overflow-y-scroll scrollbar-custom">
           <div className="w-full flex justify-between items-center">
             <h2 className="text-l-1 font-bold">
               PIN: {paymentDetails.invoiceNo}
@@ -142,7 +142,7 @@ const Content = () => {
             {mode !== 1 && mode !== 4 && (
               <p
                 onClick={downloadReceipt}
-                className="text-small text-[#007AFF] cursor-pointer"
+                className="text-s-2 text-[#007AFF] cursor-pointer"
               >
                 Print Invoice
               </p>

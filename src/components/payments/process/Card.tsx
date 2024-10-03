@@ -14,11 +14,11 @@ const Card: FC<{ details: iGenerateInvoiceResponse }> = ({ details }) => {
     details.invoiceAmount
   );
   return (
-    <div className="w-full grid place-content-center mt-10">
+    <div className="lg:w-[60%] xs:w-full mt-2 flex flex-col items-center gap-10">
       <Link
         href={url}
         target="__blank"
-        className={`bg-[#408BFC] rounded-lg lg:w-[350px] grid place-content-center xs:w-full text-large lg:h-12 xs:h-10 text-white font-bold`}
+        className={`bg-[#408BFC] rounded-lg lg:w-[350px] xs:w-full grid place-content-center text-b-1 lg:h-12 xs:h-10 text-white font-bold`}
       >
         Pay Now
       </Link>
