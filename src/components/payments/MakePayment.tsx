@@ -247,13 +247,11 @@ const Content = () => {
             >
               {proceed && invoiceResponse && (
                 <div className="w-full lg:space-y-2 xs:space-y-1">
-                  <h3 className="text-large text-[#454545]  font-bold">
-                    Payer TIN
-                  </h3>
+                  <h3 className="text-large text-[#454545]  font-bold">PIN</h3>
                   <input
                     type="text"
                     readOnly
-                    value={invoiceResponse?.payerTin ?? ""}
+                    value={invoiceResponse?.invoiceNo ?? ""}
                     className="w-full text-body border border-[#DFDFDF]"
                   />
                 </div>

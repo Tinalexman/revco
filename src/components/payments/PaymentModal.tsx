@@ -144,12 +144,11 @@ const PaymentModal: FC<{
               className="size-[6rem] object-cover"
             />
             <p className="text-black text-b-2 text-center">
-              A tax profile with the Payer TIN{" "}
+              A Payment Invoice Number (PIN){" "}
               <span className="text-primary font-bold">
-                {invoiceResponse?.payerTin}
+                {invoiceResponse?.invoiceNo}
               </span>{" "}
-              has been created for you. You can register later to view all your
-              invoices, payments and receipts.
+              has been generated for you. You can continue to the payment page.
             </p>
             <button
               onClick={() => {
