@@ -5,7 +5,8 @@
 // const paymentSecret = "REVCO_CLIENT_SECRET";
 
 const publicKey = "LIVE_DZOB6UNILKQABWQYAA40";
-const callbackUrl = "https://paysure.ng";
+const callbackUrl =
+  "https://revco-zeta.vercel.app/dashboard/transaction-history";
 const transactionStatus = "?status=successful";
 
 export function getCheckoutPage(
