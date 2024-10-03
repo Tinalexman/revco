@@ -31,14 +31,14 @@ export interface iMdaService {
 
 export async function getMDAs() {
   const response = await axios.get(
-    `${baseUrl}/self-service/mdas?sortBy=name&clientId=2`
+    `${baseUrl}/self-service/mdas?sortBy=name&clientId=1`
   );
   return response.data.data.data as iMda[];
 }
 
 export async function getMDAServices(mdaId: number) {
   const response = await axios.get(
-    `${baseUrl}/self-service/mdaservices?sortBy=name&clientId=2&mdaId=${mdaId}`
+    `${baseUrl}/self-service/mdaservices?sortBy=name&clientId=1&mdaId=${mdaId}`
   );
   return response.data.data.data as iMdaService[];
 }
