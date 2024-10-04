@@ -7,7 +7,7 @@ export const getTransactionHistory = async (
   endData: string
 ) => {
   const result = await axios.get(
-    `${baseUrl}/notifications/transaction?pageNo=1&pageSize=1000&applyFilter=false&formStartDate=${startDate}&formEndDate=${endData}`,
+    `${baseUrl}/enroll/list-invoices?sortBy=id&pageNo=1&pageSize=1000&formStartDate=${startDate}&formEndDate=${endData}&search=%20`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

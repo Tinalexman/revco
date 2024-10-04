@@ -131,6 +131,7 @@ const Content = () => {
     }
   };
 
+
   return (
     <>
       <div className="xs:w-full lg:mb-[5rem] grid place-content-center xs:px-2.5">

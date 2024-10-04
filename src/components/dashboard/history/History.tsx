@@ -8,15 +8,10 @@ import Dropdown from "../../reusable/Dropdown";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  convertDateWithDayAndMonth,
-  convertDateWithJustSlashes,
-} from "@/src/functions/dateFunctions";
+import { convertDateWithDayAndMonth } from "@/src/functions/dateFunctions";
 import toast from "react-hot-toast";
-import {
-  iTransactionData,
-  useGetTransactionHistory,
-} from "@/src/hooks/transactionHooks";
+import { useGetTransactionHistory } from "@/src/hooks/transactionHooks";
+import { iGenerateInvoiceResponse } from "@/src/services/invoiceServices";
 import Link from "next/link";
 import { Loader } from "@mantine/core";
 
@@ -30,8 +25,132 @@ const History = () => {
     start: new Date().toISOString().split("T")[0],
     end: new Date().toISOString().split("T")[0],
   });
+  const [filteredHistory, setFilteredHistory] = useState<
+    iGenerateInvoiceResponse[]
+  >([]);
+  const [search, setSearch] = useState<string>("");
+  const [filter, setFilter] = useState<string>("All");
+  const [hasFilter, setHasFilter] = useState<boolean>(false);
 
   const { get, data: history, loading } = useGetTransactionHistory();
+
+  // const history: iGenerateInvoiceResponse[] = [
+  //   {
+  //     invoiceNo: "123456781234",
+  //     invoiceAmount: 1000,
+  //     assesedService: "Electricity 1",
+  //     paymentChannel: "Bank Card",
+  //     businessId: 1,
+  //     business: "ABC Bank",
+  //     serviceId: 1,
+  //     mda: "MDA 1",
+  //     month: 1,
+  //     year: "2022",
+  //     customerId: 1,
+  //     payerFirstName: "John",
+  //     payerLastName: "A",
+  //     tinType: "TIN",
+  //     payerId: "12345678GGD2",
+  //     payerTin: "123456789",
+  //     payer: "John Doe 1",
+  //     payerEmail: "Hl5j5@example.com",
+  //     payerPhone: "1234567890",
+  //     paid: false,
+  //     payerType: "Individual",
+  //   },
+  //   {
+  //     invoiceNo: "239027641022",
+  //     invoiceAmount: 2000,
+  //     assesedService: "Electricity 2",
+  //     paymentChannel: "Bank Card",
+  //     businessId: 1,
+  //     business: "ABC Bank",
+  //     serviceId: 1,
+  //     mda: "MDA 1",
+  //     month: 1,
+  //     year: "2022",
+  //     customerId: 1,
+  //     payerFirstName: "James",
+  //     payerLastName: "B",
+  //     tinType: "TIN",
+  //     payerId: "12345678GGD2",
+  //     payerTin: "123456789",
+  //     payer: "John Doe 2",
+  //     payerEmail: "Hl5j5@example.com",
+  //     payerPhone: "1234567890",
+  //     paid: true,
+  //     payerType: "Individual",
+  //   },
+  //   {
+  //     invoiceNo: "180371635288",
+  //     invoiceAmount: 3000,
+  //     assesedService: "Electricity 3",
+  //     paymentChannel: "Bank Card",
+  //     businessId: 1,
+  //     business: "ABC Bank",
+  //     serviceId: 1,
+  //     mda: "MDA 1",
+  //     month: 1,
+  //     year: "2022",
+  //     customerId: 1,
+  //     payerFirstName: "Peter",
+  //     payerLastName: "C",
+  //     tinType: "TIN",
+  //     payerId: "12345678GGD2",
+  //     payerTin: "123456789",
+  //     payer: "John Doe 3",
+  //     payerEmail: "Hl5j5@example.com",
+  //     payerPhone: "1234567890",
+  //     paid: false,
+  //     payerType: "Individual",
+  //   },
+  //   {
+  //     invoiceNo: "133242267890",
+  //     invoiceAmount: 4000,
+  //     assesedService: "Electricity 4",
+  //     paymentChannel: "Bank Card",
+  //     businessId: 1,
+  //     business: "ABC Bank",
+  //     serviceId: 1,
+  //     mda: "MDA 1",
+  //     month: 1,
+  //     year: "2022",
+  //     customerId: 1,
+  //     payerFirstName: "Simon",
+  //     payerLastName: "D",
+  //     tinType: "TIN",
+  //     payerId: "12345678GGD2",
+  //     payerTin: "123456789",
+  //     payer: "John Doe 4",
+  //     payerEmail: "Hl5j5@example.com",
+  //     payerPhone: "1234567890",
+  //     paid: false,
+  //     payerType: "Individual",
+  //   },
+  //   {
+  //     invoiceNo: "099288337162",
+  //     invoiceAmount: 5000,
+  //     assesedService: "Electricity 5",
+  //     paymentChannel: "Bank Card",
+  //     businessId: 1,
+  //     business: "ABC Bank",
+  //     serviceId: 1,
+  //     mda: "MDA 1",
+  //     month: 1,
+  //     year: "2022",
+  //     customerId: 1,
+  //     payerFirstName: "John",
+  //     payerLastName: "Bear",
+  //     tinType: "TIN",
+  //     payerId: "12345678GGD2",
+  //     payerTin: "123456789",
+  //     payer: "John Doe 5",
+  //     payerEmail: "Hl5j5@example.com",
+  //     payerPhone: "1234567890",
+  //     paid: true,
+  //     payerType: "Individual",
+  //   },
+  // ];
 
   useEffect(() => {
     get({ ...dateRange });
@@ -71,11 +190,80 @@ const History = () => {
     }
   };
 
+  const searchHistory = (event: any) => {
+    let text: string = event.target.value.trim();
+    setSearch(text);
+
+    if (text === "") {
+      sortHistory(filter);
+      return;
+    }
+
+    let prefilteredHistory: iGenerateInvoiceResponse[] = [...history];
+    if (filter === "Unpaid") {
+      prefilteredHistory = prefilteredHistory.filter((v) => !v.paid);
+    } else if (filter === "Paid") {
+      prefilteredHistory = prefilteredHistory.filter((v) => v.paid);
+    }
+
+    const newHistory: iGenerateInvoiceResponse[] = [];
+    text = text.toLowerCase();
+
+    for (let i = 0; i < prefilteredHistory.length; ++i) {
+      const contains =
+        prefilteredHistory[i].invoiceNo.includes(text) ||
+        prefilteredHistory[i].invoiceAmount.toString().includes(text) ||
+        prefilteredHistory[i].payerFirstName?.toLowerCase().includes(text) ||
+        prefilteredHistory[i].payerLastName?.toLowerCase().includes(text) ||
+        prefilteredHistory[i].payerEmail.toLowerCase().includes(text) ||
+        prefilteredHistory[i].payerPhone.includes(text) ||
+        prefilteredHistory[i].payerType.toLowerCase().includes(text) ||
+        prefilteredHistory[i].assesedService.toLowerCase().includes(text);
+
+      if (contains) {
+        newHistory.push(prefilteredHistory[i]);
+      }
+    }
+
+    setFilteredHistory(newHistory);
+    setHasFilter(true);
+  };
+
+  const sortHistory = (sortFilter: string) => {
+    if (sortFilter === "All") {
+      setFilteredHistory([]);
+      setHasFilter(false);
+      return;
+    }
+
+    if (sortFilter === "Paid") {
+      setFilteredHistory(history.filter((v) => v.paid));
+      setHasFilter(true);
+      return;
+    }
+
+    if (sortFilter === "Unpaid") {
+      setFilteredHistory(history.filter((v) => !v.paid));
+      setHasFilter(true);
+      return;
+    }
+  };
+
   return (
     <div className="mb-[5rem] flex flex-col items-start gap-5 lg:w-[80%] xs:w-full h-full xs:h-auto">
       <BackButton classicArrow={true} color={"#000000"} text={"History"} />
       <div className="w-full h-full xs:h-auto lg:max-h-[65vh] bg-white rounded-xl lg:p-4  xs:px-2 xs:py-4 flex flex-col gap-6">
-        <div className="flex xs:flex-col lg:flex-row xs:gap-2 w-full justify-end items-center">
+        <div className="flex xs:flex-col lg:flex-row xs:gap-2 w-full justify-between items-center">
+          <div className="relative text-[#595959] lg:w-[45%] xs:w-full">
+            <input
+              type="text"
+              value={search}
+              onChange={searchHistory}
+              className="w-full h-12 rounded-[8px] border border-[#EDEEEF] pl-10 pr-3 text-body bg-[#F6F6F7]"
+              placeholder="Search a bill"
+            />
+            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-3" />
+          </div>
           <div className="max-w-[30%] w-fit h-12 flex gap-3 items-center rounded-lg border border-[#DFDFDF] px-3">
             <div className="w-fit flex items-center gap-1">
               <p className=" text-[#10101266] text-[0.815rem] leading-[0.975rem]">
@@ -123,22 +311,46 @@ const History = () => {
               />
             </div>
           </div>
+
+          <div className="w-[140px]">
+            <Dropdown
+              menus={["All", "Paid", "Unpaid"].map((v) => ({
+                name: v,
+                onClick: () => {
+                  setFilter(v);
+                  sortHistory(v);
+                },
+              }))}
+              value={filter}
+              hint="Sort By"
+              fitMenu={true}
+              alignToStart
+              showIcon
+            />
+          </div>
         </div>
         <div className="overflow-scroll scrollbar-thin w-full">
           <table className="w-full">
             <thead>
               <tr>
                 <th>#</th>
-                <th>Transaction Reference</th>
-                <th>Transaction Date</th>
-                <th>Channel</th>
+                <th>PIN</th>
+                <th>Payer Name</th>
+                <th>Revenue Head</th>
                 <th>Amount</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               {!loading &&
+                !hasFilter &&
                 history.map((item, index) => (
+                  <TransactionRow key={index} index={index} item={item} />
+                ))}
+              {!loading &&
+                hasFilter &&
+                filteredHistory.map((item, index) => (
                   <TransactionRow key={index} index={index} item={item} />
                 ))}
             </tbody>
@@ -153,26 +365,34 @@ const History = () => {
               You have not made any transactions yet.
             </div>
           )}
+          {hasFilter && filteredHistory.length === 0 && (
+            <div className="w-full h-60 place-content-center grid text-l-2 text-[#454545]">
+              No transactions found
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-const TransactionRow: FC<{ index: number; item: iTransactionData }> = ({
+const TransactionRow: FC<{ index: number; item: iGenerateInvoiceResponse }> = ({
   item,
   index,
 }) => {
   return (
     <tr className="">
       <td>{index + 1}</td>
-      <td>{item.transactionReference}</td>
-      <td>{convertDateWithJustSlashes(new Date(item.transactionDate))}</td>
-      <td>{item.channel}</td>
-      <td>₦{item.totalAmountPaid.toLocaleString("en-US")}</td>
+      <td>{item.invoiceNo}</td>
+      <td>
+        {item.payerFirstName} {item.payerLastName}
+      </td>
+      <td>{item.assesedService}</td>
+      <td>₦{item.invoiceAmount.toLocaleString("en-US")}</td>
+      <td>{item.paid ? "Paid" : "Unpaid"}</td>
       <td>
         <Link
-          href={`/dashboard/view-receipt?paidInvoice=${item.transactionReference}`}
+          href={`/dashboard/view-receipt?paidInvoice=${item.invoiceNo}`}
           className="text-[#3A3A3A] bg-[#D9EFE2] rounded text-smaller flex gap-1 px-2 w-fit py-1 items-center"
         >
           <TbFileDownload size={"16px"} />
