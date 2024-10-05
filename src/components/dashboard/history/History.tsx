@@ -380,6 +380,8 @@ const TransactionRow: FC<{ index: number; item: iGenerateInvoiceResponse }> = ({
   item,
   index,
 }) => {
+  const query = item.paid ? "?paidInvoice=" : "?pendingInvoice=";
+
   return (
     <tr className="">
       <td>{index + 1}</td>
@@ -392,7 +394,7 @@ const TransactionRow: FC<{ index: number; item: iGenerateInvoiceResponse }> = ({
       <td>{item.paid ? "Paid" : "Unpaid"}</td>
       <td>
         <Link
-          href={`/dashboard/view-receipt?paidInvoice=${item.invoiceNo}`}
+          href={`/dashboard/view-receipt${query}${item.invoiceNo}`}
           className="text-[#3A3A3A] bg-[#D9EFE2] rounded text-smaller flex gap-1 px-2 w-fit py-1 items-center"
         >
           <TbFileDownload size={"16px"} />
