@@ -11,7 +11,8 @@ const Card: FC<{ details: iGenerateInvoiceResponse }> = ({ details }) => {
     details.payerEmail,
     details.payer,
     details.payerPhone,
-    details.invoiceAmount
+    details.invoiceAmount,
+    details.invoiceNo
   );
   return (
     <div className="lg:w-[60%] xs:w-full mt-2 flex flex-col items-center gap-10">
