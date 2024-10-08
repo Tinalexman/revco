@@ -132,16 +132,16 @@ const Login = () => {
                       )}
                     </div>
                   </div>
+
                   {errors.password && touched.password && (
                     <p className="text-s-4 text-error">{errors.password}</p>
                   )}
                 </div>
 
-                <div className="w-full flex items-start justify-between">
-                  <PasswordChecker password={values.password} />
+                <div className="w-full flex items-start justify-end">
                   <Link
                     href={"/auth/forgot-password"}
-                    className="text-b-1 text-neutral-2 font-semibold text-end"
+                    className="text-b-1 text-neutral-2 font-semibold"
                   >
                     Forgot Password?
                   </Link>

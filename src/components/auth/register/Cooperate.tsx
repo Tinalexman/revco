@@ -9,6 +9,7 @@ import {
 } from "@/src/functions/numberFunctions";
 
 import { useRegister } from "@/src/hooks/authHooks";
+import PasswordChecker from "../../reusable/PasswordChecker";
 
 interface iCooperate {
   firstName: string;
@@ -424,9 +425,7 @@ const Cooperate = () => {
                   </div>
                 </div>
 
-                {errors.password && touched.password && (
-                  <p className="text-s-1 text-error">{errors.password}</p>
-                )}
+                <PasswordChecker password={values.password} />
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-b-2 text-neutral-2">

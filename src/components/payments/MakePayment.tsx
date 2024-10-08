@@ -430,12 +430,12 @@ const Content = () => {
                 </p>
               </div>
 
-              <div className="flex w-full items-center justify-around my-3">
-                <button
+              <div className="flex w-full items-center justify-center my-3">
+                {/* <button
                   className={`border border-error rounded-full lg:w-[40%] xs:w-[45%] text-b-1 lg:h-12 xs:h-10 xl:h-14 3xl:h-16 4xl:h-20 text-error font-bold`}
                 >
                   CANCEL
-                </button>
+                </button> */}
                 <button
                   type="submit"
                   className={`bg-primary rounded-full lg:w-[40%] xs:w-[45%] text-b-1 lg:h-12 xs:h-10 xl:h-14 3xl:h-16 4xl:h-20 text-white font-bold`}

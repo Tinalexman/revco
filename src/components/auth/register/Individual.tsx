@@ -11,6 +11,8 @@ import { useGetStates, useGetLGAs } from "@/src/hooks/locationHooks";
 import Dropdown from "../../reusable/Dropdown";
 
 import { useRegister } from "@/src/hooks/authHooks";
+import PasswordChecker from "../../reusable/PasswordChecker";
+import { validatePassword } from "@/src/functions/validationFunctions";
 
 interface iIndividual {
   firstName: string;
@@ -77,10 +79,9 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
             errors.email = "Invalid email address";
           }
 
-          if (!values.password) {
-            errors.password = "Required";
-          } else if (values.password.length < 8) {
-            errors.password = "Password must have at least 8 characters";
+          const validationResponse = validatePassword(values.password);
+          if (!validationResponse.valid) {
+            errors.password = validationResponse.message;
           }
 
           if (!values.confirmPassword) {
@@ -410,9 +411,7 @@ const Individual: FC<{ hasNin: boolean }> = ({ hasNin }) => {
                   </div>
                 </div>
 
-                {errors.password && touched.password && (
-                  <p className="text-s-1 text-error">{errors.password}</p>
-                )}
+                <PasswordChecker password={values.password} />
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
                 <h3 className="text-b-2 text-neutral-2">
