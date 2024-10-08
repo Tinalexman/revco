@@ -5,8 +5,7 @@
 // const paymentSecret = "REVCO_CLIENT_SECRET";
 
 const publicKey = "LIVE_DZOB6UNILKQABWQYAA40";
-const callbackUrl =
-  "https://revco-zeta.vercel.app/dashboard/transaction-history";
+const callbackUrl = "https://revco-zeta.vercel.app/dashboard/view-receipt/";
 
 export function getCheckoutPage(
   email: string,
@@ -15,5 +14,5 @@ export function getCheckoutPage(
   amount: number,
   invoiceNo: string
 ) {
-  return `https://payments.paysure.ng/checkout/gateway?k=${publicKey}&a=${amount}&e=${email}&n=${name}&p=${phone}&cburl=${callbackUrl}&ref=${invoiceNo}&hasAccessTo=bank_card,ussd,bank_transfer`;
+  return `https://payments.paysure.ng/checkout/gateway?k=${publicKey}&a=${amount}&e=${email}&n=${name}&p=${phone}&cburl=${callbackUrl}${invoiceNo}&ref=${invoiceNo}&hasAccessTo=bank_card,ussd,bank_transfer`;
 }

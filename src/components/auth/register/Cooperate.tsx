@@ -2,7 +2,7 @@ import { Loader } from "@mantine/core";
 import { Formik, Form } from "formik";
 import React, { useState, useEffect } from "react";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
-
+import { PiInfoLight } from "react-icons/pi";
 import {
   unformatNumberWithThreesAndFours,
   formatNumberWithThreesAndFours,
@@ -30,6 +30,8 @@ const Cooperate = () => {
     useState<boolean>(false);
 
   const { loading, fn, success, data } = useRegister();
+  const [showRCInfo, shouldShowRCInfo] = useState<boolean>(false);
+  const [showTINInfo, shouldShowTINInfo] = useState<boolean>(false);
 
   useEffect(() => {
     if (!loading && success && data) {
@@ -198,7 +200,51 @@ const Cooperate = () => {
 
             <div className="w-full">
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">RC Number</h3>
+                <div className="flex justify-between items-center w-full">
+                  <h3 className="text-b-2 text-neutral-2">RC Number</h3>
+                  <div className="relative">
+                    <PiInfoLight
+                      size={"20px"}
+                      className="text-[#FF9500] cursor-help"
+                      onMouseEnter={() => {
+                        if (!showRCInfo) {
+                          shouldShowRCInfo(true);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        if (showRCInfo) {
+                          shouldShowRCInfo(false);
+                        }
+                      }}
+                    />
+                    {
+                      <div
+                        className={`absolute text-[#004085] -right-[310px] top-2 z-10 w-[300px] h-fit rounded-tl-none rounded-3xl bg-[#CFE8E7] size-10 p-4 flex flex-col gap-4 transition-all duration-300 ease-in-out 
+            ${showRCInfo ? "opacity-100 scale-100" : "opacity-0 scale-0"} `}
+                      >
+                        <div className="flex flex-col gap-1 items-center">
+                          <div className="w-full">
+                            <h2 className="font-semibold text-l-2">
+                              What is an RC Number?
+                            </h2>
+                          </div>
+                          <p className="text-s-4 font-normal px-2">
+                            &bull; An RC Number (Registration Certificate
+                            Number) is a unique identifier assigned to a
+                            business upon successful registration with the
+                            relevant government authority.
+                          </p>
+                          <p className="text-s-4 font-normal px-2">
+                            &bull; It serves as official proof of the company's
+                            legal status and is required for various business
+                            activities, such as opening bank accounts, paying
+                            taxes, and entering contracts.
+                          </p>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
                 <input
                   type="text"
                   name="rc"
@@ -288,7 +334,53 @@ const Cooperate = () => {
                 )}
               </div>
               <div className="flex flex-col gap-[2px] w-[48%]">
-                <h3 className="text-b-2 text-neutral-2">TIN</h3>
+                <div className="w-full flex items-center justify-between">
+                  <h3 className="text-b-2 text-neutral-2">TIN</h3>
+                  <div className="relative">
+                    <PiInfoLight
+                      size={"20px"}
+                      className="text-[#FF9500] cursor-help"
+                      onMouseEnter={() => {
+                        if (!showTINInfo) {
+                          shouldShowTINInfo(true);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        if (showTINInfo) {
+                          shouldShowTINInfo(false);
+                        }
+                      }}
+                    />
+                    {
+                      <div
+                        className={`absolute text-[#004085] right-4 top-2 z-10 w-[350px] h-fit rounded-tr-none rounded-3xl bg-[#CFE8E7] size-10 p-4 flex flex-col gap-4 transition-all duration-300 ease-in-out 
+            ${showTINInfo ? "opacity-100 scale-100" : "opacity-0 scale-0"} `}
+                      >
+                        <div className="flex flex-col gap-1 items-center">
+                          <div className="w-full">
+                            <h2 className="font-semibold text-l-2">
+                              What is a TIN?
+                            </h2>
+                          </div>
+                          <p className="text-s-4 font-normal px-2">
+                            &bull; A TIN (Taxpayer Identification Number) is a
+                            unique number assigned to individuals or businesses
+                            for tax purposes.
+                          </p>
+                          <p className="text-s-4 font-normal px-2">
+                            &bull; It is required for filing taxes, reporting
+                            income and fulfiling tax obligations.
+                          </p>
+                          <p className="text-s-4 font-normal px-2">
+                            &bull; The TIN is issued by the tax authorities and
+                            is essential for ensuring accurate tax reporting.
+                          </p>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+
                 <input
                   type="text"
                   name="tin"

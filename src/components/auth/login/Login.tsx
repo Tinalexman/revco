@@ -11,6 +11,7 @@ import { Loader } from "@mantine/core";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 import { useLogin } from "@/src/hooks/authHooks";
+import PasswordChecker from "../../reusable/PasswordChecker";
 
 interface iManualLoginPayload {
   username: string;
@@ -136,12 +137,15 @@ const Login = () => {
                   )}
                 </div>
 
-                <Link
-                  href={"/auth/forgot-password"}
-                  className="text-b-1 text-neutral-2 font-semibold text-end"
-                >
-                  Forgot Password?
-                </Link>
+                <div className="w-full flex items-start justify-between">
+                  <PasswordChecker password={values.password} />
+                  <Link
+                    href={"/auth/forgot-password"}
+                    className="text-b-1 text-neutral-2 font-semibold text-end"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
 
                 <button
                   disabled={loading}

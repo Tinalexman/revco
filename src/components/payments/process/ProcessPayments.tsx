@@ -110,7 +110,7 @@ const Content = () => {
 
   const downloadReceipt = () => {
     router.push(
-      `/dashboard/view-receipt?pendingInvoice=${paymentDetails.invoiceNo}`
+      `/dashboard/view-receipt/${paymentDetails.invoiceNo}?status=false`
     );
   };
 
@@ -130,7 +130,6 @@ const Content = () => {
         return <></>;
     }
   };
-
 
   return (
     <>

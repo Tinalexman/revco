@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, Suspense } from "react";
+import React, { FC, useEffect, useState, Suspense } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -22,13 +22,13 @@ import {
   useValidatePendingInvoice,
 } from "@/src/hooks/invoiceHooks";
 
-const ViewReceipt = () => (
+const ViewReceipt: FC<{ invoiceNo: string }> = ({ invoiceNo }) => (
   <Suspense fallback={<Loader />}>
-    <Content />
+    <Content invoiceNo={invoiceNo} />
   </Suspense>
 );
 
-const Content = () => {
+const Content: FC<{ invoiceNo: string }> = ({ invoiceNo }) => {
   const [receipt, setReceipt] = useState<iReceiptData>({
     invoiceNo: "",
     invoiceAmount: 0,
@@ -46,8 +46,7 @@ const Content = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const target: string | null = searchParams.get("target");
-  const pendingInvoiceNo: string | null = searchParams.get("pendingInvoice");
-  const paidInvoiceNo: string | null = searchParams.get("paidInvoice");
+  const status: string | null = searchParams.get("status");
 
   const { loading: loadingPendingInvoice, validate: validatePendiingInvoice } =
     useValidatePendingInvoice();
@@ -55,11 +54,7 @@ const Content = () => {
     useValidatePaidInvoice();
 
   const checkParams = () => {
-    if (
-      target === null &&
-      pendingInvoiceNo === null &&
-      paidInvoiceNo === null
-    ) {
+    if (target === null && status === null) {
       router.back();
       return;
     }
@@ -76,9 +71,9 @@ const Content = () => {
       }
     }
 
-    if (pendingInvoiceNo !== null) {
+    if (status === "false") {
       validatePendiingInvoice(
-        pendingInvoiceNo,
+        invoiceNo,
         (data) => {
           setReceipt({
             assesedService: data.assesedService,
@@ -101,8 +96,8 @@ const Content = () => {
       );
     }
 
-    if (paidInvoiceNo !== null) {
-      validatePaidInvoice(paidInvoiceNo, (data) => {
+    if (status === "true") {
+      validatePaidInvoice(invoiceNo, (data) => {
         if (data === null) {
           router.back();
           return;

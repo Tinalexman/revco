@@ -85,9 +85,6 @@ const Content = () => {
     serviceId: -1,
   });
 
-  const [invoiceResponse, setInvoiceResponse] =
-    useState<iGenerateInvoiceResponse | null>(null);
-
   const { data: states, loading: loadingStates } = useGetStates();
   const { data: lgas, loading: loadingLGAs, get: getLGA } = useGetLGAs();
   const signedIn = useStore(useUserData, (state: any) => state.loggedIn);
@@ -189,46 +186,22 @@ const Content = () => {
               return;
             }
 
-            if (!proceed) {
-              shouldProceed(true);
-              setData({
-                address: values.address,
-                amount: Number.parseInt(
-                  values.amount.toString().replace(/,/g, "")
-                ),
-                email: values.email,
-                fullName: values.fullName,
-                lga: lgas.find((l) => l.name === values.lga)?.id ?? -1,
-                phoneNumber: unformatNumberWithThreesAndFours(
-                  values.phoneNumber
-                ),
-                state: states.find((s) => s.name === values.state)?.id ?? -1,
-                tin: values.tin,
-                mda: mdaId,
-                serviceId: targetId,
-              });
-              open();
-            } else {
-              const receiptData: iReceiptData = {
-                assesedService: invoiceResponse!.assesedService,
-                invoiceAmount: invoiceResponse!.invoiceAmount,
-                invoiceNo: invoiceResponse!.invoiceNo,
-                mda: invoiceResponse!.mda,
-                paid: invoiceResponse!.paid,
-                payer: invoiceResponse!.payer,
-                payerEmail: invoiceResponse!.payerEmail,
-                payerId: invoiceResponse?.payerId ?? "",
-                payerPhone: invoiceResponse!.payerPhone,
-                payerTin: invoiceResponse!.payerTin,
-                transactionReference: "",
-              };
-
-              window.location.assign(
-                `/dashboard/process-payment?target=${Buffer.from(
-                  JSON.stringify(receiptData)
-                ).toString("base64")}`
-              );
-            }
+            shouldProceed(true);
+            setData({
+              address: values.address,
+              amount: Number.parseInt(
+                values.amount.toString().replace(/,/g, "")
+              ),
+              email: values.email,
+              fullName: values.fullName,
+              lga: lgas.find((l) => l.name === values.lga)?.id ?? -1,
+              phoneNumber: unformatNumberWithThreesAndFours(values.phoneNumber),
+              state: states.find((s) => s.name === values.state)?.id ?? -1,
+              tin: values.tin,
+              mda: mdaId,
+              serviceId: targetId,
+            });
+            open();
           }}
           validateOnChange={false}
         >
@@ -245,18 +218,6 @@ const Content = () => {
               className="w-full flex flex-col items-center xs:gap-3 lg:gap-5"
               method="POST"
             >
-              {proceed && invoiceResponse && (
-                <div className="w-full lg:space-y-2 xs:space-y-1">
-                  <h3 className="text-large text-[#454545]  font-bold">PIN</h3>
-                  <input
-                    type="text"
-                    readOnly
-                    value={invoiceResponse?.invoiceNo ?? ""}
-                    className="w-full text-body border border-[#DFDFDF]"
-                  />
-                </div>
-              )}
-
               <div className="w-full space-y-2">
                 <h3 className="text-l-2 text-[#454545] font-bold">
                   Who do you want to pay for{" "}
@@ -461,7 +422,7 @@ const Content = () => {
                   className="size-3 accent-primary bg-white focus:ring-0"
                 />
                 <p className="text-s-3 text-black">
-                  By clicking continue, you agree to{" "}
+                  By clicking the checkbox, you agree to{" "}
                   <span className="font-semibold">
                     TARABA STATE BOARD OF INTERNAL REVENUE SERVICE
                   </span>{" "}
@@ -508,7 +469,25 @@ const Content = () => {
                 }}
                 onContinue={(val: iGenerateInvoiceResponse) => {
                   close();
-                  setInvoiceResponse(val);
+                  const receiptData: iReceiptData = {
+                    assesedService: val.assesedService,
+                    invoiceAmount: val.invoiceAmount,
+                    invoiceNo: val.invoiceNo,
+                    mda: val.mda,
+                    paid: val.paid,
+                    payer: val.payer,
+                    payerEmail: val.payerEmail,
+                    payerId: val.payerId ?? "",
+                    payerPhone: val.payerPhone,
+                    payerTin: val.payerTin,
+                    transactionReference: "",
+                  };
+
+                  window.location.assign(
+                    `/dashboard/process-payment?target=${Buffer.from(
+                      JSON.stringify(receiptData)
+                    ).toString("base64")}`
+                  );
                 }}
               />
             </Modal.Body>

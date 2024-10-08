@@ -9,7 +9,7 @@ import Cooperate from "./Cooperate";
 import Individual from "./Individual";
 
 import { useGenerateTemporaryTIN } from "@/src/hooks/tinHooks";
-
+import { IoMdClose } from "react-icons/io";
 import { Modal, Loader } from "@mantine/core";
 
 const Register = () => {
@@ -17,6 +17,7 @@ const Register = () => {
   const [nin, setNin] = useState<string>("");
   const [noNin, setNoNin] = useState<boolean>(false);
   const registerProps: string[] = ["Individual", "Cooperate"];
+  const [open, setOpen] = useState<boolean>(false);
 
   const { loading: loadingPayerID, generate: generatePayerID } =
     useGenerateTemporaryTIN();
@@ -78,25 +79,122 @@ const Register = () => {
                     ? "Temporary Payer ID"
                     : "National Identification Number"}
                 </h3>
-                {!noNin && (
-                  <PiInfoLight size={"20px"} className="text-[#FF9500]" />
+                <div className="relative">
+                  <PiInfoLight
+                    size={"20px"}
+                    className="text-[#FF9500] cursor-help"
+                    onMouseEnter={() => {
+                      if (!open) {
+                        setOpen(true);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (open) {
+                        setOpen(false);
+                      }
+                    }}
+                  />
+                  {
+                    <div
+                      className={`absolute text-[#004085] right-3 top-2 z-10 w-[380px] h-fit rounded-tr-none rounded-3xl bg-[#CFE8E7] size-10 p-4 flex flex-col gap-4 transition-all duration-300 ease-in-out 
+            ${open ? "opacity-100 scale-100" : "opacity-0 scale-0"} `}
+                    >
+                      <div className="flex flex-col gap-1 items-center">
+                        <div className="w-full">
+                          <h2 className="font-semibold text-l-2">
+                            {noNin
+                              ? "What is a Payer Temporary ID?"
+                              : "What is a NIN?"}
+                          </h2>
+                        </div>
+                        {noNin ? (
+                          <div className="flex flex-col items-start">
+                            <p className="text-s-4 font-normal px-2">
+                              &bull; A Payer Temporary ID is a unique identifier
+                              issued during the registration process.
+                            </p>
+                            <p className="text-s-4 font-normal px-2">
+                              &bull; It allows you to complete transactions or
+                              make payments while your permanent ID is being
+                              processed.
+                            </p>
+                            <p className="text-s-4 font-normal px-2">
+                              &bull; Once your registration is fully verified,
+                              your temporary ID will be replaced by a permanent
+                              one.
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="flex flex-col items-start">
+                            <p className="text-s-4 font-normal px-2">
+                              &bull; A NIN (National Identification Number) is a
+                              unique identification number assigned to
+                              individuals by the government.
+                            </p>
+                            <p className="text-s-4 font-normal px-2">
+                              &bull; It serves as a key identifier for accessing
+                              various government services, such as applying for
+                              loans, registering to vote and fulfilling tax
+                              obligations.
+                            </p>
+                            <p className="text-s-4 font-normal px-2">
+                              &bull; The NIN is essential for distinguishing
+                              individuals within national databases.
+                            </p>
+                            <h2 className="font-semibold text-l-2 mt-2">
+                              Forgotten your NIN?
+                            </h2>
+                            <p className="text-s-4 font-normal px-2">
+                              &bull; You can dial{" "}
+                              <span className="font-bold">*346#</span> on your
+                              phone to retrieve your NIN.
+                            </p>
+                            <p className="text-s-4 font-normal px-2">
+                              &bull; You can access the NIN Status Portal by
+                              visiting the portal directly via this link:{" "}
+                              <span>
+                                <Link
+                                  href={"https://nin.mtn.ng/nin/status"}
+                                  target="_blank"
+                                  className="text-green-700 font-bold"
+                                >
+                                  https://nin.mtn.ng/nin/status
+                                </Link>
+                              </span>
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+              <div className="w-full relative ">
+                <input
+                  type="text"
+                  placeholder={`Enter your ${
+                    noNin ? "temporary Payer ID" : "NIN"
+                  }`}
+                  value={nin}
+                  onChange={(e) => {
+                    const res = e.target.value.replace(/,/g, "");
+                    if (!isNaN(Number(res))) {
+                      setNin(e.target.value);
+                    }
+                  }}
+                  className="w-full text-b-1"
+                  readOnly={noNin}
+                />
+                {noNin && (
+                  <IoMdClose
+                    className="cursor-pointer text-black text-b-1 absolute top-1/2 -translate-y-1/2 right-2"
+                    onClick={() => {
+                      setNin("");
+                      setNoNin(false);
+                    }}
+                  />
                 )}
               </div>
-              <input
-                type="text"
-                placeholder={`Enter your ${
-                  noNin ? "temporary Payer ID" : "NIN"
-                }`}
-                value={nin}
-                onChange={(e) => {
-                  const res = e.target.value.replace(/,/g, "");
-                  if (!isNaN(Number(res))) {
-                    setNin(e.target.value);
-                  }
-                }}
-                className="w-full text-b-1"
-                readOnly={noNin}
-              />
               {!noNin && index === 0 && (
                 <p className="text-s-3 font-nunito text-black mt-1">
                   Don&apos;t have a NIN?{" "}

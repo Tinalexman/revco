@@ -90,7 +90,9 @@ const GenerateInvoice = () => {
                   };
 
                   window.location.assign(
-                    `/dashboard/view-receipt?target=${Buffer.from(
+                    `/dashboard/view-receipt/${
+                      data.invoiceNo
+                    }?target=${Buffer.from(
                       JSON.stringify(receiptData)
                     ).toString("base64")}`
                   );
