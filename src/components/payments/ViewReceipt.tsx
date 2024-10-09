@@ -241,14 +241,18 @@ const Content: FC<{ invoiceNo: string }> = ({ invoiceNo }) => {
 
   return (
     <div className="w-full flex flex-col items-center gap-10 font-poppins pb-20">
-      <div className="w-full">
-        <BackButton classicArrow={true} color={"#000000"} text={"Go Back"} />
-      </div>
+
       <div className="lg:h-auto lg:overflow-visible xs:h-0 xs:overflow-hidden">
+        <div className="w-full py-3">
+          <BackButton classicArrow={true} color={"#000000"} text={"Go Back"} />
+        </div>
         <DesktopRevcoReceipt receipt={receipt} colors={stateColors} />
       </div>
 
       <div className="lg:hidden xs:block w-full">
+        <div className="w-full py-3">
+          <BackButton classicArrow={true} color={"#000000"} text={"Go Back"} />
+        </div>
         <MobileRevcoReceipt receipt={receipt} colors={stateColors} />
       </div>
 
