@@ -25,11 +25,10 @@ const Register = () => {
   return (
     <>
       <div
-        className={`w-full h-full flex flex-col items-center xs:justify-start lg:justify-center bg-white bg-opacity-[0.94] overflow-y-scroll ${
-          index === -1
+        className={`w-full h-full flex flex-col items-center xs:justify-start lg:justify-center bg-white bg-opacity-[0.94] overflow-y-scroll ${index === -1
             ? "lg:pt-0"
             : "lg:pt-[38rem] xl:pt-[25rem] 2xl:pt-[12rem] 3xl:pt-0 "
-        }`}
+          }`}
       >
         <div className="h-fit lg:w-[500px] xl:w-[550px] 2xl:w-[600px] 3xl:w-[700px] 4xl:w-[800px] xs:w-full xs:px-5 xs:mt-10 lg:mt-0 flex flex-col items-center justify-center gap-5">
           <div className="flex flex-col items-center xs:gap-6 xl:gap-8 2xl:gap-10 3xl:gap-12 4xl:gap-14 w-full">
@@ -52,15 +51,13 @@ const Register = () => {
                       setNoNin(false);
                     }
                   }}
-                  className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in xs:h-8 lg:h-12 rounded-md justify-center gap-3 items-center text-s-2 text-[#3A3A3A] flex ${
-                    index === i ? "bg-primary-light " : "bg-neutral"
-                  }`}
+                  className={`w-[48%] cursor-pointer transition-colors duration-200 ease-in xs:h-8 lg:h-12 rounded-md justify-center gap-3 items-center text-s-2 text-[#3A3A3A] flex ${index === i ? "bg-primary-light " : "bg-neutral"
+                    }`}
                 >
                   <p>{rp}</p>
                   <div
-                    className={`lg:size-4 xs:size-3 grid place-content-center rounded-full border-2 ${
-                      index === i ? " border-primary" : "border-neutral-2"
-                    }`}
+                    className={`lg:size-4 xs:size-3 grid place-content-center rounded-full border-2 ${index === i ? " border-primary" : "border-neutral-2"
+                      }`}
                   >
                     {index === i && (
                       <div
@@ -159,9 +156,8 @@ const Register = () => {
               <div className="w-full relative ">
                 <input
                   type="text"
-                  placeholder={`Enter your ${
-                    noNin ? "temporary Payer ID" : "NIN"
-                  }`}
+                  placeholder={`Enter your ${noNin ? "temporary Payer ID" : "NIN"
+                    }`}
                   value={nin}
                   onChange={(e) => {
                     const res = e.target.value.replace(/,/g, "");
@@ -172,22 +168,14 @@ const Register = () => {
                   className="w-full text-b-1"
                   readOnly={noNin}
                 />
-                {noNin && (
-                  <IoMdClose
-                    className="cursor-pointer text-black text-b-1 absolute top-1/2 -translate-y-1/2 right-2"
-                    onClick={() => {
-                      
-                    }}
-                  />
-                )}
               </div>
-              
-                <p className="text-s-3 font-nunito text-black mt-1">
-                  {noNin ? "I have an NIN" : "Don't have a NIN?"}{" "}
-                  <span
-                    onClick={() => {
-                      if(!noNin) {
-                        setNoNin(true);
+
+              <p className="text-s-3 font-nunito text-black mt-1">
+                {noNin ? "Already have an NIN?" : "Don't have a NIN?"}{" "}
+                <span
+                  onClick={() => {
+                    if (!noNin) {
+                      setNoNin(true);
                       generatePayerID((val?: string) => {
                         if (val) {
                           setNin(val);
@@ -195,18 +183,18 @@ const Register = () => {
                           setNoNin(false);
                         }
                       });
-                      } else {
-                          setNin("");
+                    } else {
+                      setNin("");
                       setNoNin(false);
-                      }
-                      
-                    }}
-                    className="text-primary font-bold cursor-pointer"
-                  >
-                    Click Here
-                  </span>
-                </p>
-              
+                    }
+
+                  }}
+                  className="text-primary font-bold cursor-pointer"
+                >
+                  Click Here
+                </span>
+              </p>
+
             </div>
 
             {index === 0 && <Individual hasNin={!noNin} />}
@@ -222,7 +210,7 @@ const Register = () => {
       </div>
       <Modal.Root
         opened={loadingPayerID}
-        onClose={() => {}}
+        onClose={() => { }}
         closeOnClickOutside={false}
         closeOnEscape={false}
         size={"30vw"}
