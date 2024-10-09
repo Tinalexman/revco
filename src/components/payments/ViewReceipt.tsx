@@ -21,6 +21,7 @@ import {
   useValidatePaidInvoice,
   useValidatePendingInvoice,
 } from "@/src/hooks/invoiceHooks";
+import BackButton from "../reusable/BackButton";
 
 const ViewReceipt: FC<{ invoiceNo: string }> = ({ invoiceNo }) => (
   <Suspense fallback={<Loader />}>
@@ -240,6 +241,7 @@ const Content: FC<{ invoiceNo: string }> = ({ invoiceNo }) => {
 
   return (
     <div className="w-full flex flex-col items-center gap-10 font-poppins pb-20">
+      <BackButton classicArrow={true} color={"#000000"} text={"Go Back"} />
       <div className="lg:h-auto lg:overflow-visible xs:h-0 xs:overflow-hidden">
         <DesktopRevcoReceipt receipt={receipt} colors={stateColors} />
       </div>

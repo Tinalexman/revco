@@ -149,19 +149,6 @@ const Register = () => {
                               <span className="font-bold">*346#</span> on your
                               phone to retrieve your NIN.
                             </p>
-                            <p className="text-s-4 font-normal px-2">
-                              &bull; You can access the NIN Status Portal by
-                              visiting the portal directly via this link:{" "}
-                              <span>
-                                <Link
-                                  href={"https://nin.mtn.ng/nin/status"}
-                                  target="_blank"
-                                  className="text-green-700 font-bold"
-                                >
-                                  https://nin.mtn.ng/nin/status
-                                </Link>
-                              </span>
-                            </p>
                           </div>
                         )}
                       </div>
@@ -189,18 +176,18 @@ const Register = () => {
                   <IoMdClose
                     className="cursor-pointer text-black text-b-1 absolute top-1/2 -translate-y-1/2 right-2"
                     onClick={() => {
-                      setNin("");
-                      setNoNin(false);
+                      
                     }}
                   />
                 )}
               </div>
-              {!noNin && index === 0 && (
+              
                 <p className="text-s-3 font-nunito text-black mt-1">
-                  Don&apos;t have a NIN?{" "}
+                  {noNin ? "I have an NIN" : "Don't have a NIN?"}{" "}
                   <span
                     onClick={() => {
-                      setNoNin(true);
+                      if(!noNin) {
+                        setNoNin(true);
                       generatePayerID((val?: string) => {
                         if (val) {
                           setNin(val);
@@ -208,13 +195,18 @@ const Register = () => {
                           setNoNin(false);
                         }
                       });
+                      } else {
+                          setNin("");
+                      setNoNin(false);
+                      }
+                      
                     }}
                     className="text-primary font-bold cursor-pointer"
                   >
                     Click Here
                   </span>
                 </p>
-              )}
+              
             </div>
 
             {index === 0 && <Individual hasNin={!noNin} />}
